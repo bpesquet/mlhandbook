@@ -1,0 +1,17 @@
+name: machine-learning-handbook
+channels:
+  - damianavila82
+  - conda-forge
+dependencies:
+  - python
+  - jupyter
+  - numpy
+  - matplotlib
+  - seaborn
+  - pandas
+  - scikit-learn
+  - tensorflow
+  - keras
+  - Pillow
+  - rise
+  
