@@ -7,7 +7,7 @@
 
 This repository contains Python examples showcasing various ML algorithms.
 
-It was created for the Machine Learning course taught at the [Graduate School of Cognitics](https://www.bordeaux-inp.fr/en) (ENSC).
+It belongs to the Machine Learning course taught at the [Graduate School of Cognitive Engineering](https://www.bordeaux-inp.fr/en) (ENSC).
 
 [![ENSC logo](ensc-logo.jpg)](https://www.bordeaux-inp.fr/en)
 
