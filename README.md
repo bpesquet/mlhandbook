@@ -15,8 +15,8 @@ It is part of the Machine Learning course taught at the [Graduate School of Cogn
 
 |Tools|Machine Learning|Deep Learning|
 |-|-|-|
-|🐍 [Python](http://nbviewer.jupyter.org/github/bpesquet/machine-learning-handbook/blob/master/tools/Python.ipynb)|📈 [Linear Regression](http://nbviewer.jupyter.org/github/bpesquet/machine-learning-handbook/blob/master/ml-algorithms/Linear_Regression.ipynb)|🎛 [Multilayer Perceptrons](http://nbviewer.jupyter.org/github/bpesquet/machine-learning-handbook/blob/master/deep-learning/MLP.ipynb)|
-|🔢 [NumPy](http://nbviewer.jupyter.org/github/bpesquet/machine-learning-handbook/blob/master/tools/NumPy.ipynb)|||
+|🐍 [Python](http://nbviewer.jupyter.org/github/bpesquet/machine-learning-handbook/blob/master/tools/Python.ipynb)|📈 [Linear Regression](http://nbviewer.jupyter.org/github/bpesquet/machine-learning-handbook/blob/master/ml-algorithms/Linear_Regression.ipynb)|🎛 [Multilayer Perceptrons](http://nbviewer.jupyter.org/github/bpesquet/machine-learning-handbook/blob/master/deep-learning/Multilayer_Perceptrons.ipynb)|
+|🔢 [NumPy](http://nbviewer.jupyter.org/github/bpesquet/machine-learning-handbook/blob/master/tools/NumPy.ipynb)||🛠 [Tuning Neural Networks](http://nbviewer.jupyter.org/github/bpesquet/machine-learning-handbook/blob/master/deep-learning/Tuning_Neural_Networks.ipynb)|
 |🐼 [Pandas](http://nbviewer.jupyter.org/github/bpesquet/machine-learning-handbook/blob/master/tools/Pandas.ipynb)|||
 |📊 [Matplotlib](http://nbviewer.jupyter.org/github/bpesquet/machine-learning-handbook/blob/master/tools/Matplotlib.ipynb)|||
 
