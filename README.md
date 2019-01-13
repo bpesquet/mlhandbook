@@ -5,7 +5,7 @@
 ![stability-wip](https://img.shields.io/badge/stability-work_in_progress-lightgrey.svg)
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
 
-This repository contains Python notebooks showcasing various ML and Deep Learning algorithms.
+This repository contains Python notebooks showcasing various ML and Deep Learning algorithms. Associated exercises can be found in the [Machine Learning Katas](https://github.com/bpesquet/machine-learning-katas) repository.
 
 It is part of the Machine Learning course taught at the [Graduate School of Cognitive Engineering](https://www.bordeaux-inp.fr/en) (ENSC).
 
