@@ -23,8 +23,6 @@ It is part of the Machine Learning course taught at the [Graduate School of Cogn
 
 ## How to run the notebooks
 
-- Launch an executable version of a notebook in [Colaboratory](https://colab.research.google.com/) (Google account needed) by clicking this button: ![Open In Google Colaboratory](https://colab.research.google.com/assets/colab-badge.svg)
-
-- Alternatively, run it online with [Binder](https://mybinder.org/) by clicking this button: ![Binder](https://mybinder.org/badge.svg)
+- Launch an executable version of a notebook in [Colaboratory](https://colab.research.google.com/) (Google account needed) by opening it and clicking this button: ![Open In Google Colaboratory](https://colab.research.google.com/assets/colab-badge.svg)
 
 * Clone or download this repository and run a [Jupyter](https://jupyter.org/) notebook server on your local machine.
