@@ -1,4 +1,4 @@
-"""Add link to Google Colab for each notebook
+"""Add links to Google Colab and Binder for each notebook
 
 Ripped from https://github.com/jakevdp/PythonDataScienceHandbook/blob/master/tools/add_navigation.py
 """
@@ -17,20 +17,21 @@ def iter_notebooks():
 
 LINK_COMMENT = "<!--NAVIGATION-->\n"
 
-COLAB_LINK = """
+CLOUD_LINKS = """
 <a href="https://colab.research.google.com/github/bpesquet/machine-learning-handbook/blob/master/{notebook_filename}"><img align="left" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open in Colab" title="Open in Google Colaboratory"></a>
+<a href="https://mybinder.org/v2/gh/bpesquet/machine-learning-handbook/master?filepath={notebook_filename}"><img align="left" style="padding-left: 5px" src="https://mybinder.org/badge.svg" alt="Open in Binder" title="Launch with Binder"></a>
 """
 
 def iter_links():
-    """Returns paths to notebooks and HTML link to Google Colab for each of them"""
+    """Returns paths to notebooks and HTML links to Google Colab and Binder for each of them"""
 
     for nb_path in iter_notebooks():
         link = LINK_COMMENT
-        link += COLAB_LINK.format(notebook_filename=os.path.relpath(nb_path))
+        link += CLOUD_LINKS.format(notebook_filename=os.path.relpath(nb_path))
         yield os.path.join(ROOT_DIR, nb_path), link
 
 def write_links():
-    """Add or update a cell in each notebook with a Google Colab link"""
+    """Add or update a cell in each notebook with cloud executions links"""
 
     for nb_name, link in iter_links():
         notebook = nbformat.read(nb_name, as_version=4)
@@ -38,7 +39,7 @@ def write_links():
         is_comment = lambda cell: cell.source.startswith(LINK_COMMENT)
 
         if is_comment(notebook.cells[0]):
-            print("Amending link for {0}".format(nb_file))
+            print("Updating link for {0}".format(nb_file))
             notebook.cells[0].source = link
         else:
             print("Inserting link for {0}".format(nb_file))
