@@ -16,10 +16,10 @@ It is part of the Machine Learning course taught at the [Graduate School of Cogn
 
 |Tools|Machine Learning|Deep Learning|
 |-|-|-|
-|🐍 [Python](tools/Python.ipynb)|📈 [Linear Regression](ml-algorithms/Linear_Regression.ipynb)|🎛 [Dense Neural Networks](deep-learning/Dense_Neural_Networks.ipynb)|
-|🔢 [NumPy](tools/NumPy.ipynb)||🛠 [Neural Networks Tuning](deep-learning/Neural_Networks_Tuning.ipynb)|
-|🐼 [Pandas](tools/Pandas.ipynb)||🖼️ [Convolutional Neural Networks (CNN)](deep-learning/Convolutional_Neural_Networks.ipynb)|
-|📊 [Matplotlib](tools/Matplotlib.ipynb)|||
+|🐍 [Python](http://nbviewer.jupyter.org/github/bpesquet/machine-learning-handbook/blob/master/tools/Python.ipynb)|📈 [Linear Regression](http://nbviewer.jupyter.org/github/bpesquet/machine-learning-handbook/blob/master/ml-algorithms/Linear_Regression.ipynb)|🎛 [Dense Neural Networks](http://nbviewer.jupyter.org/github/bpesquet/machine-learning-handbook/blob/master/deep-learning/Dense_Neural_Networks.ipynb)|
+|🔢 [NumPy](http://nbviewer.jupyter.org/github/bpesquet/machine-learning-handbook/blob/master/tools/NumPy.ipynb)||🛠 [Neural Networks Tuning](http://nbviewer.jupyter.org/github/bpesquet/machine-learning-handbook/blob/master/deep-learning/Neural_Networks_Tuning.ipynb)|
+|🐼 [Pandas](http://nbviewer.jupyter.org/github/bpesquet/machine-learning-handbook/blob/master/tools/Pandas.ipynb)||🖼️ [Convolutional Neural Networks (CNN)](http://nbviewer.jupyter.org/github/bpesquet/machine-learning-handbook/blob/master/deep-learning/Convolutional_Neural_Networks.ipynb)|
+|📊 [Matplotlib](http://nbviewer.jupyter.org/github/bpesquet/machine-learning-handbook/blob/master/tools/Matplotlib.ipynb)|||
 
 ## How to run the notebooks
 

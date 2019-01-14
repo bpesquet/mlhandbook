@@ -18,7 +18,7 @@ def iter_notebooks():
 LINK_COMMENT = "<!--NAVIGATION-->\n"
 
 COLAB_LINK = """
-<a href="https://colab.research.google.com/github/bpesquet/machine-learning-katas/blob/master/{notebook_filename}"><img align="left" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open in Colab" title="Open in Google Colaboratory"></a>
+<a href="https://colab.research.google.com/github/bpesquet/machine-learning-handbook/blob/master/{notebook_filename}"><img align="left" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open in Colab" title="Open in Google Colaboratory"></a>
 """
 
 def iter_links():
