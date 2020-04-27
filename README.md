@@ -28,8 +28,8 @@ Alternatively, you may clone or download this repository and run a Jupyter noteb
 ### Machine Learning
 
 - K-Nearest Neighbors [ 📚 [Overview](https://www.bpesquet.fr/en/slides/ai/k-nearest-neighbors/) | ▶️ [Demo](notebooks/models/knn.ipynb) ]
-- Linear Regression [ 📚 [Overview](https://www.bpesquet.fr/en/slides/ai/linear-regression/)  ]
-- Logistic Regression [ 📚 [Overview](https://www.bpesquet.fr/en/slides/ai/logistic-regression/) ]
+- Linear Regression [ 📚 [Overview](https://www.bpesquet.fr/en/slides/ai/linear-regression/) | ▶️ [Demo](https://playground.tensorflow.org/#activation=tanh&batchSize=10&dataset=circle&regDataset=reg-plane&learningRate=0.03&regularizationRate=0&noise=25&networkShape=&seed=0.27079&showTestData=false&discretize=false&percTrainData=50&x=true&y=true&xTimesY=false&xSquared=false&ySquared=false&cosX=false&sinX=false&cosY=false&sinY=false&collectStats=false&problem=regression&initZero=false&hideText=false&showTestData_hide=false&activation_hide=true&noise_hide=false&discretize_hide=true&dataset_hide=true&batchSize_hide=true&percTrainData_hide=true&numHiddenLayers_hide=true&problem_hide=true) ]
+- Logistic Regression [ 📚 [Overview](https://www.bpesquet.fr/en/slides/ai/logistic-regression/) ▶️ [Demo](https://playground.tensorflow.org/#activation=sigmoid&batchSize=10&dataset=gauss&regDataset=reg-plane&learningRate=0.03&regularizationRate=0&noise=0&networkShape=&seed=0.61489&showTestData=false&discretize=false&percTrainData=50&x=true&y=true&xTimesY=false&xSquared=false&ySquared=false&cosX=false&sinX=false&cosY=false&sinY=false&collectStats=false&problem=classification&initZero=false&hideText=false&numHiddenLayers_hide=true&percTrainData_hide=true&discretize_hide=true&problem_hide=true&activation_hide=true) ]
 - Ensemble Methods [ 📚 [Overview](https://www.bpesquet.fr/en/slides/ai/ensemble-methods/) | ▶️ [Demo](notebooks/models/decision_trees.ipynb) ]
 
 ### Deep Learning
