@@ -1,3 +1,10 @@
+# Notebook execution output
+model.h5
+model.json
+runs/
+*.dot
+fruit*.txt
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

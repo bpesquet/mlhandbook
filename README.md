@@ -1,28 +1,39 @@
-# Machine Learning Handbook
+![Supported Python Versions](https://img.shields.io/badge/Python->=3.6-blue.svg?logo=python&logoColor=white)
 
-![stability-wip](https://img.shields.io/badge/stability-work_in_progress-lightgrey.svg)
-![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
+# 📓 Machine Learning Handbook
 
-This repository contains [Jupyter](https://jupyter.org/) notebooks showcasing various ML and Deep Learning algorithms.
+This repository contains theorical explanations and/or demonstrations for various Machine Learning concepts, techniques and tools. Practical challenges can be found in the associated [Machine Learning Katas](https://github.com/bpesquet/machine-learning-katas) repository.
 
-It is part of the Machine Learning course taught at the [Graduate School of Cognitive Engineering](https://www.bordeaux-inp.fr/en) (ENSC).
+The [Jupyter](https://jupyter.org/) notebooks used for demos can be executed either locally or online, through [Colaboratory](https://colab.research.google.com/) (Google account needed). To do so, open any notebook and click this button: ![Open In Google Colaboratory](https://colab.research.google.com/assets/colab-badge.svg).
 
-- Associated exercises can be found in the [Machine Learning Katas](https://github.com/bpesquet/machine-learning-katas) repository.
-- Course slides are only available in [French](https://www.bpesquet.fr/slides/ia/) for now. Désolé!
+Alternatively, you may clone or download this repository and run a Jupyter notebook server on your local machine.
 
-[![ENSC logo](ensc-logo.jpg)](https://www.bordeaux-inp.fr/en)
+> This material is part of the Machine Learning course taught at [ENSC](https://ensc.bordeaux-inp.fr). [ENSEIRB-MATMECA](https://enseirb-matmeca.bordeaux-inp.fr) and [IOGS](https://www.institutoptique.fr).
 
-## Content
+## Workflow
 
-|Tools|Machine Learning|Deep Learning|
-|-|-|-|
-|🐍 [Python](http://nbviewer.jupyter.org/github/bpesquet/machine-learning-handbook/blob/master/tools/Python.ipynb)|📈 [Linear Regression](http://nbviewer.jupyter.org/github/bpesquet/machine-learning-handbook/blob/master/ml-algorithms/Linear_Regression.ipynb)|🎛 [Dense Neural Networks](http://nbviewer.jupyter.org/github/bpesquet/machine-learning-handbook/blob/master/deep-learning/Dense_Neural_Networks.ipynb)|
-|🔢 [NumPy](http://nbviewer.jupyter.org/github/bpesquet/machine-learning-handbook/blob/master/tools/NumPy.ipynb)||🛠 [Neural Networks Tuning](http://nbviewer.jupyter.org/github/bpesquet/machine-learning-handbook/blob/master/deep-learning/Neural_Networks_Tuning.ipynb)|
-|🐼 [Pandas](http://nbviewer.jupyter.org/github/bpesquet/machine-learning-handbook/blob/master/tools/Pandas.ipynb)||🖼️ [Convolutional Neural Networks (CNN)](http://nbviewer.jupyter.org/github/bpesquet/machine-learning-handbook/blob/master/deep-learning/Convolutional_Neural_Networks.ipynb)|
-|📊 [Matplotlib](http://nbviewer.jupyter.org/github/bpesquet/machine-learning-handbook/blob/master/tools/Matplotlib.ipynb)|||
+- Machine Learning Fundamentals [ 📚 [Overview](https://www.bpesquet.fr/en/slides/ai/ml-fundamentals/) ]
 
-## How to run the notebooks
+## Tools
 
-- Launch an executable version of a notebook in [Colaboratory](https://colab.research.google.com/) (Google account needed) by opening it and clicking this button: ![Open In Google Colaboratory](https://colab.research.google.com/assets/colab-badge.svg)
+- Python [ 📚 [Overview](https://www.bpesquet.fr/en/slides/ai/python-data-science/) | ▶️ [Demo](notebooks/tools/python.ipynb) ]
+- NumPy [ ▶️ [Demo](notebooks/tools/numpy.ipynb) ]
+- pandas [ ▶️ [Demo](notebooks/tools/pandas.ipynb) ]
+- Matplotlib/Seaborn [ ▶️ [Demo](notebooks/tools/matplotlib.ipynb) ]
+- Keras [ 📚 [Overview](https://www.bpesquet.fr/en/slides/ai/keras/) ]
+- PyTorch [ 📚 [Overview](https://www.bpesquet.fr/en/slides/ai/pytorch/) | ▶️ [Demo](notebooks/tools/pytorch.ipynb) ]
 
-* Clone or download this repository and run a [Jupyter](https://jupyter.org/) notebook server on your local machine.
+## Models
+
+### Machine Learning
+
+- K-Nearest Neighbors [ 📚 [Overview](https://www.bpesquet.fr/en/slides/ai/k-nearest-neighbors/) | ▶️ [Demo](notebooks/models/knn.ipynb) ]
+- Linear Regression [ 📚 [Overview](https://www.bpesquet.fr/en/slides/ai/linear-regression/)  ]
+- Logistic Regression [ 📚 [Overview](https://www.bpesquet.fr/en/slides/ai/logistic-regression/) ]
+- Ensemble Methods [ 📚 [Overview](https://www.bpesquet.fr/en/slides/ai/ensemble-methods/) | ▶️ [Demo](notebooks/models/decision_trees.ipynb) ]
+
+### Deep Learning
+
+- Neural Networks [ 📚 [Overview](https://www.bpesquet.fr/en/slides/ai/neural-networks/) | ▶️ [Demo](notebooks/models/neural_networks.ipynb) ]
+- Convolutional Neural Networks [ 📚 [Overview](https://www.bpesquet.fr/en/slides/ai/convolutional-neural-networks/) ]
+- Generative Adversarial Networks [ 📚 [Overview](https://www.bpesquet.fr/en/slides/ai/generative-deep-learning/) ]
