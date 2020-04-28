@@ -13,6 +13,8 @@ Alternatively, you may clone or download this repository and run a Jupyter noteb
 ## Workflow
 
 - Machine Learning Fundamentals [ 📚 [Overview](https://www.bpesquet.fr/en/slides/ai/ml-fundamentals/) ]
+- Data Preprocessing [ ▶️ [Demo](notebooks/workflow/data_preprocessing.ipynb) ]
+- Model Evaluation [ ▶️ [Demo](notebooks/workflow/model_evaluation.ipynb) ]
 
 ## Tools
 
