@@ -10,16 +10,21 @@ from nbformat.v4.nbbase import new_markdown_cell
 
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 
+
 def iter_notebooks():
     """Returns notebook files in all subdirectories"""
 
-    return (filename for filename in glob.iglob(ROOT_DIR + '**/**/*.ipynb', recursive=True))
+    return (
+        filename for filename in glob.iglob(ROOT_DIR + "**/**/*.ipynb", recursive=True)
+    )
+
 
 LINK_COMMENT = "<!--NAVIGATION-->\n"
 
 COLAB_LINK = """
-<a href="https://colab.research.google.com/github/bpesquet/machine-learning-handbook/blob/master/{notebook_filename}"><img align="left" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open in Colab" title="Open in Google Colaboratory"></a>
+<a target="_blank" href="https://colab.research.google.com/github/bpesquet/machine-learning-handbook/blob/master/{notebook_filename}"><img align="left" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open in Colab" title="Open in Google Colaboratory"></a>
 """
+
 
 def iter_links():
     """Returns paths to notebooks and HTML link to Google Colab for each of them"""
@@ -28,6 +33,7 @@ def iter_links():
         link = LINK_COMMENT
         link += COLAB_LINK.format(notebook_filename=os.path.relpath(nb_path))
         yield os.path.join(ROOT_DIR, nb_path), link
+
 
 def write_links():
     """Add or update a cell in each notebook with a Google Colab link"""
@@ -46,5 +52,6 @@ def write_links():
 
         nbformat.write(notebook, nb_name)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     write_links()
