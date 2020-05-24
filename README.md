@@ -1,8 +1,8 @@
 ![Supported Python Versions](https://img.shields.io/badge/Python->=3.6-blue.svg?logo=python&logoColor=white)
 
-# 📓 Machine Learning Handbook
+# 📚 Machine Learning Handbook
 
-This repository contains theorical explanations and/or demonstrations for various Machine Learning concepts, techniques and tools. Practical challenges can be found in the associated [Machine Learning Katas](https://github.com/bpesquet/machine-learning-katas) repository.
+This repository contains theorical explanations and interactive demonstrations for various Machine Learning concepts, techniques and tools. Practical challenges can be found in the associated [Machine Learning Katas](https://github.com/bpesquet/machine-learning-katas) repository.
 
 The [Jupyter](https://jupyter.org/) notebooks used for demos can be executed either locally or online, through [Colaboratory](https://colab.research.google.com/) (Google account needed). To do so, open any notebook and click this button: ![Open In Google Colaboratory](https://colab.research.google.com/assets/colab-badge.svg).
 
@@ -13,16 +13,15 @@ Alternatively, you may clone or download this repository and run a Jupyter noteb
 ## Workflow
 
 - [Machine Learning In Action](notebooks/workflow/ml_in_action.ipynb)
-- Machine Learning Fundamentals [ 📚 [Overview](https://www.bpesquet.fr/en/slides/ai/ml-fundamentals/) ]
-- Data Preprocessing [ ▶️ [Demo](notebooks/workflow/data_preprocessing.ipynb) ]
-- Model Evaluation [ ▶️ [Demo](notebooks/workflow/model_evaluation.ipynb) ]
+- [Machine Learning Fundamentals](notebooks/workflow/ml_fundamentals.ipynb)
 
 ## Tools
 
-- Python [ 📚 [Overview](https://www.bpesquet.fr/en/slides/ai/python-data-science/) | ▶️ [Demo](notebooks/tools/python.ipynb) ]
-- NumPy [ ▶️ [Demo](notebooks/tools/numpy.ipynb) ]
-- pandas [ ▶️ [Demo](notebooks/tools/pandas.ipynb) ]
-- Matplotlib/Seaborn [ ▶️ [Demo](notebooks/tools/matplotlib.ipynb) ]
+- [Python](notebooks/tools/python.ipynb)
+- [NumPy](notebooks/tools/numpy.ipynb)
+- [pandas](notebooks/tools/pandas.ipynb)
+- [Matplotlib/Seaborn](notebooks/tools/matplotlib.ipynb)
+- [scikit-learn](notebooks/tools/scikit-learn.ipynb)
 - Keras [ 📚 [Overview](https://www.bpesquet.fr/en/slides/ai/keras/) ]
 - PyTorch [ 📚 [Overview](https://www.bpesquet.fr/en/slides/ai/pytorch/) | ▶️ [Demo](notebooks/tools/pytorch.ipynb) ]
 
