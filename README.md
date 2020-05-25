@@ -22,7 +22,6 @@ Alternatively, you may clone or download this repository and run a Jupyter noteb
 - [pandas](notebooks/tools/pandas.ipynb)
 - [Matplotlib/Seaborn](notebooks/tools/matplotlib.ipynb)
 - [scikit-learn](notebooks/tools/scikit-learn.ipynb)
-- Keras [ 📚 [Overview](https://www.bpesquet.fr/en/slides/ai/keras/) ]
 - PyTorch [ 📚 [Overview](https://www.bpesquet.fr/en/slides/ai/pytorch/) | ▶️ [Demo](notebooks/tools/pytorch.ipynb) ]
 
 ## Models
@@ -36,6 +35,6 @@ Alternatively, you may clone or download this repository and run a Jupyter noteb
 
 ### Deep Learning
 
-- Neural Networks [ 📚 [Overview](https://www.bpesquet.fr/en/slides/ai/neural-networks/) | ▶️ [Demo](notebooks/models/neural_networks.ipynb) ]
+- [Neural Networks](notebooks/models/neural_networks.ipynb)
 - Convolutional Neural Networks [ 📚 [Overview](https://www.bpesquet.fr/en/slides/ai/convolutional-neural-networks/) ]
 - Generative Adversarial Networks [ 📚 [Overview](https://www.bpesquet.fr/en/slides/ai/generative-deep-learning/) ]
