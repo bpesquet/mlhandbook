@@ -36,5 +36,5 @@ Alternatively, you may clone or download this repository and run a Jupyter noteb
 ### Deep Learning
 
 - [Neural Networks](notebooks/models/neural_networks.ipynb)
-- Convolutional Neural Networks [ 📚 [Overview](https://www.bpesquet.fr/en/slides/ai/convolutional-neural-networks/) ]
+- [Convolutional Neural Networks](notebooks/models/cnn.ipynb)
 - Generative Adversarial Networks [ 📚 [Overview](https://www.bpesquet.fr/en/slides/ai/generative-deep-learning/) ]
