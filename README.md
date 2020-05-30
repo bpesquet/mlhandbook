@@ -2,12 +2,12 @@
 
 # Machine Learning Handbook
 
-This repository contains theorical explanations and interactive demonstrations for various Machine Learning concepts, techniques and tools. Practical challenges can be found in the associated [Machine Learning Katas](https://github.com/bpesquet/machine-learning-katas) repository.
+This repository contains theorical explanations and demonstrations for various Machine Learning concepts, techniques and tools. Practical challenges can be found in the associated [Machine Learning Katas](https://github.com/bpesquet/machine-learning-katas) repository.
 
-v  [Jupyter](https://jupyter.org/) notebooks that can be executed either:
+ Explanations and demos are gathered into [Jupyter](https://jupyter.org/) notebooks that can be rendered either:
 
 - locally, by cloning or downloading this repository then spinning up a Jupyter notebook server on your local machine.
-- online, through [Colaboratory](https://colab.research.google.com/) (Google account needed).
+- online, through [nbviewer](https://nbviewer.jupyter.org) (in read-only mode), [binder](https://mybinder.org) or [Colaboratory](https://colab.research.google.com) (Google account needed).
 
 > This material is part of the Machine Learning course taught at [ENSC](https://ensc.bordeaux-inp.fr). [ENSEIRB-MATMECA](https://enseirb-matmeca.bordeaux-inp.fr) and [IOGS](https://www.institutoptique.fr).
 
@@ -35,7 +35,7 @@ v  [Jupyter](https://jupyter.org/) notebooks that can be executed either:
 |![](thumbnails/matplotlib.png)|[Matplotlib & Seaborn](notebooks/tools/matplotlib.ipynb)|[![nbviewer badge](https://raw.githubusercontent.com/jupyter/design/master/logos/Badges/nbviewer_badge.svg)](https://nbviewer.jupyter.org/github/bpesquet/machine-learning-handbook/blob/master/notebooks/tools/matplotlib.ipynb)<br>[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/bpesquet/machine-learning-handbook/master?filepath=notebooks/tools/matplotlib.ipynb)<br>[![Open In Google Colaboratory](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/bpesquet/machine-learning-handbook/blob/master/notebooks/tools/matplotlib.ipynb)|
 |![](thumbnails/scikit-learn.png)|[scikit-learn](notebooks/tools/scikit-learn.ipynb)|[![nbviewer badge](https://raw.githubusercontent.com/jupyter/design/master/logos/Badges/nbviewer_badge.svg)](https://nbviewer.jupyter.org/github/bpesquet/machine-learning-handbook/blob/master/notebooks/tools/scikit-learn.ipynb)<br>[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/bpesquet/machine-learning-handbook/master?filepath=notebooks/tools/scikit-learn.ipynb)<br>[![Open In Google Colaboratory](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/bpesquet/machine-learning-handbook/blob/master/notebooks/tools/scikit-learn.ipynb)|
 
-## Other resources
+## Older material
 
 - K-Nearest Neighbors [ [Overview](https://www.bpesquet.fr/en/slides/ai/k-nearest-neighbors/) | [Demo](notebooks/models/knn.ipynb) ]
 - Linear Regression [ [Overview](https://www.bpesquet.fr/en/slides/ai/linear-regression/) | [Demo](https://playground.tensorflow.org/#activation=tanh&batchSize=10&dataset=circle&regDataset=reg-plane&learningRate=0.03&regularizationRate=0&noise=25&networkShape=&seed=0.27079&showTestData=false&discretize=false&percTrainData=50&x=true&y=true&xTimesY=false&xSquared=false&ySquared=false&cosX=false&sinX=false&cosY=false&sinY=false&collectStats=false&problem=regression&initZero=false&hideText=false&showTestData_hide=false&activation_hide=true&noise_hide=false&discretize_hide=true&dataset_hide=true&batchSize_hide=true&percTrainData_hide=true&numHiddenLayers_hide=true&problem_hide=true) ]
