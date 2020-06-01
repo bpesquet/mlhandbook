@@ -2,7 +2,7 @@
 
 # Machine Learning Handbook
 
-This repository contains theorical explanations and demonstrations for various Machine Learning concepts, techniques and tools. Practical challenges can be found in the associated [Machine Learning Katas](https://github.com/bpesquet/machine-learning-katas) repository.
+This repository contains theorical explanations and Python-based demonstrations for various Machine Learning concepts, techniques and tools. Practical challenges can be found in the associated [Machine Learning Katas](https://github.com/bpesquet/machine-learning-katas) repository.
 
  Explanations and demos are gathered into [Jupyter](https://jupyter.org/) notebooks that can be rendered either:
 
