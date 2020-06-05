@@ -11,7 +11,7 @@ This repository contains theorical explanations and Python-based demonstrations 
 - locally, by cloning or downloading this repository then spinning up a Jupyter notebook server on your local machine.
 - online, through [nbviewer](https://nbviewer.jupyter.org) (in read-only mode), [binder](https://mybinder.org) or [Colaboratory](https://colab.research.google.com) (Google account needed).
 
-> This material is part of the Machine Learning course taught at [ENSC](https://ensc.bordeaux-inp.fr). [ENSEIRB-MATMECA](https://enseirb-matmeca.bordeaux-inp.fr) and [IOGS](https://www.institutoptique.fr).
+> This material is part of the Machine Learning course taught at [ENSC](https://ensc.bordeaux-inp.fr). [ENSEIRB-MATMECA](https://enseirb-matmeca.bordeaux-inp.fr) and [IOGS](https://www.institutoptique.fr). See also [Acknowledgments](ACKNOWLEDGMENTS.md).
 
 ## Workflow
 
