@@ -1,0 +1,1057 @@
+
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Decision Trees &amp; Random Forests &#8212; Machine Learning Handbook</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-dropdown.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Artificial Neural Networks" href="artificial_neural_networks.html" />
+    <link rel="prev" title="Machine Learning Fundamentals" href="../fundamentals/machine_learning_foundations.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/logo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Machine Learning Handbook</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <p class="caption">
+ <span class="caption-text">
+  Fundamentals
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fundamentals/machine_learning_in_action.html">
+   Machine Learning In Action
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fundamentals/machine_learning_foundations.html">
+   Machine Learning Fundamentals
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Algorithms
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Decision Trees &amp; Random Forests
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="artificial_neural_networks.html">
+   Artificial Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="convolutional_neural_networks.html">
+   Convolutional Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="recurrent_neural_networks.html">
+   Recurrent Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="generative_deep_learning.html">
+   Generative Deep Learning
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Tools
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tools/python.html">
+   Python Cheatsheet
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tools/numpy.html">
+   Tensor Management with NumPy
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tools/pandas.html">
+   Data Analysis with Pandas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tools/matplotlib.html">
+   Plotting with Matplotlib and Seaborn
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tools/scikit-learn.html">
+   scikit-learn
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Appendix
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ACKNOWLEDGMENTS.html">
+   Acknowledgments
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/algorithms/decision_trees_and_random_forests.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/bpesquet/mlhandbook"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/bpesquet/mlhandbook/issues/new?title=Issue%20on%20page%20%2Falgorithms/decision_trees_and_random_forests.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/bpesquet/mlhandbook/edit/master/algorithms/decision_trees_and_random_forests.ipynb"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/bpesquet/mlhandbook/master?urlpath=tree/algorithms/decision_trees_and_random_forests.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/bpesquet/mlhandbook/blob/master/algorithms/decision_trees_and_random_forests.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#summary">
+   Summary
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#decision-trees">
+   Decision Trees
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#decision-trees-in-a-nutshell">
+     Decision Trees in a nutshell
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-training-a-decision-tree-to-classify-flowers">
+     Example: training a Decision Tree to classify flowers
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#environment-setup">
+     Environment setup
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#tree-nodes">
+     Tree nodes
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-gini-score">
+     The Gini score
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-gini-scores-for-the-trained-decision-tree">
+     Example: Gini scores for the trained Decision Tree
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-decision-boundaries-for-the-trained-decision-tree">
+     Example: decision boundaries for the trained Decision Tree
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#using-a-decision-tree-for-predictions">
+     Using a Decision Tree for predictions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-training-process">
+     The training process
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-training-a-decision-tree-on-planar-data">
+     Example: training a Decision Tree on planar data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#decision-trees-for-regression-problems">
+     Decision Trees for regression problems
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-fitting-a-sine-curve-with-a-decision-tree">
+     Example: fitting a sine curve with a Decision Tree
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#advantages-of-decision-trees">
+     Advantages of Decision Trees
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#decision-trees-shortcomings">
+     Decision Trees shortcomings
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ensemble-learning">
+   Ensemble learning
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#general-idea">
+     General idea
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hard-voting-classifiers">
+     Hard voting classifiers
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#soft-voting-classifiers">
+     Soft voting classifiers
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bagging-and-pasting">
+     Bagging and pasting
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#random-forests">
+   Random Forests
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#random-forests-in-a-nutshell">
+     Random Forests in a nutshell
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-training-a-random-forest-to-classify-flowers">
+     Example: training a Random Forest to classify flowers
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+        </nav>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <!--NAVIGATION-->
+<p><a target="_blank" href="https://colab.research.google.com/github/bpesquet/machine-learning-handbook/blob/master/notebooks/models/decision_trees_and_random_forests.ipynb"><img align="left" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open in Colab" title="Open in Google Colaboratory"></a></p>
+<div class="section" id="decision-trees-random-forests">
+<h1>Decision Trees &amp; Random Forests<a class="headerlink" href="#decision-trees-random-forests" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Decision Trees</p></li>
+<li><p>Ensemble learning</p></li>
+<li><p>Random Forests</p></li>
+</ul>
+</div>
+<div class="section" id="decision-trees">
+<h2>Decision Trees<a class="headerlink" href="#decision-trees" title="Permalink to this headline">¶</a></h2>
+<p>(Heavily inspired by Chapter 6 of <a class="reference external" href="https://github.com/ageron/handson-ml2">Hands-On Machine Learning</a> by Aurélien Géron)</p>
+<div class="section" id="decision-trees-in-a-nutshell">
+<h3>Decision Trees in a nutshell<a class="headerlink" href="#decision-trees-in-a-nutshell" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Supervised method, used for classification or regression.</p></li>
+<li><p>Build a tree-like structure based on a series of questions on the data.</p></li>
+</ul>
+<p><a class="reference external" href="https://jakevdp.github.io/PythonDataScienceHandbook/05.08-random-forests.html"><img alt="Decision Tree Example" src="../_images/dt_pdsh.png" /></a></p>
+</div>
+<div class="section" id="example-training-a-decision-tree-to-classify-flowers">
+<h3>Example: training a Decision Tree to classify flowers<a class="headerlink" href="#example-training-a-decision-tree-to-classify-flowers" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://archive.ics.uci.edu/ml/datasets/iris">Iris</a> is a well-known multiclass dataset. It contains 3 classes of flowers with 50 samples each. There are a total of 4 features for each sample:</p>
+<ul class="simple">
+<li><p>sepal length</p></li>
+<li><p>sepal width</p></li>
+<li><p>petal length</p></li>
+<li><p>petal width</p></li>
+</ul>
+</div>
+<div class="section" id="environment-setup">
+<h3>Environment setup<a class="headerlink" href="#environment-setup" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">platform</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Python version: </span><span class="si">{</span><span class="n">platform</span><span class="o">.</span><span class="n">python_version</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">platform</span><span class="o">.</span><span class="n">python_version_tuple</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="s2">&quot;6&quot;</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib.colors</span> <span class="kn">import</span> <span class="n">ListedColormap</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">graphviz</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Python version: 3.7.5
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Setup plots</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.figsize&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">8</span>
+<span class="o">%</span><span class="k">config</span> InlineBackend.figure_format = &#39;retina&#39;
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sklearn</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;scikit-learn version: </span><span class="si">{</span><span class="n">sklearn</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_iris</span>
+<span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">DecisionTreeClassifier</span><span class="p">,</span>
+    <span class="n">DecisionTreeRegressor</span><span class="p">,</span>
+    <span class="n">plot_tree</span><span class="p">,</span>
+    <span class="n">export_graphviz</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">cross_val_score</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>scikit-learn version: 0.22.1
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the decision boundary for a model using 2 features</span>
+<span class="c1"># Taken from https://github.com/ageron/handson-ml2/blob/master/06_decision_trees.ipynb</span>
+<span class="k">def</span> <span class="nf">plot_iris_decision_boundary</span><span class="p">(</span>
+    <span class="n">model</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">7.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">plot_training</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">):</span>
+    <span class="n">x1s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">x2s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">axes</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x1s</span><span class="p">,</span> <span class="n">x2s</span><span class="p">)</span>
+    <span class="n">X_new</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">x1</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">x2</span><span class="o">.</span><span class="n">ravel</span><span class="p">()]</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_new</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">x1</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="n">custom_cmap</span> <span class="o">=</span> <span class="n">ListedColormap</span><span class="p">([</span><span class="s2">&quot;#fafab0&quot;</span><span class="p">,</span> <span class="s2">&quot;#a0faa0&quot;</span><span class="p">,</span> <span class="s2">&quot;#9898ff&quot;</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">custom_cmap</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">plot_training</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">][</span><span class="n">y</span> <span class="o">==</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">][</span><span class="n">y</span> <span class="o">==</span> <span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;yo&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Iris setosa&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">][</span><span class="n">y</span> <span class="o">==</span> <span class="mi">1</span><span class="p">],</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">][</span><span class="n">y</span> <span class="o">==</span> <span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;g^&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Iris versicolor&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">][</span><span class="n">y</span> <span class="o">==</span> <span class="mi">2</span><span class="p">],</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">][</span><span class="n">y</span> <span class="o">==</span> <span class="mi">2</span><span class="p">],</span> <span class="s2">&quot;bs&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Iris virginica&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="n">axes</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Petal length&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Petal width&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">legend</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;lower right&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load the Iris dataset</span>
+<span class="n">iris</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">()</span>
+
+<span class="c1"># Put it into a DataFrame for visualization purposes</span>
+<span class="n">df_iris</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">iris</span><span class="o">.</span><span class="n">feature_names</span><span class="p">)</span>
+<span class="c1"># Add target and class columns to DataFrame</span>
+<span class="n">df_iris</span><span class="p">[</span><span class="s2">&quot;target&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span>
+<span class="n">df_iris</span><span class="p">[</span><span class="s2">&quot;class&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">target_names</span><span class="p">[</span><span class="n">iris</span><span class="o">.</span><span class="n">target</span><span class="p">]</span>
+<span class="c1"># Show 10 random samples</span>
+<span class="n">df_iris</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sepal length (cm)</th>
+      <th>sepal width (cm)</th>
+      <th>petal length (cm)</th>
+      <th>petal width (cm)</th>
+      <th>target</th>
+      <th>class</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>4</th>
+      <td>5.0</td>
+      <td>3.6</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>0</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>95</th>
+      <td>5.7</td>
+      <td>3.0</td>
+      <td>4.2</td>
+      <td>1.2</td>
+      <td>1</td>
+      <td>versicolor</td>
+    </tr>
+    <tr>
+      <th>61</th>
+      <td>5.9</td>
+      <td>3.0</td>
+      <td>4.2</td>
+      <td>1.5</td>
+      <td>1</td>
+      <td>versicolor</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4.9</td>
+      <td>3.0</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>0</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>145</th>
+      <td>6.7</td>
+      <td>3.0</td>
+      <td>5.2</td>
+      <td>2.3</td>
+      <td>2</td>
+      <td>virginica</td>
+    </tr>
+    <tr>
+      <th>46</th>
+      <td>5.1</td>
+      <td>3.8</td>
+      <td>1.6</td>
+      <td>0.2</td>
+      <td>0</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>5.0</td>
+      <td>3.4</td>
+      <td>1.5</td>
+      <td>0.2</td>
+      <td>0</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>70</th>
+      <td>5.9</td>
+      <td>3.2</td>
+      <td>4.8</td>
+      <td>1.8</td>
+      <td>1</td>
+      <td>versicolor</td>
+    </tr>
+    <tr>
+      <th>39</th>
+      <td>5.1</td>
+      <td>3.4</td>
+      <td>1.5</td>
+      <td>0.2</td>
+      <td>0</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>40</th>
+      <td>5.0</td>
+      <td>3.5</td>
+      <td>1.3</td>
+      <td>0.3</td>
+      <td>0</td>
+      <td>setosa</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use only last two features (petal length and width)</span>
+<span class="c1"># Thus, we can plot a 2D decision boundary</span>
+
+<span class="n">x_train_2feat</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">:]</span>
+<span class="n">y_train_2feat</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;x_train: </span><span class="si">{</span><span class="n">x_train_2feat</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;y_train: </span><span class="si">{</span><span class="n">y_train_2feat</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x_train: (150, 2)
+y_train: (150,)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Train a DT on the simplified dataset</span>
+<span class="n">dt_model</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">max_depth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">dt_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train_2feat</span><span class="p">,</span> <span class="n">y_train_2feat</span><span class="p">)</span>
+
+<span class="c1"># Compute accuracy on training set</span>
+<span class="n">acc</span> <span class="o">=</span> <span class="n">dt_model</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">x_train_2feat</span><span class="p">,</span> <span class="n">y_train_2feat</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Training accuracy: </span><span class="si">{</span><span class="n">acc</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training accuracy: 0.96000
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the DT</span>
+<span class="c1"># If using Jupyter locally, install graphviz with this command: conda install python-graphviz</span>
+<span class="n">dot_data</span> <span class="o">=</span> <span class="n">export_graphviz</span><span class="p">(</span>
+    <span class="n">dt_model</span><span class="p">,</span>
+    <span class="n">out_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">feature_names</span><span class="o">=</span><span class="n">iris</span><span class="o">.</span><span class="n">feature_names</span><span class="p">[</span><span class="mi">2</span><span class="p">:],</span>
+    <span class="n">class_names</span><span class="o">=</span><span class="n">iris</span><span class="o">.</span><span class="n">target_names</span><span class="p">,</span>
+    <span class="n">filled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">rounded</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">special_characters</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">graphviz</span><span class="o">.</span><span class="n">Source</span><span class="p">(</span><span class="n">dot_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/decision_trees_and_random_forests_14_0.svg" src="../_images/decision_trees_and_random_forests_14_0.svg" /></div>
+</div>
+</div>
+<div class="section" id="tree-nodes">
+<h3>Tree nodes<a class="headerlink" href="#tree-nodes" title="Permalink to this headline">¶</a></h3>
+<p>Each node is a step in the decision process, starting with the <em>root node</em> (depth 0). Leaf nodes represent predictions of the model.</p>
+<p>Node attributes are:</p>
+<ul class="simple">
+<li><p><strong>Gini</strong>: measure of the node <em>impurity</em>.</p></li>
+<li><p><strong>Samples</strong>: number of samples the node applies to.</p></li>
+<li><p><strong>Value</strong>: number of samples of each class the node applies to.</p></li>
+</ul>
+</div>
+<div class="section" id="the-gini-score">
+<h3>The Gini score<a class="headerlink" href="#the-gini-score" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(G_i = 1- \sum_{k=1}^K {p_{i, k}}^2\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(p_{i, k}\)</span>: ratio of class <code class="docutils literal notranslate"><span class="pre">k</span></code> instances in the <span class="math notranslate nohighlight">\(i^{th}\)</span> node.</p></li>
+<li><p><span class="math notranslate nohighlight">\(Gini = 0\)</span>: all samples it applies to belong to the same class (“pure” node).</p></li>
+</ul>
+<p>Other possible measure: <em>entropy</em> (level of disorder).</p>
+</div>
+<div class="section" id="example-gini-scores-for-the-trained-decision-tree">
+<h3>Example: Gini scores for the trained Decision Tree<a class="headerlink" href="#example-gini-scores-for-the-trained-decision-tree" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Root node:
+$<span class="math notranslate nohighlight">\(G_0 = 1 - ((\frac{50}{150})^2 + (\frac{50}{150})^2 + (\frac{50}{150})^2) = 1 - (\frac{1}{9} + \frac{1}{9} + \frac{1}{9}) = \frac{2}{3}\)</span>$</p></li>
+<li><p>Depth 1, left node:
+$<span class="math notranslate nohighlight">\(G_1 = 1 - ((\frac{50}{50})^2 + (\frac{0}{50})^2 + (\frac{0}{50})^2) = 1 - (1 + 0 + 0) = 0\)</span>$</p></li>
+<li><p>Depth 2, left node:
+$<span class="math notranslate nohighlight">\(G_3 = 1 - ((\frac{0}{54})^2 + (\frac{49}{54})^2 + (\frac{5}{54})^2) \simeq 0.168\)</span>$</p></li>
+</ul>
+</div>
+<div class="section" id="example-decision-boundaries-for-the-trained-decision-tree">
+<h3>Example: decision boundaries for the trained Decision Tree<a class="headerlink" href="#example-decision-boundaries-for-the-trained-decision-tree" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_iris_decision_boundary</span><span class="p">(</span><span class="n">dt_model</span><span class="p">,</span> <span class="n">x_train_2feat</span><span class="p">,</span> <span class="n">y_train_2feat</span><span class="p">)</span>
+<span class="c1"># Plot separation lines</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mf">2.45</span><span class="p">,</span> <span class="mf">2.45</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s2">&quot;k-&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mf">2.45</span><span class="p">,</span> <span class="mf">7.5</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.75</span><span class="p">,</span> <span class="mf">1.75</span><span class="p">],</span> <span class="s2">&quot;k--&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">1.40</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s2">&quot;Depth=0&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">3.2</span><span class="p">,</span> <span class="mf">1.80</span><span class="p">,</span> <span class="s2">&quot;Depth=1&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/decision_trees_and_random_forests_19_0.png" src="../_images/decision_trees_and_random_forests_19_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="using-a-decision-tree-for-predictions">
+<h3>Using a Decision Tree for predictions<a class="headerlink" href="#using-a-decision-tree-for-predictions" title="Permalink to this headline">¶</a></h3>
+<ol class="simple">
+<li><p>Using the new sample data, the tree is traversed to find the leaf node for that sample.</p></li>
+<li><p>Class probabilities are the ratios of samples of each class for this node.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define some new flower data</span>
+<span class="n">x_new</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">]]</span>
+
+<span class="c1"># Print predicted class probabilities</span>
+<span class="c1"># 0/54 for &quot;setosa&quot;, 49/54 for &quot;versicolor&quot;, 5/54 for &quot;virginica&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dt_model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">x_new</span><span class="p">))</span>
+
+<span class="c1"># Print predicted class</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">target_names</span><span class="p">[</span><span class="n">dt_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_new</span><span class="p">)])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0.         0.90740741 0.09259259]]
+[&#39;versicolor&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="the-training-process">
+<h3>The training process<a class="headerlink" href="#the-training-process" title="Permalink to this headline">¶</a></h3>
+<p>The CART (<em>Classification And Regression Tree</em>) algorithm creates binary trees.</p>
+<p>At each depth, it looks for the highest <em>Gini gain</em> by finding the feature and the threshold that produces the <em>purest</em> subsets (weighted by their size). Then, its splits the subsets recursively according to the same logic.</p>
+<p>It stops once no split will further reduce impurity, or when it reaches the maximum depth.</p>
+</div>
+<div class="section" id="example-training-a-decision-tree-on-planar-data">
+<h3>Example: training a Decision Tree on planar data<a class="headerlink" href="#example-training-a-decision-tree-on-planar-data" title="Permalink to this headline">¶</a></h3>
+<p>Three classes with 3 samples each, two features <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span>.</p>
+<p><a class="reference external" href="https://victorzhou.com/blog/intro-to-random-forests/"><img alt="DT CART example" src="../_images/dt_cart_example.png" /></a></p>
+<p><span class="math notranslate nohighlight">\(G_{initial} = 1 - ((\frac{3}{9})^2 + (\frac{3}{9})^2 + (\frac{3}{9})^2) = \frac{2}{3}\)</span></p>
+<p>Impurity gain with <span class="math notranslate nohighlight">\(x=0.4\)</span>:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(G_{left|x=0.4} = 1 - ((\frac{1}{1})^2 + (\frac{0}{1})^2 + (\frac{0}{1})^2) = 0\;\;G_{right|x=0.4} = 1 - ((\frac{2}{8})^2 + (\frac{3}{8})^2 + (\frac{3}{8})^2) = \frac{21}{32}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(Gain_{x=0.4} = G_{initial} - (\frac{1}{9}G_{left|x=0.4} + \frac{8}{9}G_{right|x=0.4}) = \frac{2}{3} - \frac{7}{12} = \frac{1}{12}\)</span></p></li>
+</ul>
+<p>Impurity gain with <span class="math notranslate nohighlight">\(x=2\)</span>:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(G_{left|x=2} = 1 - ((\frac{3}{6})^2 + (\frac{3}{6})^2 + (\frac{0}{6})^2) = 0,5\;\;G_{right|x=2} = 1 - ((\frac{0}{3})^2 + (\frac{0}{3})^2 + (\frac{3}{3})^2) = 0\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(Gain_{x=2} = G_{initial} - (\frac{6}{9}G_{left|x=2} + \frac{3}{9}G_{right|x=2}) = \frac{2}{3} - \frac{1}{3} = \frac{1}{3}\)</span></p></li>
+</ul>
+</div>
+<div class="section" id="decision-trees-for-regression-problems">
+<h3>Decision Trees for regression problems<a class="headerlink" href="#decision-trees-for-regression-problems" title="Permalink to this headline">¶</a></h3>
+<p>Decision Tree can also perform regression tasks.</p>
+<p>Instead of predicting a class, it outputs a value which is the average of all training samples associated with the leaf node reached during traversal.</p>
+</div>
+<div class="section" id="example-fitting-a-sine-curve-with-a-decision-tree">
+<h3>Example: fitting a sine curve with a Decision Tree<a class="headerlink" href="#example-fitting-a-sine-curve-with-a-decision-tree" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Taken from https://scikit-learn.org/stable/auto_examples/tree/plot_tree_regression.html</span>
+<span class="c1"># Create a random dataset</span>
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">x_sin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="mi">5</span> <span class="o">*</span> <span class="n">rng</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">80</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">y_sin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x_sin</span><span class="p">)</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+<span class="n">y_sin</span><span class="p">[::</span><span class="mi">5</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">3</span> <span class="o">*</span> <span class="p">(</span><span class="mf">0.5</span> <span class="o">-</span> <span class="n">rng</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">16</span><span class="p">))</span>
+
+<span class="c1"># Fit regression DT</span>
+<span class="n">dt_reg_model1</span> <span class="o">=</span> <span class="n">DecisionTreeRegressor</span><span class="p">(</span><span class="n">max_depth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">dt_reg_model1</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_sin</span><span class="p">,</span> <span class="n">y_sin</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DecisionTreeRegressor(ccp_alpha=0.0, criterion=&#39;mse&#39;, max_depth=2,
+                      max_features=None, max_leaf_nodes=None,
+                      min_impurity_decrease=0.0, min_impurity_split=None,
+                      min_samples_leaf=1, min_samples_split=2,
+                      min_weight_fraction_leaf=0.0, presort=&#39;deprecated&#39;,
+                      random_state=None, splitter=&#39;best&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the DT</span>
+<span class="c1"># If using Jupyter locally, install graphviz with this command: conda install python-graphviz</span>
+<span class="n">dot_data</span> <span class="o">=</span> <span class="n">export_graphviz</span><span class="p">(</span>
+    <span class="n">dt_reg_model1</span><span class="p">,</span>
+    <span class="n">out_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">feature_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">],</span>
+    <span class="n">filled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">rounded</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">special_characters</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">graphviz</span><span class="o">.</span><span class="n">Source</span><span class="p">(</span><span class="n">dot_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/decision_trees_and_random_forests_28_0.svg" src="../_images/decision_trees_and_random_forests_28_0.svg" /></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Train another regression DT on same dataset</span>
+<span class="n">dt_reg_model2</span> <span class="o">=</span> <span class="n">DecisionTreeRegressor</span><span class="p">(</span><span class="n">max_depth</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">dt_reg_model2</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_sin</span><span class="p">,</span> <span class="n">y_sin</span><span class="p">)</span>
+
+<span class="c1"># Predict values for both DT</span>
+<span class="n">x_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+<span class="n">y_pred_1</span> <span class="o">=</span> <span class="n">dt_reg_model1</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_test</span><span class="p">)</span>
+<span class="n">y_pred_2</span> <span class="o">=</span> <span class="n">dt_reg_model2</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_test</span><span class="p">)</span>
+
+<span class="c1"># Plot the results</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_sin</span><span class="p">,</span> <span class="n">y_sin</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;darkorange&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;data&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_pred_1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;cornflowerblue&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;max_depth=2&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_pred_2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;yellowgreen&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;max_depth=5&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;target&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/decision_trees_and_random_forests_29_0.png" src="../_images/decision_trees_and_random_forests_29_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="advantages-of-decision-trees">
+<h3>Advantages of Decision Trees<a class="headerlink" href="#advantages-of-decision-trees" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Versatility</p></li>
+<li><p>Very fast inference</p></li>
+<li><p>Intuitive and interpretable (<em>white box</em>)</p></li>
+<li><p>No feature scaling or encoding required</p></li>
+</ul>
+</div>
+<div class="section" id="decision-trees-shortcomings">
+<h3>Decision Trees shortcomings<a class="headerlink" href="#decision-trees-shortcomings" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Main problem: <strong>overfitting</strong>. Regularization is possible through hyperparameters:</p>
+<ul>
+<li><p>Maximum depth of the tree.</p></li>
+<li><p>Minimum number of samples needed to split a node.</p></li>
+<li><p>Minimum number of samples for any leaf node.</p></li>
+<li><p>Maximum number of leaf nodes.</p></li>
+</ul>
+</li>
+<li><p>Sensibility to small variations in the training data.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="ensemble-learning">
+<h2>Ensemble learning<a class="headerlink" href="#ensemble-learning" title="Permalink to this headline">¶</a></h2>
+<p>(Heavily inspired by Chapter 7 of <a class="reference external" href="https://github.com/ageron/handson-ml2">Hands-On Machine Learning</a> by Aurélien Géron)</p>
+<div class="section" id="general-idea">
+<h3>General idea<a class="headerlink" href="#general-idea" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Combining several predictors will lead to better results.</p></li>
+<li><p>A group of predictors is called an <strong>ensemble</strong>.</p></li>
+<li><p>Works best when predictors are diverse.</p></li>
+<li><p>Less interpretable and harder to tune than an individual predictor.</p></li>
+</ul>
+</div>
+<div class="section" id="hard-voting-classifiers">
+<h3>Hard voting classifiers<a class="headerlink" href="#hard-voting-classifiers" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://github.com/ageron/handson-ml2"><img alt="Hard voting classifier" src="../_images/hard_voting_classifier.png" /></a></p>
+</div>
+<div class="section" id="soft-voting-classifiers">
+<h3>Soft voting classifiers<a class="headerlink" href="#soft-voting-classifiers" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Use class probabilities rather than class predictions.</p></li>
+<li><p>Often yields better results than hard voting (highly confident predictions have more weight).</p></li>
+</ul>
+</div>
+<div class="section" id="bagging-and-pasting">
+<h3>Bagging and pasting<a class="headerlink" href="#bagging-and-pasting" title="Permalink to this headline">¶</a></h3>
+<p>Train several predictors with same algorithm on different random samples of the training set. The ensemble’s result is computed by aggregating (i.e. most frequent or average) the predictions of individual predictors.</p>
+<p>Only bagging (<em>bootstrap aggregating</em>) allows samples to be repeated for the same predictor.</p>
+<p><a class="reference external" href="https://github.com/ageron/handson-ml2"><img alt="Bagging &amp; pasting" src="../_images/bagging_pasting.png" /></a></p>
+</div>
+</div>
+<div class="section" id="random-forests">
+<h2>Random Forests<a class="headerlink" href="#random-forests" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="random-forests-in-a-nutshell">
+<h3>Random Forests in a nutshell<a class="headerlink" href="#random-forests-in-a-nutshell" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Ensemble of Decision Trees, generally trained via bagging.</p></li>
+<li><p>May be used for classification or regression.</p></li>
+<li><p>Trees are grown using a random subset of features.</p></li>
+<li><p>Ensembling mitigates the individual shortcomings of Decision Trees (overfitting, sensibility to small changes in the dataset).</p></li>
+<li><p>On the other hand, results are less interpretable.</p></li>
+</ul>
+</div>
+<div class="section" id="example-training-a-random-forest-to-classify-flowers">
+<h3>Example: training a Random Forest to classify flowers<a class="headerlink" href="#example-training-a-random-forest-to-classify-flowers" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use whole Iris dataset</span>
+<span class="n">x_train</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">data</span>
+<span class="n">y_train</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span>
+
+<span class="c1"># Create a Random Forest classifier</span>
+<span class="c1"># n_estimators: number of predictors (Decision Trees)</span>
+<span class="n">rf_model</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+
+<span class="c1"># Train the RF on the dataset</span>
+<span class="n">rf_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="c1"># Compute cross-validation scores for the RF</span>
+<span class="n">scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">rf_model</span><span class="p">,</span> <span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="n">cv_acc</span> <span class="o">=</span> <span class="n">scores</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mean CV accuracy: </span><span class="si">{</span><span class="n">cv_acc</span><span class="si">:</span><span class="s2">.05f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean CV accuracy: 0.95333
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./algorithms"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="../fundamentals/machine_learning_foundations.html" title="previous page">Machine Learning Fundamentals</a>
+    <a class='right-next' id="next-link" href="artificial_neural_networks.html" title="next page">Artificial Neural Networks</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Baptiste Pesquet<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="../_static/js/index.js"></script>
+    
+  </body>
+</html>

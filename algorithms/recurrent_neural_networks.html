@@ -1,0 +1,1299 @@
+
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recurrent Neural Networks &#8212; Machine Learning Handbook</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-dropdown.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Generative Deep Learning" href="generative_deep_learning.html" />
+    <link rel="prev" title="Convolutional Neural Networks" href="convolutional_neural_networks.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/logo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Machine Learning Handbook</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <p class="caption">
+ <span class="caption-text">
+  Fundamentals
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fundamentals/machine_learning_in_action.html">
+   Machine Learning In Action
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fundamentals/machine_learning_foundations.html">
+   Machine Learning Fundamentals
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Algorithms
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="decision_trees_and_random_forests.html">
+   Decision Trees &amp; Random Forests
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="artificial_neural_networks.html">
+   Artificial Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="convolutional_neural_networks.html">
+   Convolutional Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Recurrent Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="generative_deep_learning.html">
+   Generative Deep Learning
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Tools
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tools/python.html">
+   Python Cheatsheet
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tools/numpy.html">
+   Tensor Management with NumPy
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tools/pandas.html">
+   Data Analysis with Pandas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tools/matplotlib.html">
+   Plotting with Matplotlib and Seaborn
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tools/scikit-learn.html">
+   scikit-learn
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Appendix
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ACKNOWLEDGMENTS.html">
+   Acknowledgments
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/algorithms/recurrent_neural_networks.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/bpesquet/mlhandbook"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/bpesquet/mlhandbook/issues/new?title=Issue%20on%20page%20%2Falgorithms/recurrent_neural_networks.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/bpesquet/mlhandbook/edit/master/algorithms/recurrent_neural_networks.ipynb"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/bpesquet/mlhandbook/master?urlpath=tree/algorithms/recurrent_neural_networks.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/bpesquet/mlhandbook/blob/master/algorithms/recurrent_neural_networks.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#summary">
+   Summary
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#rnn-fundamentals">
+   RNN fundamentals
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#recurrent-neural-networks-in-a-nutshell">
+     Recurrent Neural Networks in a nutshell
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#terminology">
+     Terminology
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#rnn-architecture">
+     RNN architecture
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#inputs-and-outputs">
+     Inputs and outputs
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#training-a-rnn">
+     Training a RNN
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sequence-format">
+     Sequence format
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-forecasting-a-univariate-time-series">
+     Example: forecasting a univariate time series
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#single-step-naive-forecasting">
+     Single step, naïve forecasting
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#recurrent-neurons">
+     Recurrent neurons
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#recurrent-layers">
+     Recurrent layers
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#multi-step-forecasting">
+     Multi-step forecasting
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#lstm-gru-and-1d-convolutions">
+   LSTM, GRU and 1D convolutions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-limits-of-recurrent-neurons">
+     The limits of recurrent neurons
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lstm-cells">
+     LSTM cells
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#gru-cells">
+     GRU cells
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sequence-processing-with-1d-convolutions">
+     Sequence processing with 1D convolutions
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+        </nav>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <!--NAVIGATION-->
+<p><a target="_blank" href="https://colab.research.google.com/github/bpesquet/machine-learning-handbook/blob/master/notebooks/models/recurrent_neural_networks.ipynb"><img align="left" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open in Colab" title="Open in Google Colaboratory"></a></p>
+<div class="section" id="recurrent-neural-networks">
+<h1>Recurrent Neural Networks<a class="headerlink" href="#recurrent-neural-networks" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>RNN fundamentals</p></li>
+<li><p>LSTM, GRU and 1D convolutions</p></li>
+</ul>
+</div>
+<div class="section" id="rnn-fundamentals">
+<h2>RNN fundamentals<a class="headerlink" href="#rnn-fundamentals" title="Permalink to this headline">¶</a></h2>
+<p>(Heavily inspired by Chapter 15 of <a class="reference external" href="https://github.com/ageron/handson-ml2">Hands-On Machine Learning</a> by Aurélien Géron)</p>
+<div class="section" id="recurrent-neural-networks-in-a-nutshell">
+<h3>Recurrent Neural Networks in a nutshell<a class="headerlink" href="#recurrent-neural-networks-in-a-nutshell" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Family of neural networks that maintain some kind of <strong>state</strong>, contrary to feedforward networks like MLP.</p></li>
+<li><p>Able to handle <strong>sequential data</strong> (data for which there is some sort of dependence through time).</p></li>
+<li><p>Can process input of arbitrary length.</p></li>
+<li><p>Useful in many contexts:</p>
+<ul>
+<li><p>Time series analysis.</p></li>
+<li><p>Natural Language Processing.</p></li>
+<li><p>Audio tasks (text-to-speech, speech-to-text, music generation).</p></li>
+<li><p>…</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="terminology">
+<h3>Terminology<a class="headerlink" href="#terminology" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><strong>Sequence</strong>: instance of sequential data.</p></li>
+<li><p><strong>Time step</strong> (or <em>frame</em>): incremental change in time used to discretize the sequence.</p></li>
+<li><p><strong>Cell</strong>: recurrent unit in a RNN.</p></li>
+<li><p><strong>Unrolling</strong>: representing the RNN flow against the time axis.</p></li>
+</ul>
+</div>
+<div class="section" id="rnn-architecture">
+<h3>RNN architecture<a class="headerlink" href="#rnn-architecture" title="Permalink to this headline">¶</a></h3>
+<p>RNN have <strong>loops</strong> into them, allowing information to persist and be passed from one step of the network to the next.</p>
+<p><a class="reference external" href="https://colah.github.io/posts/2015-08-Understanding-LSTMs/"><img alt="RNN unrolled" src="../_images/RNN-unrolled.png" /></a></p>
+<p>At each time step, the output is a function of all inputs from previous time steps. The network has a form of <strong>memory</strong>, encoding information about the timesteps it has seen so far.</p>
+</div>
+<div class="section" id="inputs-and-outputs">
+<h3>Inputs and outputs<a class="headerlink" href="#inputs-and-outputs" title="Permalink to this headline">¶</a></h3>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>RNN Type</p></th>
+<th class="head"><p>In</p></th>
+<th class="head"><p>Out</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><em>Sequence-to-sequence</em></p></td>
+<td><p>An input sequence</p></td>
+<td><p>An output sequence</p></td>
+</tr>
+<tr class="row-odd"><td><p><em>Sequence-to-vector</em></p></td>
+<td><p>An input sequence</p></td>
+<td><p>Value of output sequence for last timestep</p></td>
+</tr>
+<tr class="row-even"><td><p><em>Vector-to-sequence</em></p></td>
+<td><p>Single value of input sequence</p></td>
+<td><p>An output sequence</p></td>
+</tr>
+<tr class="row-odd"><td><p><em>Encoder-decoder</em></p></td>
+<td><p>An input sequence</p></td>
+<td><p>An output sequence, after encoding (seq2vec) and decoding (vec2seq)</p></td>
+</tr>
+</tbody>
+</table>
+<p><a class="reference external" href="https://github.com/ageron/handson-ml2"><img alt="RNN inputs and outputs" src="../_images/rnn_input_output.png" /></a></p>
+</div>
+<div class="section" id="training-a-rnn">
+<h3>Training a RNN<a class="headerlink" href="#training-a-rnn" title="Permalink to this headline">¶</a></h3>
+<p>A RNN is similar to a deep feedforward neural network that has a layer for each time step. Its weights are shared across time.</p>
+<p>The training process uses <strong>backpropagation through time</strong> (BPTT). After the forward pass, gradients of the cost function are propagated backwards through the unrolled network (<a class="reference external" href="https://stats.stackexchange.com/a/220111/8706">more details</a>).</p>
+<p><a class="reference external" href="https://github.com/ageron/handson-ml2"><img alt="BPTT" src="../_images/bptt.png" /></a></p>
+</div>
+<div class="section" id="sequence-format">
+<h3>Sequence format<a class="headerlink" href="#sequence-format" title="Permalink to this headline">¶</a></h3>
+<p>Input sequences for a RNN are 3D tensors. Axis are: batch size (number of sequences in the batch), time steps, and features.</p>
+<ul class="simple">
+<li><p>An <strong>univariate</strong> sequence has only a single feature per time step.</p></li>
+<li><p>A <strong>multivariate</strong> sequence has several features per time step.</p></li>
+</ul>
+<p><img alt="Input sequence format" src="../_images/time_series.png" /></p>
+</div>
+<div class="section" id="example-forecasting-a-univariate-time-series">
+<h3>Example: forecasting a univariate time series<a class="headerlink" href="#example-forecasting-a-univariate-time-series" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">platform</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Python version: </span><span class="si">{</span><span class="n">platform</span><span class="o">.</span><span class="n">python_version</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">platform</span><span class="o">.</span><span class="n">python_version_tuple</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="s2">&quot;6&quot;</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Python version: 3.7.5
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Setup plots</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.figsize&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">8</span>
+<span class="o">%</span><span class="k">config</span> InlineBackend.figure_format = &quot;retina&quot;
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;TensorFlow version: </span><span class="si">{</span><span class="n">tf</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Keras version: </span><span class="si">{</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">tensorflow.keras.losses</span> <span class="kn">import</span> <span class="n">mean_squared_error</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.models</span> <span class="kn">import</span> <span class="n">Sequential</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.layers</span> <span class="kn">import</span> <span class="n">SimpleRNN</span><span class="p">,</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">LSTM</span><span class="p">,</span> <span class="n">GRU</span><span class="p">,</span> <span class="n">Conv1D</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.optimizers</span> <span class="kn">import</span> <span class="n">Adam</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>TensorFlow version: 2.0.0
+Keras version: 2.2.4-tf
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Utility functions</span>
+<span class="c1"># First two are adapted from</span>
+<span class="c1"># https://github.com/ageron/handson-ml2/blob/master/15_processing_sequences_using_rnns_and_cnns.ipynb</span>
+
+
+<span class="k">def</span> <span class="nf">generate_time_series</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">n_steps</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Generate a batch of time series with same length = n_steps</span>
+<span class="sd">    Each series is the sum of two sine waves of fixed amplitudes </span>
+<span class="sd">        but random frequencies and phases, with added noise</span>
+<span class="sd">    Return a 3D tensor of shape (batch_size, n_steps, 1)&quot;&quot;&quot;</span>
+
+    <span class="n">freq1</span><span class="p">,</span> <span class="n">freq2</span><span class="p">,</span> <span class="n">offsets1</span><span class="p">,</span> <span class="n">offsets2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n_steps</span><span class="p">)</span>
+    <span class="n">series</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">((</span><span class="n">time</span> <span class="o">-</span> <span class="n">offsets1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">freq1</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">+</span> <span class="mi">10</span><span class="p">))</span>  <span class="c1">#   wave 1</span>
+    <span class="n">series</span> <span class="o">+=</span> <span class="mf">0.2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">((</span><span class="n">time</span> <span class="o">-</span> <span class="n">offsets2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">freq2</span> <span class="o">*</span> <span class="mi">20</span> <span class="o">+</span> <span class="mi">20</span><span class="p">))</span>  <span class="c1"># + wave 2</span>
+    <span class="n">series</span> <span class="o">+=</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">n_steps</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)</span>  <span class="c1"># + noise</span>
+    <span class="k">return</span> <span class="n">series</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">plot_series</span><span class="p">(</span><span class="n">series</span><span class="p">,</span> <span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">x_label</span><span class="o">=</span><span class="s2">&quot;$t$&quot;</span><span class="p">,</span> <span class="n">y_label</span><span class="o">=</span><span class="s2">&quot;$x(t)$&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Plot a time series with actual and predicted future values</span>
+<span class="sd">    series: vector of shape (time steps, )</span>
+<span class="sd">    y_true: scalar (if only 1 ahead step) or vector of shape (ahead steps,)</span>
+<span class="sd">    y_pred: scalar (if only 1 ahead step) or vector of shape (ahead steps,)&quot;&quot;&quot;</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">series</span><span class="p">,</span> <span class="s2">&quot;.-&quot;</span><span class="p">)</span>
+    <span class="n">n_steps</span> <span class="o">=</span> <span class="n">series</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># Calculate the number of steps ahead (= number of future values)</span>
+    <span class="n">n_steps_ahead</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isscalar</span><span class="p">(</span><span class="n">y_true</span><span class="p">):</span>
+        <span class="n">n_steps_ahead</span> <span class="o">=</span> <span class="n">y_true</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># Plot actual future values</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n_steps</span><span class="p">,</span> <span class="n">n_steps</span> <span class="o">+</span> <span class="n">n_steps_ahead</span><span class="p">),</span> <span class="n">y_true</span><span class="p">,</span> <span class="s2">&quot;ro-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Actual&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">y_pred</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># Plot predicted future values</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n_steps</span><span class="p">,</span> <span class="n">n_steps</span> <span class="o">+</span> <span class="n">n_steps_ahead</span><span class="p">),</span>
+            <span class="n">y_pred</span><span class="p">,</span>
+            <span class="s2">&quot;bx-&quot;</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Predicted&quot;</span><span class="p">,</span>
+            <span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="k">if</span> <span class="n">x_label</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">x_label</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">y_label</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">y_label</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_steps</span> <span class="o">+</span> <span class="n">n_steps_ahead</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">plot_loss</span><span class="p">(</span><span class="n">history</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Plot training loss for a Keras model</span>
+<span class="sd">    Takes a Keras History object as parameter&quot;&quot;&quot;</span>
+
+    <span class="n">loss</span> <span class="o">=</span> <span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s2">&quot;loss&quot;</span><span class="p">]</span>
+    <span class="n">epochs</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">loss</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">epochs</span><span class="p">,</span> <span class="n">loss</span><span class="p">,</span> <span class="s2">&quot;.--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Training loss&quot;</span><span class="p">)</span>
+    <span class="n">final_loss</span> <span class="o">=</span> <span class="n">loss</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Training loss: </span><span class="si">{:.4f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">final_loss</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Loss&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="s2">&quot;val_loss&quot;</span> <span class="ow">in</span> <span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">:</span>
+        <span class="n">val_loss</span> <span class="o">=</span> <span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s2">&quot;val_loss&quot;</span><span class="p">]</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">epochs</span><span class="p">,</span> <span class="n">val_loss</span><span class="p">,</span> <span class="s2">&quot;o-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Validation loss&quot;</span><span class="p">)</span>
+        <span class="n">final_val_loss</span> <span class="o">=</span> <span class="n">val_loss</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">title</span> <span class="o">+=</span> <span class="s2">&quot;, Validation loss: </span><span class="si">{:.4f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">final_val_loss</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate a batch of time series</span>
+<span class="n">n_steps</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">series</span> <span class="o">=</span> <span class="n">generate_time_series</span><span class="p">(</span><span class="mi">10000</span><span class="p">,</span> <span class="n">n_steps</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;series: </span><span class="si">{</span><span class="n">series</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Split dataset as usual between train/validation/test sets</span>
+<span class="c1"># -1 is used to retrieve feature(s) for last time step only (the one we try to predict)</span>
+<span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span> <span class="o">=</span> <span class="n">series</span><span class="p">[:</span><span class="mi">7000</span><span class="p">,</span> <span class="p">:</span><span class="n">n_steps</span><span class="p">],</span> <span class="n">series</span><span class="p">[:</span><span class="mi">7000</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">x_val</span><span class="p">,</span> <span class="n">y_val</span> <span class="o">=</span> <span class="n">series</span><span class="p">[</span><span class="mi">7000</span><span class="p">:</span><span class="mi">9000</span><span class="p">,</span> <span class="p">:</span><span class="n">n_steps</span><span class="p">],</span> <span class="n">series</span><span class="p">[</span><span class="mi">7000</span><span class="p">:</span><span class="mi">9000</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">series</span><span class="p">[</span><span class="mi">9000</span><span class="p">:,</span> <span class="p">:</span><span class="n">n_steps</span><span class="p">],</span> <span class="n">series</span><span class="p">[</span><span class="mi">9000</span><span class="p">:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;x_train: </span><span class="si">{</span><span class="n">x_train</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">, y_train: </span><span class="si">{</span><span class="n">y_train</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;x_val: </span><span class="si">{</span><span class="n">x_val</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">, y_val: </span><span class="si">{</span><span class="n">y_val</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;x_test: </span><span class="si">{</span><span class="n">x_test</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">, y_test: </span><span class="si">{</span><span class="n">y_test</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>series: (10000, 51, 1)
+x_train: (7000, 50, 1), y_train: (7000, 1)
+x_val: (2000, 50, 1), y_val: (2000, 1)
+x_test: (1000, 50, 1), y_test: (1000, 1)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot 3 series from the validation set</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">sca</span><span class="p">(</span><span class="n">axes</span><span class="p">[</span><span class="n">col</span><span class="p">])</span>
+    <span class="n">plot_series</span><span class="p">(</span>
+        <span class="n">series</span><span class="o">=</span><span class="n">x_val</span><span class="p">[</span><span class="n">col</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">],</span>
+        <span class="n">y_true</span><span class="o">=</span><span class="n">y_val</span><span class="p">[</span><span class="n">col</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+        <span class="n">y_label</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;$x(t)$&quot;</span> <span class="k">if</span> <span class="n">col</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="kc">None</span><span class="p">),</span>
+    <span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/recurrent_neural_networks_16_0.png" src="../_images/recurrent_neural_networks_16_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="single-step-naive-forecasting">
+<h3>Single step, naïve forecasting<a class="headerlink" href="#single-step-naive-forecasting" title="Permalink to this headline">¶</a></h3>
+<p>Here, we only try to predict the sequence value one step ahead in the future.</p>
+<p>A baseline solution (always useful at the beginning of any ML project) would be to use the last know value as prediction.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Naïve prediction = input for last time step</span>
+<span class="n">y_pred_naive</span> <span class="o">=</span> <span class="n">x_val</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;y_pred_naive: </span><span class="si">{</span><span class="n">y_pred_naive</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Naïve predictor MSE: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_pred_naive</span><span class="p">))</span><span class="si">:</span><span class="s2">0.05f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>y_pred_naive: (2000, 1)
+Naïve predictor MSE: 0.02098
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot first validation series with ground truth and prediction</span>
+<span class="n">plot_series</span><span class="p">(</span><span class="n">series</span><span class="o">=</span><span class="n">x_val</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">y_true</span><span class="o">=</span><span class="n">y_val</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">y_pred</span><span class="o">=</span><span class="n">y_pred_naive</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/recurrent_neural_networks_19_0.png" src="../_images/recurrent_neural_networks_19_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="recurrent-neurons">
+<h3>Recurrent neurons<a class="headerlink" href="#recurrent-neurons" title="Permalink to this headline">¶</a></h3>
+<p>The most basic form of RNN cell is a <em>recurrent neuron</em>. It simply sends its output back to itself.</p>
+<p>At each time step <span class="math notranslate nohighlight">\(t\)</span>, it receives the input vector <span class="math notranslate nohighlight">\(\mathbf{x}_{(t)}\)</span> and its own scalar output from the previous time step, <span class="math notranslate nohighlight">\(y_{(t-1)}\)</span>.</p>
+<p><a class="reference external" href="https://github.com/ageron/handson-ml2/"><img alt="Recurrent neuron" src="../_images/recurrent_neuron.png" /></a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a linear stack of layers</span>
+<span class="n">basic_rnn_model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
+
+<span class="c1"># Add a RNN layer to the model</span>
+<span class="c1"># units: dimensionality of the output space (= number of cells inside the layer)</span>
+<span class="c1"># input_shape: dimensionality of input, excluding batch dimension: vector of shape (time steps, features)</span>
+<span class="c1">#   Could also be (n_steps, 1) here, bur RNN can process any number of time steps, so None is also ok</span>
+<span class="c1"># This layer expects input as a 3D tensor (batch size, time steps, features)</span>
+<span class="c1"># Output shape is a 2D tensor (batch size, units) corresponding to the last time step</span>
+<span class="c1"># Activation function is tanh by default</span>
+<span class="n">basic_rnn_model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">SimpleRNN</span><span class="p">(</span><span class="n">units</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="mi">1</span><span class="p">)))</span>
+
+<span class="c1"># 1 weight for input, 1 for recurrent output, 1 for bias = 3 parameters</span>
+<span class="n">basic_rnn_model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;sequential&quot;
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+simple_rnn (SimpleRNN)       (None, 1)                 3         
+=================================================================
+Total params: 3
+Trainable params: 3
+Non-trainable params: 0
+_________________________________________________________________
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">basic_rnn_model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="n">Adam</span><span class="p">(</span><span class="n">lr</span><span class="o">=</span><span class="mf">0.005</span><span class="p">),</span> <span class="n">loss</span><span class="o">=</span><span class="s2">&quot;mse&quot;</span><span class="p">)</span>
+
+<span class="n">history</span> <span class="o">=</span> <span class="n">basic_rnn_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">x_val</span><span class="p">,</span> <span class="n">y_val</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">plot_loss</span><span class="p">(</span><span class="n">history</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/recurrent_neural_networks_22_0.png" src="../_images/recurrent_neural_networks_22_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_pred_basic</span> <span class="o">=</span> <span class="n">basic_rnn_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_val</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Basic RNN MSE: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_pred_basic</span><span class="p">))</span><span class="si">:</span><span class="s2">0.05f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Basic RNN MSE: 0.01756
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot first validation series with ground truth and prediction</span>
+<span class="n">plot_series</span><span class="p">(</span><span class="n">series</span><span class="o">=</span><span class="n">x_val</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">y_true</span><span class="o">=</span><span class="n">y_val</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">y_pred</span><span class="o">=</span><span class="n">y_pred_basic</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/recurrent_neural_networks_24_0.png" src="../_images/recurrent_neural_networks_24_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="recurrent-layers">
+<h3>Recurrent layers<a class="headerlink" href="#recurrent-layers" title="Permalink to this headline">¶</a></h3>
+<p>Recurrent neurons can be stacked together to form a <em>recurrent layer</em>.</p>
+<p>At each time step <span class="math notranslate nohighlight">\(t\)</span>, each neuron of the layer receives both the input vector <span class="math notranslate nohighlight">\(\mathbf{x}_{(t)}\)</span> and the output of the layer from the previous time step, <span class="math notranslate nohighlight">\(\mathbf{y}_{(t-1)}\)</span> (which is a vector in that case).</p>
+<p><img alt="Recurrent layer" src="../_images/recurrent_layer.png" /></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stacked_rnn_model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
+
+<span class="c1"># return_sequences: if True, the layer outputs the whole sequence instead of the value for last time step</span>
+<span class="c1"># In that case, output shape is a 3D tensor (batch size, time steps, units)</span>
+<span class="n">stacked_rnn_model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">SimpleRNN</span><span class="p">(</span><span class="n">units</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">return_sequences</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="mi">1</span><span class="p">)))</span>
+
+<span class="c1"># return_sequences is False by default</span>
+<span class="c1"># In that case, output shape is a 2D tensor (batch size, units)</span>
+<span class="c1"># Here, we only care about output for the last time step</span>
+<span class="n">stacked_rnn_model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">SimpleRNN</span><span class="p">(</span><span class="n">units</span><span class="o">=</span><span class="mi">20</span><span class="p">))</span>
+
+<span class="c1"># Add a linear layer to compute the prediction</span>
+<span class="n">stacked_rnn_model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="n">units</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="c1"># First RNN layer: 20 (input) + 20*20 (recurrent output) + 20 (bias) = 440 parameters</span>
+<span class="c1"># Second RNN layer: 20*20 (input) + 20*20 (recurrent output) + 20 (bias) = 820 parameters</span>
+<span class="c1"># Dense layer: 20 (input) + 1 (bias) = 21 parameters</span>
+<span class="n">stacked_rnn_model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;sequential_1&quot;
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+simple_rnn_1 (SimpleRNN)     (None, None, 20)          440       
+_________________________________________________________________
+simple_rnn_2 (SimpleRNN)     (None, 20)                820       
+_________________________________________________________________
+dense (Dense)                (None, 1)                 21        
+=================================================================
+Total params: 1,281
+Trainable params: 1,281
+Non-trainable params: 0
+_________________________________________________________________
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stacked_rnn_model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s2">&quot;adam&quot;</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s2">&quot;mse&quot;</span><span class="p">)</span>
+
+<span class="n">history</span> <span class="o">=</span> <span class="n">stacked_rnn_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">x_val</span><span class="p">,</span> <span class="n">y_val</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">plot_loss</span><span class="p">(</span><span class="n">history</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/recurrent_neural_networks_27_0.png" src="../_images/recurrent_neural_networks_27_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_pred_stacked</span> <span class="o">=</span> <span class="n">stacked_rnn_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_val</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Stacked RNN MSE: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_pred_stacked</span><span class="p">))</span><span class="si">:</span><span class="s2">0.05f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Stacked RNN MSE: 0.00283
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_series</span><span class="p">(</span><span class="n">series</span><span class="o">=</span><span class="n">x_val</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">y_true</span><span class="o">=</span><span class="n">y_val</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">y_pred</span><span class="o">=</span><span class="n">y_pred_stacked</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/recurrent_neural_networks_29_0.png" src="../_images/recurrent_neural_networks_29_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="multi-step-forecasting">
+<h3>Multi-step forecasting<a class="headerlink" href="#multi-step-forecasting" title="Permalink to this headline">¶</a></h3>
+<p>To forecast <span class="math notranslate nohighlight">\(n\)</span> timesteps ahead, we train the network to predict all <span class="math notranslate nohighlight">\(n\)</span> next values at once.</p>
+<p>To do so, we need to turn the targets into vectors containing the next <span class="math notranslate nohighlight">\(n\)</span> values.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_steps</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="c1"># Generate time series of length = n_steps + 10</span>
+<span class="n">series</span> <span class="o">=</span> <span class="n">generate_time_series</span><span class="p">(</span><span class="mi">10000</span><span class="p">,</span> <span class="n">n_steps</span> <span class="o">+</span> <span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># Training inputs stay the same</span>
+<span class="c1"># Targets are now the first (and only) feature for the last 10 time steps</span>
+<span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span> <span class="o">=</span> <span class="n">series</span><span class="p">[:</span><span class="mi">7000</span><span class="p">,</span> <span class="p">:</span><span class="n">n_steps</span><span class="p">],</span> <span class="n">series</span><span class="p">[:</span><span class="mi">7000</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">:,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">x_val</span><span class="p">,</span> <span class="n">y_val</span> <span class="o">=</span> <span class="n">series</span><span class="p">[</span><span class="mi">7000</span><span class="p">:</span><span class="mi">9000</span><span class="p">,</span> <span class="p">:</span><span class="n">n_steps</span><span class="p">],</span> <span class="n">series</span><span class="p">[</span><span class="mi">7000</span><span class="p">:</span><span class="mi">9000</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">:,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">series</span><span class="p">[</span><span class="mi">9000</span><span class="p">:,</span> <span class="p">:</span><span class="n">n_steps</span><span class="p">],</span> <span class="n">series</span><span class="p">[</span><span class="mi">9000</span><span class="p">:,</span> <span class="o">-</span><span class="mi">10</span><span class="p">:,</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;series: </span><span class="si">{</span><span class="n">series</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;x_train: </span><span class="si">{</span><span class="n">x_train</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">, y_train: </span><span class="si">{</span><span class="n">y_train</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;x_val: </span><span class="si">{</span><span class="n">x_val</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">, y_val: </span><span class="si">{</span><span class="n">y_val</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;x_test: </span><span class="si">{</span><span class="n">x_test</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">, y_test: </span><span class="si">{</span><span class="n">y_test</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>series: (10000, 60, 1)
+x_train: (7000, 50, 1), y_train: (7000, 10)
+x_val: (2000, 50, 1), y_val: (2000, 10)
+x_test: (1000, 50, 1), y_test: (1000, 10)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">multistep_rnn_model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
+<span class="n">multistep_rnn_model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">SimpleRNN</span><span class="p">(</span><span class="n">units</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">return_sequences</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="mi">1</span><span class="p">)))</span>
+<span class="n">multistep_rnn_model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">SimpleRNN</span><span class="p">(</span><span class="n">units</span><span class="o">=</span><span class="mi">20</span><span class="p">))</span>
+<span class="c1"># Predict 10 steps ahead</span>
+<span class="n">multistep_rnn_model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="n">units</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span>
+
+<span class="n">multistep_rnn_model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;sequential_2&quot;
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+simple_rnn_3 (SimpleRNN)     (None, None, 20)          440       
+_________________________________________________________________
+simple_rnn_4 (SimpleRNN)     (None, 20)                820       
+_________________________________________________________________
+dense_1 (Dense)              (None, 10)                210       
+=================================================================
+Total params: 1,470
+Trainable params: 1,470
+Non-trainable params: 0
+_________________________________________________________________
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">multistep_rnn_model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s2">&quot;adam&quot;</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s2">&quot;mse&quot;</span><span class="p">)</span>
+
+<span class="n">history</span> <span class="o">=</span> <span class="n">multistep_rnn_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">x_val</span><span class="p">,</span> <span class="n">y_val</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">plot_loss</span><span class="p">(</span><span class="n">history</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/recurrent_neural_networks_33_0.png" src="../_images/recurrent_neural_networks_33_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_pred_multistep</span> <span class="o">=</span> <span class="n">multistep_rnn_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_val</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Multistep RNN MSE: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_pred_multistep</span><span class="p">))</span><span class="si">:</span><span class="s2">0.05f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multistep RNN MSE: 0.01010
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot first validation series with ground truth and prediction</span>
+<span class="n">plot_series</span><span class="p">(</span>
+    <span class="n">series</span><span class="o">=</span><span class="n">x_val</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">y_true</span><span class="o">=</span><span class="n">y_val</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">y_pred</span><span class="o">=</span><span class="n">y_pred_multistep</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/recurrent_neural_networks_35_0.png" src="../_images/recurrent_neural_networks_35_0.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="lstm-gru-and-1d-convolutions">
+<h2>LSTM, GRU and 1D convolutions<a class="headerlink" href="#lstm-gru-and-1d-convolutions" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="the-limits-of-recurrent-neurons">
+<h3>The limits of recurrent neurons<a class="headerlink" href="#the-limits-of-recurrent-neurons" title="Permalink to this headline">¶</a></h3>
+<p>Basic RNN architectures suffer from a <em>short-term memory</em> problem. Because of data transformations when traversing the layers, some information is lost at each time step. Thus, they struggle to handle long-term dependencies between sequence elements.</p>
+<p>Newer, more sophisticated RNN cell types like <strong>LSTM</strong> and <strong>GRU</strong> alleviate this limit.</p>
+</div>
+<div class="section" id="lstm-cells">
+<h3>LSTM cells<a class="headerlink" href="#lstm-cells" title="Permalink to this headline">¶</a></h3>
+<p><em>Long Short-Term Memory</em> cells are a special kind of RNN cells, capable of learning long-term dependencies in input data. They were introduced in 1997 (<a class="reference external" href="http://www.bioinf.jku.at/publications/older/2604.pdf">original paper</a>) and have been refined over the years.</p>
+<p>An LSTM cell has a complex internal structure that make it able to:</p>
+<ul class="simple">
+<li><p>learn to recognize an important input,</p></li>
+<li><p>store it in the long-term state,</p></li>
+<li><p>preserve it for as long as it is needed,</p></li>
+<li><p>extract it whenever it is needed.</p></li>
+</ul>
+<p><a class="reference external" href="https://github.com/ageron/handson-ml2"><img alt="LSTM cell" src="../_images/lstm_cell.png" /></a></p>
+<p>The cell’s state is split between <span class="math notranslate nohighlight">\(\mathbf{h}_{(t)}\)</span> (<em>short-term state</em>) and <span class="math notranslate nohighlight">\(\mathbf{c}_{(t)}\)</span> (<em>long-term state</em>).</p>
+<ul class="simple">
+<li><p>The <em>forget gate</em> controls which parts of the previous long-term state <span class="math notranslate nohighlight">\(\mathbf{c}_{(t-1)}\)</span> should ne erased.</p></li>
+<li><p>The <em>input gate</em> controls which information should ne added to the long-term state.</p></li>
+<li><p>The <em>output gate</em> controls which parts of the long-term state should be outputted at this time step.</p></li>
+</ul>
+<p>For more details, consult this <a class="reference external" href="https://colah.github.io/posts/2015-08-Understanding-LSTMs/">step-by-step LSTM walkthrough</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lstm_model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
+<span class="c1"># The LSTM layer has a similar API to the SimpleRNN layer</span>
+<span class="n">lstm_model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">LSTM</span><span class="p">(</span><span class="n">units</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">return_sequences</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="mi">1</span><span class="p">)))</span>
+<span class="n">lstm_model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">LSTM</span><span class="p">(</span><span class="n">units</span><span class="o">=</span><span class="mi">20</span><span class="p">))</span>
+<span class="c1"># Predict 10 steps ahead</span>
+<span class="n">lstm_model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="n">units</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span>
+
+<span class="n">lstm_model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;sequential_3&quot;
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+lstm (LSTM)                  (None, None, 20)          1760      
+_________________________________________________________________
+lstm_1 (LSTM)                (None, 20)                3280      
+_________________________________________________________________
+dense_2 (Dense)              (None, 10)                210       
+=================================================================
+Total params: 5,250
+Trainable params: 5,250
+Non-trainable params: 0
+_________________________________________________________________
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lstm_model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s2">&quot;adam&quot;</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s2">&quot;mse&quot;</span><span class="p">)</span>
+
+<span class="n">history</span> <span class="o">=</span> <span class="n">lstm_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">x_val</span><span class="p">,</span> <span class="n">y_val</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">plot_loss</span><span class="p">(</span><span class="n">history</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/recurrent_neural_networks_42_0.png" src="../_images/recurrent_neural_networks_42_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_pred_lstm</span> <span class="o">=</span> <span class="n">lstm_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_val</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Multistep RNN MSE: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_pred_lstm</span><span class="p">))</span><span class="si">:</span><span class="s2">0.05f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multistep RNN MSE: 0.00871
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot first validation series with ground truth and prediction</span>
+<span class="n">plot_series</span><span class="p">(</span>
+    <span class="n">series</span><span class="o">=</span><span class="n">x_val</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">y_true</span><span class="o">=</span><span class="n">y_val</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">y_pred</span><span class="o">=</span><span class="n">y_pred_lstm</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/recurrent_neural_networks_44_0.png" src="../_images/recurrent_neural_networks_44_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="gru-cells">
+<h3>GRU cells<a class="headerlink" href="#gru-cells" title="Permalink to this headline">¶</a></h3>
+<p>The <em>Gated Recurrent Unit</em> cell was introduced in 2014 (<a class="reference external" href="https://arxiv.org/abs/1406.1078">original paper</a>).</p>
+<p>It is a simplification of the LSTM cell that performs similarly well while being faster to train.</p>
+<p><a class="reference external" href="https://github.com/ageron/handson-ml2"><img alt="GRU cell" src="../_images/gru_cell.png" /></a></p>
+<ul class="simple">
+<li><p>Short- and long-time states are merged into the <span class="math notranslate nohighlight">\(\mathbf{h}_{(t)}\)</span> vector.</p></li>
+<li><p>A single update gate controller manages both the forget and input gates.</p></li>
+<li><p>There is no output gate.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gru_model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
+<span class="n">gru_model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">GRU</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="n">return_sequences</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="mi">1</span><span class="p">)))</span>
+<span class="n">gru_model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">GRU</span><span class="p">(</span><span class="mi">20</span><span class="p">))</span>
+<span class="c1"># Predict 10 steps ahead</span>
+<span class="n">gru_model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+
+<span class="n">gru_model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;sequential_4&quot;
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+gru (GRU)                    (None, None, 20)          1380      
+_________________________________________________________________
+gru_1 (GRU)                  (None, 20)                2520      
+_________________________________________________________________
+dense_3 (Dense)              (None, 10)                210       
+=================================================================
+Total params: 4,110
+Trainable params: 4,110
+Non-trainable params: 0
+_________________________________________________________________
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gru_model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s2">&quot;adam&quot;</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s2">&quot;mse&quot;</span><span class="p">)</span>
+
+<span class="n">history</span> <span class="o">=</span> <span class="n">gru_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">x_val</span><span class="p">,</span> <span class="n">y_val</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">plot_loss</span><span class="p">(</span><span class="n">history</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/recurrent_neural_networks_49_0.png" src="../_images/recurrent_neural_networks_49_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_pred_gru</span> <span class="o">=</span> <span class="n">gru_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_val</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Multistep RNN MSE: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_pred_gru</span><span class="p">))</span><span class="si">:</span><span class="s2">0.05f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multistep RNN MSE: 0.01126
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot first validation series with ground truth and prediction</span>
+<span class="n">plot_series</span><span class="p">(</span>
+    <span class="n">series</span><span class="o">=</span><span class="n">x_val</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">y_true</span><span class="o">=</span><span class="n">y_val</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">y_pred</span><span class="o">=</span><span class="n">y_pred_gru</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/recurrent_neural_networks_51_0.png" src="../_images/recurrent_neural_networks_51_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="sequence-processing-with-1d-convolutions">
+<h3>Sequence processing with 1D convolutions<a class="headerlink" href="#sequence-processing-with-1d-convolutions" title="Permalink to this headline">¶</a></h3>
+<p>Despite their many qualities, LSTM and GRU cells still have a fairly limited short-term memory. To facilitate long-pattern detection in sequences of 100 time steps or more, a solution is to shorten the sequences by using <strong>1D convolutions</strong>.</p>
+<p><img alt="1D convolution" src="../_images/1D_convolution.png" /></p>
+<p>They work by treating time as a spatial dimension, and sliding several kernels across a sequence. Depending on the kernel size and <em>stride</em> (sliding step), the output sequence is typically shorter than the input one. 1D convolution will also detect higher-level features in the sequence, facilitating the work of subsequent layers.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a model combining CNN and RNN operations</span>
+<span class="n">conv1d_gru_model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
+
+<span class="c1"># Add a 1D convolution layer with 20 kernels of size 4</span>
+<span class="n">conv1d_gru_model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+    <span class="n">Conv1D</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">strides</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s2">&quot;valid&quot;</span><span class="p">,</span> <span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="p">)</span>
+<span class="n">conv1d_gru_model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">GRU</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="n">return_sequences</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<span class="n">conv1d_gru_model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">GRU</span><span class="p">(</span><span class="mi">20</span><span class="p">))</span>
+<span class="c1"># Predict 10 steps ahead</span>
+<span class="n">conv1d_gru_model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+
+<span class="n">conv1d_gru_model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;sequential_5&quot;
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+conv1d (Conv1D)              (None, None, 20)          100       
+_________________________________________________________________
+gru_2 (GRU)                  (None, None, 20)          2520      
+_________________________________________________________________
+gru_3 (GRU)                  (None, 20)                2520      
+_________________________________________________________________
+dense_4 (Dense)              (None, 10)                210       
+=================================================================
+Total params: 5,350
+Trainable params: 5,350
+Non-trainable params: 0
+_________________________________________________________________
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conv1d_gru_model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s2">&quot;adam&quot;</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s2">&quot;mse&quot;</span><span class="p">)</span>
+
+<span class="n">history</span> <span class="o">=</span> <span class="n">conv1d_gru_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">x_val</span><span class="p">,</span> <span class="n">y_val</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">plot_loss</span><span class="p">(</span><span class="n">history</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/recurrent_neural_networks_54_0.png" src="../_images/recurrent_neural_networks_54_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_pred_conv1d_gru</span> <span class="o">=</span> <span class="n">conv1d_gru_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_val</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Multistep RNN MSE: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_pred_conv1d_gru</span><span class="p">))</span><span class="si">:</span><span class="s2">0.05f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multistep RNN MSE: 0.00830
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot first validation series with ground truth and prediction</span>
+<span class="n">plot_series</span><span class="p">(</span>
+    <span class="n">series</span><span class="o">=</span><span class="n">x_val</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">y_true</span><span class="o">=</span><span class="n">y_val</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">y_pred</span><span class="o">=</span><span class="n">y_pred_conv1d_gru</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/recurrent_neural_networks_56_0.png" src="../_images/recurrent_neural_networks_56_0.png" />
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./algorithms"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="convolutional_neural_networks.html" title="previous page">Convolutional Neural Networks</a>
+    <a class='right-next' id="next-link" href="generative_deep_learning.html" title="next page">Generative Deep Learning</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Baptiste Pesquet<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="../_static/js/index.js"></script>
+    
+  </body>
+</html>

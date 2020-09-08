@@ -1,0 +1,1406 @@
+
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Machine Learning Fundamentals &#8212; Machine Learning Handbook</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-dropdown.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Decision Trees &amp; Random Forests" href="../algorithms/decision_trees_and_random_forests.html" />
+    <link rel="prev" title="Machine Learning In Action" href="machine_learning_in_action.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/logo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Machine Learning Handbook</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <p class="caption">
+ <span class="caption-text">
+  Fundamentals
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="machine_learning_in_action.html">
+   Machine Learning In Action
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Machine Learning Fundamentals
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Algorithms
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../algorithms/decision_trees_and_random_forests.html">
+   Decision Trees &amp; Random Forests
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../algorithms/artificial_neural_networks.html">
+   Artificial Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../algorithms/convolutional_neural_networks.html">
+   Convolutional Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../algorithms/recurrent_neural_networks.html">
+   Recurrent Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../algorithms/generative_deep_learning.html">
+   Generative Deep Learning
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Tools
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tools/python.html">
+   Python Cheatsheet
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tools/numpy.html">
+   Tensor Management with NumPy
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tools/pandas.html">
+   Data Analysis with Pandas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tools/matplotlib.html">
+   Plotting with Matplotlib and Seaborn
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tools/scikit-learn.html">
+   scikit-learn
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Appendix
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ACKNOWLEDGMENTS.html">
+   Acknowledgments
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/fundamentals/machine_learning_foundations.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/bpesquet/mlhandbook"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/bpesquet/mlhandbook/issues/new?title=Issue%20on%20page%20%2Ffundamentals/machine_learning_foundations.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/bpesquet/mlhandbook/edit/master/fundamentals/machine_learning_foundations.ipynb"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/bpesquet/mlhandbook/master?urlpath=tree/fundamentals/machine_learning_foundations.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/bpesquet/mlhandbook/blob/master/fundamentals/machine_learning_foundations.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#summary">
+   Summary
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#terminology-and-notations">
+   Terminology and notations
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-elements-of-a-supervised-ml-system">
+     The elements of a supervised ML system
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#terminology-and-notations-data">
+     Terminology and notations: data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#multidimensional-data-reshaping">
+     Multidimensional data: reshaping
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-the-mnist-handwritten-digits-datasets">
+     Example: the MNIST handwritten digits datasets
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#environment-setup">
+     Environment setup
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#multidimensional-data-scaling">
+     Multidimensional data: scaling
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#terminology-and-notations-model">
+     Terminology and notations: model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-linear-relationship-between-features-and-labels">
+     Example: linear relationship between features and labels
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#terminology-and-notations-loss">
+     Terminology and notations: loss
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#loss-functions-for-regression">
+     Loss functions for regression
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#loss-function-for-binary-classification">
+     Loss function for binary classification
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#terminology-and-notations-multiclass-classification">
+     Terminology and notations: multiclass classification
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#loss-function-for-multiclass-classification">
+     Loss function for multiclass classification
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#model-lifecycle">
+     Model lifecycle
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#optimization-algorithm">
+     Optimization algorithm
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#model-hyperparameters">
+     Model hyperparameters
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gradient-descent">
+   Gradient descent
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#an-iterative-approach">
+     An iterative approach
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-gradient-descent-algorithm">
+     The gradient descent algorithm
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-notion-of-gradient">
+     The notion of gradient
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#d-gradient-descent-one-parameter">
+     1D gradient descent (one parameter)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#d-gradient-two-parameters">
+     2D gradient (two parameters)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#d-gradient-descent">
+     2D gradient descent
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#gradient-descent-types">
+     Gradient descent types
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#batch-gradient-descent">
+     Batch Gradient Descent
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#stochastic-gradient-descent-sgd">
+     Stochastic Gradient Descent (SGD)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mini-batch-sgd">
+     Mini-Batch SGD
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#updating-the-model-s-parameters">
+     Updating the model’s parameters
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#importance-of-learning-rate">
+     Importance of learning rate
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-local-minima-problem">
+     The local minima problem
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-training-a-binary-classifier-using-sgd">
+     Example: training a binary classifier using SGD
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#performance-measures">
+   Performance measures
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#performance-metrics-for-regression">
+     Performance metrics for regression
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#performance-metrics-for-classification">
+     Performance metrics for classification
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#accuracy">
+     Accuracy
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#accuracy-shortcomings">
+     Accuracy shortcomings
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#true-false-positives-and-negatives">
+     True/False positives and negatives
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#confusion-matrix">
+     Confusion matrix
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#precision-and-recall">
+     Precision and recall
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-a-flawed-tumor-classifier">
+     Example: a (flawed) tumor classifier
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#f1-score">
+     F1 score
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-precision-recall-trade-off">
+     The precision/recall trade-off
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#roc-curve-and-auc">
+     ROC curve and AUC
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#multiclass-classification">
+     Multiclass classification
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+        </nav>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <!--NAVIGATION-->
+<p><a target="_blank" href="https://colab.research.google.com/github/bpesquet/machine-learning-handbook/blob/master/notebooks/workflow/machine_learning_fundamentals.ipynb"><img align="left" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open in Colab" title="Open in Google Colaboratory"></a></p>
+<div class="section" id="machine-learning-fundamentals">
+<h1>Machine Learning Fundamentals<a class="headerlink" href="#machine-learning-fundamentals" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Terminology and notations</p></li>
+<li><p>Gradient descent</p></li>
+<li><p>Performance measures</p></li>
+</ul>
+</div>
+<div class="section" id="terminology-and-notations">
+<h2>Terminology and notations<a class="headerlink" href="#terminology-and-notations" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="the-elements-of-a-supervised-ml-system">
+<h3>The elements of a supervised ML system<a class="headerlink" href="#the-elements-of-a-supervised-ml-system" title="Permalink to this headline">¶</a></h3>
+<ol class="simple">
+<li><p>Some <strong>data</strong> under numeric form.</p></li>
+<li><p>A <strong>model</strong> able to produce results from data.</p></li>
+<li><p>A <strong>loss (or cost) function</strong> to quantify the model error (difference between expected and actual results).</p></li>
+<li><p>An <strong>optimization algorithm</strong> to update the model’s parameters in order to minimize the loss.</p></li>
+</ol>
+</div>
+<div class="section" id="terminology-and-notations-data">
+<h3>Terminology and notations: data<a class="headerlink" href="#terminology-and-notations-data" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(m\)</span> is the number of samples and associated results in the dataset.</p></li>
+<li><p><span class="math notranslate nohighlight">\(n\)</span> is the number of features. A <strong>feature</strong> is an attribute (a property) of the data samples.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{x}^{(i)}\)</span> is a <strong>sample</strong>, a particular instance of data, vector of <span class="math notranslate nohighlight">\(n\)</span> features: <span class="math notranslate nohighlight">\(\mathbf{x}^{(i)} = \left\{ x^{(i)}_1, x^{(i)}_2, \dotsc, x^{(i)}_n \right\}\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(x^{(i)}_j\)</span> is the value of the <span class="math notranslate nohighlight">\(j\)</span>th feature for the <span class="math notranslate nohighlight">\(i\)</span>th data sample.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{y}^{(i)}\)</span> is the expected result for a sample, vector of <span class="math notranslate nohighlight">\(K\)</span> values called <strong>labels</strong> (or <em>targets</em>): <span class="math notranslate nohighlight">\(\mathbf{y}^{(i)} = \left\{ y^{(i)}_1, y^{(i)}_2, \dotsc, y^{(i)}_K \right\}\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(y^{(i)}_k\)</span> is the value of the <span class="math notranslate nohighlight">\(k\)</span>th label for the <span class="math notranslate nohighlight">\(i\)</span>th data sample.</p></li>
+</ul>
+<p>Most ML algorithms except input data to come as a 2-dimensional matrix (<em>samples, features</em>)</p>
+<ul class="simple">
+<li><p>First dimension is for the <span class="math notranslate nohighlight">\(m\)</span> samples.</p></li>
+<li><p>Second dimension is for the <span class="math notranslate nohighlight">\(n\)</span> features of each sample.</p></li>
+</ul>
+<p>Targets should be formatted using the same first dimension.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{X} = \begin{pmatrix}
+       \ x^{(1)}_1 &amp; x^{(1)}_2 &amp; \cdots &amp; x^{(1)}_n \\
+       \ x^{(2)}_1 &amp; x^{(2)}_2 &amp; \cdots &amp; x^{(2)}_n \\
+       \ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+       \ x^{(m)}_1 &amp; x^{(m)}_2 &amp; \cdots &amp; x^{(m)}_n
+     \end{pmatrix}\;\;
+\mathbf{Y} = \begin{pmatrix}
+       \ y^{(1)}_1 &amp; y^{(1)}_2 &amp; \cdots &amp; y^{(1)}_K \\
+       \ y^{(2)}_1 &amp; y^{(2)}_2 &amp; \cdots &amp; y^{(2)}_K \\
+       \ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+       \ y^{(m)}_1 &amp; y^{(m)}_2 &amp; \cdots &amp; y^{(m)}_K
+     \end{pmatrix}\end{split}\]</div>
+</div>
+<div class="section" id="multidimensional-data-reshaping">
+<h3>Multidimensional data: reshaping<a class="headerlink" href="#multidimensional-data-reshaping" title="Permalink to this headline">¶</a></h3>
+<p>A bitmap image can be represented as a 3D multidimensional array (<em>height, width, color_channels</em>).</p>
+<p>A video can be represented as a 4D multidimensional array (<em>frames, height, width, color_channels</em>).</p>
+<p>They have to be <strong>reshaped</strong>, or <em>flattened</em> in that case, into a vector before being fed to most ML models.</p>
+<p><img alt="Image to vector" src="../_images/image2vector.jpeg" /></p>
+</div>
+<div class="section" id="example-the-mnist-handwritten-digits-datasets">
+<h3>Example: the MNIST handwritten digits datasets<a class="headerlink" href="#example-the-mnist-handwritten-digits-datasets" title="Permalink to this headline">¶</a></h3>
+<p>Dataset of 70,000 handwritten digits, stored as 28x28 grayscale images.</p>
+<p>Staple of Machine Learning since 1998.</p>
+</div>
+<div class="section" id="environment-setup">
+<h3>Environment setup<a class="headerlink" href="#environment-setup" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">platform</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Python version: </span><span class="si">{</span><span class="n">platform</span><span class="o">.</span><span class="n">python_version</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">platform</span><span class="o">.</span><span class="n">python_version_tuple</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="s2">&quot;6&quot;</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Python version: 3.7.5
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Setup plots</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.figsize&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">8</span>
+<span class="o">%</span><span class="k">config</span> InlineBackend.figure_format = &quot;retina&quot;
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sklearn</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;scikit-learn version: </span><span class="si">{</span><span class="n">sklearn</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">__version__</span> <span class="o">&gt;=</span> <span class="s2">&quot;0.22&quot;</span>  <span class="c1"># For plotting API</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">log_loss</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">SGDClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">accuracy_score</span><span class="p">,</span>
+    <span class="n">plot_confusion_matrix</span><span class="p">,</span>
+    <span class="n">classification_report</span><span class="p">,</span>
+    <span class="n">plot_roc_curve</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">cross_val_score</span>
+
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;TensorFlow version: </span><span class="si">{</span><span class="n">tf</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Keras version: </span><span class="si">{</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">tensorflow.keras.datasets</span> <span class="kn">import</span> <span class="n">mnist</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>scikit-learn version: 0.22.1
+TensorFlow version: 2.0.0
+Keras version: 2.2.4-tf
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load the MNIST digits dataset</span>
+<span class="p">(</span><span class="n">train_images</span><span class="p">,</span> <span class="n">train_labels</span><span class="p">),</span> <span class="p">(</span><span class="n">test_images</span><span class="p">,</span> <span class="n">test_labels</span><span class="p">)</span> <span class="o">=</span> <span class="n">mnist</span><span class="o">.</span><span class="n">load_data</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Training images: </span><span class="si">{</span><span class="n">train_images</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">. Training labels: </span><span class="si">{</span><span class="n">train_labels</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Test images: </span><span class="si">{</span><span class="n">test_images</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">. Test labels: </span><span class="si">{</span><span class="n">test_labels</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training images: (60000, 28, 28). Training labels: (60000,)
+Test images: (10000, 28, 28). Test labels: (10000,)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the first 10 digits</span>
+<span class="k">with</span> <span class="n">sns</span><span class="o">.</span><span class="n">axes_style</span><span class="p">(</span><span class="s2">&quot;white&quot;</span><span class="p">):</span>  <span class="c1"># Temporary hide Seaborn grid lines</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+        <span class="n">digit</span> <span class="o">=</span> <span class="n">train_images</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">digit</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">binary</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/machine_learning_foundations_15_0.png" src="../_images/machine_learning_foundations_15_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Reshape images into a (samples, 28x28) matrix</span>
+<span class="n">x_train</span> <span class="o">=</span> <span class="n">train_images</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">60000</span><span class="p">,</span> <span class="mi">28</span> <span class="o">*</span> <span class="mi">28</span><span class="p">))</span>
+<span class="n">x_test</span> <span class="o">=</span> <span class="n">test_images</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">10000</span><span class="p">,</span> <span class="mi">28</span> <span class="o">*</span> <span class="mi">28</span><span class="p">))</span>
+
+<span class="c1"># 784=28x28</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;x_train: </span><span class="si">{</span><span class="n">x_train</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;x_test: </span><span class="si">{</span><span class="n">x_test</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x_train: (60000, 784)
+x_test: (10000, 784)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="multidimensional-data-scaling">
+<h3>Multidimensional data: scaling<a class="headerlink" href="#multidimensional-data-scaling" title="Permalink to this headline">¶</a></h3>
+<p>Individual pixel values for images and videos are typically integers in the [0:255] range.</p>
+<p>Scaling them to obtain floats into the [0:1] range ensures is a common practice.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Rescale pixel values from [0:255] to [0:1]</span>
+<span class="n">x_train</span> <span class="o">=</span> <span class="n">x_train</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;float32&quot;</span><span class="p">)</span> <span class="o">/</span> <span class="mi">255</span>
+<span class="n">x_test</span> <span class="o">=</span> <span class="n">x_test</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;float32&quot;</span><span class="p">)</span> <span class="o">/</span> <span class="mi">255</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="terminology-and-notations-model">
+<h3>Terminology and notations: model<a class="headerlink" href="#terminology-and-notations-model" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>It defines the relationship between features and labels.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\boldsymbol{\theta}\)</span> (or <span class="math notranslate nohighlight">\(\boldsymbol{\omega}\)</span>) is the set of its internal <strong>parameters</strong>, vector of <span class="math notranslate nohighlight">\(P\)</span> values: <span class="math notranslate nohighlight">\(\boldsymbol{\theta} = \left\{ \theta_0, \theta_2, \dotsc, \theta_{P-1} \right\}\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(h_\theta\)</span> is the model’s prediction function, called the <em>hypothesis function</em>. This function relies on the model parameters <span class="math notranslate nohighlight">\(\boldsymbol{\theta}\)</span> and treats them as constants during prediction computation.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{y}'^{(i)}\)</span> is the hypothesis function’s output.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\mathbf{y}'^{(i)} = h_\theta(\mathbf{x}^{(i)}) = \left\{ y'^{(i)}_1, y'^{(i)}_2, \dotsc, y'^{(i)}_K \right\}\]</div>
+</div>
+<div class="section" id="example-linear-relationship-between-features-and-labels">
+<h3>Example: linear relationship between features and labels<a class="headerlink" href="#example-linear-relationship-between-features-and-labels" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>In this case, <span class="math notranslate nohighlight">\(K=1\)</span> and <span class="math notranslate nohighlight">\(P=n\)</span>.</p></li>
+<li><p>The prediction output is a scalar value.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[y'^{(i)} = \mathcal{h}_\theta(\mathbf{x}^{(i)}) = \theta_0 + \theta_1x^{(i)}_1 + \dotsc + \theta_nx^{(i)}_n\]</div>
+</div>
+<div class="section" id="terminology-and-notations-loss">
+<h3>Terminology and notations: loss<a class="headerlink" href="#terminology-and-notations-loss" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mathcal{L_{\mathbf{X, Y}}(\theta)}\)</span> (or <span class="math notranslate nohighlight">\(\mathcal{J_{\mathbf{X, Y}}(\theta)}\)</span>) is the <strong>loss</strong> (or <em>cost</em>) <strong>function</strong> that quantifies the difference between expected results (called <em>ground truth</em>) and actual results computed by the model.</p></li>
+<li><p>During model training, the input dataset <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> and the expected results <span class="math notranslate nohighlight">\(\mathbf{Y}\)</span> are treated as constants. The loss depends solely on the model parameters <span class="math notranslate nohighlight">\(\boldsymbol{\theta}\)</span>.</p></li>
+<li><p>To simplify notations, the loss function will be written <span class="math notranslate nohighlight">\(\mathcal{L(\boldsymbol{\theta})}\)</span>.</p></li>
+<li><p>Different loss functions exists. The choice depends on the learning type.</p></li>
+</ul>
+</div>
+<div class="section" id="loss-functions-for-regression">
+<h3>Loss functions for regression<a class="headerlink" href="#loss-functions-for-regression" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><em>Mean Absolute Error</em> (aka <em>l1 or Manhattan norm</em>):
+$<span class="math notranslate nohighlight">\( \mathrm{MAE}(\boldsymbol{\theta}) = \frac{1}{m}\sum_{i=1}^m |\mathcal{h}_\theta(\mathbf{x}^{(i)}) - \mathbf{y}^{(i)}| \)</span>$</p></li>
+<li><p><em>Mean Squared Error</em> (aka <em>l2 norm</em>), the default choice:
+$<span class="math notranslate nohighlight">\( \mathrm{MSE}(\boldsymbol{\theta}) = \frac{1}{m}\sum_{i=1}^m (\mathcal{h}_\theta(\mathbf{x}^{(i)}) - \mathbf{y}^{(i)})^2 \)</span>$</p></li>
+<li><p><em>Root Mean Squared Error</em> (aka <em>Euclidean norm</em>):
+$<span class="math notranslate nohighlight">\( \mathrm{RMSE}(\boldsymbol{\theta}) = \sqrt{\frac{1}{m}\sum_{i=1}^m (\mathcal{h}_\theta(\mathbf{x}^{(i)}) - \mathbf{y}^{(i)})^2} \)</span>$</p></li>
+</ul>
+</div>
+<div class="section" id="loss-function-for-binary-classification">
+<h3>Loss function for binary classification<a class="headerlink" href="#loss-function-for-binary-classification" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>The expected result <span class="math notranslate nohighlight">\(y^{(i)}\)</span> is either 0 or 1.</p></li>
+<li><p>The computed result <span class="math notranslate nohighlight">\(y'^{(i)}\)</span> is a probability (float value between 0 and 1).</p></li>
+<li><p>A frequently used loss function for binary classification is the <em>Binary Crossentropy</em> (aka <em>Log Loss</em>):</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\mathcal{L}(\boldsymbol{\theta}) = -\frac{1}{m}\sum_{i=1}^m \left[y^{(i)} \log_e(y'^{(i)}) + (1-y^{(i)}) \log_e(1-y'^{(i)})\right]\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define expected results</span>
+<span class="n">y_true</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># [.9, .1] means 90% probability that the first sample has label 0: prediction is 0.1</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.99</span><span class="p">]]</span>
+<span class="c1"># -(ln(0.9) + ln(0.8) + ln(0.7) + ln(0.99))/4</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">log_loss</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+
+<span class="c1"># Perfect prediction</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">log_loss</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+
+<span class="c1"># Awful prediction</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.85</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.83</span><span class="p">,</span> <span class="mf">0.17</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.95</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">]]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">log_loss</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.1738073366910675
+9.992007221626415e-16
+2.241848548341448
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="terminology-and-notations-multiclass-classification">
+<h3>Terminology and notations: multiclass classification<a class="headerlink" href="#terminology-and-notations-multiclass-classification" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mathbf{y}^{(i)}\)</span> et <span class="math notranslate nohighlight">\(\mathbf{y}'^{(i)}\)</span> are vectors with as many elements as the number of predicted classes <span class="math notranslate nohighlight">\(K\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{y}^{(i)}\)</span> is a <strong>binary vector</strong> of <span class="math notranslate nohighlight">\(K\)</span> values: <span class="math notranslate nohighlight">\(\mathbf{y}^{(i)} = \left\{ y^{(i)}_1, y^{(i)}_2, \dotsc, y^{(i)}_K \right\}\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(y^{(i)}_k\)</span> is equal to 1 if the <span class="math notranslate nohighlight">\(i\)</span>th sample’s class corresponds to <span class="math notranslate nohighlight">\(k\)</span>, 0 otherwise.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{y}'^{(i)}\)</span> is a <strong>probability vector</strong>.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{Y} = \begin{pmatrix}
+       \ y^{(1)}_1 &amp; \cdots &amp; y^{(1)}_K \\
+       \ y^{(2)}_1 &amp; \cdots &amp; y^{(2)}_K \\
+       \ \vdots &amp; \ddots &amp; \vdots \\
+       \ y^{(m)}_1 &amp; \cdots &amp; y^{(m)}_K
+     \end{pmatrix}\;\;
+\mathbf{Y}' = \begin{pmatrix}
+       \ y'^{(1)}_1 &amp; \cdots &amp; y'^{(1)}_K \\
+       \ y'^{(2)}_1 &amp; \cdots &amp; y'^{(2)}_K \\
+       \ \vdots &amp; \ddots &amp; \vdots \\
+       \ y'^{(m)}_1 &amp; \cdots &amp; y'^{(m)}_K
+     \end{pmatrix}\end{split}\]</div>
+</div>
+<div class="section" id="loss-function-for-multiclass-classification">
+<h3>Loss function for multiclass classification<a class="headerlink" href="#loss-function-for-multiclass-classification" title="Permalink to this headline">¶</a></h3>
+<p>The standard loss function for multiclass classification is <em>Categorical Crossentropy</em>:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{L}(\boldsymbol{\theta}) = -\frac{1}{m}\sum_{i=1}^m\sum_{k=1}^K y^{(i)}_k \log_e(y'^{(i)}_k)\]</div>
+<p>It is equivalent to <em>Binary Crossentropy</em> when <span class="math notranslate nohighlight">\(K = 2\)</span></p>
+</div>
+<div class="section" id="model-lifecycle">
+<h3>Model lifecycle<a class="headerlink" href="#model-lifecycle" title="Permalink to this headline">¶</a></h3>
+<p>There are two (repeatable) phases:</p>
+<ul class="simple">
+<li><p><strong>Training</strong>: using training input samples, the model learns to find a relationship between features and labels.</p></li>
+<li><p><strong>Inference</strong>: the trained model is used to make predictions.</p></li>
+</ul>
+</div>
+<div class="section" id="optimization-algorithm">
+<h3>Optimization algorithm<a class="headerlink" href="#optimization-algorithm" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Used during the training phase.</p></li>
+<li><p>For each learning type, several algorithms of various complexity exist.</p></li>
+<li><p>Objective: find the set of model parameters <span class="math notranslate nohighlight">\(\boldsymbol{\theta_{best}}\)</span> that minimizes the loss.</p></li>
+</ul>
+<p><a class="reference external" href="https://developers.google.com/machine-learning/crash-course/reducing-loss/an-iterative-approach"><img alt="Optimization: linear regression" src="../_images/LossSideBySide.png" /></a></p>
+</div>
+<div class="section" id="model-hyperparameters">
+<h3>Model hyperparameters<a class="headerlink" href="#model-hyperparameters" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Many ML models also have user-defined properties called <strong>hyperparameters</strong>.</p></li>
+<li><p>Examples: maximum depth of a decision tree, number oy layers of a neural network…</p></li>
+<li><p>Contrary to internal parameters, they are not automatically updated during training.</p></li>
+<li><p>The hyperparameters directly affect the model’s performance and must be tweaked during the training and tuning steps.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="gradient-descent">
+<h2>Gradient descent<a class="headerlink" href="#gradient-descent" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="an-iterative-approach">
+<h3>An iterative approach<a class="headerlink" href="#an-iterative-approach" title="Permalink to this headline">¶</a></h3>
+<p>The model’s parameters are iteratively updated until an optimum is reached.</p>
+<p><a class="reference external" href="https://developers.google.com/machine-learning/crash-course/descending-into-ml/training-and-loss"><img alt="Iterative approach" src="../_images/GradientDescentDiagram.png" /></a></p>
+</div>
+<div class="section" id="the-gradient-descent-algorithm">
+<h3>The gradient descent algorithm<a class="headerlink" href="#the-gradient-descent-algorithm" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Used in several ML models, including neural networks.</p></li>
+<li><p>General idea: converging to a loss function’s minimum by updating model parameters in small steps, in the <strong>opposite direction</strong> of the loss function <strong>gradient</strong>.</p></li>
+</ul>
+</div>
+<div class="section" id="the-notion-of-gradient">
+<h3>The notion of gradient<a class="headerlink" href="#the-notion-of-gradient" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Expresses the variation of a function <em>wrt</em> the variation of its parameters.</p></li>
+<li><p>Vector containing partial derivatives of the function <em>wrt</em> each of its <span class="math notranslate nohighlight">\(P\)</span> parameters.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}\nabla_{\theta}\mathcal{L}(\boldsymbol{\theta}) = \begin{pmatrix}
+       \ \frac{\partial}{\partial \theta_1} \mathcal{L}(\boldsymbol{\theta}) \\
+       \ \frac{\partial}{\partial \theta_2} \mathcal{L}(\boldsymbol{\theta}) \\
+       \ \vdots \\
+       \ \frac{\partial}{\partial \theta_P} \mathcal{L}(\boldsymbol{\theta})
+     \end{pmatrix}\end{split}\]</div>
+</div>
+<div class="section" id="d-gradient-descent-one-parameter">
+<h3>1D gradient descent (one parameter)<a class="headerlink" href="#d-gradient-descent-one-parameter" title="Permalink to this headline">¶</a></h3>
+<p><img alt="Gradient Descent" src="../_images/gradient_descent_1parameter.png" /></p>
+</div>
+<div class="section" id="d-gradient-two-parameters">
+<h3>2D gradient (two parameters)<a class="headerlink" href="#d-gradient-two-parameters" title="Permalink to this headline">¶</a></h3>
+<p><img alt="Tangent Space" src="../_images/tangent_space.png" /></p>
+</div>
+<div class="section" id="d-gradient-descent">
+<h3>2D gradient descent<a class="headerlink" href="#d-gradient-descent" title="Permalink to this headline">¶</a></h3>
+<p><img alt="Gradient Descent" src="../_images/gradient_descent_2parameters.gif" /></p>
+</div>
+<div class="section" id="gradient-descent-types">
+<h3>Gradient descent types<a class="headerlink" href="#gradient-descent-types" title="Permalink to this headline">¶</a></h3>
+<p>The gradient descent process can be done in several ways:</p>
+<ul class="simple">
+<li><p><em>Batch Gradient Descent</em></p></li>
+<li><p><em>Stochastic Gradient Descent</em></p></li>
+<li><p><em>Mini-Batch SGD</em></p></li>
+</ul>
+</div>
+<div class="section" id="batch-gradient-descent">
+<h3>Batch Gradient Descent<a class="headerlink" href="#batch-gradient-descent" title="Permalink to this headline">¶</a></h3>
+<p>The gradient is computed on the whole dataset before model parameters are updated.</p>
+<ul class="simple">
+<li><p>Advantages: simple and safe (always converges in the right direction).</p></li>
+<li><p>Drawback: can become slow and even untractable with a big dataset.</p></li>
+</ul>
+</div>
+<div class="section" id="stochastic-gradient-descent-sgd">
+<h3>Stochastic Gradient Descent (SGD)<a class="headerlink" href="#stochastic-gradient-descent-sgd" title="Permalink to this headline">¶</a></h3>
+<p>The gradient is computed on only one randomly chosen sample whole dataset before parameters are updated.</p>
+<ul class="simple">
+<li><p>Advantages:</p>
+<ul>
+<li><p>Very fast.</p></li>
+<li><p>Enables learning from each new sample (<em>online learning</em>).</p></li>
+</ul>
+</li>
+<li><p>Drawback:</p>
+<ul>
+<li><p>Convergence is not guaranteed.</p></li>
+<li><p>No vectorization of computations.</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="mini-batch-sgd">
+<h3>Mini-Batch SGD<a class="headerlink" href="#mini-batch-sgd" title="Permalink to this headline">¶</a></h3>
+<p>The gradient is computed on a small set of samples, called a <em>batch</em>, before parameters are updated.</p>
+<ul class="simple">
+<li><p>Combines the advantages of batch and stochastic GD.</p></li>
+<li><p>Default method for many ML libraries.</p></li>
+<li><p>The mini-batch size varies between 10 and 1000 samples, depending of the dataset size.</p></li>
+</ul>
+</div>
+<div class="section" id="updating-the-model-s-parameters">
+<h3>Updating the model’s parameters<a class="headerlink" href="#updating-the-model-s-parameters" title="Permalink to this headline">¶</a></h3>
+<p><span class="math notranslate nohighlight">\(\eta\)</span> is the update factor for parameters once gradient is computed, called the <strong><em>learning rate</em></strong>.</p>
+<p>It has a direct impact on the “speed” of the gradient descent.</p>
+<div class="math notranslate nohighlight">
+\[ \boldsymbol{\theta_{next}} = \boldsymbol{\theta} - \eta\nabla_{\boldsymbol{\theta}}\mathcal{L}(\boldsymbol{\theta})\]</div>
+</div>
+<div class="section" id="importance-of-learning-rate">
+<h3>Importance of learning rate<a class="headerlink" href="#importance-of-learning-rate" title="Permalink to this headline">¶</a></h3>
+<p><img alt="Learning rate" src="../_images/learning_rate.png" /></p>
+<p><a class="reference external" href="https://developers.google.com/machine-learning/crash-course/fitter/graph">Interactive exercise</a></p>
+</div>
+<div class="section" id="the-local-minima-problem">
+<h3>The local minima problem<a class="headerlink" href="#the-local-minima-problem" title="Permalink to this headline">¶</a></h3>
+<p><img alt="Local minima" src="../_images/local_minima.jpg" /></p>
+<p><img alt="Gradient Descent" src="../_images/gd_ng.jpg" /></p>
+</div>
+<div class="section" id="example-training-a-binary-classifier-using-sgd">
+<h3>Example: training a binary classifier using SGD<a class="headerlink" href="#example-training-a-binary-classifier-using-sgd" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Show 10 random labels (integer scalars between 0 and 9)</span>
+<span class="n">df_train_labels</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">train_labels</span><span class="p">)</span>
+<span class="n">df_train_labels</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;digit&quot;</span><span class="p">}</span>
+<span class="n">df_train_labels</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>digit</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>9</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create binary vectors of expected results</span>
+<span class="c1"># label is true for all 5s, false for all other digits</span>
+<span class="n">y_train_5</span> <span class="o">=</span> <span class="n">train_labels</span> <span class="o">==</span> <span class="mi">5</span>
+<span class="n">y_test_5</span> <span class="o">=</span> <span class="n">test_labels</span> <span class="o">==</span> <span class="mi">5</span>
+
+<span class="c1"># true, false, false</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y_train_5</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">y_train_5</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">y_train_5</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True False False
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a classifier using stochastic gradient descent and log loss</span>
+<span class="n">sgd_model</span> <span class="o">=</span> <span class="n">SGDClassifier</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+
+<span class="c1"># Trains the model on data</span>
+<span class="n">sgd_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train_5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SGDClassifier(alpha=0.0001, average=False, class_weight=None,
+              early_stopping=False, epsilon=0.1, eta0=0.0, fit_intercept=True,
+              l1_ratio=0.15, learning_rate=&#39;optimal&#39;, loss=&#39;log&#39;, max_iter=1000,
+              n_iter_no_change=5, n_jobs=None, penalty=&#39;l2&#39;, power_t=0.5,
+              random_state=None, shuffle=True, tol=0.001,
+              validation_fraction=0.1, verbose=0, warm_start=False)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="performance-measures">
+<h2>Performance measures<a class="headerlink" href="#performance-measures" title="Permalink to this headline">¶</a></h2>
+<p>(Heavily inspired by Chapter 3 of <a class="reference external" href="https://github.com/ageron/handson-ml2">Hands-On Machine Learning</a> by Aurélien Géron)</p>
+<div class="section" id="performance-metrics-for-regression">
+<h3>Performance metrics for regression<a class="headerlink" href="#performance-metrics-for-regression" title="Permalink to this headline">¶</a></h3>
+<p>A typical performance metric for regression tasks is RMSE.</p>
+<div class="math notranslate nohighlight">
+\[ \mathrm{RMSE}(\mathbf{X}, h_\theta) = \sqrt{\frac{1}{m}\sum_{i=1}^m (\mathcal{h}_\theta(\mathbf{x}^{(i)}) - \mathbf{y}^{(i)})^2} \]</div>
+<p>MAE (less sensitive to outliers) and MSE can also be used.</p>
+</div>
+<div class="section" id="performance-metrics-for-classification">
+<h3>Performance metrics for classification<a class="headerlink" href="#performance-metrics-for-classification" title="Permalink to this headline">¶</a></h3>
+<p>During inference, the model output (probabilities) are thresholded into discrete values.</p>
+<p>Thresholds are problem-dependent.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Test on first 3 digits</span>
+<span class="n">samples</span> <span class="o">=</span> <span class="p">[</span><span class="n">x_train</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x_train</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">x_train</span><span class="p">[</span><span class="mi">2</span><span class="p">]]</span>
+
+<span class="c1"># Print binary predictions (5/not 5)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sgd_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">samples</span><span class="p">))</span>
+
+<span class="c1"># Print prediction probabilities</span>
+<span class="n">sgd_model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">decimals</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ True False False]
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.101, 0.899],
+       [0.999, 0.001],
+       [1.   , 0.   ]])
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="accuracy">
+<h3>Accuracy<a class="headerlink" href="#accuracy" title="Permalink to this headline">¶</a></h3>
+<p>A simple evaluation metric for classification is <strong>accuracy</strong>.</p>
+<div class="math notranslate nohighlight">
+\[Accuracy = \frac{\text{Number of exact predictions}}{\text{Total number of predictions}} \]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define ground truth and prediction vectors</span>
+<span class="n">y_true</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># Using scikit-learn to compute accuracy</span>
+<span class="n">acc</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+
+<span class="c1"># 4 good predictions, 6 total =&gt; accuracy = 2/3</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accuracy: </span><span class="si">{</span><span class="n">acc</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.66667
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The score() method computes accuracy for SGDClassifier</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Training accuracy: </span><span class="si">{</span><span class="n">sgd_model</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train_5</span><span class="p">)</span><span class="si">:</span><span class="s2">.05f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Computing accuracy by hand</span>
+<span class="n">train_acc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">([</span><span class="n">sgd_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_train</span><span class="p">)</span> <span class="o">==</span> <span class="n">y_train_5</span><span class="p">])</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_train</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Manual computation: </span><span class="si">{</span><span class="n">train_acc</span><span class="si">:</span><span class="s2">.05f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Using cross-validation to evaluate accuracy, using 3 folds</span>
+<span class="n">cv_acc</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">sgd_model</span><span class="p">,</span> <span class="n">x_train</span><span class="p">,</span> <span class="n">y_train_5</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s2">&quot;accuracy&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;CV accuracy: </span><span class="si">{</span><span class="n">cv_acc</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training accuracy: 0.97550
+Manual computation: 0.97550
+CV accuracy: [0.97225 0.9711  0.972  ]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="accuracy-shortcomings">
+<h3>Accuracy shortcomings<a class="headerlink" href="#accuracy-shortcomings" title="Permalink to this headline">¶</a></h3>
+<p>When the dataset is <em>skewed</em> (some classes are more frequent than others), computing accuracy is not enough to assert the model’s performance.</p>
+<p>To find out why, let’s imagine a dumb binary classifier that always predicts that the digit is not 5.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">not5_count</span> <span class="o">=</span> <span class="p">(</span><span class="n">y_train_5</span> <span class="o">==</span> <span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;There are </span><span class="si">{</span><span class="n">not5_count</span><span class="si">}</span><span class="s2"> digits other than 5 in the training set&quot;</span><span class="p">)</span>
+
+<span class="n">dumb_model_acc</span> <span class="o">=</span> <span class="n">not5_count</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_train</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Dumb classifier accuracy: </span><span class="si">{</span><span class="n">dumb_model_acc</span><span class="si">:</span><span class="s2">.05f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>There are 54579 digits other than 5 in the training set
+Dumb classifier accuracy: 0.90965
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="true-false-positives-and-negatives">
+<h3>True/False positives and negatives<a class="headerlink" href="#true-false-positives-and-negatives" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><strong>True Positive (TP)</strong>: the model <em>correctly</em> predicts the positive class.</p></li>
+<li><p><strong>False Positive (FP)</strong>: the model <em>incorrectly</em> predicts the positive class.</p></li>
+<li><p><strong>True Negative (TN)</strong>: the model <em>correctly</em> predicts the negative class.</p></li>
+<li><p><strong>False Negative (FN)</strong>: the model <em>incorrectly</em> predicts the negative class.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[Accuracy = \frac{TP + TN}{TP + TN + FP + FN}\]</div>
+</div>
+<div class="section" id="confusion-matrix">
+<h3>Confusion matrix<a class="headerlink" href="#confusion-matrix" title="Permalink to this headline">¶</a></h3>
+<p>Useful representation of classification results. Row are actual classes, columns are predicted classes.</p>
+<p><a class="reference external" href="https://github.com/ageron/handson-ml2"><img alt="Confusion matrix for 5s" src="../_images/confusion_matrix.png" /></a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the confusion matrix for a model and a dataset</span>
+<span class="k">def</span> <span class="nf">plot_conf_mat</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">sns</span><span class="o">.</span><span class="n">axes_style</span><span class="p">(</span><span class="s2">&quot;white&quot;</span><span class="p">):</span>  <span class="c1"># Temporary hide Seaborn grid lines</span>
+        <span class="n">display</span> <span class="o">=</span> <span class="n">plot_confusion_matrix</span><span class="p">(</span>
+            <span class="n">model</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">values_format</span><span class="o">=</span><span class="s2">&quot;d&quot;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">Blues</span>
+        <span class="p">)</span>
+
+
+<span class="c1"># Plot confusion matrix for the SGD classifier</span>
+<span class="n">plot_conf_mat</span><span class="p">(</span><span class="n">sgd_model</span><span class="p">,</span> <span class="n">x_train</span><span class="p">,</span> <span class="n">y_train_5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/machine_learning_foundations_60_0.png" src="../_images/machine_learning_foundations_60_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="precision-and-recall">
+<h3>Precision and recall<a class="headerlink" href="#precision-and-recall" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><strong>Precision</strong>: proportion of positive identifications that were actually correct.</p></li>
+<li><p><strong>Recall</strong> (or <em>sensitivity</em>): proportion of actual positives that were identified correctly.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[Precision = \frac{TP}{TP + FP} = \frac{\text{True Positives}}{\text{Total Predicted Positives}}\]</div>
+<div class="math notranslate nohighlight">
+\[Recall = \frac{TP}{TP + FN} = \frac{\text{True Positives}}{\text{Total Actual Positives}}\]</div>
+</div>
+<div class="section" id="example-a-flawed-tumor-classifier">
+<h3>Example: a (flawed) tumor classifier<a class="headerlink" href="#example-a-flawed-tumor-classifier" title="Permalink to this headline">¶</a></h3>
+<p>Context: binary classification of tumors (positive means malignant). Dataset of 100 tumors, of which 9 are malignant.</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Negatives</p></th>
+<th class="head"><p>Positives</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>True Negatives: 90</p></td>
+<td><p>False Positives: 1</p></td>
+</tr>
+<tr class="row-odd"><td><p>False Negatives: 8</p></td>
+<td><p>True Positives: 1</p></td>
+</tr>
+</tbody>
+</table>
+<div class="math notranslate nohighlight">
+\[Accuracy = \frac{90+1}{100} = 91\%\]</div>
+<div class="math notranslate nohighlight">
+\[Precision = \frac{1}{1 + 1} = 50\%\;\;\;
+Recall = \frac{1}{1 + 8} = 11\%\]</div>
+</div>
+<div class="section" id="f1-score">
+<h3>F1 score<a class="headerlink" href="#f1-score" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Weighted average (<em>harmonic mean</em>) of precision and recall.</p></li>
+<li><p>Also known as <em>balanced F-score</em> or <em>F-measure</em>.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[F1 = 2 \times \frac{Precision \times Recall}{Precision + Recall}\]</div>
+<p>Good metric in case of class imbalance, when precision and recall are both important.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Using scikit-learn to compute several metrics about the SGD classifier</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_train_5</span><span class="p">,</span> <span class="n">sgd_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_train</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              precision    recall  f1-score   support
+
+       False       0.98      0.99      0.99     54579
+        True       0.89      0.83      0.86      5421
+
+    accuracy                           0.98     60000
+   macro avg       0.94      0.91      0.92     60000
+weighted avg       0.97      0.98      0.98     60000
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="the-precision-recall-trade-off">
+<h3>The precision/recall trade-off<a class="headerlink" href="#the-precision-recall-trade-off" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Improving precision typically reduces recall and vice versa (<a class="reference external" href="https://developers.google.com/machine-learning/crash-course/classification/precision-and-recall#precision-and-recall:-a-tug-of-war">example</a>).</p></li>
+<li><p>Precision matters most when the cost of false positives is high (example: spam detection).</p></li>
+<li><p>Recall matters most when the cost of false negatives is high (example: tumor detection).</p></li>
+</ul>
+</div>
+<div class="section" id="roc-curve-and-auc">
+<h3>ROC curve and AUC<a class="headerlink" href="#roc-curve-and-auc" title="Permalink to this headline">¶</a></h3>
+<div class="math notranslate nohighlight">
+\[\text{TP Rate} = \frac{TP}{TP + FN} = Recall\;\;\;\;
+\text{FP Rate} = \frac{FP}{FP + TN}\]</div>
+<ul class="simple">
+<li><p>ROC stands for “Receiver Operating Characteristic”.</p></li>
+<li><p>A ROC curve plots TPR vs. FPR at different classification thresholds.</p></li>
+<li><p>AOC (“Area Under the ROC Curve”) provides an aggregate measure of performance across all possible classification thresholds.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot ROC curve for the SGD classifier</span>
+<span class="n">sgd_disp</span> <span class="o">=</span> <span class="n">plot_roc_curve</span><span class="p">(</span><span class="n">sgd_model</span><span class="p">,</span> <span class="n">x_train</span><span class="p">,</span> <span class="n">y_train_5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/machine_learning_foundations_68_0.png" src="../_images/machine_learning_foundations_68_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Training a Random Forest classifier on same dataset</span>
+<span class="n">rf_model</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">rf_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train_5</span><span class="p">)</span>
+
+<span class="c1"># Plot ROC curves for both classifiers</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">rf_disp</span> <span class="o">=</span> <span class="n">plot_roc_curve</span><span class="p">(</span><span class="n">rf_model</span><span class="p">,</span> <span class="n">x_train</span><span class="p">,</span> <span class="n">y_train_5</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+<span class="n">sgd_disp</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/machine_learning_foundations_69_0.png" src="../_images/machine_learning_foundations_69_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="multiclass-classification">
+<h3>Multiclass classification<a class="headerlink" href="#multiclass-classification" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_train</span> <span class="o">=</span> <span class="n">train_labels</span>
+<span class="n">y_test</span> <span class="o">=</span> <span class="n">test_labels</span>
+
+<span class="c1"># Training a SGD classifier to recognize all digits, not just 5s</span>
+<span class="n">multi_sgd_model</span> <span class="o">=</span> <span class="n">SGDClassifier</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+<span class="n">multi_sgd_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="c1"># Since dataset is not class imbalanced anymore, accuracy is a reliable metric</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Training accuracy: </span><span class="si">{</span><span class="n">multi_sgd_model</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span><span class="si">:</span><span class="s2">.05f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Test accuracy: </span><span class="si">{</span><span class="n">multi_sgd_model</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span><span class="si">:</span><span class="s2">.05f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training accuracy: 0.91975
+Test accuracy: 0.91580
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot confusion matrix for multiclass SGD classifier on test data</span>
+<span class="n">plot_conf_mat</span><span class="p">(</span><span class="n">multi_sgd_model</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/machine_learning_foundations_72_0.png" src="../_images/machine_learning_foundations_72_0.png" />
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./fundamentals"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="machine_learning_in_action.html" title="previous page">Machine Learning In Action</a>
+    <a class='right-next' id="next-link" href="../algorithms/decision_trees_and_random_forests.html" title="next page">Decision Trees &amp; Random Forests</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Baptiste Pesquet<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="../_static/js/index.js"></script>
+    
+  </body>
+</html>
