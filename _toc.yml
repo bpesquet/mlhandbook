@@ -1,0 +1,26 @@
+- file: intro
+
+- part: Fundamentals
+  chapters:
+  - file: fundamentals/machine_learning_in_action
+  - file: fundamentals/machine_learning_foundations
+
+- part: Algorithms
+  chapters:
+  - file: algorithms/decision_trees_and_random_forests
+  - file: algorithms/artificial_neural_networks
+  - file: algorithms/convolutional_neural_networks
+  - file: algorithms/recurrent_neural_networks
+  - file: algorithms/generative_deep_learning
+
+- part: Tools
+  chapters:
+  - file: tools/python
+  - file: tools/numpy
+  - file: tools/pandas
+  - file: tools/matplotlib
+  - file: tools/scikit-learn
+
+- part: Appendix
+  chapters:
+  - file: ACKNOWLEDGMENTS
