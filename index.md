@@ -9,3 +9,7 @@ Because this book is built with [Jupyter Notebooks](https://jupyter.org/), you c
 ```
 
 This book is always evolving, with new content added regularly.
+
+## Acknowledgments
+
+This material is inspired by a large number of sources, from which many ideas and some illustrations were borrowed. More details [here](./appendix/acknowledgments.md).

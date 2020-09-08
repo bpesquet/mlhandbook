@@ -1,8 +1,6 @@
 # Acknowledgments
 
-This material is inspired by a large number of sources, from which many ideas and some illustrations were borrowed.
-
-Here is a non-exhaustive list. Thanks to the authors for sharing their knowledge!
+Thanks to the following authors and organizations for sharing their knowledge!
 
 ## Online courses
 

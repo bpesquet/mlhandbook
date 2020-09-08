@@ -11,6 +11,9 @@ Activation function
 AUC
   Area Under the ROC Curve. An aggregate measure of a classifier' performance across all possible classification thresholds ([Wikipedia](https://en.wikipedia.org/wiki/Receiver_operating_characteristic#Area_under_the_curve)).
 
+Automatic differentiation (autodiff)
+  Soon!
+
 Backpropagation
   Mathematical technique used to obtain the gradients of the loss function with respect to the weights of a neural network. Applies the chain rule to compute the gradients one layer at a time, iterating backward from the last layer ([Wikipedia](https://en.wikipedia.org/wiki/Backpropagation)).
 
