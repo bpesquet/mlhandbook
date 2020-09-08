@@ -1,6 +1,6 @@
 # Acknowledgments
 
-The material in this repository is inspired by a large number of sources, from which many ideas and some illustrations were borrowed.
+This material is inspired by a large number of sources, from which many ideas and some illustrations were borrowed.
 
 Here is a non-exhaustive list. Thanks to the authors for sharing their knowledge!
 
