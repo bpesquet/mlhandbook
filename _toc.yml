@@ -23,4 +23,5 @@
 
 - part: Appendix
   chapters:
-  - file: ACKNOWLEDGMENTS
+  - file: appendix/acknowledgments
+  - file: appendix/glossary
