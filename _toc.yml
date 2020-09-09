@@ -2,6 +2,7 @@
 
 - part: Fundamentals
   chapters:
+  - file: fundamentals/introduction_to_machine_learning
   - file: fundamentals/machine_learning_in_action
   - file: fundamentals/machine_learning_foundations
 
