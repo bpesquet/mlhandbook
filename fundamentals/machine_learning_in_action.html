@@ -17,7 +17,6 @@
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-dropdown.css" />
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script src="../_static/sphinx-book-theme.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
@@ -39,7 +38,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Machine Learning Foundations" href="machine_learning_foundations.html" />
-    <link rel="prev" title="Machine Learning Handbook" href="../index.html" />
+    <link rel="prev" title="Introduction To Machine Learning" href="introduction_to_machine_learning.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="docsearch:language" content="en">
@@ -78,6 +77,11 @@
  </span>
 </p>
 <ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="introduction_to_machine_learning.html">
+   Introduction To Machine Learning
+  </a>
+ </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Machine Learning In Action
@@ -285,87 +289,15 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#introduction-to-machine-learning">
-   Introduction to Machine Learning
+  <a class="reference internal nav-link" href="#environment-setup">
+   Environment setup
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#a-first-definition">
-     A first definition
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#learning-machines">
-     Learning machines?
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#a-new-paradigm">
-     A new paradigm
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-ml-landscape">
-     The ML landscape
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#regression">
-     Regression
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#classification">
-     Classification
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#classification-types">
-     Classification types
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#clustering">
-     Clustering
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#anomaly-detection">
-     Anomaly Detection
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#game-ai">
-     Game AI
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#machine-learning-models">
-     Machine Learning models
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-machine-learning-workflow">
-     The Machine Learning workflow
-    </a>
-   </li>
-  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#step-by-step-ml-project-predict-housing-prices">
-   Step-by-step ML project: predict housing prices
+  <a class="reference internal nav-link" href="#step-1-frame-the-problem">
+   Step 1: frame the problem
   </a>
   <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#environment-setup">
-     Environment setup
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#step-1-framing-the-problem">
-     Step 1: framing the problem
-    </a>
-   </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#properties-of-ml-friendly-problems">
      Properties of ML-friendly problems
@@ -376,11 +308,13 @@
      Example: predict house prices
     </a>
    </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#step-2-collecting-analyzing-and-preparing-data">
-     Step 2: collecting, analyzing and preparing data
-    </a>
-   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#step-2-collect-analyze-and-prepare-data">
+   Step 2: collect, analyze and prepare data
+  </a>
+  <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#predefined-datasets-vs-real-data">
      Predefined datasets Vs real data
@@ -436,11 +370,13 @@
      Preprocessing pipelines
     </a>
    </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#step-3-select-and-train-models">
-     Step 3: select and train models
-    </a>
-   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#step-3-select-and-train-models">
+   Step 3: select and train models
+  </a>
+  <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#the-optimization-generalization-dilemna">
      The optimization/generalization dilemna
@@ -476,11 +412,13 @@
      Cross-validation
     </a>
    </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#step-4-tune-the-selected-model">
-     Step 4: tune the selected model
-    </a>
-   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#step-4-tune-the-selected-model">
+   Step 4: tune the selected model
+  </a>
+  <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#checking-final-model-performance-on-test-dataset">
      Checking final model performance on test dataset
@@ -491,11 +429,13 @@
      Using the model to make predictions on new data
     </a>
    </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#step-5-deploy-to-production-and-maintain-the-system">
-     Step 5: Deploy to production and maintain the system
-    </a>
-   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#step-5-deploy-to-production-and-maintain-the-system">
+   Step 5: deploy to production and maintain the system
+  </a>
+  <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#step-5-1-saving-the-final-model-and-data-pipeline">
      Step 5.1: saving the final model and data pipeline
@@ -530,119 +470,20 @@
                 
   <div class="section" id="machine-learning-in-action">
 <h1>Machine Learning In Action<a class="headerlink" href="#machine-learning-in-action" title="Permalink to this headline">¶</a></h1>
+<p>(Heavily inspired by Chapter 2 of <a class="reference external" href="https://github.com/ageron/handson-ml2">Hands-On Machine Learning</a> by Aurélien Géron)</p>
 <div class="section" id="summary">
 <h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>Introduction to Machine Learning</p></li>
-<li><p>Step-by-step ML project: predict housing prices</p></li>
+<li><p>Environment setup</p></li>
+<li><p>Step 1: frame the problem</p></li>
+<li><p>Step 2: collect, analyze and prepare data</p></li>
+<li><p>Step 3: select and train models</p></li>
+<li><p>Step 4: tune the selected model</p></li>
+<li><p>Step 5: deploy to production and maintain the system</p></li>
 </ul>
 </div>
-<div class="section" id="introduction-to-machine-learning">
-<h2>Introduction to Machine Learning<a class="headerlink" href="#introduction-to-machine-learning" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="a-first-definition">
-<h3>A first definition<a class="headerlink" href="#a-first-definition" title="Permalink to this headline">¶</a></h3>
-<blockquote>
-<div><p>“The field of study that gives computers the ability to learn without being explicitly programmed” (Arthur Samuel, 1959).</p>
-</div></blockquote>
-</div>
-<div class="section" id="learning-machines">
-<h3>Learning machines?<a class="headerlink" href="#learning-machines" title="Permalink to this headline">¶</a></h3>
-<p>Machine Learning is a set of techniques for giving machines the ability to <strong>learn from data</strong>, in order to:</p>
-<ul class="simple">
-<li><p>Identify or classify elements</p></li>
-<li><p>Detect tendencies</p></li>
-<li><p>Make predictions</p></li>
-</ul>
-<p>As more data is fed into the system, results get better: performance improves with experience.</p>
-</div>
-<div class="section" id="a-new-paradigm">
-<h3>A new paradigm<a class="headerlink" href="#a-new-paradigm" title="Permalink to this headline">¶</a></h3>
-<p><img alt="Programming paradigm" src="../_images/programming_paradigm.png" /></p>
-<p><img alt="Training paradigm" src="../_images/training_paradigm.png" /></p>
-<p><a class="reference external" href="https://xkcd.com/1838/"><img alt="ML on XKCD" src="../_images/ml_xkcd.png" /></a></p>
-<p><img alt="AI/ML/DL Venn diagram" src="../_images/ai_ml_dl.png" /></p>
-</div>
-<div class="section" id="the-ml-landscape">
-<h3>The ML landscape<a class="headerlink" href="#the-ml-landscape" title="Permalink to this headline">¶</a></h3>
-<p>ML systems are traditionally classified in three categories, according to the amount and type of human supervision during training. <a class="reference external" href="https://hackernoon.com/self-supervised-learning-gets-us-closer-to-autonomous-learning-be77e6c86b5a">Hybrid approaches</a> exist.</p>
-<ul class="simple">
-<li><p><strong>Supervised Learning</strong>: expected results (called <em>labels</em> or <em>tags</em>) are given to the system along with training data.</p></li>
-<li><p><strong>Unsupervised Learning</strong>: training data comes without the expected results. The system must discover some structure in the data by itself.</p></li>
-<li><p><strong>Reinforcement Learning</strong>: without being given an explicit goal, the system’s decisions produce a <strong>reward</strong> it tries to maximize.</p></li>
-</ul>
-<p><img alt="ML category tree" src="../_images/ml_tree.png" /></p>
-</div>
-<div class="section" id="regression">
-<h3>Regression<a class="headerlink" href="#regression" title="Permalink to this headline">¶</a></h3>
-<p>The system predicts <strong>continuous</strong> values. Examples: temperature forecasting, asset price prediction…</p>
-<p><img alt="Regression example" src="../_images/ml_regression.png" /></p>
-</div>
-<div class="section" id="classification">
-<h3>Classification<a class="headerlink" href="#classification" title="Permalink to this headline">¶</a></h3>
-<p>The system predicts <strong>discrete</strong> values: input is <strong>categorized</strong>.</p>
-<p><img alt="Classification example" src="../_images/ml_classification.png" /></p>
-</div>
-<div class="section" id="classification-types">
-<h3>Classification types<a class="headerlink" href="#classification-types" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li><p><strong>Binary</strong>: only two possibles classes. Examples: cat/not a cat, spam/legit mail, benign/malignant tumor.</p></li>
-<li><p><strong>Multiclass</strong>: several mutually exclusive classes. Example: handwritten digit recognition.</p></li>
-<li><p><strong>Multilabel</strong>: several non-mutually exclusive classes. Example: face recognition.</p></li>
-</ul>
-</div>
-<div class="section" id="clustering">
-<h3>Clustering<a class="headerlink" href="#clustering" title="Permalink to this headline">¶</a></h3>
-<p>Data is partitioned into groups.</p>
-<p><img alt="ML clustering example" src="../_images/ml_clustering.png" /></p>
-</div>
-<div class="section" id="anomaly-detection">
-<h3>Anomaly Detection<a class="headerlink" href="#anomaly-detection" title="Permalink to this headline">¶</a></h3>
-<p>The system is able to detect abnomal samples (<em>outliers</em>).</p>
-<p><img alt="ML anomaly detection example" src="../_images/ml_anomaly_detection.png" /></p>
-</div>
-<div class="section" id="game-ai">
-<h3>Game AI<a class="headerlink" href="#game-ai" title="Permalink to this headline">¶</a></h3>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">YouTubeVideo</span>
-
-<span class="n">YouTubeVideo</span><span class="p">(</span><span class="s2">&quot;TmPfTpjtdgg&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html">
-<iframe
-    width="400"
-    height="300"
-    src="https://www.youtube.com/embed/TmPfTpjtdgg"
-    frameborder="0"
-    allowfullscreen
-></iframe>
-</div></div>
-</div>
-</div>
-<div class="section" id="machine-learning-models">
-<h3>Machine Learning models<a class="headerlink" href="#machine-learning-models" title="Permalink to this headline">¶</a></h3>
-<p>The representation learnt from data during training is called a <strong>model</strong>. It defines the relationship between inputs and outputs. Most (but not all) ML systems are model-based.</p>
-<p><a class="reference external" href="https://github.com/ageron/handson-ml2"><img alt="Extract from the book Hands-on Machine Learning with Scikit-Learn &amp; TensorFlow by A. Géron" src="../_images/instance_model_learning.png" /></a></p>
-</div>
-<div class="section" id="the-machine-learning-workflow">
-<h3>The Machine Learning workflow<a class="headerlink" href="#the-machine-learning-workflow" title="Permalink to this headline">¶</a></h3>
-<ol class="simple">
-<li><p>Frame the problem</p></li>
-<li><p>Collect, analyze and prepare the data</p></li>
-<li><p>Select and train models</p></li>
-<li><p>Tune the chosen model</p></li>
-<li><p>Deploy to production and maintain the system</p></li>
-</ol>
-</div>
-</div>
-<div class="section" id="step-by-step-ml-project-predict-housing-prices">
-<h2>Step-by-step ML project: predict housing prices<a class="headerlink" href="#step-by-step-ml-project-predict-housing-prices" title="Permalink to this headline">¶</a></h2>
-<p>(Heavily inspired by Chapter 2 of <a class="reference external" href="https://github.com/ageron/handson-ml2">Hands-On Machine Learning</a> by Aurélien Géron)</p>
 <div class="section" id="environment-setup">
-<h3>Environment setup<a class="headerlink" href="#environment-setup" title="Permalink to this headline">¶</a></h3>
+<h2>Environment setup<a class="headerlink" href="#environment-setup" title="Permalink to this headline">¶</a></h2>
 <p>Our core toolset is:</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="../tools/python.html"><span class="doc std std-doc">Python</span></a>, a multi-purpose programming language well suited to Data Science and ML.</p></li>
@@ -712,8 +553,8 @@
 </div>
 </div>
 </div>
-<div class="section" id="step-1-framing-the-problem">
-<h3>Step 1: framing the problem<a class="headerlink" href="#step-1-framing-the-problem" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="step-1-frame-the-problem">
+<h2>Step 1: frame the problem<a class="headerlink" href="#step-1-frame-the-problem" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>What is the business objective?</p></li>
 <li><p>How good are the current solutions?</p></li>
@@ -722,7 +563,6 @@
 <li><p>What is the expected learning type (supervised or not, batch/online…)?</p></li>
 <li><p>How will the model’s performance be evaluated?</p></li>
 </ul>
-</div>
 <div class="section" id="properties-of-ml-friendly-problems">
 <h3>Properties of ML-friendly problems<a class="headerlink" href="#properties-of-ml-friendly-problems" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
@@ -744,11 +584,11 @@
 </ul>
 <p><a class="reference external" href="https://www.kaggle.com/c/house-prices-advanced-regression-techniques/overview"><img alt="Kaggle houses banner" src="../_images/kaggle_housesbanner.png" /></a></p>
 </div>
-<div class="section" id="step-2-collecting-analyzing-and-preparing-data">
-<h3>Step 2: collecting, analyzing and preparing data<a class="headerlink" href="#step-2-collecting-analyzing-and-preparing-data" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="step-2-collect-analyze-and-prepare-data">
+<h2>Step 2: collect, analyze and prepare data<a class="headerlink" href="#step-2-collect-analyze-and-prepare-data" title="Permalink to this headline">¶</a></h2>
 <p>Data quality is <strong>paramount</strong> for any ML project.</p>
 <p><img alt="Your data, your model" src="../_images/yourdata_yourmodel.png" /></p>
-</div>
 <div class="section" id="predefined-datasets-vs-real-data">
 <h3>Predefined datasets Vs real data<a class="headerlink" href="#predefined-datasets-vs-real-data" title="Permalink to this headline">¶</a></h3>
 <p>Real data is messy, incomplete and often scattered across many sources.</p>
@@ -1135,7 +975,7 @@ memory usage: 1.6+ MB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/machine_learning_in_action_37_0.png" src="../_images/machine_learning_in_action_37_0.png" />
+<img alt="../_images/machine_learning_in_action_17_0.png" src="../_images/machine_learning_in_action_17_0.png" />
 </div>
 </div>
 </div>
@@ -1191,7 +1031,7 @@ Test dataset: (4128, 10)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/machine_learning_in_action_41_0.png" src="../_images/machine_learning_in_action_41_0.png" />
+<img alt="../_images/machine_learning_in_action_21_0.png" src="../_images/machine_learning_in_action_21_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1205,20 +1045,20 @@ Test dataset: (4128, 10)
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>median_house_value    1.000000
-median_income         0.688576
-total_rooms           0.132812
-housing_median_age    0.100638
-households            0.065043
-total_bedrooms        0.049124
-population           -0.025864
-longitude            -0.045416
-latitude             -0.145383
+median_income         0.689557
+total_rooms           0.139464
+housing_median_age    0.106695
+households            0.067366
+total_bedrooms        0.050744
+population           -0.025604
+longitude            -0.048522
+latitude             -0.144150
 Name: median_house_value, dtype: float64
 </pre></div>
 </div>
 </div>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot correlation matrix</span>
 <span class="k">def</span> <span class="nf">plot_correlation_matrix</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
@@ -1240,14 +1080,18 @@ Name: median_house_value, dtype: float64
     <span class="c1"># Correct a regression in matplotlib 3.1.1 https://stackoverflow.com/a/58165593</span>
     <span class="c1"># bottom, top = ax.get_ylim()</span>
     <span class="c1"># ax.set_ylim(bottom + 0.5, top - 0.5)</span>
-
-
-<span class="n">plot_correlation_matrix</span><span class="p">(</span><span class="n">df_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_correlation_matrix</span><span class="p">(</span><span class="n">df_train</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/machine_learning_in_action_43_0.png" src="../_images/machine_learning_in_action_43_0.png" />
+<img alt="../_images/machine_learning_in_action_24_0.png" src="../_images/machine_learning_in_action_24_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1265,7 +1109,7 @@ Name: median_house_value, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/machine_learning_in_action_44_0.png" src="../_images/machine_learning_in_action_44_0.png" />
+<img alt="../_images/machine_learning_in_action_25_0.png" src="../_images/machine_learning_in_action_25_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1280,7 +1124,7 @@ Name: median_house_value, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/machine_learning_in_action_45_0.png" src="../_images/machine_learning_in_action_45_0.png" />
+<img alt="../_images/machine_learning_in_action_26_0.png" src="../_images/machine_learning_in_action_26_0.png" />
 </div>
 </div>
 </div>
@@ -1311,17 +1155,17 @@ Name: median_house_value, dtype: float64
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>median_house_value          1.000000
-median_income               0.688576
-rooms_per_household         0.150251
-total_rooms                 0.132812
-housing_median_age          0.100638
-households                  0.065043
-total_bedrooms              0.049124
-population_per_household   -0.021739
-population                 -0.025864
-longitude                  -0.045416
-latitude                   -0.145383
-bedrooms_per_room          -0.259196
+median_income               0.689557
+rooms_per_household         0.145502
+total_rooms                 0.139464
+housing_median_age          0.106695
+households                  0.067366
+total_bedrooms              0.050744
+population_per_household   -0.022050
+population                 -0.025604
+longitude                  -0.048522
+latitude                   -0.144150
+bedrooms_per_room          -0.255941
 Name: median_house_value, dtype: float64
 </pre></div>
 </div>
@@ -1409,8 +1253,8 @@ Training labels: (16512,)
   <tbody>
     <tr>
       <th>total_bedrooms</th>
-      <td>169</td>
-      <td>1.023498</td>
+      <td>166</td>
+      <td>1.005329</td>
     </tr>
     <tr>
       <th>ocean_proximity</th>
@@ -1475,64 +1319,64 @@ Training labels: (16512,)
   </thead>
   <tbody>
     <tr>
-      <th>18873</th>
-      <td>-122.22</td>
-      <td>38.08</td>
-      <td>37.0</td>
-      <td>2811.0</td>
+      <th>4629</th>
+      <td>-118.30</td>
+      <td>34.07</td>
+      <td>18.0</td>
+      <td>3759.0</td>
       <td>NaN</td>
-      <td>1574.0</td>
-      <td>516.0</td>
-      <td>3.1053</td>
-      <td>NEAR BAY</td>
-    </tr>
-    <tr>
-      <th>14173</th>
-      <td>-117.05</td>
-      <td>32.75</td>
-      <td>36.0</td>
-      <td>2024.0</td>
-      <td>NaN</td>
-      <td>1030.0</td>
-      <td>390.0</td>
-      <td>3.8233</td>
-      <td>NEAR OCEAN</td>
-    </tr>
-    <tr>
-      <th>2647</th>
-      <td>-124.13</td>
-      <td>40.55</td>
-      <td>38.0</td>
-      <td>544.0</td>
-      <td>NaN</td>
-      <td>240.0</td>
-      <td>91.0</td>
-      <td>3.2500</td>
+      <td>3296.0</td>
+      <td>1462.0</td>
+      <td>2.2708</td>
       <td>&lt;1H OCEAN</td>
     </tr>
     <tr>
-      <th>3354</th>
-      <td>-120.67</td>
-      <td>40.50</td>
-      <td>15.0</td>
-      <td>5343.0</td>
+      <th>20046</th>
+      <td>-119.01</td>
+      <td>36.06</td>
+      <td>25.0</td>
+      <td>1505.0</td>
       <td>NaN</td>
-      <td>2503.0</td>
-      <td>902.0</td>
-      <td>3.5962</td>
+      <td>1392.0</td>
+      <td>359.0</td>
+      <td>1.6812</td>
       <td>INLAND</td>
     </tr>
     <tr>
-      <th>19252</th>
-      <td>-122.79</td>
-      <td>38.48</td>
-      <td>7.0</td>
-      <td>6837.0</td>
+      <th>341</th>
+      <td>-122.17</td>
+      <td>37.75</td>
+      <td>38.0</td>
+      <td>992.0</td>
       <td>NaN</td>
-      <td>3468.0</td>
-      <td>1405.0</td>
-      <td>3.1662</td>
-      <td>&lt;1H OCEAN</td>
+      <td>732.0</td>
+      <td>259.0</td>
+      <td>1.6196</td>
+      <td>NEAR BAY</td>
+    </tr>
+    <tr>
+      <th>6052</th>
+      <td>-117.76</td>
+      <td>34.04</td>
+      <td>34.0</td>
+      <td>1914.0</td>
+      <td>NaN</td>
+      <td>1564.0</td>
+      <td>328.0</td>
+      <td>2.8347</td>
+      <td>INLAND</td>
+    </tr>
+    <tr>
+      <th>2412</th>
+      <td>-119.45</td>
+      <td>36.61</td>
+      <td>24.0</td>
+      <td>1302.0</td>
+      <td>NaN</td>
+      <td>693.0</td>
+      <td>243.0</td>
+      <td>3.7917</td>
+      <td>INLAND</td>
     </tr>
   </tbody>
 </table>
@@ -1569,9 +1413,9 @@ Training labels: (16512,)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[3 7 8]
- [7 8 5]
- [3 4 7]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[8 7 5]
+ [8 9 3]
+ [7 1 6]]
 </pre></div>
 </div>
 </div>
@@ -1591,11 +1435,11 @@ Training labels: (16512,)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[4.33333333 6.33333333 6.66666667]
-[[-0.70710678  0.39223227  1.06904497]
- [ 1.41421356  0.98058068 -1.33630621]
- [-0.70710678 -1.37281295  0.26726124]]
-Mean: 3.700743415417188e-17. Std: 1.0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[7.66666667 5.66666667 4.66666667]
+[[ 0.70710678  0.39223227  0.26726124]
+ [ 0.70710678  0.98058068 -1.33630621]
+ [-1.41421356 -1.37281295  1.06904497]]
+Mean: -3.20731096002823e-16. Std: 1.0
 </pre></div>
 </div>
 </div>
@@ -1659,10 +1503,10 @@ Mean: 3.700743415417188e-17. Std: 1.0
 Index([&#39;ocean_proximity&#39;], dtype=&#39;object&#39;)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;1H OCEAN     7284
-INLAND        5267
-NEAR OCEAN    2132
-NEAR BAY      1825
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;1H OCEAN     7232
+INLAND        5278
+NEAR OCEAN    2159
+NEAR BAY      1839
 ISLAND           4
 Name: ocean_proximity, dtype: int64
 </pre></div>
@@ -1695,20 +1539,20 @@ Name: ocean_proximity, dtype: int64
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x_train: (16512, 13)
-[-1.43526519  0.97095979  1.86398909 -0.41626957 -0.52046957 -0.47487956
- -0.52260642  0.22522225  0.          0.          0.          1.
+[ 0.71304049 -0.79627938  0.19804486  0.27128986  0.46914666  0.20582391
+  0.44545607 -0.26528534  1.          0.          0.          0.
   0.        ]
 </pre></div>
 </div>
 </div>
 </div>
 </div>
+</div>
 <div class="section" id="step-3-select-and-train-models">
-<h3>Step 3: select and train models<a class="headerlink" href="#step-3-select-and-train-models" title="Permalink to this headline">¶</a></h3>
+<h2>Step 3: select and train models<a class="headerlink" href="#step-3-select-and-train-models" title="Permalink to this headline">¶</a></h2>
 <p>At long last, our data is ready and we can start training models.</p>
 <p>This step is often iterative and can be quite empirical. Depending on data and model complexity, it can also be resource-intensive.</p>
 <p><img alt="Busy training" src="../_images/busy_training.jpg" /></p>
-</div>
 <div class="section" id="the-optimization-generalization-dilemna">
 <h3>The optimization/generalization dilemna<a class="headerlink" href="#the-optimization-generalization-dilemna" title="Permalink to this headline">¶</a></h3>
 <p><img alt="Underfitting and overfitting" src="../_images/underfitting_overfitting.png" /></p>
@@ -1754,7 +1598,7 @@ Name: ocean_proximity, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training error for linear regression: 68767.89
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training error for linear regression: 68651.43
 </pre></div>
 </div>
 </div>
@@ -1807,8 +1651,8 @@ Name: ocean_proximity, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean CV error for decision tree: 67896.08
-Mean CV error for linear regression: 68372.08
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean CV error for decision tree: 68721.25
+Mean CV error for linear regression: 68771.10
 </pre></div>
 </div>
 </div>
@@ -1828,15 +1672,16 @@ Mean CV error for linear regression: 68372.08
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training error for random forest: 18159.59
-Mean CV error for random forest: 48961.95
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training error for random forest: 18179.94
+Mean CV error for random forest: 48809.94
 </pre></div>
 </div>
 </div>
 </div>
 </div>
+</div>
 <div class="section" id="step-4-tune-the-selected-model">
-<h3>Step 4: tune the selected model<a class="headerlink" href="#step-4-tune-the-selected-model" title="Permalink to this headline">¶</a></h3>
+<h2>Step 4: tune the selected model<a class="headerlink" href="#step-4-tune-the-selected-model" title="Permalink to this headline">¶</a></h2>
 <p>Once a model looks promising, it must be <strong>tuned</strong> in order to offer the best compromise between optimization and generalization.</p>
 <p>The goal is to find the set of model properties that gives the best performance. Model properties are often called <strong>hyperparameters</strong> (example: maximum depth for a decision tree).</p>
 <p>This step can be either:</p>
@@ -1876,7 +1721,6 @@ Mean CV error for random forest: 48961.95
 </div>
 </div>
 </div>
-</div>
 <div class="section" id="checking-final-model-performance-on-test-dataset">
 <h3>Checking final model performance on test dataset<a class="headerlink" href="#checking-final-model-performance-on-test-dataset" title="Permalink to this headline">¶</a></h3>
 <p>Now is the time to evaluate the final model on the test set that we put apart before.</p>
@@ -1902,7 +1746,7 @@ Mean CV error for random forest: 48961.95
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test data: (4128, 9)
 Test labels: (4128,)
-Test error for final model: 48837.81
+Test error for final model: 49515.38
 </pre></div>
 </div>
 </div>
@@ -1982,16 +1826,16 @@ Test error for final model: 48837.81
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted result: 295056.73
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted result: 277680.07
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="section" id="step-5-deploy-to-production-and-maintain-the-system">
-<h3>Step 5: Deploy to production and maintain the system<a class="headerlink" href="#step-5-deploy-to-production-and-maintain-the-system" title="Permalink to this headline">¶</a></h3>
-<p>We can finally make the model accessible to its users!</p>
 </div>
+<div class="section" id="step-5-deploy-to-production-and-maintain-the-system">
+<h2>Step 5: deploy to production and maintain the system<a class="headerlink" href="#step-5-deploy-to-production-and-maintain-the-system" title="Permalink to this headline">¶</a></h2>
+<p>We can finally make the model accessible to its users!</p>
 <div class="section" id="step-5-1-saving-the-final-model-and-data-pipeline">
 <h3>Step 5.1: saving the final model and data pipeline<a class="headerlink" href="#step-5-1-saving-the-final-model-and-data-pipeline" title="Permalink to this headline">¶</a></h3>
 <p>A trained model can be saved to several formats. A standard common is to use Python’s built-in persistence model, <a class="reference external" href="https://docs.python.org/3/library/pickle.html">pickle</a>, through the <a class="reference external" href="https://pypi.org/project/joblib/">joblib</a> library for efficiency reasons.</p>
@@ -2072,7 +1916,7 @@ Test error for final model: 48837.81
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="../index.html" title="previous page">Machine Learning Handbook</a>
+    <a class='left-prev' id="prev-link" href="introduction_to_machine_learning.html" title="previous page">Introduction To Machine Learning</a>
     <a class='right-next' id="next-link" href="machine_learning_foundations.html" title="next page">Machine Learning Foundations</a>
 
     </div>

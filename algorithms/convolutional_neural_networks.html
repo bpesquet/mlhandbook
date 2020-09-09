@@ -17,7 +17,6 @@
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-dropdown.css" />
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script src="../_static/sphinx-book-theme.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
@@ -78,6 +77,11 @@
  </span>
 </p>
 <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fundamentals/introduction_to_machine_learning.html">
+   Introduction To Machine Learning
+  </a>
+ </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fundamentals/machine_learning_in_action.html">
    Machine Learning In Action
@@ -356,24 +360,22 @@
      AlexNet (2012)
     </a>
    </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#vgg-2014">
-   VGG (2014)
-  </a>
-  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#vgg-2014">
+     VGG (2014)
+    </a>
+   </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#googlenet-inception-2014">
      GoogLeNet/Inception (2014)
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#microsoft-resnet-2015">
+     Microsoft ResNet (2015)
+    </a>
+   </li>
   </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#microsoft-resnet-2015">
-   Microsoft ResNet (2015)
-  </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#training-a-convnet">
@@ -531,7 +533,7 @@
 <div class="section" id="humble-beginnings-lenet5-1988">
 <h3>Humble beginnings: LeNet5 (1988)<a class="headerlink" href="#humble-beginnings-lenet5-1988" title="Permalink to this headline">¶</a></h3>
 <p><img alt="LeNet5" src="../_images/lenet5.jpg" /></p>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">YouTubeVideo</span>
 
@@ -564,10 +566,10 @@
 <p>Trained on 2 GPU for 5 to 6 days.</p>
 <p><img alt="AlexNet" src="../_images/alexnet2.png" /></p>
 </div>
-</div>
 <div class="section" id="vgg-2014">
-<h2>VGG (2014)<a class="headerlink" href="#vgg-2014" title="Permalink to this headline">¶</a></h2>
+<h3>VGG (2014)<a class="headerlink" href="#vgg-2014" title="Permalink to this headline">¶</a></h3>
 <p><img alt="VGG16" src="../_images/vgg16.png" /></p>
+</div>
 <div class="section" id="googlenet-inception-2014">
 <h3>GoogLeNet/Inception (2014)<a class="headerlink" href="#googlenet-inception-2014" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
@@ -576,15 +578,15 @@
 </ul>
 <p><img alt="Inception" src="../_images/google_inception.jpg" /></p>
 </div>
-</div>
 <div class="section" id="microsoft-resnet-2015">
-<h2>Microsoft ResNet (2015)<a class="headerlink" href="#microsoft-resnet-2015" title="Permalink to this headline">¶</a></h2>
+<h3>Microsoft ResNet (2015)<a class="headerlink" href="#microsoft-resnet-2015" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>152 layers, trained on 8 GPU for 2 to 3 weeks.</p></li>
 <li><p>Smaller error rate than a average human.</p></li>
 </ul>
 <p><img alt="ResNet" src="../_images/resnet_archi.png" /></p>
 <p><img alt="Deeper model" src="../_images/deeper_model.jpg" /></p>
+</div>
 </div>
 <div class="section" id="training-a-convnet">
 <h2>Training a convnet<a class="headerlink" href="#training-a-convnet" title="Permalink to this headline">¶</a></h2>
@@ -658,7 +660,7 @@ Keras version: 2.3.0-tf
 </div>
 </div>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_loss_acc</span><span class="p">(</span><span class="n">history</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Plot training and (optionally) validation loss and accuracy</span>
