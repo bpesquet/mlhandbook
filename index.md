@@ -8,7 +8,7 @@ It was created to support the Machine Learning course taught at French engineeri
 Because this book is built with [Jupyter Notebooks](https://jupyter.org/), you can launch live Jupyter sessions in the cloud directly from any chapter. To do so, open a chapter, press the <i class="fas fa-rocket" title="rocket"></i> button in the toolbar above and select an online notebook service. You will be able to interact with the code and regenerate the chapter output.
 ```
 
-This book is always evolving, with new content added regularly.
+This book is constantly evolving, with new content added regularly.
 
 ## Acknowledgments
 
