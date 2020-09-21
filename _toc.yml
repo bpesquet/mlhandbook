@@ -8,6 +8,7 @@
 
 - part: Algorithms
   chapters:
+  - file: algorithms/linear_regression
   - file: algorithms/decision_trees_and_random_forests
   - file: algorithms/artificial_neural_networks
   - file: algorithms/convolutional_neural_networks
