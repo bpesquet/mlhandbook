@@ -26,3 +26,9 @@ launch_buttons:
   colab_url: "https://colab.research.google.com"
 
 exclude_patterns: ["README.md", "algorithms/knn.ipynb", "tasks/data_analysis.ipynb", "tools/pytorch.ipynb"]
+
+sphinx:
+  config:
+    html_js_files:
+    # Needed for Plotly
+    - https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js
