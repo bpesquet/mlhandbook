@@ -40,7 +40,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Decision Trees &amp; Random Forests" href="decision_trees_and_random_forests.html" />
-    <link rel="prev" title="Machine Learning Foundations" href="../fundamentals/machine_learning_foundations.html" />
+    <link rel="prev" title="Machine Learning foundations" href="../fundamentals/machine_learning_foundations.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="docsearch:language" content="en">
@@ -91,7 +91,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../fundamentals/machine_learning_foundations.html">
-   Machine Learning Foundations
+   Machine Learning foundations
   </a>
  </li>
 </ul>
@@ -425,41 +425,77 @@
   <a class="reference internal nav-link" href="#iterative-approach-gradient-descent">
    Iterative approach: gradient descent
   </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#computation-of-gradients">
-   Computation of gradients
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#parameters-update">
-   Parameters update
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#types-of-gradient-descent">
-   Types of gradient descent
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#pros-cons-of-iterative-approach">
-   Pros/cons of iterative approach
-  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#method-description">
+     Method description
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#computation-of-gradients">
+     Computation of gradients
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#parameters-update">
+     Parameters update
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#interactive-example">
+     Interactive example
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#gradient-descent-types">
+     Gradient descent types
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-applying-stochastic-gradient-descent-to-predict-country-happiness">
+     Example: applying stochastic gradient descent to predict country happiness
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pros-cons-of-iterative-approach">
+     Pros/cons of iterative approach
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#polynomial-regression">
    Polynomial Regression
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#general-idea">
+     General idea
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-fitting-a-quadratic-curve-with-polynomial-regression">
+     Example: fitting a quadratic curve with polynomial regression
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#regularization">
    Regularization
   </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#effects-of-regularization-rate">
-   Effects of regularization rate
-  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     General idea
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-observing-the-effects-of-regularization-rate">
+     Example: observing the effects of regularization rate
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -630,8 +666,10 @@ var n,a=t("./lib/build-log"),i=t("./lib/epsilon"),o=t("./lib/intersecter"),s=t("
 <span class="k">assert</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">__version__</span> <span class="o">&gt;=</span> <span class="s2">&quot;0.20&quot;</span>
 
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
-<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span><span class="p">,</span> <span class="n">SGDRegressor</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span><span class="p">,</span> <span class="n">SGDRegressor</span><span class="p">,</span> <span class="n">Ridge</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">PolynomialFeatures</span><span class="p">,</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
 </pre></div>
 </div>
 </div>
@@ -963,54 +1001,54 @@ memory usage: 14.7+ KB
   </thead>
   <tbody>
     <tr>
-      <th>143</th>
-      <td>0.305809</td>
-      <td>3.644</td>
+      <th>86</th>
+      <td>1.289487</td>
+      <td>5.227</td>
     </tr>
     <tr>
-      <th>118</th>
-      <td>0.339234</td>
-      <td>4.460</td>
+      <th>2</th>
+      <td>1.480633</td>
+      <td>7.504</td>
     </tr>
     <tr>
-      <th>26</th>
-      <td>1.343280</td>
-      <td>6.527</td>
+      <th>98</th>
+      <td>0.479820</td>
+      <td>4.962</td>
     </tr>
     <tr>
-      <th>11</th>
-      <td>1.109706</td>
-      <td>7.079</td>
+      <th>68</th>
+      <td>1.198274</td>
+      <td>5.500</td>
     </tr>
     <tr>
-      <th>0</th>
-      <td>1.616463</td>
-      <td>7.537</td>
+      <th>22</th>
+      <td>1.352682</td>
+      <td>6.609</td>
     </tr>
     <tr>
-      <th>130</th>
-      <td>0.667225</td>
-      <td>4.120</td>
+      <th>51</th>
+      <td>1.314582</td>
+      <td>5.902</td>
     </tr>
     <tr>
-      <th>152</th>
-      <td>0.511136</td>
-      <td>3.349</td>
+      <th>30</th>
+      <td>1.430923</td>
+      <td>6.442</td>
     </tr>
     <tr>
-      <th>77</th>
-      <td>0.951484</td>
-      <td>5.279</td>
+      <th>70</th>
+      <td>1.551675</td>
+      <td>5.472</td>
     </tr>
     <tr>
-      <th>114</th>
-      <td>0.479309</td>
-      <td>4.535</td>
+      <th>141</th>
+      <td>1.122094</td>
+      <td>3.766</td>
     </tr>
     <tr>
-      <th>139</th>
-      <td>0.858428</td>
-      <td>3.795</td>
+      <th>85</th>
+      <td>1.079374</td>
+      <td>5.230</td>
     </tr>
   </tbody>
 </table>
@@ -1065,16 +1103,17 @@ Test data: (31, 1), labels: (31,)
 <h3>Data plotting<a class="headerlink" href="#data-plotting" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_univariate</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">input_features</span><span class="p">,</span> <span class="n">target_features</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_univariate</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">input_features</span><span class="p">,</span> <span class="n">target_features</span><span class="p">,</span> <span class="n">model_list</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;2D plot of features and target, including model prediction if defined&quot;&quot;&quot;</span>
     
     <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Actual&quot;</span><span class="p">)</span>
-    
-    <span class="k">if</span> <span class="n">model</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+    <span class="k">if</span> <span class="n">model_list</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">predictions_count</span> <span class="o">=</span> <span class="mi">100</span>
         <span class="n">x_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">x</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">predictions_count</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">predictions_count</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
-        <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_pred</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_pred</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Prediction&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">model_list</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_pred</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_pred</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">model_name</span><span class="p">)</span>
     
     <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">input_features</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">target_feature</span><span class="p">)</span>
@@ -1126,9 +1165,9 @@ Test data: (31, 1), labels: (31,)
 </div>
 <div class="section" id="loss-function">
 <h3>Loss function<a class="headerlink" href="#loss-function" title="Permalink to this headline">¶</a></h3>
-<p>We use the Mean Squared Error (MSE). RMSE is also a possible choice.</p>
+<p>We use the <em>Mean Squared Error</em> (MSE). RMSE is also a possible choice.</p>
 <div class="math notranslate nohighlight">
-\[\mathcal{L}(\theta) = \frac{1}{m}\sum_{i=1}^m (y'^{(i)} - y^{(i)})^2 = \frac{1}{m}\sum_{i=1}^m (\mathcal{h}_\theta(x^{(i)}) - y^{(i)})^2\]</div>
+\[\mathcal{L}(\pmb{\theta}) = \frac{1}{m}\sum_{i=1}^m (y'^{(i)} - y^{(i)})^2 = \frac{1}{m}\sum_{i=1}^m (\mathcal{h}_\theta(x^{(i)}) - y^{(i)})^2\]</div>
 </div>
 <div class="section" id="analytical-solution">
 <h3>Analytical solution<a class="headerlink" href="#analytical-solution" title="Permalink to this headline">¶</a></h3>
@@ -1325,7 +1364,7 @@ Test data: (31, 1), labels: (31,)
 <div class="math notranslate nohighlight">
 \[\nabla_{\theta}\mathcal{L}(\pmb{\theta}) = \nabla_{\theta}\left(\frac{1}{m}(\pmb{\theta}^T\pmb{X}^T\pmb{X}\pmb{\theta} - 2(\pmb{X}\pmb{\theta})^T\pmb{y} + \pmb{y}^T\pmb{y})\right) = \frac{1}{m}\left(2\pmb{X}^T\pmb{X}\pmb{\theta} - 2\pmb{X}^T\pmb{y}\right)\]</div>
 <div class="math notranslate nohighlight">
-\[\nabla_{\theta}\mathcal{L}(\pmb{\theta}) = \frac{2}{m}\pmb{X}^T\left(\pmb{X}\pmb{\theta} - y\right)\]</div>
+\[\nabla_{\theta}\mathcal{L}(\pmb{\theta}) = \frac{2}{m}\pmb{X}^T\left(\pmb{X}\pmb{\theta} - \pmb{y}\right)\]</div>
 </div>
 <div class="section" id="loss-minimization">
 <h4>Loss minimization<a class="headerlink" href="#loss-minimization" title="Permalink to this headline">¶</a></h4>
@@ -1371,9 +1410,9 @@ Test data: (31, 1), labels: (31,)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model weights: [2.21896353], bias: 3.161674588899579
-Training error: 0.45053
-Test error: 0.35994
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model weights: [2.25107644], bias: 3.201513992616606
+Training error: 0.40958
+Test error: 0.54695
 </pre></div>
 </div>
 </div>
@@ -1381,7 +1420,13 @@ Test error: 0.35994
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot data and model prediction</span>
-<span class="n">plot_univariate</span><span class="p">(</span><span class="n">x_train_uni</span><span class="p">,</span> <span class="n">y_train_uni</span><span class="p">,</span> <span class="n">input_features_uni</span><span class="p">,</span> <span class="n">target_feature</span><span class="p">,</span> <span class="n">lr_model</span><span class="p">)</span>
+<span class="n">plot_univariate</span><span class="p">(</span>
+    <span class="n">x_train_uni</span><span class="p">,</span>
+    <span class="n">y_train_uni</span><span class="p">,</span>
+    <span class="n">input_features_uni</span><span class="p">,</span>
+    <span class="n">target_feature</span><span class="p">,</span>
+    <span class="n">model_list</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;LR&quot;</span><span class="p">:</span> <span class="n">lr_model</span><span class="p">},</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1510,9 +1555,9 @@ Test data: (31, 2), labels: (31,)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div>                            <div id="709024d2-30d3-4315-82e2-982c0555ce55" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("709024d2-30d3-4315-82e2-982c0555ce55")) {                    Plotly.newPlot(                        "709024d2-30d3-4315-82e2-982c0555ce55",                        [{"marker": {"line": {"color": "rgb(255, 255, 255)", "width": 1}, "opacity": 1, "size": 10}, "mode": "markers", "name": "Actual", "type": "scatter3d", "x": [0.737299203872681, 0.7885475754737851, 0.30544471740722695, 1.2860119342803997, 1.47920441627502, 1.40570604801178, 1.1893955469131499, 1.06457793712616, 0.7922212481498722, 0.339233845472336, 0.8781145811080929, 0.996192753314972, 0.730573117733002, 0.16192533075809498, 0.7288706302642819, 1.74194359779358, 0.564305365085602, 0.716249227523804, 1.1307767629623402, 1.1027104854583702, 0.950612664222717, 1.3753824234008798, 0.11904179304838199, 1.08116579055786, 0.885416388511658, 1.29121541976929, 0.521021246910095, 0.783756256103516, 1.25278460979462, 0.89465194940567, 1.12112903594971, 0.85769921541214, 1.3151752948761002, 0.833756566047668, 1.48238301277161, 0.667224824428558, 1.53062355518341, 1.4870972633361799, 1.22255623340607, 0.43108540773391707, 1.6164631843566901, 1.29178786277771, 1.54625928401947, 1.4884122610092199, 1.00726580619812, 1.3208793401718102, 1.41691517829895, 1.480633020401, 0.36842092871666, 0.6595166921615601, 0.0921023488044739, 1.43092346191406, 0.36711055040359497, 0.35022771358490007, 1.15655755996704, 1.12209415435791, 1.38439786434174, 0.24454993009567302, 1.12843120098114, 1.23374843597412, 0.479309022426605, 1.4844149351120002, 1.63295245170593, 1.09186446666718, 0.964434325695038, 1.50394463539124, 1.2845562696456898, 0.43801298737525896, 1.21768391132355, 1.28177809715271, 0.368745893239975, 0.6030489206314089, 0.872001945972443, 0.982409417629242, 1.49438726902008, 1.10970628261566, 0.989701807498932, 1.3412059545516999, 1.4637807607650801, 1.28948748111725, 1.00082039833069, 0.560479462146759, 1.5649795532226598, 1.0352252721786501, 0.381430715322495, 1.2175596952438401, 1.44163393974304, 0.786441087722778, 0.23430564999580397, 1.05469870567322, 1.8707656860351598, 0.6017650961875921, 1.55167484283447, 1.12786877155304, 0.8584281802177429, 0.907975316047668, 1.48792338371277, 0.7268835306167599, 1.1073532104492199, 0.925579309463501, 0.6364067792892459, 1.3559380769729599, 0.9910123944282528, 0.0226431842893362, 1.07062232494354, 1.00985014438629, 1.07498753070831, 0.401477217674255, 1.35268235206604, 0.6484572887420649, 1.4336265325546298, 0.479820191860199, 0.09162256866693501, 0.8089642524719242, 0.305808693170547, 1.1982102394104, 1.0272358655929599, 0.37584653496742204, 1.06931757926941, 0.9097844958305359, 1.18529546260834, 1.1614590883255, 0.476180493831635, 1.07937383651733], "y": [0.447551846504211, 0.571055591106415, 0.38042613863945, 0.17586351931095098, 0.611100912094116, 0.6140621304512021, 0.491247326135635, 0.325905978679657, 0.469987004995346, 0.408842742443085, 0.408158332109451, 0.381498634815216, 0.348079860210419, 0.36365869641304, 0.24072904884815197, 0.59662789106369, 0.430388748645782, 0.25471106171608, 0.41827192902565, 0.288555532693863, 0.309410035610199, 0.40598860383033797, 0.33288118243217496, 0.47278770804405196, 0.5015376806259161, 0.40226498246192893, 0.390661299228668, 0.394952565431595, 0.376895278692245, 0.12297477573156401, 0.194989055395126, 0.585214674472809, 0.498465299606323, 0.5587329268455511, 0.626006722450256, 0.423026293516159, 0.449750572443008, 0.567766189575195, 0.255772292613983, 0.42596277594566295, 0.635422587394714, 0.520342111587524, 0.505740523338318, 0.536746919155121, 0.289680689573288, 0.479131430387497, 0.505625545978546, 0.6271626353263849, 0.318697690963745, 0.0149958552792668, 0.235961347818375, 0.470222115516663, 0.514492034912109, 0.32436785101890603, 0.295400261878967, 0.505196332931519, 0.408781230449677, 0.348587512969971, 0.15399712324142498, 0.550026834011078, 0.37792226672172496, 0.601607382297516, 0.49633759260177596, 0.233335807919502, 0.520303547382355, 0.5853844881057739, 0.43745428323745705, 0.16234202682972002, 0.457003742456436, 0.373783111572266, 0.5818438529968261, 0.4477061927318571, 0.5313106179237371, 0.204403176903725, 0.612924098968506, 0.580131649971008, 0.28211015462875394, 0.572575807571411, 0.5397707223892211, 0.0957312509417534, 0.4551981985569, 0.45276376605033897, 0.620070576667786, 0.45000287890434293, 0.443185955286026, 0.5793922543525699, 0.508190035820007, 0.6582486629486078, 0.48079109191894503, 0.479246735572815, 0.604130983352661, 0.633375823497772, 0.490968644618988, 0.580200731754303, 0.0, 0.5475093722343439, 0.562511384487152, 0.23521526157856, 0.437453746795654, 0.474307239055634, 0.461603492498398, 0.35511153936386103, 0.418421149253845, 0.602126955986023, 0.47748741507530196, 0.561213254928589, 0.28851598501205394, 0.106179520487785, 0.49094617366790794, 0.0960980430245399, 0.361466586589813, 0.44030594825744607, 0.0599007532000542, 0.4350258708000179, 0.18919676542282102, 0.31232857704162603, 0.39414396882057207, 0.336384207010269, 0.20871552824974102, 0.432452529668808, 0.49451920390129106, 0.28923171758651695, 0.306613743305206, 0.55258983373642], "z": [6.07100009918213, 5.07399988174438, 3.4949998855590803, 5.32399988174438, 7.31599998474121, 7.31400012969971, 5.62900018692017, 5.175000190734861, 4.31500005722046, 4.46000003814697, 5.2350001335144, 4.64400005340576, 5.1810002326965305, 4.02799987792969, 5.837999820709231, 6.86299991607666, 4.69500017166138, 4.77500009536743, 5.82200002670288, 4.49700021743774, 4.28599977493286, 7.212999820709231, 3.5329999923706095, 5.2729997634887695, 5.01100015640259, 6.08400011062622, 3.80800008773804, 5.07399988174438, 6.65199995040894, 4.09600019454956, 5.23699998855591, 5.42999982833862, 5.19500017166138, 5.82299995422363, 7.52199983596802, 4.11999988555908, 6.343999862670901, 7.00600004196167, 5.2930002212524405, 3.65700006484985, 7.537000179290769, 5.97300004959106, 6.993000030517581, 6.08699989318848, 4.80499982833862, 5.61100006103516, 5.92000007629395, 7.50400018692017, 4.70900011062622, 4.138999938964839, 4.2800002098083505, 6.44199991226196, 4.54500007629395, 4.03200006484985, 5.5689997673034695, 3.7660000324249303, 6.40299987792969, 3.50699996948242, 5.25, 6.4520001411438, 4.53499984741211, 7.28399991989136, 6.10500001907349, 5.872000217437741, 4.57399988174438, 7.3769998550415, 5.8189997673034695, 3.9360001087188703, 5.824999809265139, 5.962999820709231, 3.47099995613098, 4.17999982833862, 6.4539999961853, 5.18200016021729, 7.28399991989136, 7.0789999961853, 4.7350001335144, 5.75799989700317, 6.89099979400635, 5.2270002365112305, 6.00799989700317, 4.55299997329712, 7.49399995803833, 5.71500015258789, 4.08099985122681, 6.4539999961853, 6.71400022506714, 5.97100019454956, 4.550000190734861, 4.8289999961853, 6.375, 4.1680002212524405, 5.47200012207031, 6.4239997863769505, 3.79500007629395, 5.955999851226809, 6.9510002136230495, 5.26900005340576, 6.6350002288818395, 5.31099987030029, 4.513999938964839, 5.62099981307983, 5.33599996566772, 5.151000022888179, 6.35699987411499, 4.44000005722046, 5.22499990463257, 3.7939999103546103, 6.60900020599365, 4.29199981689453, 6.42199993133545, 4.961999893188481, 2.90499997138977, 4.29099988937378, 3.64400005340576, 4.46500015258789, 4.95499992370605, 3.875, 5.39499998092651, 6.002999782562259, 6.59899997711182, 4.71400022506714, 4.19000005722046, 5.230000019073491]}],                        {"margin": {"b": 0, "l": 0, "r": 0, "t": 0}, "scene": {"xaxis": {"title": {"text": "Economy..GDP.per.Capita."}}, "yaxis": {"title": {"text": "Freedom"}}, "zaxis": {"title": {"text": "Happiness.Score"}}}, "template": {"data": {"bar": [{"error_x": {"color": "#2a3f5f"}, "error_y": {"color": "#2a3f5f"}, "marker": {"line": {"color": "#E5ECF6", "width": 0.5}}, "type": "bar"}], "barpolar": [{"marker": {"line": {"color": "#E5ECF6", "width": 0.5}}, "type": "barpolar"}], "carpet": [{"aaxis": {"endlinecolor": "#2a3f5f", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "#2a3f5f"}, "baxis": {"endlinecolor": "#2a3f5f", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "#2a3f5f"}, "type": "carpet"}], "choropleth": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "choropleth"}], "contour": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "contour"}], "contourcarpet": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "contourcarpet"}], "heatmap": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "heatmap"}], "heatmapgl": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "heatmapgl"}], "histogram": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "histogram"}], "histogram2d": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "histogram2d"}], "histogram2dcontour": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "histogram2dcontour"}], "mesh3d": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "mesh3d"}], "parcoords": [{"line": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "parcoords"}], "pie": [{"automargin": true, "type": "pie"}], "scatter": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatter"}], "scatter3d": [{"line": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatter3d"}], "scattercarpet": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattercarpet"}], "scattergeo": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattergeo"}], "scattergl": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattergl"}], "scattermapbox": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattermapbox"}], "scatterpolar": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterpolar"}], "scatterpolargl": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterpolargl"}], "scatterternary": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterternary"}], "surface": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "surface"}], "table": [{"cells": {"fill": {"color": "#EBF0F8"}, "line": {"color": "white"}}, "header": {"fill": {"color": "#C8D4E3"}, "line": {"color": "white"}}, "type": "table"}]}, "layout": {"annotationdefaults": {"arrowcolor": "#2a3f5f", "arrowhead": 0, "arrowwidth": 1}, "coloraxis": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "colorscale": {"diverging": [[0, "#8e0152"], [0.1, "#c51b7d"], [0.2, "#de77ae"], [0.3, "#f1b6da"], [0.4, "#fde0ef"], [0.5, "#f7f7f7"], [0.6, "#e6f5d0"], [0.7, "#b8e186"], [0.8, "#7fbc41"], [0.9, "#4d9221"], [1, "#276419"]], "sequential": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "sequentialminus": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]]}, "colorway": ["#636efa", "#EF553B", "#00cc96", "#ab63fa", "#FFA15A", "#19d3f3", "#FF6692", "#B6E880", "#FF97FF", "#FECB52"], "font": {"color": "#2a3f5f"}, "geo": {"bgcolor": "white", "lakecolor": "white", "landcolor": "#E5ECF6", "showlakes": true, "showland": true, "subunitcolor": "white"}, "hoverlabel": {"align": "left"}, "hovermode": "closest", "mapbox": {"style": "light"}, "paper_bgcolor": "white", "plot_bgcolor": "#E5ECF6", "polar": {"angularaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "bgcolor": "#E5ECF6", "radialaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}}, "scene": {"xaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}, "yaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}, "zaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}}, "shapedefaults": {"line": {"color": "#2a3f5f"}}, "ternary": {"aaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "baxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "bgcolor": "#E5ECF6", "caxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}}, "title": {"x": 0.05}, "xaxis": {"automargin": true, "gridcolor": "white", "linecolor": "white", "ticks": "", "title": {"standoff": 15}, "zerolinecolor": "white", "zerolinewidth": 2}, "yaxis": {"automargin": true, "gridcolor": "white", "linecolor": "white", "ticks": "", "title": {"standoff": 15}, "zerolinecolor": "white", "zerolinewidth": 2}}}, "title": {"text": "Date Sets"}},                        {"responsive": true}                    ).then(function(){
+<div class="output text_html"><div>                            <div id="270e40d9-0835-4572-9102-31ffcfb295c3" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("270e40d9-0835-4572-9102-31ffcfb295c3")) {                    Plotly.newPlot(                        "270e40d9-0835-4572-9102-31ffcfb295c3",                        [{"marker": {"line": {"color": "rgb(255, 255, 255)", "width": 1}, "opacity": 1, "size": 10}, "mode": "markers", "name": "Actual", "type": "scatter3d", "x": [0.305808693170547, 1.15655755996704, 1.0272358655929599, 0.7288706302642819, 1.12843120098114, 1.00726580619812, 1.2175596952438401, 1.69227766990662, 0.932537317276001, 1.08116579055786, 0.30544471740722695, 1.1982102394104, 1.29121541976929, 0.16192533075809498, 1.06931757926941, 0.11904179304838199, 0.7922212481498722, 1.00082039833069, 1.5649795532226598, 1.09186446666718, 1.6263433694839498, 1.1614590883255, 1.40570604801178, 0.5962200760841371, 1.40167844295502, 1.25278460979462, 0.36711055040359497, 1.34327983856201, 0.8781145811080929, 0.401477217674255, 1.07498753070831, 1.50394463539124, 1.1531838178634601, 0.23430564999580397, 1.2845562696456898, 0.521021246910095, 0.0226431842893362, 1.8707656860351598, 0.233442038297653, 0.737299203872681, 1.12209415435791, 1.3559380769729599, 1.6164631843566901, 1.4336265325546298, 1.26074862480164, 0.900596737861633, 1.10970628261566, 1.06457793712616, 0.6364067792892459, 0.6017650961875921, 0.511135876178741, 1.74194359779358, 0.716249227523804, 0.907975316047668, 0.09162256866693501, 1.07937383651733, 1.1982743740081798, 1.12786877155304, 0.368745893239975, 1.1018030643463101, 0.951484382152557, 1.55167484283447, 0.37584653496742204, 1.44163393974304, 0.35022771358490007, 0.8089642524719242, 1.05469870567322, 1.3469113111496, 1.4637807607650801, 1.63295245170593, 0.964434325695038, 1.38439786434174, 1.4884122610092199, 0.85769921541214, 0.381430715322495, 1.12112903594971, 1.18529546260834, 1.07062232494354, 0.9097844958305359, 0.43108540773391707, 0.833756566047668, 0.982409417629242, 0.6595166921615601, 0.9910123944282528, 1.54625928401947, 1.1073532104492199, 0.586682975292206, 0.0, 1.28948748111725, 1.21768391132355, 0.479309022426605, 1.22255623340607, 1.48792338371277, 0.872001945972443, 1.48238301277161, 0.783756256103516, 1.1027104854583702, 0.479820191860199, 0.5916834473609921, 0.0921023488044739, 1.4870972633361799, 0.6484572887420649, 1.23374843597412, 1.53062355518341, 1.3412059545516999, 0.885416388511658, 1.1307767629623402, 1.47920441627502, 0.925579309463501, 1.3145823478698702, 0.730573117733002, 1.32539355754852, 0.995538592338562, 1.43092346191406, 1.3950666189193701, 1.480633020401, 0.6030489206314089, 1.3753824234008798, 0.564305365085602, 1.2860119342803997, 0.7268835306167599, 0.560479462146759, 1.1536017656326298, 0.950612664222717], "y": [0.18919676542282102, 0.295400261878967, 0.39414396882057207, 0.24072904884815197, 0.15399712324142498, 0.289680689573288, 0.5793922543525699, 0.549840569496155, 0.473507791757584, 0.47278770804405196, 0.38042613863945, 0.31232857704162603, 0.40226498246192893, 0.36365869641304, 0.20871552824974102, 0.33288118243217496, 0.469987004995346, 0.4551981985569, 0.620070576667786, 0.233335807919502, 0.60834527015686, 0.28923171758651695, 0.6140621304512021, 0.454943388700485, 0.257921665906906, 0.376895278692245, 0.514492034912109, 0.588767051696777, 0.408158332109451, 0.106179520487785, 0.28851598501205394, 0.5853844881057739, 0.412730008363724, 0.48079109191894503, 0.43745428323745705, 0.390661299228668, 0.602126955986023, 0.604130983352661, 0.466914653778076, 0.447551846504211, 0.505196332931519, 0.35511153936386103, 0.635422587394714, 0.361466586589813, 0.32570791244506797, 0.198303267359734, 0.580131649971008, 0.325905978679657, 0.461603492498398, 0.633375823497772, 0.390017777681351, 0.59662789106369, 0.25471106171608, 0.5475093722343439, 0.0599007532000542, 0.55258983373642, 0.300740599632263, 0.580200731754303, 0.5818438529968261, 0.465733230113983, 0.260287940502167, 0.490968644618988, 0.336384207010269, 0.508190035820007, 0.32436785101890603, 0.4350258708000179, 0.479246735572815, 0.47120362520217896, 0.5397707223892211, 0.49633759260177596, 0.520303547382355, 0.408781230449677, 0.536746919155121, 0.585214674472809, 0.443185955286026, 0.194989055395126, 0.49451920390129106, 0.47748741507530196, 0.432452529668808, 0.42596277594566295, 0.5587329268455511, 0.204403176903725, 0.0149958552792668, 0.418421149253845, 0.505740523338318, 0.437453746795654, 0.478356659412384, 0.270842045545578, 0.0957312509417534, 0.457003742456436, 0.37792226672172496, 0.255772292613983, 0.562511384487152, 0.5313106179237371, 0.626006722450256, 0.394952565431595, 0.288555532693863, 0.44030594825744607, 0.24946372210979503, 0.235961347818375, 0.567766189575195, 0.0960980430245399, 0.550026834011078, 0.449750572443008, 0.572575807571411, 0.5015376806259161, 0.41827192902565, 0.611100912094116, 0.474307239055634, 0.234231784939766, 0.348079860210419, 0.295817464590073, 0.443323463201523, 0.470222115516663, 0.256450712680817, 0.6271626353263849, 0.4477061927318571, 0.40598860383033797, 0.430388748645782, 0.17586351931095098, 0.23521526157856, 0.45276376605033897, 0.39815583825111406, 0.309410035610199], "z": [3.64400005340576, 5.5689997673034695, 4.95499992370605, 5.837999820709231, 5.25, 4.80499982833862, 6.4539999961853, 6.57200002670288, 5.493000030517581, 5.2729997634887695, 3.4949998855590803, 4.46500015258789, 6.08400011062622, 4.02799987792969, 5.39499998092651, 3.5329999923706095, 4.31500005722046, 6.00799989700317, 7.49399995803833, 5.872000217437741, 6.6479997634887695, 4.71400022506714, 7.31400012969971, 5.0040001869201705, 5.837999820709231, 6.65199995040894, 4.54500007629395, 6.52699995040894, 5.2350001335144, 3.7939999103546103, 5.22499990463257, 7.3769998550415, 6.57800006866455, 4.550000190734861, 5.8189997673034695, 3.80800008773804, 5.151000022888179, 6.375, 3.97000002861023, 6.07100009918213, 3.7660000324249303, 5.62099981307983, 7.537000179290769, 6.42199993133545, 5.849999904632571, 4.37599992752075, 7.0789999961853, 5.175000190734861, 4.513999938964839, 4.1680002212524405, 3.34899997711182, 6.86299991607666, 4.77500009536743, 5.955999851226809, 2.90499997138977, 5.230000019073491, 5.5, 6.4239997863769505, 3.47099995613098, 5.525000095367429, 5.27899980545044, 5.47200012207031, 3.875, 6.71400022506714, 4.03200006484985, 4.29099988937378, 4.8289999961853, 5.80999994277954, 6.89099979400635, 6.10500001907349, 4.57399988174438, 6.40299987792969, 6.08699989318848, 5.42999982833862, 4.08099985122681, 5.23699998855591, 6.59899997711182, 6.35699987411499, 6.002999782562259, 3.65700006484985, 5.82299995422363, 5.18200016021729, 4.138999938964839, 5.33599996566772, 6.993000030517581, 6.6350002288818395, 4.60799980163574, 2.69300007820129, 5.2270002365112305, 5.824999809265139, 4.53499984741211, 5.2930002212524405, 6.9510002136230495, 6.4539999961853, 7.52199983596802, 5.07399988174438, 4.49700021743774, 4.961999893188481, 3.59299993515015, 4.2800002098083505, 7.00600004196167, 4.29199981689453, 6.4520001411438, 6.343999862670901, 5.75799989700317, 5.01100015640259, 5.82200002670288, 7.31599998474121, 5.31099987030029, 5.90199995040894, 5.1810002326965305, 6.09800004959106, 5.26200008392334, 6.44199991226196, 5.96400022506714, 7.50400018692017, 4.17999982833862, 7.212999820709231, 4.69500017166138, 5.32399988174438, 5.26900005340576, 4.55299997329712, 5.234000205993651, 4.28599977493286]}],                        {"margin": {"b": 0, "l": 0, "r": 0, "t": 0}, "scene": {"xaxis": {"title": {"text": "Economy..GDP.per.Capita."}}, "yaxis": {"title": {"text": "Freedom"}}, "zaxis": {"title": {"text": "Happiness.Score"}}}, "template": {"data": {"bar": [{"error_x": {"color": "#2a3f5f"}, "error_y": {"color": "#2a3f5f"}, "marker": {"line": {"color": "#E5ECF6", "width": 0.5}}, "type": "bar"}], "barpolar": [{"marker": {"line": {"color": "#E5ECF6", "width": 0.5}}, "type": "barpolar"}], "carpet": [{"aaxis": {"endlinecolor": "#2a3f5f", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "#2a3f5f"}, "baxis": {"endlinecolor": "#2a3f5f", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "#2a3f5f"}, "type": "carpet"}], "choropleth": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "choropleth"}], "contour": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "contour"}], "contourcarpet": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "contourcarpet"}], "heatmap": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "heatmap"}], "heatmapgl": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "heatmapgl"}], "histogram": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "histogram"}], "histogram2d": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "histogram2d"}], "histogram2dcontour": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "histogram2dcontour"}], "mesh3d": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "mesh3d"}], "parcoords": [{"line": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "parcoords"}], "pie": [{"automargin": true, "type": "pie"}], "scatter": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatter"}], "scatter3d": [{"line": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatter3d"}], "scattercarpet": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattercarpet"}], "scattergeo": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattergeo"}], "scattergl": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattergl"}], "scattermapbox": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattermapbox"}], "scatterpolar": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterpolar"}], "scatterpolargl": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterpolargl"}], "scatterternary": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterternary"}], "surface": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "surface"}], "table": [{"cells": {"fill": {"color": "#EBF0F8"}, "line": {"color": "white"}}, "header": {"fill": {"color": "#C8D4E3"}, "line": {"color": "white"}}, "type": "table"}]}, "layout": {"annotationdefaults": {"arrowcolor": "#2a3f5f", "arrowhead": 0, "arrowwidth": 1}, "coloraxis": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "colorscale": {"diverging": [[0, "#8e0152"], [0.1, "#c51b7d"], [0.2, "#de77ae"], [0.3, "#f1b6da"], [0.4, "#fde0ef"], [0.5, "#f7f7f7"], [0.6, "#e6f5d0"], [0.7, "#b8e186"], [0.8, "#7fbc41"], [0.9, "#4d9221"], [1, "#276419"]], "sequential": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "sequentialminus": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]]}, "colorway": ["#636efa", "#EF553B", "#00cc96", "#ab63fa", "#FFA15A", "#19d3f3", "#FF6692", "#B6E880", "#FF97FF", "#FECB52"], "font": {"color": "#2a3f5f"}, "geo": {"bgcolor": "white", "lakecolor": "white", "landcolor": "#E5ECF6", "showlakes": true, "showland": true, "subunitcolor": "white"}, "hoverlabel": {"align": "left"}, "hovermode": "closest", "mapbox": {"style": "light"}, "paper_bgcolor": "white", "plot_bgcolor": "#E5ECF6", "polar": {"angularaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "bgcolor": "#E5ECF6", "radialaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}}, "scene": {"xaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}, "yaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}, "zaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}}, "shapedefaults": {"line": {"color": "#2a3f5f"}}, "ternary": {"aaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "baxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "bgcolor": "#E5ECF6", "caxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}}, "title": {"x": 0.05}, "xaxis": {"automargin": true, "gridcolor": "white", "linecolor": "white", "ticks": "", "title": {"standoff": 15}, "zerolinecolor": "white", "zerolinewidth": 2}, "yaxis": {"automargin": true, "gridcolor": "white", "linecolor": "white", "ticks": "", "title": {"standoff": 15}, "zerolinecolor": "white", "zerolinewidth": 2}}}, "title": {"text": "Date Sets"}},                        {"responsive": true}                    ).then(function(){
 
-var gd = document.getElementById('709024d2-30d3-4315-82e2-982c0555ce55');
+var gd = document.getElementById('270e40d9-0835-4572-9102-31ffcfb295c3');
 var x = new MutationObserver(function (mutations, observer) {{
         var display = window.getComputedStyle(gd).display;
         if (!display || display === 'none') {{
@@ -1548,23 +1593,24 @@ if (outputEl) {{
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model weights: [1.82862842 2.27066581], bias: 2.6406132285124366
-Training error: 0.35857
-Test error: 0.19576
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model weights: [1.91374839 2.097135  ], bias: 2.6403170042219255
+Training error: 0.33815
+Test error: 0.28320
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_multivariate</span><span class="p">(</span><span class="n">x_train_multi</span><span class="p">,</span> <span class="n">y_train_multi</span><span class="p">,</span> <span class="n">input_features_multi</span><span class="p">,</span> <span class="n">target_feature</span><span class="p">,</span> <span class="n">lr_model_multi</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot data and model prediction</span>
+<span class="n">plot_multivariate</span><span class="p">(</span><span class="n">x_train_multi</span><span class="p">,</span> <span class="n">y_train_multi</span><span class="p">,</span> <span class="n">input_features_multi</span><span class="p">,</span> <span class="n">target_feature</span><span class="p">,</span> <span class="n">lr_model_multi</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div>                            <div id="629a085c-9d18-4d10-bd62-16e7aef763fc" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("629a085c-9d18-4d10-bd62-16e7aef763fc")) {                    Plotly.newPlot(                        "629a085c-9d18-4d10-bd62-16e7aef763fc",                        [{"marker": {"line": {"color": "rgb(255, 255, 255)", "width": 1}, "opacity": 1, "size": 10}, "mode": "markers", "name": "Actual", "type": "scatter3d", "x": [0.737299203872681, 0.7885475754737851, 0.30544471740722695, 1.2860119342803997, 1.47920441627502, 1.40570604801178, 1.1893955469131499, 1.06457793712616, 0.7922212481498722, 0.339233845472336, 0.8781145811080929, 0.996192753314972, 0.730573117733002, 0.16192533075809498, 0.7288706302642819, 1.74194359779358, 0.564305365085602, 0.716249227523804, 1.1307767629623402, 1.1027104854583702, 0.950612664222717, 1.3753824234008798, 0.11904179304838199, 1.08116579055786, 0.885416388511658, 1.29121541976929, 0.521021246910095, 0.783756256103516, 1.25278460979462, 0.89465194940567, 1.12112903594971, 0.85769921541214, 1.3151752948761002, 0.833756566047668, 1.48238301277161, 0.667224824428558, 1.53062355518341, 1.4870972633361799, 1.22255623340607, 0.43108540773391707, 1.6164631843566901, 1.29178786277771, 1.54625928401947, 1.4884122610092199, 1.00726580619812, 1.3208793401718102, 1.41691517829895, 1.480633020401, 0.36842092871666, 0.6595166921615601, 0.0921023488044739, 1.43092346191406, 0.36711055040359497, 0.35022771358490007, 1.15655755996704, 1.12209415435791, 1.38439786434174, 0.24454993009567302, 1.12843120098114, 1.23374843597412, 0.479309022426605, 1.4844149351120002, 1.63295245170593, 1.09186446666718, 0.964434325695038, 1.50394463539124, 1.2845562696456898, 0.43801298737525896, 1.21768391132355, 1.28177809715271, 0.368745893239975, 0.6030489206314089, 0.872001945972443, 0.982409417629242, 1.49438726902008, 1.10970628261566, 0.989701807498932, 1.3412059545516999, 1.4637807607650801, 1.28948748111725, 1.00082039833069, 0.560479462146759, 1.5649795532226598, 1.0352252721786501, 0.381430715322495, 1.2175596952438401, 1.44163393974304, 0.786441087722778, 0.23430564999580397, 1.05469870567322, 1.8707656860351598, 0.6017650961875921, 1.55167484283447, 1.12786877155304, 0.8584281802177429, 0.907975316047668, 1.48792338371277, 0.7268835306167599, 1.1073532104492199, 0.925579309463501, 0.6364067792892459, 1.3559380769729599, 0.9910123944282528, 0.0226431842893362, 1.07062232494354, 1.00985014438629, 1.07498753070831, 0.401477217674255, 1.35268235206604, 0.6484572887420649, 1.4336265325546298, 0.479820191860199, 0.09162256866693501, 0.8089642524719242, 0.305808693170547, 1.1982102394104, 1.0272358655929599, 0.37584653496742204, 1.06931757926941, 0.9097844958305359, 1.18529546260834, 1.1614590883255, 0.476180493831635, 1.07937383651733], "y": [0.447551846504211, 0.571055591106415, 0.38042613863945, 0.17586351931095098, 0.611100912094116, 0.6140621304512021, 0.491247326135635, 0.325905978679657, 0.469987004995346, 0.408842742443085, 0.408158332109451, 0.381498634815216, 0.348079860210419, 0.36365869641304, 0.24072904884815197, 0.59662789106369, 0.430388748645782, 0.25471106171608, 0.41827192902565, 0.288555532693863, 0.309410035610199, 0.40598860383033797, 0.33288118243217496, 0.47278770804405196, 0.5015376806259161, 0.40226498246192893, 0.390661299228668, 0.394952565431595, 0.376895278692245, 0.12297477573156401, 0.194989055395126, 0.585214674472809, 0.498465299606323, 0.5587329268455511, 0.626006722450256, 0.423026293516159, 0.449750572443008, 0.567766189575195, 0.255772292613983, 0.42596277594566295, 0.635422587394714, 0.520342111587524, 0.505740523338318, 0.536746919155121, 0.289680689573288, 0.479131430387497, 0.505625545978546, 0.6271626353263849, 0.318697690963745, 0.0149958552792668, 0.235961347818375, 0.470222115516663, 0.514492034912109, 0.32436785101890603, 0.295400261878967, 0.505196332931519, 0.408781230449677, 0.348587512969971, 0.15399712324142498, 0.550026834011078, 0.37792226672172496, 0.601607382297516, 0.49633759260177596, 0.233335807919502, 0.520303547382355, 0.5853844881057739, 0.43745428323745705, 0.16234202682972002, 0.457003742456436, 0.373783111572266, 0.5818438529968261, 0.4477061927318571, 0.5313106179237371, 0.204403176903725, 0.612924098968506, 0.580131649971008, 0.28211015462875394, 0.572575807571411, 0.5397707223892211, 0.0957312509417534, 0.4551981985569, 0.45276376605033897, 0.620070576667786, 0.45000287890434293, 0.443185955286026, 0.5793922543525699, 0.508190035820007, 0.6582486629486078, 0.48079109191894503, 0.479246735572815, 0.604130983352661, 0.633375823497772, 0.490968644618988, 0.580200731754303, 0.0, 0.5475093722343439, 0.562511384487152, 0.23521526157856, 0.437453746795654, 0.474307239055634, 0.461603492498398, 0.35511153936386103, 0.418421149253845, 0.602126955986023, 0.47748741507530196, 0.561213254928589, 0.28851598501205394, 0.106179520487785, 0.49094617366790794, 0.0960980430245399, 0.361466586589813, 0.44030594825744607, 0.0599007532000542, 0.4350258708000179, 0.18919676542282102, 0.31232857704162603, 0.39414396882057207, 0.336384207010269, 0.20871552824974102, 0.432452529668808, 0.49451920390129106, 0.28923171758651695, 0.306613743305206, 0.55258983373642], "z": [6.07100009918213, 5.07399988174438, 3.4949998855590803, 5.32399988174438, 7.31599998474121, 7.31400012969971, 5.62900018692017, 5.175000190734861, 4.31500005722046, 4.46000003814697, 5.2350001335144, 4.64400005340576, 5.1810002326965305, 4.02799987792969, 5.837999820709231, 6.86299991607666, 4.69500017166138, 4.77500009536743, 5.82200002670288, 4.49700021743774, 4.28599977493286, 7.212999820709231, 3.5329999923706095, 5.2729997634887695, 5.01100015640259, 6.08400011062622, 3.80800008773804, 5.07399988174438, 6.65199995040894, 4.09600019454956, 5.23699998855591, 5.42999982833862, 5.19500017166138, 5.82299995422363, 7.52199983596802, 4.11999988555908, 6.343999862670901, 7.00600004196167, 5.2930002212524405, 3.65700006484985, 7.537000179290769, 5.97300004959106, 6.993000030517581, 6.08699989318848, 4.80499982833862, 5.61100006103516, 5.92000007629395, 7.50400018692017, 4.70900011062622, 4.138999938964839, 4.2800002098083505, 6.44199991226196, 4.54500007629395, 4.03200006484985, 5.5689997673034695, 3.7660000324249303, 6.40299987792969, 3.50699996948242, 5.25, 6.4520001411438, 4.53499984741211, 7.28399991989136, 6.10500001907349, 5.872000217437741, 4.57399988174438, 7.3769998550415, 5.8189997673034695, 3.9360001087188703, 5.824999809265139, 5.962999820709231, 3.47099995613098, 4.17999982833862, 6.4539999961853, 5.18200016021729, 7.28399991989136, 7.0789999961853, 4.7350001335144, 5.75799989700317, 6.89099979400635, 5.2270002365112305, 6.00799989700317, 4.55299997329712, 7.49399995803833, 5.71500015258789, 4.08099985122681, 6.4539999961853, 6.71400022506714, 5.97100019454956, 4.550000190734861, 4.8289999961853, 6.375, 4.1680002212524405, 5.47200012207031, 6.4239997863769505, 3.79500007629395, 5.955999851226809, 6.9510002136230495, 5.26900005340576, 6.6350002288818395, 5.31099987030029, 4.513999938964839, 5.62099981307983, 5.33599996566772, 5.151000022888179, 6.35699987411499, 4.44000005722046, 5.22499990463257, 3.7939999103546103, 6.60900020599365, 4.29199981689453, 6.42199993133545, 4.961999893188481, 2.90499997138977, 4.29099988937378, 3.64400005340576, 4.46500015258789, 4.95499992370605, 3.875, 5.39499998092651, 6.002999782562259, 6.59899997711182, 4.71400022506714, 4.19000005722046, 5.230000019073491]}, {"marker": {"size": 1}, "mode": "markers", "name": "Prediction Plane", "opacity": 0.8, "surfaceaxis": 2, "type": "scatter3d", "x": [0.0226431842893362, 0.0226431842893362, 0.0226431842893362, 0.0226431842893362, 0.0226431842893362, 0.0226431842893362, 0.0226431842893362, 0.0226431842893362, 0.0226431842893362, 0.0226431842893362, 0.22799012892776105, 0.22799012892776105, 0.22799012892776105, 0.22799012892776105, 0.22799012892776105, 0.22799012892776105, 0.22799012892776105, 0.22799012892776105, 0.22799012892776105, 0.22799012892776105, 0.4333370735661859, 0.4333370735661859, 0.4333370735661859, 0.4333370735661859, 0.4333370735661859, 0.4333370735661859, 0.4333370735661859, 0.4333370735661859, 0.4333370735661859, 0.4333370735661859, 0.6386840182046107, 0.6386840182046107, 0.6386840182046107, 0.6386840182046107, 0.6386840182046107, 0.6386840182046107, 0.6386840182046107, 0.6386840182046107, 0.6386840182046107, 0.6386840182046107, 0.8440309628430356, 0.8440309628430356, 0.8440309628430356, 0.8440309628430356, 0.8440309628430356, 0.8440309628430356, 0.8440309628430356, 0.8440309628430356, 0.8440309628430356, 0.8440309628430356, 1.0493779074814604, 1.0493779074814604, 1.0493779074814604, 1.0493779074814604, 1.0493779074814604, 1.0493779074814604, 1.0493779074814604, 1.0493779074814604, 1.0493779074814604, 1.0493779074814604, 1.2547248521198853, 1.2547248521198853, 1.2547248521198853, 1.2547248521198853, 1.2547248521198853, 1.2547248521198853, 1.2547248521198853, 1.2547248521198853, 1.2547248521198853, 1.2547248521198853, 1.4600717967583101, 1.4600717967583101, 1.4600717967583101, 1.4600717967583101, 1.4600717967583101, 1.4600717967583101, 1.4600717967583101, 1.4600717967583101, 1.4600717967583101, 1.4600717967583101, 1.665418741396735, 1.665418741396735, 1.665418741396735, 1.665418741396735, 1.665418741396735, 1.665418741396735, 1.665418741396735, 1.665418741396735, 1.665418741396735, 1.665418741396735, 1.8707656860351598, 1.8707656860351598, 1.8707656860351598, 1.8707656860351598, 1.8707656860351598, 1.8707656860351598, 1.8707656860351598, 1.8707656860351598, 1.8707656860351598, 1.8707656860351598], "y": [0.0, 0.07313874032762309, 0.14627748065524618, 0.21941622098286928, 0.29255496131049236, 0.36569370163811543, 0.43883244196573856, 0.5119711822933616, 0.5851099226209847, 0.6582486629486078, 0.0, 0.07313874032762309, 0.14627748065524618, 0.21941622098286928, 0.29255496131049236, 0.36569370163811543, 0.43883244196573856, 0.5119711822933616, 0.5851099226209847, 0.6582486629486078, 0.0, 0.07313874032762309, 0.14627748065524618, 0.21941622098286928, 0.29255496131049236, 0.36569370163811543, 0.43883244196573856, 0.5119711822933616, 0.5851099226209847, 0.6582486629486078, 0.0, 0.07313874032762309, 0.14627748065524618, 0.21941622098286928, 0.29255496131049236, 0.36569370163811543, 0.43883244196573856, 0.5119711822933616, 0.5851099226209847, 0.6582486629486078, 0.0, 0.07313874032762309, 0.14627748065524618, 0.21941622098286928, 0.29255496131049236, 0.36569370163811543, 0.43883244196573856, 0.5119711822933616, 0.5851099226209847, 0.6582486629486078, 0.0, 0.07313874032762309, 0.14627748065524618, 0.21941622098286928, 0.29255496131049236, 0.36569370163811543, 0.43883244196573856, 0.5119711822933616, 0.5851099226209847, 0.6582486629486078, 0.0, 0.07313874032762309, 0.14627748065524618, 0.21941622098286928, 0.29255496131049236, 0.36569370163811543, 0.43883244196573856, 0.5119711822933616, 0.5851099226209847, 0.6582486629486078, 0.0, 0.07313874032762309, 0.14627748065524618, 0.21941622098286928, 0.29255496131049236, 0.36569370163811543, 0.43883244196573856, 0.5119711822933616, 0.5851099226209847, 0.6582486629486078, 0.0, 0.07313874032762309, 0.14627748065524618, 0.21941622098286928, 0.29255496131049236, 0.36569370163811543, 0.43883244196573856, 0.5119711822933616, 0.5851099226209847, 0.6582486629486078, 0.0, 0.07313874032762309, 0.14627748065524618, 0.21941622098286928, 0.29255496131049236, 0.36569370163811543, 0.43883244196573856, 0.5119711822933616, 0.5851099226209847, 0.6582486629486078], "z": [2.68201919885404, 2.848092835674982, 3.014166472495924, 3.180240109316866, 3.3463137461378083, 3.5123873829587504, 3.678461019779693, 3.8445346566006346, 4.010608293421577, 4.17668193024252, 3.0575224580595806, 3.2235960948805227, 3.389669731701465, 3.555743368522407, 3.7218170053433495, 3.887890642164291, 4.053964278985234, 4.220037915806175, 4.386111552627118, 4.5521851894480605, 3.4330257172651213, 3.5990993540860634, 3.7651729909070055, 3.9312466277279476, 4.09732026454889, 4.263393901369832, 4.429467538190774, 4.595541175011716, 4.761614811832659, 4.927688448653601, 3.808528976470662, 3.974602613291604, 4.140676250112547, 4.306749886933488, 4.472823523754431, 4.638897160575373, 4.804970797396315, 4.971044434217257, 5.137118071038199, 5.303191707859142, 4.184032235676202, 4.350105872497145, 4.516179509318087, 4.682253146139029, 4.848326782959972, 5.014400419780913, 5.180474056601856, 5.346547693422798, 5.51262133024374, 5.678694967064683, 4.559535494881743, 4.725609131702686, 4.891682768523628, 5.05775640534457, 5.223830042165512, 5.389903678986454, 5.555977315807397, 5.722050952628338, 5.888124589449281, 6.054198226270223, 4.935038754087284, 5.101112390908226, 5.267186027729169, 5.433259664550111, 5.599333301371053, 5.765406938191995, 5.931480575012937, 6.097554211833879, 6.263627848654822, 6.429701485475764, 5.3105420132928245, 5.476615650113767, 5.64268928693471, 5.808762923755651, 5.974836560576594, 6.1409101973975355, 6.306983834218478, 6.47305747103942, 6.639131107860362, 6.805204744681305, 5.686045272498365, 5.852118909319308, 6.01819254614025, 6.184266182961192, 6.350339819782135, 6.516413456603076, 6.682487093424019, 6.8485607302449605, 7.014634367065903, 7.180708003886846, 6.061548531703907, 6.227622168524849, 6.393695805345791, 6.559769442166734, 6.725843078987675, 6.891916715808618, 7.05799035262956, 7.224063989450502, 7.390137626271444, 7.556211263092386]}],                        {"margin": {"b": 0, "l": 0, "r": 0, "t": 0}, "scene": {"xaxis": {"title": {"text": "Economy..GDP.per.Capita."}}, "yaxis": {"title": {"text": "Freedom"}}, "zaxis": {"title": {"text": "Happiness.Score"}}}, "template": {"data": {"bar": [{"error_x": {"color": "#2a3f5f"}, "error_y": {"color": "#2a3f5f"}, "marker": {"line": {"color": "#E5ECF6", "width": 0.5}}, "type": "bar"}], "barpolar": [{"marker": {"line": {"color": "#E5ECF6", "width": 0.5}}, "type": "barpolar"}], "carpet": [{"aaxis": {"endlinecolor": "#2a3f5f", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "#2a3f5f"}, "baxis": {"endlinecolor": "#2a3f5f", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "#2a3f5f"}, "type": "carpet"}], "choropleth": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "choropleth"}], "contour": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "contour"}], "contourcarpet": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "contourcarpet"}], "heatmap": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "heatmap"}], "heatmapgl": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "heatmapgl"}], "histogram": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "histogram"}], "histogram2d": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "histogram2d"}], "histogram2dcontour": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "histogram2dcontour"}], "mesh3d": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "mesh3d"}], "parcoords": [{"line": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "parcoords"}], "pie": [{"automargin": true, "type": "pie"}], "scatter": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatter"}], "scatter3d": [{"line": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatter3d"}], "scattercarpet": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattercarpet"}], "scattergeo": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattergeo"}], "scattergl": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattergl"}], "scattermapbox": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattermapbox"}], "scatterpolar": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterpolar"}], "scatterpolargl": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterpolargl"}], "scatterternary": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterternary"}], "surface": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "surface"}], "table": [{"cells": {"fill": {"color": "#EBF0F8"}, "line": {"color": "white"}}, "header": {"fill": {"color": "#C8D4E3"}, "line": {"color": "white"}}, "type": "table"}]}, "layout": {"annotationdefaults": {"arrowcolor": "#2a3f5f", "arrowhead": 0, "arrowwidth": 1}, "coloraxis": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "colorscale": {"diverging": [[0, "#8e0152"], [0.1, "#c51b7d"], [0.2, "#de77ae"], [0.3, "#f1b6da"], [0.4, "#fde0ef"], [0.5, "#f7f7f7"], [0.6, "#e6f5d0"], [0.7, "#b8e186"], [0.8, "#7fbc41"], [0.9, "#4d9221"], [1, "#276419"]], "sequential": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "sequentialminus": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]]}, "colorway": ["#636efa", "#EF553B", "#00cc96", "#ab63fa", "#FFA15A", "#19d3f3", "#FF6692", "#B6E880", "#FF97FF", "#FECB52"], "font": {"color": "#2a3f5f"}, "geo": {"bgcolor": "white", "lakecolor": "white", "landcolor": "#E5ECF6", "showlakes": true, "showland": true, "subunitcolor": "white"}, "hoverlabel": {"align": "left"}, "hovermode": "closest", "mapbox": {"style": "light"}, "paper_bgcolor": "white", "plot_bgcolor": "#E5ECF6", "polar": {"angularaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "bgcolor": "#E5ECF6", "radialaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}}, "scene": {"xaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}, "yaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}, "zaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}}, "shapedefaults": {"line": {"color": "#2a3f5f"}}, "ternary": {"aaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "baxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "bgcolor": "#E5ECF6", "caxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}}, "title": {"x": 0.05}, "xaxis": {"automargin": true, "gridcolor": "white", "linecolor": "white", "ticks": "", "title": {"standoff": 15}, "zerolinecolor": "white", "zerolinewidth": 2}, "yaxis": {"automargin": true, "gridcolor": "white", "linecolor": "white", "ticks": "", "title": {"standoff": 15}, "zerolinecolor": "white", "zerolinewidth": 2}}}, "title": {"text": "Date Sets"}},                        {"responsive": true}                    ).then(function(){
+<div class="output text_html"><div>                            <div id="3f6c19ef-5c1b-4fda-8e10-08ad5a0d1ba9" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("3f6c19ef-5c1b-4fda-8e10-08ad5a0d1ba9")) {                    Plotly.newPlot(                        "3f6c19ef-5c1b-4fda-8e10-08ad5a0d1ba9",                        [{"marker": {"line": {"color": "rgb(255, 255, 255)", "width": 1}, "opacity": 1, "size": 10}, "mode": "markers", "name": "Actual", "type": "scatter3d", "x": [0.305808693170547, 1.15655755996704, 1.0272358655929599, 0.7288706302642819, 1.12843120098114, 1.00726580619812, 1.2175596952438401, 1.69227766990662, 0.932537317276001, 1.08116579055786, 0.30544471740722695, 1.1982102394104, 1.29121541976929, 0.16192533075809498, 1.06931757926941, 0.11904179304838199, 0.7922212481498722, 1.00082039833069, 1.5649795532226598, 1.09186446666718, 1.6263433694839498, 1.1614590883255, 1.40570604801178, 0.5962200760841371, 1.40167844295502, 1.25278460979462, 0.36711055040359497, 1.34327983856201, 0.8781145811080929, 0.401477217674255, 1.07498753070831, 1.50394463539124, 1.1531838178634601, 0.23430564999580397, 1.2845562696456898, 0.521021246910095, 0.0226431842893362, 1.8707656860351598, 0.233442038297653, 0.737299203872681, 1.12209415435791, 1.3559380769729599, 1.6164631843566901, 1.4336265325546298, 1.26074862480164, 0.900596737861633, 1.10970628261566, 1.06457793712616, 0.6364067792892459, 0.6017650961875921, 0.511135876178741, 1.74194359779358, 0.716249227523804, 0.907975316047668, 0.09162256866693501, 1.07937383651733, 1.1982743740081798, 1.12786877155304, 0.368745893239975, 1.1018030643463101, 0.951484382152557, 1.55167484283447, 0.37584653496742204, 1.44163393974304, 0.35022771358490007, 0.8089642524719242, 1.05469870567322, 1.3469113111496, 1.4637807607650801, 1.63295245170593, 0.964434325695038, 1.38439786434174, 1.4884122610092199, 0.85769921541214, 0.381430715322495, 1.12112903594971, 1.18529546260834, 1.07062232494354, 0.9097844958305359, 0.43108540773391707, 0.833756566047668, 0.982409417629242, 0.6595166921615601, 0.9910123944282528, 1.54625928401947, 1.1073532104492199, 0.586682975292206, 0.0, 1.28948748111725, 1.21768391132355, 0.479309022426605, 1.22255623340607, 1.48792338371277, 0.872001945972443, 1.48238301277161, 0.783756256103516, 1.1027104854583702, 0.479820191860199, 0.5916834473609921, 0.0921023488044739, 1.4870972633361799, 0.6484572887420649, 1.23374843597412, 1.53062355518341, 1.3412059545516999, 0.885416388511658, 1.1307767629623402, 1.47920441627502, 0.925579309463501, 1.3145823478698702, 0.730573117733002, 1.32539355754852, 0.995538592338562, 1.43092346191406, 1.3950666189193701, 1.480633020401, 0.6030489206314089, 1.3753824234008798, 0.564305365085602, 1.2860119342803997, 0.7268835306167599, 0.560479462146759, 1.1536017656326298, 0.950612664222717], "y": [0.18919676542282102, 0.295400261878967, 0.39414396882057207, 0.24072904884815197, 0.15399712324142498, 0.289680689573288, 0.5793922543525699, 0.549840569496155, 0.473507791757584, 0.47278770804405196, 0.38042613863945, 0.31232857704162603, 0.40226498246192893, 0.36365869641304, 0.20871552824974102, 0.33288118243217496, 0.469987004995346, 0.4551981985569, 0.620070576667786, 0.233335807919502, 0.60834527015686, 0.28923171758651695, 0.6140621304512021, 0.454943388700485, 0.257921665906906, 0.376895278692245, 0.514492034912109, 0.588767051696777, 0.408158332109451, 0.106179520487785, 0.28851598501205394, 0.5853844881057739, 0.412730008363724, 0.48079109191894503, 0.43745428323745705, 0.390661299228668, 0.602126955986023, 0.604130983352661, 0.466914653778076, 0.447551846504211, 0.505196332931519, 0.35511153936386103, 0.635422587394714, 0.361466586589813, 0.32570791244506797, 0.198303267359734, 0.580131649971008, 0.325905978679657, 0.461603492498398, 0.633375823497772, 0.390017777681351, 0.59662789106369, 0.25471106171608, 0.5475093722343439, 0.0599007532000542, 0.55258983373642, 0.300740599632263, 0.580200731754303, 0.5818438529968261, 0.465733230113983, 0.260287940502167, 0.490968644618988, 0.336384207010269, 0.508190035820007, 0.32436785101890603, 0.4350258708000179, 0.479246735572815, 0.47120362520217896, 0.5397707223892211, 0.49633759260177596, 0.520303547382355, 0.408781230449677, 0.536746919155121, 0.585214674472809, 0.443185955286026, 0.194989055395126, 0.49451920390129106, 0.47748741507530196, 0.432452529668808, 0.42596277594566295, 0.5587329268455511, 0.204403176903725, 0.0149958552792668, 0.418421149253845, 0.505740523338318, 0.437453746795654, 0.478356659412384, 0.270842045545578, 0.0957312509417534, 0.457003742456436, 0.37792226672172496, 0.255772292613983, 0.562511384487152, 0.5313106179237371, 0.626006722450256, 0.394952565431595, 0.288555532693863, 0.44030594825744607, 0.24946372210979503, 0.235961347818375, 0.567766189575195, 0.0960980430245399, 0.550026834011078, 0.449750572443008, 0.572575807571411, 0.5015376806259161, 0.41827192902565, 0.611100912094116, 0.474307239055634, 0.234231784939766, 0.348079860210419, 0.295817464590073, 0.443323463201523, 0.470222115516663, 0.256450712680817, 0.6271626353263849, 0.4477061927318571, 0.40598860383033797, 0.430388748645782, 0.17586351931095098, 0.23521526157856, 0.45276376605033897, 0.39815583825111406, 0.309410035610199], "z": [3.64400005340576, 5.5689997673034695, 4.95499992370605, 5.837999820709231, 5.25, 4.80499982833862, 6.4539999961853, 6.57200002670288, 5.493000030517581, 5.2729997634887695, 3.4949998855590803, 4.46500015258789, 6.08400011062622, 4.02799987792969, 5.39499998092651, 3.5329999923706095, 4.31500005722046, 6.00799989700317, 7.49399995803833, 5.872000217437741, 6.6479997634887695, 4.71400022506714, 7.31400012969971, 5.0040001869201705, 5.837999820709231, 6.65199995040894, 4.54500007629395, 6.52699995040894, 5.2350001335144, 3.7939999103546103, 5.22499990463257, 7.3769998550415, 6.57800006866455, 4.550000190734861, 5.8189997673034695, 3.80800008773804, 5.151000022888179, 6.375, 3.97000002861023, 6.07100009918213, 3.7660000324249303, 5.62099981307983, 7.537000179290769, 6.42199993133545, 5.849999904632571, 4.37599992752075, 7.0789999961853, 5.175000190734861, 4.513999938964839, 4.1680002212524405, 3.34899997711182, 6.86299991607666, 4.77500009536743, 5.955999851226809, 2.90499997138977, 5.230000019073491, 5.5, 6.4239997863769505, 3.47099995613098, 5.525000095367429, 5.27899980545044, 5.47200012207031, 3.875, 6.71400022506714, 4.03200006484985, 4.29099988937378, 4.8289999961853, 5.80999994277954, 6.89099979400635, 6.10500001907349, 4.57399988174438, 6.40299987792969, 6.08699989318848, 5.42999982833862, 4.08099985122681, 5.23699998855591, 6.59899997711182, 6.35699987411499, 6.002999782562259, 3.65700006484985, 5.82299995422363, 5.18200016021729, 4.138999938964839, 5.33599996566772, 6.993000030517581, 6.6350002288818395, 4.60799980163574, 2.69300007820129, 5.2270002365112305, 5.824999809265139, 4.53499984741211, 5.2930002212524405, 6.9510002136230495, 6.4539999961853, 7.52199983596802, 5.07399988174438, 4.49700021743774, 4.961999893188481, 3.59299993515015, 4.2800002098083505, 7.00600004196167, 4.29199981689453, 6.4520001411438, 6.343999862670901, 5.75799989700317, 5.01100015640259, 5.82200002670288, 7.31599998474121, 5.31099987030029, 5.90199995040894, 5.1810002326965305, 6.09800004959106, 5.26200008392334, 6.44199991226196, 5.96400022506714, 7.50400018692017, 4.17999982833862, 7.212999820709231, 4.69500017166138, 5.32399988174438, 5.26900005340576, 4.55299997329712, 5.234000205993651, 4.28599977493286]}, {"marker": {"size": 1}, "mode": "markers", "name": "Prediction Plane", "opacity": 0.8, "surfaceaxis": 2, "type": "scatter3d", "x": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.20786285400390664, 0.20786285400390664, 0.20786285400390664, 0.20786285400390664, 0.20786285400390664, 0.20786285400390664, 0.20786285400390664, 0.20786285400390664, 0.20786285400390664, 0.20786285400390664, 0.4157257080078133, 0.4157257080078133, 0.4157257080078133, 0.4157257080078133, 0.4157257080078133, 0.4157257080078133, 0.4157257080078133, 0.4157257080078133, 0.4157257080078133, 0.4157257080078133, 0.6235885620117199, 0.6235885620117199, 0.6235885620117199, 0.6235885620117199, 0.6235885620117199, 0.6235885620117199, 0.6235885620117199, 0.6235885620117199, 0.6235885620117199, 0.6235885620117199, 0.8314514160156266, 0.8314514160156266, 0.8314514160156266, 0.8314514160156266, 0.8314514160156266, 0.8314514160156266, 0.8314514160156266, 0.8314514160156266, 0.8314514160156266, 0.8314514160156266, 1.0393142700195332, 1.0393142700195332, 1.0393142700195332, 1.0393142700195332, 1.0393142700195332, 1.0393142700195332, 1.0393142700195332, 1.0393142700195332, 1.0393142700195332, 1.0393142700195332, 1.2471771240234397, 1.2471771240234397, 1.2471771240234397, 1.2471771240234397, 1.2471771240234397, 1.2471771240234397, 1.2471771240234397, 1.2471771240234397, 1.2471771240234397, 1.2471771240234397, 1.4550399780273464, 1.4550399780273464, 1.4550399780273464, 1.4550399780273464, 1.4550399780273464, 1.4550399780273464, 1.4550399780273464, 1.4550399780273464, 1.4550399780273464, 1.4550399780273464, 1.662902832031253, 1.662902832031253, 1.662902832031253, 1.662902832031253, 1.662902832031253, 1.662902832031253, 1.662902832031253, 1.662902832031253, 1.662902832031253, 1.662902832031253, 1.8707656860351598, 1.8707656860351598, 1.8707656860351598, 1.8707656860351598, 1.8707656860351598, 1.8707656860351598, 1.8707656860351598, 1.8707656860351598, 1.8707656860351598, 1.8707656860351598], "y": [0.0149958552792668, 0.08393215884764982, 0.15286846241603286, 0.22180476598441587, 0.2907410695527989, 0.3596773731211819, 0.4286136766895649, 0.49754998025794794, 0.566486283826331, 0.635422587394714, 0.0149958552792668, 0.08393215884764982, 0.15286846241603286, 0.22180476598441587, 0.2907410695527989, 0.3596773731211819, 0.4286136766895649, 0.49754998025794794, 0.566486283826331, 0.635422587394714, 0.0149958552792668, 0.08393215884764982, 0.15286846241603286, 0.22180476598441587, 0.2907410695527989, 0.3596773731211819, 0.4286136766895649, 0.49754998025794794, 0.566486283826331, 0.635422587394714, 0.0149958552792668, 0.08393215884764982, 0.15286846241603286, 0.22180476598441587, 0.2907410695527989, 0.3596773731211819, 0.4286136766895649, 0.49754998025794794, 0.566486283826331, 0.635422587394714, 0.0149958552792668, 0.08393215884764982, 0.15286846241603286, 0.22180476598441587, 0.2907410695527989, 0.3596773731211819, 0.4286136766895649, 0.49754998025794794, 0.566486283826331, 0.635422587394714, 0.0149958552792668, 0.08393215884764982, 0.15286846241603286, 0.22180476598441587, 0.2907410695527989, 0.3596773731211819, 0.4286136766895649, 0.49754998025794794, 0.566486283826331, 0.635422587394714, 0.0149958552792668, 0.08393215884764982, 0.15286846241603286, 0.22180476598441587, 0.2907410695527989, 0.3596773731211819, 0.4286136766895649, 0.49754998025794794, 0.566486283826331, 0.635422587394714, 0.0149958552792668, 0.08393215884764982, 0.15286846241603286, 0.22180476598441587, 0.2907410695527989, 0.3596773731211819, 0.4286136766895649, 0.49754998025794794, 0.566486283826331, 0.635422587394714, 0.0149958552792668, 0.08393215884764982, 0.15286846241603286, 0.22180476598441587, 0.2907410695527989, 0.3596773731211819, 0.4286136766895649, 0.49754998025794794, 0.566486283826331, 0.635422587394714, 0.0149958552792668, 0.08393215884764982, 0.15286846241603286, 0.22180476598441587, 0.2907410695527989, 0.3596773731211819, 0.4286136766895649, 0.49754998025794794, 0.566486283826331, 0.635422587394714], "z": [2.6717653371997163, 2.816334072260394, 2.9609028073210713, 3.105471542381749, 3.2500402774424266, 3.394609012503104, 3.5391777475637816, 3.683746482624459, 3.8283152176851365, 3.972883952745814, 3.069562538661675, 3.2141312737223524, 3.35870000878303, 3.503268743843708, 3.647837478904385, 3.7924062139650627, 3.93697494902574, 4.081543684086418, 4.226112419147095, 4.370681154207773, 3.4673597401236336, 3.6119284751843113, 3.756497210244989, 3.901065945305666, 4.045634680366344, 4.190203415427021, 4.334772150487699, 4.4793408855483765, 4.623909620609054, 4.768478355669732, 3.8651569415855924, 4.009725676646269, 4.154294411706948, 4.298863146767625, 4.443431881828302, 4.58800061688898, 4.732569351949657, 4.877138087010335, 5.021706822071012, 5.16627555713169, 4.262954143047551, 4.407522878108228, 4.552091613168907, 4.6966603482295834, 4.841229083290261, 4.985797818350939, 5.130366553411616, 5.274935288472294, 5.419504023532971, 5.564072758593649, 4.66075134450951, 4.805320079570187, 4.9498888146308655, 5.094457549691542, 5.23902628475222, 5.383595019812898, 5.5281637548735745, 5.672732489934253, 5.81730122499493, 5.9618699600556075, 5.058548545971468, 5.203117281032146, 5.3476860160928235, 5.492254751153501, 5.636823486214178, 5.781392221274856, 5.925960956335533, 6.070529691396211, 6.215098426456889, 6.3596671615175655, 5.456345747433427, 5.600914482494105, 5.745483217554782, 5.89005195261546, 6.034620687676137, 6.1791894227368145, 6.323758157797492, 6.46832689285817, 6.6128956279188476, 6.757464362979524, 5.854142948895386, 5.9987116839560635, 6.143280419016741, 6.287849154077419, 6.432417889138096, 6.576986624198773, 6.721555359259451, 6.866124094320129, 7.010692829380806, 7.155261564441483, 6.251940150357345, 6.396508885418022, 6.5410776204787, 6.685646355539378, 6.8302150906000545, 6.974783825660732, 7.11935256072141, 7.263921295782088, 7.408490030842765, 7.553058765903442]}],                        {"margin": {"b": 0, "l": 0, "r": 0, "t": 0}, "scene": {"xaxis": {"title": {"text": "Economy..GDP.per.Capita."}}, "yaxis": {"title": {"text": "Freedom"}}, "zaxis": {"title": {"text": "Happiness.Score"}}}, "template": {"data": {"bar": [{"error_x": {"color": "#2a3f5f"}, "error_y": {"color": "#2a3f5f"}, "marker": {"line": {"color": "#E5ECF6", "width": 0.5}}, "type": "bar"}], "barpolar": [{"marker": {"line": {"color": "#E5ECF6", "width": 0.5}}, "type": "barpolar"}], "carpet": [{"aaxis": {"endlinecolor": "#2a3f5f", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "#2a3f5f"}, "baxis": {"endlinecolor": "#2a3f5f", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "#2a3f5f"}, "type": "carpet"}], "choropleth": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "choropleth"}], "contour": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "contour"}], "contourcarpet": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "contourcarpet"}], "heatmap": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "heatmap"}], "heatmapgl": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "heatmapgl"}], "histogram": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "histogram"}], "histogram2d": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "histogram2d"}], "histogram2dcontour": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "histogram2dcontour"}], "mesh3d": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "mesh3d"}], "parcoords": [{"line": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "parcoords"}], "pie": [{"automargin": true, "type": "pie"}], "scatter": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatter"}], "scatter3d": [{"line": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatter3d"}], "scattercarpet": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattercarpet"}], "scattergeo": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattergeo"}], "scattergl": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattergl"}], "scattermapbox": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattermapbox"}], "scatterpolar": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterpolar"}], "scatterpolargl": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterpolargl"}], "scatterternary": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterternary"}], "surface": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "surface"}], "table": [{"cells": {"fill": {"color": "#EBF0F8"}, "line": {"color": "white"}}, "header": {"fill": {"color": "#C8D4E3"}, "line": {"color": "white"}}, "type": "table"}]}, "layout": {"annotationdefaults": {"arrowcolor": "#2a3f5f", "arrowhead": 0, "arrowwidth": 1}, "coloraxis": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "colorscale": {"diverging": [[0, "#8e0152"], [0.1, "#c51b7d"], [0.2, "#de77ae"], [0.3, "#f1b6da"], [0.4, "#fde0ef"], [0.5, "#f7f7f7"], [0.6, "#e6f5d0"], [0.7, "#b8e186"], [0.8, "#7fbc41"], [0.9, "#4d9221"], [1, "#276419"]], "sequential": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "sequentialminus": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]]}, "colorway": ["#636efa", "#EF553B", "#00cc96", "#ab63fa", "#FFA15A", "#19d3f3", "#FF6692", "#B6E880", "#FF97FF", "#FECB52"], "font": {"color": "#2a3f5f"}, "geo": {"bgcolor": "white", "lakecolor": "white", "landcolor": "#E5ECF6", "showlakes": true, "showland": true, "subunitcolor": "white"}, "hoverlabel": {"align": "left"}, "hovermode": "closest", "mapbox": {"style": "light"}, "paper_bgcolor": "white", "plot_bgcolor": "#E5ECF6", "polar": {"angularaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "bgcolor": "#E5ECF6", "radialaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}}, "scene": {"xaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}, "yaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}, "zaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}}, "shapedefaults": {"line": {"color": "#2a3f5f"}}, "ternary": {"aaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "baxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "bgcolor": "#E5ECF6", "caxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}}, "title": {"x": 0.05}, "xaxis": {"automargin": true, "gridcolor": "white", "linecolor": "white", "ticks": "", "title": {"standoff": 15}, "zerolinecolor": "white", "zerolinewidth": 2}, "yaxis": {"automargin": true, "gridcolor": "white", "linecolor": "white", "ticks": "", "title": {"standoff": 15}, "zerolinecolor": "white", "zerolinewidth": 2}}}, "title": {"text": "Date Sets"}},                        {"responsive": true}                    ).then(function(){
 
-var gd = document.getElementById('629a085c-9d18-4d10-bd62-16e7aef763fc');
+var gd = document.getElementById('3f6c19ef-5c1b-4fda-8e10-08ad5a0d1ba9');
 var x = new MutationObserver(function (mutations, observer) {{
         var display = window.getComputedStyle(gd).display;
         if (!display || display === 'none') {{
@@ -1605,84 +1651,44 @@ if (outputEl) {{
 </div>
 <div class="section" id="iterative-approach-gradient-descent">
 <h2>Iterative approach: gradient descent<a class="headerlink" href="#iterative-approach-gradient-descent" title="Permalink to this headline">¶</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sgd_model_uni</span> <span class="o">=</span> <span class="n">SGDRegressor</span><span class="p">()</span>
-
-<span class="n">train_model</span><span class="p">(</span><span class="n">sgd_model_uni</span><span class="p">,</span> <span class="n">x_train_uni</span><span class="p">,</span> <span class="n">y_train_uni</span><span class="p">)</span>
-<span class="n">test_model</span><span class="p">(</span><span class="n">sgd_model_uni</span><span class="p">,</span> <span class="n">x_test_uni</span><span class="p">,</span> <span class="n">y_test_uni</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model weights: [2.60651152], bias: [2.74329168]
-Training error: 0.47865
-Test error: 0.41276
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_univariate</span><span class="p">(</span><span class="n">x_train_uni</span><span class="p">,</span> <span class="n">y_train_uni</span><span class="p">,</span> <span class="n">input_features_uni</span><span class="p">,</span> <span class="n">target_feature</span><span class="p">,</span> <span class="n">sgd_model_uni</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/linear_regression_55_0.png" src="../_images/linear_regression_55_0.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sgd_model_multi</span> <span class="o">=</span> <span class="n">SGDRegressor</span><span class="p">()</span>
-
-<span class="n">train_model</span><span class="p">(</span><span class="n">sgd_model_multi</span><span class="p">,</span> <span class="n">x_train_multi</span><span class="p">,</span> <span class="n">y_train_multi</span><span class="p">)</span>
-<span class="n">test_model</span><span class="p">(</span><span class="n">sgd_model_multi</span><span class="p">,</span> <span class="n">x_test_multi</span><span class="p">,</span> <span class="n">y_test_multi</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model weights: [2.35867558 1.15410997], bias: [2.56299242]
-Training error: 0.40823
-Test error: 0.22566
-</pre></div>
-</div>
-</div>
-</div>
+<div class="section" id="method-description">
+<h3>Method description<a class="headerlink" href="#method-description" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p>Same objective: find <span class="math notranslate nohighlight">\(\hat{\theta}\)</span> that minimizes loss.</p></li>
+<li><p>Same objective: find the <span class="math notranslate nohighlight">\(\pmb{\theta}^{*}\)</span> vector that minimizes the loss.</p></li>
 <li><p>General idea:</p>
 <ul>
-<li><p>Start with random values for the <span class="math notranslate nohighlight">\(\theta\)</span> vector.</p></li>
-<li><p>Update <span class="math notranslate nohighlight">\(\theta\)</span> in small steps towards the loss minimum.</p></li>
+<li><p>Start with random values for <span class="math notranslate nohighlight">\(\pmb{\theta}\)</span>.</p></li>
+<li><p>Update <span class="math notranslate nohighlight">\(\pmb{\theta}\)</span> in small steps towards loss minimization.</p></li>
 </ul>
 </li>
-<li><p>To know in which direction update <span class="math notranslate nohighlight">\(\theta\)</span>, we compute the <strong>gradient</strong> of the loss function w.r.t. <span class="math notranslate nohighlight">\(\theta\)</span> and go into the opposite direction.</p></li>
+<li><p>To know in which direction update <span class="math notranslate nohighlight">\(\pmb{\theta}\)</span>, we compute the <strong>gradient</strong> of the loss function w.r.t. <span class="math notranslate nohighlight">\(\pmb{\theta}\)</span> and go into the opposite direction.</p></li>
 </ul>
-<p><a class="reference external" href="https://alykhantejani.github.io/a-brief-introduction-to-gradient-descent/"><img alt="Gradient descent line graph" src="algorithms/images/gradient_descent_line_graph.gif" /></a></p>
 </div>
 <div class="section" id="computation-of-gradients">
-<h2>Computation of gradients<a class="headerlink" href="#computation-of-gradients" title="Permalink to this headline">¶</a></h2>
-<p><span class="math notranslate nohighlight">\(\mathcal{L}(\theta) = \frac{1}{m}\sum_{i=1}^m (\theta^T\cdot x^{(i)} - y^{(i)})^2\)</span></p>
-<p><span class="math notranslate nohighlight">\(\frac{\partial}{\partial \theta_j} \mathcal{L}(\theta) = \frac{2}{m}\sum_{i=1}^m (\theta^T\cdot x^{(i)} - y^{(i)})x^{(i)}_j\)</span></p>
+<h3>Computation of gradients<a class="headerlink" href="#computation-of-gradients" title="Permalink to this headline">¶</a></h3>
 <div class="math notranslate nohighlight">
-\[\begin{split}\nabla_{\theta}\mathcal{L}(\theta) = \begin{pmatrix}
+\[\begin{split}\nabla_{\theta}\mathcal{L}(\pmb{\theta}) = \begin{pmatrix}
+       \ \frac{\partial}{\partial \theta_0} \mathcal{L}(\theta) \\
        \ \frac{\partial}{\partial \theta_1} \mathcal{L}(\theta) \\
-       \ \frac{\partial}{\partial \theta_2} \mathcal{L}(\theta) \\
        \ \vdots \\
        \ \frac{\partial}{\partial \theta_n} \mathcal{L}(\theta)
      \end{pmatrix} =
-\frac{2}{m}X^T\cdot (X\cdot \theta - y)\end{split}\]</div>
+\frac{2}{m}\pmb{X}^T\left(\pmb{X}\pmb{\theta} - \pmb{y}\right)\end{split}\]</div>
+<p>(See math proof above)</p>
 </div>
 <div class="section" id="parameters-update">
-<h2>Parameters update<a class="headerlink" href="#parameters-update" title="Permalink to this headline">¶</a></h2>
+<h3>Parameters update<a class="headerlink" href="#parameters-update" title="Permalink to this headline">¶</a></h3>
 <p>The <strong><em>learning rate</em></strong> <span class="math notranslate nohighlight">\(\eta\)</span> governs the amplitude of updates.</p>
 <div class="math notranslate nohighlight">
-\[\theta_{next} = \theta - \eta\nabla_{\theta}\mathcal{L}(\theta)\]</div>
-<p><a class="reference external" href="https://www.jeremyjordan.me/nn-learning-rate/"><img alt="Importance of learning rate" src="algorithms/images/learning_rate.png" /></a></p>
+\[\pmb{\theta}_{next} = \pmb{\theta} - \eta\nabla_{\theta}\mathcal{L}(\pmb{\theta})\]</div>
+<p><a class="reference external" href="https://www.jeremyjordan.me/nn-learning-rate/"><img alt="Importance of learning rate" src="../_images/learning_rate.png" /></a></p>
 </div>
-<div class="section" id="types-of-gradient-descent">
-<h2>Types of gradient descent<a class="headerlink" href="#types-of-gradient-descent" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="interactive-example">
+<h3>Interactive example<a class="headerlink" href="#interactive-example" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://alykhantejani.github.io/a-brief-introduction-to-gradient-descent/"><img alt="Gradient descent line graph" src="../_images/gradient_descent_line_graph.gif" /></a></p>
+</div>
+<div class="section" id="gradient-descent-types">
+<h3>Gradient descent types<a class="headerlink" href="#gradient-descent-types" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p><em>Batch</em>: use the whole dataset to compute gradients.</p>
 <ul>
@@ -1701,12 +1707,51 @@ Test error: 0.22566
 </li>
 </ul>
 </div>
+<div class="section" id="example-applying-stochastic-gradient-descent-to-predict-country-happiness">
+<h3>Example: applying stochastic gradient descent to predict country happiness<a class="headerlink" href="#example-applying-stochastic-gradient-descent-to-predict-country-happiness" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a Linear Regression model (based on Stochastic Gradient Descent)</span>
+<span class="n">sgd_model_uni</span> <span class="o">=</span> <span class="n">SGDRegressor</span><span class="p">()</span>
+
+<span class="c1"># Train and test the model on univariate data</span>
+<span class="n">train_model</span><span class="p">(</span><span class="n">sgd_model_uni</span><span class="p">,</span> <span class="n">x_train_uni</span><span class="p">,</span> <span class="n">y_train_uni</span><span class="p">)</span>
+<span class="n">test_model</span><span class="p">(</span><span class="n">sgd_model_uni</span><span class="p">,</span> <span class="n">x_test_uni</span><span class="p">,</span> <span class="n">y_test_uni</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model weights: [2.64314295], bias: [2.78847564]
+Training error: 0.43841
+Test error: 0.59931
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot data and models predictions</span>
+<span class="n">plot_univariate</span><span class="p">(</span>
+    <span class="n">x_train_uni</span><span class="p">,</span>
+    <span class="n">y_train_uni</span><span class="p">,</span>
+    <span class="n">input_features_uni</span><span class="p">,</span>
+    <span class="n">target_feature</span><span class="p">,</span>
+    <span class="n">model_list</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;LR&quot;</span><span class="p">:</span> <span class="n">lr_model</span><span class="p">,</span> <span class="s2">&quot;SGD&quot;</span><span class="p">:</span> <span class="n">sgd_model_uni</span><span class="p">},</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/linear_regression_61_0.png" src="../_images/linear_regression_61_0.png" />
+</div>
+</div>
+</div>
 <div class="section" id="pros-cons-of-iterative-approach">
-<h2>Pros/cons of iterative approach<a class="headerlink" href="#pros-cons-of-iterative-approach" title="Permalink to this headline">¶</a></h2>
+<h3>Pros/cons of iterative approach<a class="headerlink" href="#pros-cons-of-iterative-approach" title="Permalink to this headline">¶</a></h3>
 <p>Pros:</p>
 <ul class="simple">
 <li><p>Works well with a large number of features.</p></li>
-<li><p>MSE loss convex =&gt; guarantee of a global minimum.</p></li>
+<li><p>MSE loss function convex =&gt; guarantee of a global minimum.</p></li>
 </ul>
 <p>Cons:</p>
 <ul class="simple">
@@ -1714,29 +1759,165 @@ Test error: 0.22566
 <li><p>Dependant on feature scaling.</p></li>
 </ul>
 </div>
+</div>
 <div class="section" id="polynomial-regression">
 <h2>Polynomial Regression<a class="headerlink" href="#polynomial-regression" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="general-idea">
+<h3>General idea<a class="headerlink" href="#general-idea" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>How can a linear model fit non-linear data?</p></li>
 <li><p>Solution: add powers of each feature as new features.</p></li>
 <li><p>The hypothesis function is still linear.</p></li>
+<li><p>High-degree polynomial regression can be subject to severe overfitting.</p></li>
 </ul>
-<p><a class="reference external" href="https://github.com/ageron/handson-ml2"><img alt="Polynomial degree examples" src="algorithms/images/polynomial_regression.png" /></a></p>
+</div>
+<div class="section" id="example-fitting-a-quadratic-curve-with-polynomial-regression">
+<h3>Example: fitting a quadratic curve with polynomial regression<a class="headerlink" href="#example-fitting-a-quadratic-curve-with-polynomial-regression" title="Permalink to this headline">¶</a></h3>
+<p>(Heavily inspired by Chapter 4 of <a class="reference external" href="https://github.com/ageron/handson-ml2">Hands-On Machine Learning</a> by Aurélien Géron)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate quadratic data with noise</span>
+<span class="c1"># (ripped from https://github.com/ageron/handson-ml2)</span>
+<span class="n">m</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">x_quad</span> <span class="o">=</span> <span class="mi">6</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="mi">3</span>
+<span class="c1"># y = 0,5x2 + x + 2 + noise</span>
+<span class="n">y_quad</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">x_quad</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x_quad</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Initial features for first sample: </span><span class="si">{</span><span class="n">x_quad</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Add polynomial features to the dataset</span>
+<span class="n">poly_degree</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">poly_features</span> <span class="o">=</span> <span class="n">PolynomialFeatures</span><span class="p">(</span><span class="n">degree</span><span class="o">=</span><span class="n">poly_degree</span><span class="p">,</span> <span class="n">include_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">x_quad_poly</span> <span class="o">=</span> <span class="n">poly_features</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">x_quad</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;New features for first sample: </span><span class="si">{</span><span class="n">x_quad_poly</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Initial features for first sample: [-2.06658959]
+New features for first sample: [-2.06658959  4.27079255]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fit a linear regression model to the extended data</span>
+<span class="n">lr_model_poly</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+<span class="n">lr_model_poly</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_quad_poly</span><span class="p">,</span> <span class="n">y_quad</span><span class="p">)</span>
+
+<span class="c1"># Should be close to [1, 0,5] and 2</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Model weights: </span><span class="si">{</span><span class="n">lr_model_poly</span><span class="o">.</span><span class="n">coef_</span><span class="si">}</span><span class="s2">, bias: </span><span class="si">{</span><span class="n">lr_model_poly</span><span class="o">.</span><span class="n">intercept_</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model weights: [[1.02239828 0.48923265]], bias: [2.06149788]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot data and model prediction</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_quad</span><span class="p">,</span> <span class="n">y_quad</span><span class="p">,</span> <span class="s2">&quot;b.&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Data&quot;</span><span class="p">)</span>
+<span class="n">x_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">x_pred_poly</span> <span class="o">=</span> <span class="n">poly_features</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">x_pred</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">lr_model_poly</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_pred_poly</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_pred</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="s2">&quot;r-&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Prediction&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/linear_regression_69_0.png" src="../_images/linear_regression_69_0.png" />
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="regularization">
 <h2>Regularization<a class="headerlink" href="#regularization" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id2">
+<h3>General idea<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>Solution against overfitting: constraining model parameters.</p></li>
-<li><p>Ridge regression (using L2 norm): <span class="math notranslate nohighlight">\(\mathcal{L}(\theta) = MSE(\theta) + \frac{\lambda}{2}\sum_{i=1}^n \theta_i^2\)</span></p></li>
-<li><p>Lasso regression (using L1 norm): <span class="math notranslate nohighlight">\(\mathcal{L}(\theta) = MSE(\theta) + \lambda\sum_{i=1}^n |\theta_i|\)</span></p></li>
+<li><p><em>Ridge regression</em> (using l2 norm):</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\mathcal{L}(\pmb{\theta}) = \mathrm{MSE}(\pmb{\theta}) + \frac{\lambda}{2}\sum_{i=1}^n \theta_i^2\]</div>
+<ul class="simple">
+<li><p><em>Lasso regression</em> (using l1 norm):</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\mathcal{L}(\pmb{\theta}) = \mathrm{MSE}(\pmb{\theta}) + \lambda\sum_{i=1}^n |\theta_i|\]</div>
+<ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\lambda\)</span> is called the <strong>regularization rate</strong>.</p></li>
 </ul>
 </div>
-<div class="section" id="effects-of-regularization-rate">
-<h2>Effects of regularization rate<a class="headerlink" href="#effects-of-regularization-rate" title="Permalink to this headline">¶</a></h2>
-<p>(Called <span class="math notranslate nohighlight">\(\alpha\)</span> here)</p>
-<p>Left: linear model. Right: 10th degree polynomial model.</p>
-<p><a class="reference external" href="https://github.com/ageron/handson-ml2"><img alt="Ridge regression example" src="algorithms/images/ridge_regression.png" /></a></p>
+<div class="section" id="example-observing-the-effects-of-regularization-rate">
+<h3>Example: observing the effects of regularization rate<a class="headerlink" href="#example-observing-the-effects-of-regularization-rate" title="Permalink to this headline">¶</a></h3>
+<p>(Heavily inspired by Chapter 4 of <a class="reference external" href="https://github.com/ageron/handson-ml2">Hands-On Machine Learning</a> by Aurélien Géron)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">x_reg</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">y_reg</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">x_reg</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mf">1.5</span>
+<span class="n">x_new</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_model</span><span class="p">(</span><span class="n">model_class</span><span class="p">,</span> <span class="n">polynomial</span><span class="p">,</span> <span class="n">lambdas</span><span class="p">,</span> <span class="o">**</span><span class="n">model_kargs</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">reg_rate</span><span class="p">,</span> <span class="n">style</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">lambdas</span><span class="p">,</span> <span class="p">(</span><span class="s2">&quot;b-&quot;</span><span class="p">,</span> <span class="s2">&quot;g--&quot;</span><span class="p">,</span> <span class="s2">&quot;r:&quot;</span><span class="p">)):</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">model_class</span><span class="p">(</span><span class="n">reg_rate</span><span class="p">,</span> <span class="o">**</span><span class="n">model_kargs</span><span class="p">)</span> <span class="k">if</span> <span class="n">reg_rate</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">LinearRegression</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">polynomial</span><span class="p">:</span>
+            <span class="n">model</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
+                    <span class="p">(</span><span class="s2">&quot;poly_features&quot;</span><span class="p">,</span> <span class="n">PolynomialFeatures</span><span class="p">(</span><span class="n">degree</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">include_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)),</span>
+                    <span class="p">(</span><span class="s2">&quot;std_scaler&quot;</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">()),</span>
+                    <span class="p">(</span><span class="s2">&quot;regul_reg&quot;</span><span class="p">,</span> <span class="n">model</span><span class="p">),</span>
+                <span class="p">])</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_reg</span><span class="p">,</span> <span class="n">y_reg</span><span class="p">)</span>
+        <span class="n">y_new_regul</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_new</span><span class="p">)</span>
+        <span class="n">lw</span> <span class="o">=</span> <span class="mi">2</span> <span class="k">if</span> <span class="n">reg_rate</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">1</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_new</span><span class="p">,</span> <span class="n">y_new_regul</span><span class="p">,</span> <span class="n">style</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">lw</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\lambda = </span><span class="si">{}</span><span class="s2">$&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">reg_rate</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_reg</span><span class="p">,</span> <span class="n">y_reg</span><span class="p">,</span> <span class="s2">&quot;b.&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper left&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;$x$&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot data and predictions with varying regularization rates</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span><span class="mi">7</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">121</span><span class="p">)</span>
+<span class="n">plot_model</span><span class="p">(</span><span class="n">Ridge</span><span class="p">,</span> <span class="n">polynomial</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">lambdas</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;$y$&quot;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Linear regression with Ridge regularization&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">)</span>
+<span class="n">plot_model</span><span class="p">(</span><span class="n">Ridge</span><span class="p">,</span> <span class="n">polynomial</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">lambdas</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="o">**-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Polynomial regression with Ridge regularization&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/linear_regression_75_0.png" src="../_images/linear_regression_75_0.png" />
+</div>
+</div>
+</div>
 </div>
 </div>
 
@@ -1768,7 +1949,7 @@ Test error: 0.22566
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="../fundamentals/machine_learning_foundations.html" title="previous page">Machine Learning Foundations</a>
+    <a class='left-prev' id="prev-link" href="../fundamentals/machine_learning_foundations.html" title="previous page">Machine Learning foundations</a>
     <a class='right-next' id="next-link" href="decision_trees_and_random_forests.html" title="next page">Decision Trees &amp; Random Forests</a>
 
     </div>

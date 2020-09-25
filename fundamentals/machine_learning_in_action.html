@@ -39,7 +39,7 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Machine Learning Foundations" href="machine_learning_foundations.html" />
+    <link rel="next" title="Machine Learning foundations" href="machine_learning_foundations.html" />
     <link rel="prev" title="Introduction to Machine Learning" href="introduction_to_machine_learning.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -91,7 +91,7 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="machine_learning_foundations.html">
-   Machine Learning Foundations
+   Machine Learning foundations
   </a>
  </li>
 </ul>
@@ -296,11 +296,6 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#environment-setup">
-   Environment setup
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#step-1-frame-the-problem">
    Step 1: frame the problem
   </a>
@@ -335,6 +330,11 @@
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#step-2-1-discover-data">
      Step 2.1: discover data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#environment-setup">
+     Environment setup
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -422,8 +422,8 @@
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#step-4-tune-the-selected-model">
-   Step 4: tune the selected model
+  <a class="reference internal nav-link" href="#step-4-tune-the-chosen-model">
+   Step 4: tune the chosen model
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -481,16 +481,69 @@
 <div class="section" id="summary">
 <h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>Environment setup</p></li>
 <li><p>Step 1: frame the problem</p></li>
 <li><p>Step 2: collect, analyze and prepare data</p></li>
 <li><p>Step 3: select and train models</p></li>
-<li><p>Step 4: tune the selected model</p></li>
+<li><p>Step 4: tune the chosen model</p></li>
 <li><p>Step 5: deploy to production and maintain the system</p></li>
 </ul>
 </div>
+<div class="section" id="step-1-frame-the-problem">
+<h2>Step 1: frame the problem<a class="headerlink" href="#step-1-frame-the-problem" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>What is the business objective?</p></li>
+<li><p>How good are the current solutions?</p></li>
+<li><p>What data is available?</p></li>
+<li><p>Is the problem a good fit for ML?</p></li>
+<li><p>What is the expected learning type (supervised or not, batch/online…)?</p></li>
+<li><p>How will the model’s performance be evaluated?</p></li>
+</ul>
+<div class="section" id="properties-of-ml-friendly-problems">
+<h3>Properties of ML-friendly problems<a class="headerlink" href="#properties-of-ml-friendly-problems" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Difficulty to express the actions as rules.</p></li>
+<li><p>Data too complex for traditional analytical methods:</p>
+<ul>
+<li><p>High number of features.</p></li>
+<li><p>Highly correlated data (data with similar or closely related values).</p></li>
+</ul>
+</li>
+<li><p>Performance &gt; explicability.</p></li>
+</ul>
+</div>
+<div class="section" id="example-predict-house-prices">
+<h3>Example: predict house prices<a class="headerlink" href="#example-predict-house-prices" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Inputs: housing properties in an area</p></li>
+<li><p>Output: median housing price in the area</p></li>
+</ul>
+<p><a class="reference external" href="https://www.kaggle.com/c/house-prices-advanced-regression-techniques/overview"><img alt="Kaggle houses banner" src="../_images/kaggle_housesbanner.png" /></a></p>
+</div>
+</div>
+<div class="section" id="step-2-collect-analyze-and-prepare-data">
+<h2>Step 2: collect, analyze and prepare data<a class="headerlink" href="#step-2-collect-analyze-and-prepare-data" title="Permalink to this headline">¶</a></h2>
+<p>Data quality is <strong>paramount</strong> for any ML project.</p>
+<p><img alt="Your data, your model" src="../_images/yourdata_yourmodel.png" /></p>
+<div class="section" id="predefined-datasets-vs-real-data">
+<h3>Predefined datasets Vs real data<a class="headerlink" href="#predefined-datasets-vs-real-data" title="Permalink to this headline">¶</a></h3>
+<p>Real data is messy, incomplete and often scattered across many sources.</p>
+<p>Data labeling is a manual and tedious process.</p>
+<p>Predefined datasets offer a convenient way to bypass the data wrangling step. Alas, using one is not always an option.</p>
+</div>
+<div class="section" id="example-the-california-housing-dataset">
+<h3>Example: the California housing dataset<a class="headerlink" href="#example-the-california-housing-dataset" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Based on data from the 1990 California census.</p></li>
+<li><p>Slightly modified for teaching purposes by A. Géron (<a class="reference external" href="https://www.dcc.fc.up.pt/%7Eltorgo/Regression/cal_housing.html">original version</a>).</p></li>
+</ul>
+</div>
+<div class="section" id="step-2-1-discover-data">
+<h3>Step 2.1: discover data<a class="headerlink" href="#step-2-1-discover-data" title="Permalink to this headline">¶</a></h3>
+<p>Our first objective is to familiarize ourselves with the dataset.</p>
+<p>Once data is loaded, the <strong>pandas</strong> library  provides many useful functions for making sense of it.</p>
+</div>
 <div class="section" id="environment-setup">
-<h2>Environment setup<a class="headerlink" href="#environment-setup" title="Permalink to this headline">¶</a></h2>
+<h3>Environment setup<a class="headerlink" href="#environment-setup" title="Permalink to this headline">¶</a></h3>
 <p>Our core toolset is:</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="../tools/python.html"><span class="doc std std-doc">Python</span></a>, a multi-purpose programming language well suited to Data Science and ML.</p></li>
@@ -559,60 +612,6 @@
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="step-1-frame-the-problem">
-<h2>Step 1: frame the problem<a class="headerlink" href="#step-1-frame-the-problem" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p>What is the business objective?</p></li>
-<li><p>How good are the current solutions?</p></li>
-<li><p>What data is available?</p></li>
-<li><p>Is the problem a good fit for ML?</p></li>
-<li><p>What is the expected learning type (supervised or not, batch/online…)?</p></li>
-<li><p>How will the model’s performance be evaluated?</p></li>
-</ul>
-<div class="section" id="properties-of-ml-friendly-problems">
-<h3>Properties of ML-friendly problems<a class="headerlink" href="#properties-of-ml-friendly-problems" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li><p>Difficulty to express the actions as rules.</p></li>
-<li><p>Data too complex for traditional analytical methods:</p>
-<ul>
-<li><p>High number of features.</p></li>
-<li><p>Highly correlated data (data with similar or closely related values).</p></li>
-</ul>
-</li>
-<li><p>Performance &gt; explicability.</p></li>
-</ul>
-</div>
-<div class="section" id="example-predict-house-prices">
-<h3>Example: predict house prices<a class="headerlink" href="#example-predict-house-prices" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li><p>Inputs: housing properties in an area</p></li>
-<li><p>Output: median housing price in the area</p></li>
-</ul>
-<p><a class="reference external" href="https://www.kaggle.com/c/house-prices-advanced-regression-techniques/overview"><img alt="Kaggle houses banner" src="../_images/kaggle_housesbanner.png" /></a></p>
-</div>
-</div>
-<div class="section" id="step-2-collect-analyze-and-prepare-data">
-<h2>Step 2: collect, analyze and prepare data<a class="headerlink" href="#step-2-collect-analyze-and-prepare-data" title="Permalink to this headline">¶</a></h2>
-<p>Data quality is <strong>paramount</strong> for any ML project.</p>
-<p><img alt="Your data, your model" src="../_images/yourdata_yourmodel.png" /></p>
-<div class="section" id="predefined-datasets-vs-real-data">
-<h3>Predefined datasets Vs real data<a class="headerlink" href="#predefined-datasets-vs-real-data" title="Permalink to this headline">¶</a></h3>
-<p>Real data is messy, incomplete and often scattered across many sources.</p>
-<p>Data labeling is a manual and tedious process.</p>
-<p>Predefined datasets offer a convenient way to bypass the data wrangling step. Alas, using one is not always an option.</p>
-</div>
-<div class="section" id="example-the-california-housing-dataset">
-<h3>Example: the California housing dataset<a class="headerlink" href="#example-the-california-housing-dataset" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li><p>Based on data from the 1990 California census.</p></li>
-<li><p>Slightly modified for teaching purposes by A. Géron (<a class="reference external" href="https://www.dcc.fc.up.pt/%7Eltorgo/Regression/cal_housing.html">original version</a>).</p></li>
-</ul>
-</div>
-<div class="section" id="step-2-1-discover-data">
-<h3>Step 2.1: discover data<a class="headerlink" href="#step-2-1-discover-data" title="Permalink to this headline">¶</a></h3>
-<p>Our first objective is to familiarize ourselves with the dataset.</p>
-<p>Once data is loaded, the <strong>pandas</strong> library  provides many useful functions for making sense of it.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load the dataset in a pandas DataFrame</span>
@@ -1052,14 +1051,14 @@ Test dataset: (4128, 10)
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>median_house_value    1.000000
-median_income         0.689557
-total_rooms           0.139464
-housing_median_age    0.106695
-households            0.067366
-total_bedrooms        0.050744
-population           -0.025604
-longitude            -0.048522
-latitude             -0.144150
+median_income         0.686489
+total_rooms           0.138169
+housing_median_age    0.107661
+households            0.070977
+total_bedrooms        0.052991
+population           -0.018141
+longitude            -0.045351
+latitude             -0.145444
 Name: median_house_value, dtype: float64
 </pre></div>
 </div>
@@ -1162,17 +1161,17 @@ Name: median_house_value, dtype: float64
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>median_house_value          1.000000
-median_income               0.689557
-rooms_per_household         0.145502
-total_rooms                 0.139464
-housing_median_age          0.106695
-households                  0.067366
-total_bedrooms              0.050744
-population_per_household   -0.022050
-population                 -0.025604
-longitude                  -0.048522
-latitude                   -0.144150
-bedrooms_per_room          -0.255941
+median_income               0.686489
+rooms_per_household         0.155415
+total_rooms                 0.138169
+housing_median_age          0.107661
+households                  0.070977
+total_bedrooms              0.052991
+population                 -0.018141
+population_per_household   -0.032319
+longitude                  -0.045351
+latitude                   -0.145444
+bedrooms_per_room          -0.253723
 Name: median_house_value, dtype: float64
 </pre></div>
 </div>
@@ -1260,8 +1259,8 @@ Training labels: (16512,)
   <tbody>
     <tr>
       <th>total_bedrooms</th>
-      <td>166</td>
-      <td>1.005329</td>
+      <td>156</td>
+      <td>0.944767</td>
     </tr>
     <tr>
       <th>ocean_proximity</th>
@@ -1326,63 +1325,63 @@ Training labels: (16512,)
   </thead>
   <tbody>
     <tr>
-      <th>4629</th>
-      <td>-118.30</td>
-      <td>34.07</td>
-      <td>18.0</td>
-      <td>3759.0</td>
+      <th>19391</th>
+      <td>-120.85</td>
+      <td>37.78</td>
+      <td>25.0</td>
+      <td>421.0</td>
       <td>NaN</td>
-      <td>3296.0</td>
-      <td>1462.0</td>
-      <td>2.2708</td>
+      <td>303.0</td>
+      <td>106.0</td>
+      <td>2.2679</td>
+      <td>INLAND</td>
+    </tr>
+    <tr>
+      <th>17923</th>
+      <td>-121.97</td>
+      <td>37.35</td>
+      <td>30.0</td>
+      <td>1955.0</td>
+      <td>NaN</td>
+      <td>999.0</td>
+      <td>386.0</td>
+      <td>4.6328</td>
       <td>&lt;1H OCEAN</td>
     </tr>
     <tr>
-      <th>20046</th>
-      <td>-119.01</td>
-      <td>36.06</td>
-      <td>25.0</td>
-      <td>1505.0</td>
+      <th>18246</th>
+      <td>-122.08</td>
+      <td>37.39</td>
+      <td>4.0</td>
+      <td>2292.0</td>
       <td>NaN</td>
-      <td>1392.0</td>
-      <td>359.0</td>
-      <td>1.6812</td>
-      <td>INLAND</td>
-    </tr>
-    <tr>
-      <th>341</th>
-      <td>-122.17</td>
-      <td>37.75</td>
-      <td>38.0</td>
-      <td>992.0</td>
-      <td>NaN</td>
-      <td>732.0</td>
-      <td>259.0</td>
-      <td>1.6196</td>
+      <td>1050.0</td>
+      <td>584.0</td>
+      <td>4.8036</td>
       <td>NEAR BAY</td>
     </tr>
     <tr>
-      <th>6052</th>
-      <td>-117.76</td>
-      <td>34.04</td>
-      <td>34.0</td>
-      <td>1914.0</td>
+      <th>4391</th>
+      <td>-118.27</td>
+      <td>34.07</td>
+      <td>27.0</td>
+      <td>1190.0</td>
       <td>NaN</td>
-      <td>1564.0</td>
-      <td>328.0</td>
-      <td>2.8347</td>
-      <td>INLAND</td>
+      <td>1795.0</td>
+      <td>422.0</td>
+      <td>1.7016</td>
+      <td>&lt;1H OCEAN</td>
     </tr>
     <tr>
-      <th>2412</th>
-      <td>-119.45</td>
-      <td>36.61</td>
-      <td>24.0</td>
-      <td>1302.0</td>
+      <th>2115</th>
+      <td>-119.72</td>
+      <td>36.76</td>
+      <td>23.0</td>
+      <td>6403.0</td>
       <td>NaN</td>
-      <td>693.0</td>
-      <td>243.0</td>
-      <td>3.7917</td>
+      <td>3573.0</td>
+      <td>1260.0</td>
+      <td>2.3006</td>
       <td>INLAND</td>
     </tr>
   </tbody>
@@ -1420,9 +1419,9 @@ Training labels: (16512,)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[8 7 5]
- [8 9 3]
- [7 1 6]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[4 5 2]
+ [3 2 8]
+ [7 7 6]]
 </pre></div>
 </div>
 </div>
@@ -1442,11 +1441,11 @@ Training labels: (16512,)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[7.66666667 5.66666667 4.66666667]
-[[ 0.70710678  0.39223227  0.26726124]
- [ 0.70710678  0.98058068 -1.33630621]
- [-1.41421356 -1.37281295  1.06904497]]
-Mean: -3.20731096002823e-16. Std: 1.0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[4.66666667 4.66666667 5.33333333]
+[[-0.39223227  0.16222142 -1.33630621]
+ [-0.98058068 -1.29777137  1.06904497]
+ [ 1.37281295  1.13554995  0.26726124]]
+Mean: -2.4671622769447922e-17. Std: 0.9999999999999999
 </pre></div>
 </div>
 </div>
@@ -1510,11 +1509,11 @@ Mean: -3.20731096002823e-16. Std: 1.0
 Index([&#39;ocean_proximity&#39;], dtype=&#39;object&#39;)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;1H OCEAN     7232
-INLAND        5278
-NEAR OCEAN    2159
-NEAR BAY      1839
-ISLAND           4
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;1H OCEAN     7251
+INLAND        5297
+NEAR OCEAN    2134
+NEAR BAY      1825
+ISLAND           5
 Name: ocean_proximity, dtype: int64
 </pre></div>
 </div>
@@ -1546,8 +1545,8 @@ Name: ocean_proximity, dtype: int64
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x_train: (16512, 13)
-[ 0.71304049 -0.79627938  0.19804486  0.27128986  0.46914666  0.20582391
-  0.44545607 -0.26528534  1.          0.          0.          0.
+[-1.28587979  0.970395   -0.92252949 -0.5380901  -0.59041733 -0.66576734
+ -0.44777892  0.3817485   0.          0.          0.          1.
   0.        ]
 </pre></div>
 </div>
@@ -1605,7 +1604,7 @@ Name: ocean_proximity, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training error for linear regression: 68651.43
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training error for linear regression: 68837.80
 </pre></div>
 </div>
 </div>
@@ -1658,8 +1657,8 @@ Name: ocean_proximity, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean CV error for decision tree: 68721.25
-Mean CV error for linear regression: 68771.10
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean CV error for decision tree: 68298.40
+Mean CV error for linear regression: 68614.25
 </pre></div>
 </div>
 </div>
@@ -1679,16 +1678,16 @@ Mean CV error for linear regression: 68771.10
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training error for random forest: 18179.94
-Mean CV error for random forest: 48809.94
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training error for random forest: 18278.07
+Mean CV error for random forest: 49214.49
 </pre></div>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="section" id="step-4-tune-the-selected-model">
-<h2>Step 4: tune the selected model<a class="headerlink" href="#step-4-tune-the-selected-model" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="step-4-tune-the-chosen-model">
+<h2>Step 4: tune the chosen model<a class="headerlink" href="#step-4-tune-the-chosen-model" title="Permalink to this headline">¶</a></h2>
 <p>Once a model looks promising, it must be <strong>tuned</strong> in order to offer the best compromise between optimization and generalization.</p>
 <p>The goal is to find the set of model properties that gives the best performance. Model properties are often called <strong>hyperparameters</strong> (example: maximum depth for a decision tree).</p>
 <p>This step can be either:</p>
@@ -1723,7 +1722,7 @@ Mean CV error for random forest: 48809.94
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;max_features&#39;: 8, &#39;n_estimators&#39;: 30}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;max_features&#39;: 6, &#39;n_estimators&#39;: 30}
 </pre></div>
 </div>
 </div>
@@ -1753,7 +1752,7 @@ Mean CV error for random forest: 48809.94
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test data: (4128, 9)
 Test labels: (4128,)
-Test error for final model: 49515.38
+Test error for final model: 48302.02
 </pre></div>
 </div>
 </div>
@@ -1833,7 +1832,7 @@ Test error for final model: 49515.38
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted result: 277680.07
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted result: 310236.73
 </pre></div>
 </div>
 </div>
@@ -1924,7 +1923,7 @@ Test error for final model: 49515.38
     <div class='prev-next-bottom'>
         
     <a class='left-prev' id="prev-link" href="introduction_to_machine_learning.html" title="previous page">Introduction to Machine Learning</a>
-    <a class='right-next' id="next-link" href="machine_learning_foundations.html" title="next page">Machine Learning Foundations</a>
+    <a class='right-next' id="next-link" href="machine_learning_foundations.html" title="next page">Machine Learning foundations</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

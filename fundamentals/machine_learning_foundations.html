@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Machine Learning Foundations &#8212; Machine Learning Handbook</title>
+    <title>Machine Learning foundations &#8212; Machine Learning Handbook</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
     <link href="../_static/css/index.css" rel="stylesheet">
     <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
@@ -91,7 +91,7 @@
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Machine Learning Foundations
+   Machine Learning foundations
   </a>
  </li>
 </ul>
@@ -296,8 +296,8 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#terminology-and-notations">
-   Terminology and notations
+  <a class="reference internal nav-link" href="#problem-formulation">
+   Problem formulation
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -306,24 +306,31 @@
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#terminology-and-notations-data">
-     Terminology and notations: data
+    <a class="reference internal nav-link" href="#terminology-and-notations-inputs">
+     Terminology and notations: inputs
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#design-matrix">
+     Design matrix
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#multidimensional-data-reshaping">
      Multidimensional data: reshaping
     </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-the-mnist-handwritten-digits-datasets">
-     Example: the MNIST handwritten digits datasets
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#environment-setup">
-     Environment setup
-    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#example-the-mnist-handwritten-digits-datasets">
+       Example: the MNIST handwritten digits datasets
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#environment-setup">
+       Environment setup
+      </a>
+     </li>
+    </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#multidimensional-data-scaling">
@@ -331,13 +338,13 @@
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#terminology-and-notations-model">
-     Terminology and notations: model
+    <a class="reference internal nav-link" href="#terminology-and-notations-targets">
+     Terminology and notations: targets
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-linear-relationship-between-features-and-labels">
-     Example: linear relationship between features and labels
+    <a class="reference internal nav-link" href="#terminology-and-notations-model">
+     Terminology and notations: model
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -537,55 +544,65 @@
               <div>
                 
   <div class="section" id="machine-learning-foundations">
-<h1>Machine Learning Foundations<a class="headerlink" href="#machine-learning-foundations" title="Permalink to this headline">¶</a></h1>
+<h1>Machine Learning foundations<a class="headerlink" href="#machine-learning-foundations" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="summary">
 <h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>Terminology and notations</p></li>
+<li><p>Problem formulation</p></li>
 <li><p>Gradient descent</p></li>
 <li><p>Performance measures</p></li>
 </ul>
 </div>
-<div class="section" id="terminology-and-notations">
-<h2>Terminology and notations<a class="headerlink" href="#terminology-and-notations" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="problem-formulation">
+<h2>Problem formulation<a class="headerlink" href="#problem-formulation" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="the-elements-of-a-supervised-ml-system">
 <h3>The elements of a supervised ML system<a class="headerlink" href="#the-elements-of-a-supervised-ml-system" title="Permalink to this headline">¶</a></h3>
 <ol class="simple">
 <li><p>Some <strong>data</strong> under numeric form.</p></li>
 <li><p>A <strong>model</strong> able to produce results from data.</p></li>
-<li><p>A <strong>loss (or cost) function</strong> to quantify the model error (difference between expected and actual results).</p></li>
+<li><p>A <strong>loss</strong> (or <strong>cost</strong>) function to quantify the model error (difference between expected and actual results).</p></li>
 <li><p>An <strong>optimization algorithm</strong> to update the model’s parameters in order to minimize the loss.</p></li>
 </ol>
 </div>
-<div class="section" id="terminology-and-notations-data">
-<h3>Terminology and notations: data<a class="headerlink" href="#terminology-and-notations-data" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="terminology-and-notations-inputs">
+<h3>Terminology and notations: inputs<a class="headerlink" href="#terminology-and-notations-inputs" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(m\)</span> is the number of samples and associated results in the dataset.</p></li>
-<li><p><span class="math notranslate nohighlight">\(n\)</span> is the number of features. A <strong>feature</strong> is an attribute (a property) of the data samples.</p></li>
-<li><p><span class="math notranslate nohighlight">\(\mathbf{x}^{(i)}\)</span> is a <strong>sample</strong>, a particular instance of data, vector of <span class="math notranslate nohighlight">\(n\)</span> features: <span class="math notranslate nohighlight">\(\mathbf{x}^{(i)} = \left\{ x^{(i)}_1, x^{(i)}_2, \dotsc, x^{(i)}_n \right\}\)</span>.</p></li>
-<li><p><span class="math notranslate nohighlight">\(x^{(i)}_j\)</span> is the value of the <span class="math notranslate nohighlight">\(j\)</span>th feature for the <span class="math notranslate nohighlight">\(i\)</span>th data sample.</p></li>
-<li><p><span class="math notranslate nohighlight">\(\mathbf{y}^{(i)}\)</span> is the expected result for a sample, vector of <span class="math notranslate nohighlight">\(K\)</span> values called <strong>labels</strong> (or <em>targets</em>): <span class="math notranslate nohighlight">\(\mathbf{y}^{(i)} = \left\{ y^{(i)}_1, y^{(i)}_2, \dotsc, y^{(i)}_K \right\}\)</span>.</p></li>
-<li><p><span class="math notranslate nohighlight">\(y^{(i)}_k\)</span> is the value of the <span class="math notranslate nohighlight">\(k\)</span>th label for the <span class="math notranslate nohighlight">\(i\)</span>th data sample.</p></li>
+<li><p><span class="math notranslate nohighlight">\(m\)</span>: number of samples and associated results in the dataset.</p></li>
+<li><p><span class="math notranslate nohighlight">\(n\)</span>: number of features. A <strong>feature</strong> is an attribute (a property) of the data samples.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\pmb{x}^{(i)}\)</span>: data <strong>sample</strong> (example), vector of <span class="math notranslate nohighlight">\(n\)</span> features.</p></li>
+<li><p><span class="math notranslate nohighlight">\(x^{(i)}_j\)</span>: value of the <span class="math notranslate nohighlight">\(j\)</span>th feature for the <span class="math notranslate nohighlight">\(i\)</span>th data sample.</p></li>
 </ul>
-<p>Most ML algorithms except input data to come as a 2-dimensional matrix (<em>samples, features</em>)</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\pmb{x}^{(i)} = \begin{pmatrix}
+       \ x^{(i)}_1 \\
+       \ x^{(i)}_2 \\
+       \ \vdots \\
+       \ x^{(i)}_n
+     \end{pmatrix} \in \pmb{R}^n\end{split}\]</div>
+</div>
+<div class="section" id="design-matrix">
+<h3>Design matrix<a class="headerlink" href="#design-matrix" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\pmb{X}\)</span>: matrix of the form (<em>samples, features</em>) expected by most ML algorithms and called <em>design matrix</em>.</p>
+<ul>
 <li><p>First dimension is for the <span class="math notranslate nohighlight">\(m\)</span> samples.</p></li>
 <li><p>Second dimension is for the <span class="math notranslate nohighlight">\(n\)</span> features of each sample.</p></li>
 </ul>
-<p>Targets should be formatted using the same first dimension.</p>
+</li>
+</ul>
 <div class="math notranslate nohighlight">
-\[\begin{split}\mathbf{X} = \begin{pmatrix}
+\[\begin{split}\pmb{X} = \begin{bmatrix}
+       \ x^{(1)T} \\
+       \ x^{(2)T} \\
+       \ \vdots \\
+       \ x^{(m)T} \\
+     \end{bmatrix} = 
+\begin{bmatrix}
        \ x^{(1)}_1 &amp; x^{(1)}_2 &amp; \cdots &amp; x^{(1)}_n \\
        \ x^{(2)}_1 &amp; x^{(2)}_2 &amp; \cdots &amp; x^{(2)}_n \\
        \ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
        \ x^{(m)}_1 &amp; x^{(m)}_2 &amp; \cdots &amp; x^{(m)}_n
-     \end{pmatrix}\;\;
-\mathbf{Y} = \begin{pmatrix}
-       \ y^{(1)}_1 &amp; y^{(1)}_2 &amp; \cdots &amp; y^{(1)}_K \\
-       \ y^{(2)}_1 &amp; y^{(2)}_2 &amp; \cdots &amp; y^{(2)}_K \\
-       \ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
-       \ y^{(m)}_1 &amp; y^{(m)}_2 &amp; \cdots &amp; y^{(m)}_K
-     \end{pmatrix}\end{split}\]</div>
+     \end{bmatrix} \in \pmb{R}^{m \times n} \end{split}\]</div>
 </div>
 <div class="section" id="multidimensional-data-reshaping">
 <h3>Multidimensional data: reshaping<a class="headerlink" href="#multidimensional-data-reshaping" title="Permalink to this headline">¶</a></h3>
@@ -593,14 +610,13 @@
 <p>A video can be represented as a 4D multidimensional array (<em>frames, height, width, color_channels</em>).</p>
 <p>They have to be <strong>reshaped</strong>, or <em>flattened</em> in that case, into a vector before being fed to most ML models.</p>
 <p><img alt="Image to vector" src="../_images/image2vector.jpeg" /></p>
-</div>
 <div class="section" id="example-the-mnist-handwritten-digits-datasets">
-<h3>Example: the MNIST handwritten digits datasets<a class="headerlink" href="#example-the-mnist-handwritten-digits-datasets" title="Permalink to this headline">¶</a></h3>
+<h4>Example: the MNIST handwritten digits datasets<a class="headerlink" href="#example-the-mnist-handwritten-digits-datasets" title="Permalink to this headline">¶</a></h4>
 <p>Dataset of 70,000 handwritten digits, stored as 28x28 grayscale images.</p>
 <p>Staple of Machine Learning since 1998.</p>
 </div>
 <div class="section" id="environment-setup">
-<h3>Environment setup<a class="headerlink" href="#environment-setup" title="Permalink to this headline">¶</a></h3>
+<h4>Environment setup<a class="headerlink" href="#environment-setup" title="Permalink to this headline">¶</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">platform</span>
@@ -720,59 +736,73 @@ x_test: (10000, 784)
 </div>
 </div>
 </div>
+</div>
 <div class="section" id="multidimensional-data-scaling">
 <h3>Multidimensional data: scaling<a class="headerlink" href="#multidimensional-data-scaling" title="Permalink to this headline">¶</a></h3>
 <p>Individual pixel values for images and videos are typically integers in the [0:255] range.</p>
-<p>Scaling them to obtain floats into the [0:1] range ensures is a common practice.</p>
+<p>Scaling them to obtain floats into the <span class="math notranslate nohighlight">\([0,1]\)</span> range is a common practice.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Rescale pixel values from [0:255] to [0:1]</span>
-<span class="n">x_train</span> <span class="o">=</span> <span class="n">x_train</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;float32&quot;</span><span class="p">)</span> <span class="o">/</span> <span class="mi">255</span>
-<span class="n">x_test</span> <span class="o">=</span> <span class="n">x_test</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;float32&quot;</span><span class="p">)</span> <span class="o">/</span> <span class="mi">255</span>
+
+<span class="n">x_train</span> <span class="o">=</span> <span class="n">x_train</span> <span class="o">/</span> <span class="mf">255.0</span>
+<span class="c1"># Alternative: x_train = x_train.astype(&quot;float32&quot;) / 255</span>
+<span class="n">x_test</span> <span class="o">=</span> <span class="n">x_test</span> <span class="o">/</span> <span class="mf">255.0</span>
+<span class="c1"># Alternative: x_test = x_test.astype(&quot;float32&quot;) / 255</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
+<div class="section" id="terminology-and-notations-targets">
+<h3>Terminology and notations: targets<a class="headerlink" href="#terminology-and-notations-targets" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(y^{(i)}\)</span>: <strong>target</strong>, or <strong>label</strong> (expected result) for a data sample.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\pmb{y}\)</span>: vector of labels for all <span class="math notranslate nohighlight">\(m\)</span> samples in a dataset.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}\pmb{y} = \begin{pmatrix}
+       \ y^{(1)} \\
+       \ y^{(2)} \\
+       \ \vdots \\
+       \ y^{(m)}
+     \end{pmatrix} \in \pmb{R}^m\end{split}\]</div>
+</div>
 <div class="section" id="terminology-and-notations-model">
 <h3>Terminology and notations: model<a class="headerlink" href="#terminology-and-notations-model" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p>It defines the relationship between features and labels.</p></li>
-<li><p><span class="math notranslate nohighlight">\(\boldsymbol{\theta}\)</span> (or <span class="math notranslate nohighlight">\(\boldsymbol{\omega}\)</span>) is the set of its internal <strong>parameters</strong>, vector of <span class="math notranslate nohighlight">\(P\)</span> values: <span class="math notranslate nohighlight">\(\boldsymbol{\theta} = \left\{ \theta_0, \theta_2, \dotsc, \theta_{P-1} \right\}\)</span>.</p></li>
-<li><p><span class="math notranslate nohighlight">\(h_\theta\)</span> is the model’s prediction function, called the <em>hypothesis function</em>. This function relies on the model parameters <span class="math notranslate nohighlight">\(\boldsymbol{\theta}\)</span> and treats them as constants during prediction computation.</p></li>
-<li><p><span class="math notranslate nohighlight">\(\mathbf{y}'^{(i)}\)</span> is the hypothesis function’s output.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\pmb{\theta}\)</span> (sometime noted <span class="math notranslate nohighlight">\(\pmb{\omega}\)</span>): model’s internal parameters vector.</p></li>
+<li><p><span class="math notranslate nohighlight">\(h_\theta()\)</span>: model’s prediction function (<em>hypothesis function</em>), using the model parameters <span class="math notranslate nohighlight">\(\pmb{\theta}\)</span> to define the relationship between features and labels.</p></li>
+<li><p><span class="math notranslate nohighlight">\(y'^{(i)}\)</span> (sometimes noted <span class="math notranslate nohighlight">\(\hat{y}^{(i)}\)</span>): hypothesis function’s output (model prediction).</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[\mathbf{y}'^{(i)} = h_\theta(\mathbf{x}^{(i)}) = \left\{ y'^{(i)}_1, y'^{(i)}_2, \dotsc, y'^{(i)}_K \right\}\]</div>
-</div>
-<div class="section" id="example-linear-relationship-between-features-and-labels">
-<h3>Example: linear relationship between features and labels<a class="headerlink" href="#example-linear-relationship-between-features-and-labels" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li><p>In this case, <span class="math notranslate nohighlight">\(K=1\)</span> and <span class="math notranslate nohighlight">\(P=n\)</span>.</p></li>
-<li><p>The prediction output is a scalar value.</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[y'^{(i)} = \mathcal{h}_\theta(\mathbf{x}^{(i)}) = \theta_0 + \theta_1x^{(i)}_1 + \dotsc + \theta_nx^{(i)}_n\]</div>
+\[y'^{(i)} = h_\theta(\pmb{x}^{(i)})\]</div>
 </div>
 <div class="section" id="terminology-and-notations-loss">
 <h3>Terminology and notations: loss<a class="headerlink" href="#terminology-and-notations-loss" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\mathcal{L_{\mathbf{X, Y}}(\theta)}\)</span> (or <span class="math notranslate nohighlight">\(\mathcal{J_{\mathbf{X, Y}}(\theta)}\)</span>) is the <strong>loss</strong> (or <em>cost</em>) <strong>function</strong> that quantifies the difference between expected results (called <em>ground truth</em>) and actual results computed by the model.</p></li>
-<li><p>During model training, the input dataset <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> and the expected results <span class="math notranslate nohighlight">\(\mathbf{Y}\)</span> are treated as constants. The loss depends solely on the model parameters <span class="math notranslate nohighlight">\(\boldsymbol{\theta}\)</span>.</p></li>
-<li><p>To simplify notations, the loss function will be written <span class="math notranslate nohighlight">\(\mathcal{L(\boldsymbol{\theta})}\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathcal{L_{\pmb{X, y}}(\pmb{\theta})}\)</span>, sometimes noted <span class="math notranslate nohighlight">\(\mathcal{J_{\pmb{X, y}}(\pmb{\theta})}\)</span>: <strong>loss</strong> (or <strong>cost</strong>) function that quantifies the difference between expected results (called <em>ground truth</em>) and actual results computed by the model.</p></li>
+<li><p>During model training, the input dataset <span class="math notranslate nohighlight">\(\pmb{X}\)</span> and the expected results <span class="math notranslate nohighlight">\(\pmb{y}\)</span> are treated as constants. The loss depends solely on the model parameters <span class="math notranslate nohighlight">\(\pmb{\theta}\)</span>. To simplify notations, the loss function will be written <span class="math notranslate nohighlight">\(\mathcal{L(\pmb{\theta})}\)</span>.</p></li>
 <li><p>Different loss functions exists. The choice depends on the learning type.</p></li>
 </ul>
 </div>
 <div class="section" id="loss-functions-for-regression">
 <h3>Loss functions for regression<a class="headerlink" href="#loss-functions-for-regression" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p><em>Mean Absolute Error</em> (aka <em>l1 or Manhattan norm</em>):
-$<span class="math notranslate nohighlight">\( \mathrm{MAE}(\boldsymbol{\theta}) = \frac{1}{m}\sum_{i=1}^m |\mathcal{h}_\theta(\mathbf{x}^{(i)}) - \mathbf{y}^{(i)}| \)</span>$</p></li>
-<li><p><em>Mean Squared Error</em> (aka <em>l2 norm</em>), the default choice:
-$<span class="math notranslate nohighlight">\( \mathrm{MSE}(\boldsymbol{\theta}) = \frac{1}{m}\sum_{i=1}^m (\mathcal{h}_\theta(\mathbf{x}^{(i)}) - \mathbf{y}^{(i)})^2 \)</span>$</p></li>
-<li><p><em>Root Mean Squared Error</em> (aka <em>Euclidean norm</em>):
-$<span class="math notranslate nohighlight">\( \mathrm{RMSE}(\boldsymbol{\theta}) = \sqrt{\frac{1}{m}\sum_{i=1}^m (\mathcal{h}_\theta(\mathbf{x}^{(i)}) - \mathbf{y}^{(i)})^2} \)</span>$</p></li>
+<li><p><em>Mean Absolute Error</em> (aka <em>l1 or Manhattan norm</em>):</p></li>
 </ul>
+<div class="math notranslate nohighlight">
+\[\mathrm{MAE}(\boldsymbol{\pmb{\theta}}) = \frac{1}{m}\sum_{i=1}^m |\mathcal{h}_\theta(\mathbf{x}^{(i)}) - y^{(i)}| = \frac{1}{m}{\lVert{h_\theta(\pmb{X}) - \pmb{y}}\rVert}_1\]</div>
+<ul class="simple">
+<li><p><em>Mean Squared Error</em>, most sensible to outliers:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\mathrm{MSE}(\boldsymbol{\pmb{\theta}}) = \frac{1}{m}\sum_{i=1}^m (\mathcal{h}_\theta(\mathbf{x}^{(i)}) - y^{(i)})^2 = \frac{1}{m}{{\lVert{h_\theta(\pmb{X}) - \pmb{y}}\rVert}_2}^2\]</div>
+<ul class="simple">
+<li><p><em>Root Mean Squared Error</em> (aka <em>l2 or Euclidean norm</em>), the default choice:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\mathrm{RMSE}(\boldsymbol{\pmb{\theta}}) = \sqrt{\frac{1}{m}\sum_{i=1}^m (\mathcal{h}_\theta(\mathbf{x}^{(i)}) - y^{(i)})^2} = \frac{1}{m}{\lVert{h_\theta(\pmb{X}) - \pmb{y}}\rVert}_2\]</div>
 </div>
 <div class="section" id="loss-function-for-binary-classification">
 <h3>Loss function for binary classification<a class="headerlink" href="#loss-function-for-binary-classification" title="Permalink to this headline">¶</a></h3>
@@ -782,7 +812,7 @@ $<span class="math notranslate nohighlight">\( \mathrm{RMSE}(\boldsymbol{\theta}
 <li><p>A frequently used loss function for binary classification is the <em>Binary Crossentropy</em> (aka <em>Log Loss</em>):</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[\mathcal{L}(\boldsymbol{\theta}) = -\frac{1}{m}\sum_{i=1}^m \left[y^{(i)} \log_e(y'^{(i)}) + (1-y^{(i)}) \log_e(1-y'^{(i)})\right]\]</div>
+\[\mathcal{L}(\boldsymbol{\pmb{\theta}}) = -\frac{1}{m}\sum_{i=1}^m \left(y^{(i)} \log_e(y'^{(i)}) + (1-y^{(i)}) \log_e(1-y'^{(i)})\right)\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define expected results</span>
@@ -815,30 +845,30 @@ $<span class="math notranslate nohighlight">\( \mathrm{RMSE}(\boldsymbol{\theta}
 <div class="section" id="terminology-and-notations-multiclass-classification">
 <h3>Terminology and notations: multiclass classification<a class="headerlink" href="#terminology-and-notations-multiclass-classification" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\mathbf{y}^{(i)}\)</span> et <span class="math notranslate nohighlight">\(\mathbf{y}'^{(i)}\)</span> are vectors with as many elements as the number of predicted classes <span class="math notranslate nohighlight">\(K\)</span>.</p></li>
-<li><p><span class="math notranslate nohighlight">\(\mathbf{y}^{(i)}\)</span> is a <strong>binary vector</strong> of <span class="math notranslate nohighlight">\(K\)</span> values: <span class="math notranslate nohighlight">\(\mathbf{y}^{(i)} = \left\{ y^{(i)}_1, y^{(i)}_2, \dotsc, y^{(i)}_K \right\}\)</span>.</p></li>
-<li><p><span class="math notranslate nohighlight">\(y^{(i)}_k\)</span> is equal to 1 if the <span class="math notranslate nohighlight">\(i\)</span>th sample’s class corresponds to <span class="math notranslate nohighlight">\(k\)</span>, 0 otherwise.</p></li>
-<li><p><span class="math notranslate nohighlight">\(\mathbf{y}'^{(i)}\)</span> is a <strong>probability vector</strong>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\pmb{y}^{(i)}\)</span> et <span class="math notranslate nohighlight">\(\pmb{y}'^{(i)}\)</span> are vectors with as many elements as the number of predicted classes <span class="math notranslate nohighlight">\(K\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\pmb{y}^{(i)}\)</span> (the <em>ground truth</em>) is a <strong>binary vector</strong> of <span class="math notranslate nohighlight">\(K\)</span> values. <span class="math notranslate nohighlight">\(y^{(i)}_k\)</span> is equal to 1 if the <span class="math notranslate nohighlight">\(i\)</span>th sample’s class corresponds to <span class="math notranslate nohighlight">\(k\)</span>, 0 otherwise.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\pmb{y}'^{(i)}\)</span> is a <strong>probability vector</strong> of <span class="math notranslate nohighlight">\(K\)</span> values, computed by the model. <span class="math notranslate nohighlight">\(y'^{(i)}_k\)</span> represents the probability that the <span class="math notranslate nohighlight">\(i\)</span>th sample belongs to class <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[\begin{split}\mathbf{Y} = \begin{pmatrix}
-       \ y^{(1)}_1 &amp; \cdots &amp; y^{(1)}_K \\
-       \ y^{(2)}_1 &amp; \cdots &amp; y^{(2)}_K \\
-       \ \vdots &amp; \ddots &amp; \vdots \\
-       \ y^{(m)}_1 &amp; \cdots &amp; y^{(m)}_K
-     \end{pmatrix}\;\;
-\mathbf{Y}' = \begin{pmatrix}
-       \ y'^{(1)}_1 &amp; \cdots &amp; y'^{(1)}_K \\
-       \ y'^{(2)}_1 &amp; \cdots &amp; y'^{(2)}_K \\
-       \ \vdots &amp; \ddots &amp; \vdots \\
-       \ y'^{(m)}_1 &amp; \cdots &amp; y'^{(m)}_K
-     \end{pmatrix}\end{split}\]</div>
+\[\begin{split}\pmb{y}^{(i)} = \begin{pmatrix}
+       \ y^{(i)}_1 \\
+       \ y^{(i)}_2 \\
+       \ \vdots \\
+       \ y^{(i)}_K
+     \end{pmatrix} \in \pmb{R}^K
+\;\;\;
+\pmb{y}'^{(i)} = \begin{pmatrix}
+       \ y'^{(i)}_1 \\
+       \ y'^{(i)}_2 \\
+       \ \vdots \\
+       \ y'^{(i)}_K
+     \end{pmatrix} \in \pmb{R}^K\end{split}\]</div>
 </div>
 <div class="section" id="loss-function-for-multiclass-classification">
 <h3>Loss function for multiclass classification<a class="headerlink" href="#loss-function-for-multiclass-classification" title="Permalink to this headline">¶</a></h3>
 <p>The standard loss function for multiclass classification is <em>Categorical Crossentropy</em>:</p>
 <div class="math notranslate nohighlight">
-\[\mathcal{L}(\boldsymbol{\theta}) = -\frac{1}{m}\sum_{i=1}^m\sum_{k=1}^K y^{(i)}_k \log_e(y'^{(i)}_k)\]</div>
+\[\mathcal{L}(\boldsymbol{\pmb{\theta}}) = -\frac{1}{m}\sum_{i=1}^m\sum_{k=1}^K y^{(i)}_k \log_e(y'^{(i)}_k)\]</div>
 <p>It is equivalent to <em>Binary Crossentropy</em> when <span class="math notranslate nohighlight">\(K = 2\)</span></p>
 </div>
 <div class="section" id="model-lifecycle">
@@ -854,15 +884,18 @@ $<span class="math notranslate nohighlight">\( \mathrm{RMSE}(\boldsymbol{\theta}
 <ul class="simple">
 <li><p>Used during the training phase.</p></li>
 <li><p>For each learning type, several algorithms of various complexity exist.</p></li>
-<li><p>Objective: find the set of model parameters <span class="math notranslate nohighlight">\(\boldsymbol{\theta_{best}}\)</span> that minimizes the loss.</p></li>
+<li><p>Objective: find the set of model parameters <span class="math notranslate nohighlight">\(\pmb{\theta}^{*}\)</span> that minimizes the loss.</p></li>
 </ul>
 <p><a class="reference external" href="https://developers.google.com/machine-learning/crash-course/reducing-loss/an-iterative-approach"><img alt="Optimization: linear regression" src="../_images/LossSideBySide.png" /></a></p>
 </div>
 <div class="section" id="model-hyperparameters">
 <h3>Model hyperparameters<a class="headerlink" href="#model-hyperparameters" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p>Many ML models also have user-defined properties called <strong>hyperparameters</strong>.</p></li>
+<li><p>Many ML models also have user-defined properties called <strong>hyperparameters</strong>.</p>
+<ul>
 <li><p>Examples: maximum depth of a decision tree, number oy layers of a neural network…</p></li>
+</ul>
+</li>
 <li><p>Contrary to internal parameters, they are not automatically updated during training.</p></li>
 <li><p>The hyperparameters directly affect the model’s performance and must be tweaked during the training and tuning steps.</p></li>
 </ul>
@@ -885,11 +918,11 @@ $<span class="math notranslate nohighlight">\( \mathrm{RMSE}(\boldsymbol{\theta}
 <div class="section" id="the-notion-of-gradient">
 <h3>The notion of gradient<a class="headerlink" href="#the-notion-of-gradient" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p>Expresses the variation of a function <em>wrt</em> the variation of its parameters.</p></li>
-<li><p>Vector containing partial derivatives of the function <em>wrt</em> each of its <span class="math notranslate nohighlight">\(P\)</span> parameters.</p></li>
+<li><p>Expresses the variation of a function relative to the variation of its parameters.</p></li>
+<li><p>Vector containing partial derivatives of the function <em>w.r.t.</em> each of its <span class="math notranslate nohighlight">\(P\)</span> parameters.</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[\begin{split}\nabla_{\theta}\mathcal{L}(\boldsymbol{\theta}) = \begin{pmatrix}
+\[\begin{split}\nabla_{\theta}\mathcal{L}(\boldsymbol{\pmb{\theta}}) = \begin{pmatrix}
        \ \frac{\partial}{\partial \theta_1} \mathcal{L}(\boldsymbol{\theta}) \\
        \ \frac{\partial}{\partial \theta_2} \mathcal{L}(\boldsymbol{\theta}) \\
        \ \vdots \\
@@ -957,11 +990,11 @@ $<span class="math notranslate nohighlight">\( \mathrm{RMSE}(\boldsymbol{\theta}
 <p><span class="math notranslate nohighlight">\(\eta\)</span> is the update factor for parameters once gradient is computed, called the <strong><em>learning rate</em></strong>.</p>
 <p>It has a direct impact on the “speed” of the gradient descent.</p>
 <div class="math notranslate nohighlight">
-\[ \boldsymbol{\theta_{next}} = \boldsymbol{\theta} - \eta\nabla_{\boldsymbol{\theta}}\mathcal{L}(\boldsymbol{\theta})\]</div>
+\[ \pmb{\theta_{next}} = \pmb{\theta} - \eta\nabla_{\boldsymbol{\theta}}\mathcal{L}(\boldsymbol{\theta})\]</div>
 </div>
 <div class="section" id="importance-of-learning-rate">
 <h3>Importance of learning rate<a class="headerlink" href="#importance-of-learning-rate" title="Permalink to this headline">¶</a></h3>
-<p><img alt="Learning rate" src="../_images/learning_rate.png" /></p>
+<p><img alt="Learning rate" src="../_images/learning_rate1.png" /></p>
 <p><a class="reference external" href="https://developers.google.com/machine-learning/crash-course/fitter/graph">Interactive exercise</a></p>
 </div>
 <div class="section" id="the-local-minima-problem">
@@ -1075,7 +1108,7 @@ $<span class="math notranslate nohighlight">\( \mathrm{RMSE}(\boldsymbol{\theta}
 <h3>Performance metrics for regression<a class="headerlink" href="#performance-metrics-for-regression" title="Permalink to this headline">¶</a></h3>
 <p>A typical performance metric for regression tasks is RMSE.</p>
 <div class="math notranslate nohighlight">
-\[ \mathrm{RMSE}(\mathbf{X}, h_\theta) = \sqrt{\frac{1}{m}\sum_{i=1}^m (\mathcal{h}_\theta(\mathbf{x}^{(i)}) - \mathbf{y}^{(i)})^2} \]</div>
+\[ \mathrm{RMSE}(\mathbf{X}, h_\theta) = \sqrt{\frac{1}{m}\sum_{i=1}^m (\mathcal{h}_\theta(\mathbf{x}^{(i)}) - y^{(i)})^2} \]</div>
 <p>MAE (less sensitive to outliers) and MSE can also be used.</p>
 </div>
 <div class="section" id="performance-metrics-for-classification">
@@ -1099,8 +1132,8 @@ $<span class="math notranslate nohighlight">\( \mathrm{RMSE}(\boldsymbol{\theta}
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ True False False]
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.101, 0.899],
-       [0.999, 0.001],
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.153, 0.847],
+       [1.   , 0.   ],
        [1.   , 0.   ]])
 </pre></div>
 </div>
@@ -1148,9 +1181,9 @@ $<span class="math notranslate nohighlight">\( \mathrm{RMSE}(\boldsymbol{\theta}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training accuracy: 0.97550
-Manual computation: 0.97550
-CV accuracy: [0.97225 0.9711  0.972  ]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training accuracy: 0.97305
+Manual computation: 0.97305
+CV accuracy: [0.97055 0.97155 0.96275]
 </pre></div>
 </div>
 </div>
@@ -1268,11 +1301,11 @@ Recall = \frac{1}{1 + 8} = 11\%\]</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              precision    recall  f1-score   support
 
        False       0.98      0.99      0.99     54579
-        True       0.89      0.83      0.86      5421
+        True       0.94      0.75      0.83      5421
 
-    accuracy                           0.98     60000
-   macro avg       0.94      0.91      0.92     60000
-weighted avg       0.97      0.98      0.98     60000
+    accuracy                           0.97     60000
+   macro avg       0.96      0.87      0.91     60000
+weighted avg       0.97      0.97      0.97     60000
 </pre></div>
 </div>
 </div>
@@ -1331,7 +1364,8 @@ weighted avg       0.97      0.98      0.98     60000
 <h3>Multiclass classification<a class="headerlink" href="#multiclass-classification" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_train</span> <span class="o">=</span> <span class="n">train_labels</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Using all digits in the datasets</span>
+<span class="n">y_train</span> <span class="o">=</span> <span class="n">train_labels</span>
 <span class="n">y_test</span> <span class="o">=</span> <span class="n">test_labels</span>
 
 <span class="c1"># Training a SGD classifier to recognize all digits, not just 5s</span>
@@ -1345,8 +1379,8 @@ weighted avg       0.97      0.98      0.98     60000
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training accuracy: 0.91975
-Test accuracy: 0.91580
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training accuracy: 0.92008
+Test accuracy: 0.91650
 </pre></div>
 </div>
 </div>
