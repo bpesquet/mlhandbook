@@ -1,6 +1,6 @@
 # Acknowledgments
 
-Thanks to the following authors and organizations for sharing their knowledge!
+All of these resources inspired this book and are well worth studying. Thanks to the following authors and organizations for sharing their knowledge!
 
 ## Online courses
 
@@ -13,6 +13,10 @@ Thanks to the following authors and organizations for sharing their knowledge!
 - [Deep Learning with Python](https://www.manning.com/books/deep-learning-with-python) ([source code](https://github.com/fchollet/deep-learning-with-python-notebooks)) by François Chollet.
 - [A Whirlwind Tour of Python](https://jakevdp.github.io/WhirlwindTourOfPython/) and [Python Data Science Handbook](https://jakevdp.github.io/PythonDataScienceHandbook/) by Jake VanderPlas.
 - [Neural Networks and Deep Learning](http://neuralnetworksanddeeplearning.com/) by Michael Nielsen.
+
+## Repositories
+
+- [Homemade Machine Learning](https://github.com/trekhleb/homemade-machine-learning) by Oleksii Trekhleb.
 
 ## Articles
 
