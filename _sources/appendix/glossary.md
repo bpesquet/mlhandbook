@@ -32,6 +32,9 @@ Broadcasting
 Confusion matrix
   Soon!
 
+Decision boundary
+  Frontier between the classes learned by a classification model.
+
 Precision
   Evaluation matrix measuring the frequency with which a model was correct when predicting the positive class ([Wikipedia](https://en.wikipedia.org/wiki/Evaluation_of_binary_classifiers)).
 ```

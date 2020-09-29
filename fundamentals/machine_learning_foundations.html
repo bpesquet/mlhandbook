@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 
 <html>
@@ -7,9 +6,26 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Machine Learning foundations &#8212; Machine Learning Handbook</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
-    <link href="../_static/css/index.css" rel="stylesheet">
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
+    
+  <link rel="stylesheet" href="../_static/css/index.d431a4ee1c1efae0e38bdfebc22debff.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.bfb7730f9caf2ec0b46a44615585038c.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
@@ -17,6 +33,9 @@
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.30270b6e4c972e43c488.js">
+
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
@@ -25,9 +44,9 @@
     <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/sphinx-book-theme.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.be0a4a0c39cd630af62a2fcf693f3f06.js"></script>
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
@@ -42,8 +61,8 @@
     <link rel="next" title="Linear Regression" href="../algorithms/linear_regression.html" />
     <link rel="prev" title="Machine Learning in action" href="machine_learning_in_action.html" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="docsearch:language" content="en">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
 
 
 
@@ -104,6 +123,11 @@
  <li class="toctree-l1">
   <a class="reference internal" href="../algorithms/linear_regression.html">
    Linear Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../algorithms/logistic_regression.html">
+   Logistic Regression
   </a>
  </li>
  <li class="toctree-l1">
@@ -285,6 +309,7 @@
 
     <!-- Table of contents -->
     <div class="d-none d-md-block col-md-2 bd-toc show">
+        
         <div class="tocsection onthispage pt-5 pb-3">
             <i class="fas fa-list"></i> Contents
         </div>
@@ -536,6 +561,7 @@
 </ul>
 
         </nav>
+        
     </div>
 </div>
     <div id="main-content" class="row">
@@ -773,7 +799,7 @@ x_test: (10000, 784)
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\pmb{\theta}\)</span> (sometime noted <span class="math notranslate nohighlight">\(\pmb{\omega}\)</span>): model’s internal parameters vector.</p></li>
 <li><p><span class="math notranslate nohighlight">\(h_\theta()\)</span>: model’s prediction function (<em>hypothesis function</em>), using the model parameters <span class="math notranslate nohighlight">\(\pmb{\theta}\)</span> to define the relationship between features and labels.</p></li>
-<li><p><span class="math notranslate nohighlight">\(y'^{(i)}\)</span> (sometimes noted <span class="math notranslate nohighlight">\(\hat{y}^{(i)}\)</span>): hypothesis function’s output (model prediction).</p></li>
+<li><p><span class="math notranslate nohighlight">\(y'^{(i)}\)</span> (sometimes noted <span class="math notranslate nohighlight">\(\hat{y}^{(i)}\)</span>): hypothesis function output (model prediction).</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[y'^{(i)} = h_\theta(\pmb{x}^{(i)})\]</div>
@@ -783,7 +809,7 @@ x_test: (10000, 784)
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\mathcal{L_{\pmb{X, y}}(\pmb{\theta})}\)</span>, sometimes noted <span class="math notranslate nohighlight">\(\mathcal{J_{\pmb{X, y}}(\pmb{\theta})}\)</span>: <strong>loss</strong> (or <strong>cost</strong>) function that quantifies the difference between expected results (called <em>ground truth</em>) and actual results computed by the model.</p></li>
 <li><p>During model training, the input dataset <span class="math notranslate nohighlight">\(\pmb{X}\)</span> and the expected results <span class="math notranslate nohighlight">\(\pmb{y}\)</span> are treated as constants. The loss depends solely on the model parameters <span class="math notranslate nohighlight">\(\pmb{\theta}\)</span>. To simplify notations, the loss function will be written <span class="math notranslate nohighlight">\(\mathcal{L(\pmb{\theta})}\)</span>.</p></li>
-<li><p>Different loss functions exists. The choice depends on the learning type.</p></li>
+<li><p>Different loss functions exist. The choice depends on the learning type.</p></li>
 </ul>
 </div>
 <div class="section" id="loss-functions-for-regression">
@@ -990,7 +1016,7 @@ x_test: (10000, 784)
 <p><span class="math notranslate nohighlight">\(\eta\)</span> is the update factor for parameters once gradient is computed, called the <strong><em>learning rate</em></strong>.</p>
 <p>It has a direct impact on the “speed” of the gradient descent.</p>
 <div class="math notranslate nohighlight">
-\[ \pmb{\theta_{next}} = \pmb{\theta} - \eta\nabla_{\boldsymbol{\theta}}\mathcal{L}(\boldsymbol{\theta})\]</div>
+\[\pmb{\theta_{next}} = \pmb{\theta} - \eta\nabla_{\boldsymbol{\theta}}\mathcal{L}(\boldsymbol{\theta})\]</div>
 </div>
 <div class="section" id="importance-of-learning-rate">
 <h3>Importance of learning rate<a class="headerlink" href="#importance-of-learning-rate" title="Permalink to this headline">¶</a></h3>
@@ -1448,7 +1474,10 @@ Test accuracy: 0.91650
       </div>
     </div>
 
-    <script src="../_static/js/index.js"></script>
+    
+  <script src="../_static/js/index.30270b6e4c972e43c488.js"></script>
+
+
     
   </body>
 </html>
