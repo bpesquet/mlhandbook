@@ -1,18 +1,19 @@
 # Acknowledgments
 
-All of these resources inspired this book and are well worth studying. Thanks to the following authors and organizations for sharing their knowledge!
-
-## Online courses
-
-- Google's [Machine Learning Crash Course](https://developers.google.com/machine-learning/crash-course).
-- Andrew Ng's [Machine Learning Course](https://www.coursera.org/learn/machine-learning) and [Deep Learning Specialization](https://www.deeplearning.ai/) on Coursera.
+All these resources inspired this book and are well worth studying. Thanks to the following authors and organizations for sharing their knowledge!
 
 ## Books
 
 - [Hands-on Machine Learning with scikit-learn, Keras & TensorFlow](https://www.oreilly.com/library/view/hands-on-machine-learning/9781492032632/) ([source code](https://github.com/ageron/handson-ml2)) by Aurélien Géron.
 - [Deep Learning with Python](https://www.manning.com/books/deep-learning-with-python) ([source code](https://github.com/fchollet/deep-learning-with-python-notebooks)) by François Chollet.
+- [Data Science From Scratch](https://www.oreilly.com/library/view/data-science-from/9781492041122/) ([source code](https://github.com/joelgrus/data-science-from-scratch)) by Joel Grus.
 - [A Whirlwind Tour of Python](https://jakevdp.github.io/WhirlwindTourOfPython/) and [Python Data Science Handbook](https://jakevdp.github.io/PythonDataScienceHandbook/) by Jake VanderPlas.
 - [Neural Networks and Deep Learning](http://neuralnetworksanddeeplearning.com/) by Michael Nielsen.
+
+## Online courses
+
+- Google's [Machine Learning Crash Course](https://developers.google.com/machine-learning/crash-course).
+- Andrew Ng's [Machine Learning Course](https://www.coursera.org/learn/machine-learning) and [Deep Learning Specialization](https://www.deeplearning.ai/) on Coursera.
 
 ## Repositories
 
