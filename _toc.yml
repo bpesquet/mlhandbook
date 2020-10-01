@@ -23,6 +23,7 @@
   - file: tools/pandas
   - file: tools/matplotlib
   - file: tools/scikit-learn
+  - file: tools/keras
 
 - part: Appendix
   chapters:
