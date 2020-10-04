@@ -37,4 +37,7 @@ Decision boundary
 
 Precision
   Evaluation matrix measuring the frequency with which a model was correct when predicting the positive class ([Wikipedia](https://en.wikipedia.org/wiki/Evaluation_of_binary_classifiers)).
+
+Self-supervised learning
+  Form of unsupervised learning in which labels are automatically generated from the data itself, then a model is supervisely trained on the resulting dataset.
 ```

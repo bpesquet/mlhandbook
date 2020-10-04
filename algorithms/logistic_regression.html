@@ -187,6 +187,11 @@
    scikit-learn
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tools/keras.html">
+   Keras
+  </a>
+ </li>
 </ul>
 <p class="caption">
  <span class="caption-text">
@@ -353,11 +358,6 @@
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#example-classify-planar-data">
      Example: classify planar data
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#interactive-example">
-     Interactive example
     </a>
    </li>
   </ul>
@@ -653,10 +653,6 @@ weighted avg       0.94      0.94      0.94      1000
 </div>
 </div>
 </div>
-<div class="section" id="interactive-example">
-<h3>Interactive example<a class="headerlink" href="#interactive-example" title="Permalink to this headline">¶</a></h3>
-<p><a class="reference external" href="https://playground.tensorflow.org/#activation=sigmoid&amp;batchSize=10&amp;dataset=gauss%C2%AEDataset=reg-plane&amp;learningRate=0.03%C2%AEularizationRate=0&amp;noise=25&amp;networkShape=1&amp;seed=0.93645&amp;showTestData=false&amp;discretize=false&amp;percTrainData=80&amp;x=true&amp;y=true&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=classification&amp;initZero=false&amp;hideText=false&amp;showTestData_hide=true&amp;discretize_hide=true%C2%AEularization_hide=true&amp;dataset_hide=true&amp;batchSize_hide=true%C2%AEularizationRate_hide=true&amp;percTrainData_hide=true&amp;numHiddenLayers_hide=true&amp;problem_hide=true"><img alt="LR on the TF playground" src="../_images/lr_tf_playground.png" /></a></p>
-</div>
 </div>
 <div class="section" id="softmax-regression">
 <h2>Softmax regression<a class="headerlink" href="#softmax-regression" title="Permalink to this headline">¶</a></h2>
@@ -670,7 +666,7 @@ weighted avg       0.94      0.94      0.94      1000
 </div>
 <div class="section" id="the-softmax-function">
 <h3>The softmax function<a class="headerlink" href="#the-softmax-function" title="Permalink to this headline">¶</a></h3>
-<p>Transforms a vector <span class="math notranslate nohighlight">\(\pmb{v} \in \pmb{R}^K\)</span> into a probability distribution.</p>
+<p>Transforms a vector <span class="math notranslate nohighlight">\(\pmb{v} \in \pmb{R}^K\)</span> into a probability distribution. Multiclass generalization of the <em>sigmoid</em> function.</p>
 <div class="math notranslate nohighlight">
 \[\sigma(s(\pmb{x}))_k = \frac{e^{s_k(\pmb{x})}}{\sum_{k=1}^K {e^{s_k(\pmb{x})}}}\;\;\;\;
 \sum_{k=1}^K \sigma(s(\pmb{x}))_k = 1\]</div>
@@ -756,7 +752,7 @@ weighted avg       0.94      0.94      0.94      1000
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/logistic_regression_28_0.png" src="../_images/logistic_regression_28_0.png" />
+<img alt="../_images/logistic_regression_27_0.png" src="../_images/logistic_regression_27_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -809,7 +805,7 @@ weighted avg       1.00      1.00      1.00      1000
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/logistic_regression_31_0.png" src="../_images/logistic_regression_31_0.png" />
+<img alt="../_images/logistic_regression_30_0.png" src="../_images/logistic_regression_30_0.png" />
 </div>
 </div>
 </div>

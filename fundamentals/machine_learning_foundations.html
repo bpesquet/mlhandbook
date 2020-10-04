@@ -187,6 +187,11 @@
    scikit-learn
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tools/keras.html">
+   Keras
+  </a>
+ </li>
 </ul>
 <p class="caption">
  <span class="caption-text">
@@ -835,7 +840,7 @@ x_test: (10000, 784)
 <ul class="simple">
 <li><p>The expected result <span class="math notranslate nohighlight">\(y^{(i)}\)</span> is either 0 or 1.</p></li>
 <li><p>The computed result <span class="math notranslate nohighlight">\(y'^{(i)}\)</span> is a probability (float value between 0 and 1).</p></li>
-<li><p>A frequently used loss function for binary classification is the <em>Binary Crossentropy</em> (aka <em>Log Loss</em>):</p></li>
+<li><p>A frequently used loss function for binary classification is the <em>Binary Crossentropy</em> (aka <em>logistic loss</em> or <em>negative log likelyhood</em>):</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[\mathcal{L}(\boldsymbol{\pmb{\theta}}) = -\frac{1}{m}\sum_{i=1}^m \left(y^{(i)} \log_e(y'^{(i)}) + (1-y^{(i)}) \log_e(1-y'^{(i)})\right)\]</div>
