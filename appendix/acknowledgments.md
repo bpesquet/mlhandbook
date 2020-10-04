@@ -10,10 +10,11 @@ All these resources inspired this book and are well worth studying. Thanks to th
 - [A Whirlwind Tour of Python](https://jakevdp.github.io/WhirlwindTourOfPython/) and [Python Data Science Handbook](https://jakevdp.github.io/PythonDataScienceHandbook/) by Jake VanderPlas.
 - [Neural Networks and Deep Learning](http://neuralnetworksanddeeplearning.com/) by Michael Nielsen.
 
-## Online courses
+## Courses
 
 - Google's [Machine Learning Crash Course](https://developers.google.com/machine-learning/crash-course).
 - Andrew Ng's [Machine Learning Course](https://www.coursera.org/learn/machine-learning) and [Deep Learning Specialization](https://www.deeplearning.ai/) on Coursera.
+- UCLxDeepMind [lecture series](https://deepmind.com/learning-resources/deep-learning-lecture-series-2020).
 
 ## Repositories
 
