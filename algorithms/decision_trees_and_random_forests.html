@@ -814,13 +814,20 @@ y_train: (150,)
 <div class="section" id="example-gini-scores-for-the-trained-decision-tree">
 <h3>Example: Gini scores for the trained Decision Tree<a class="headerlink" href="#example-gini-scores-for-the-trained-decision-tree" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p>Root node:
-$<span class="math notranslate nohighlight">\(G_0 = 1 - ((\frac{50}{150})^2 + (\frac{50}{150})^2 + (\frac{50}{150})^2) = 1 - (\frac{1}{9} + \frac{1}{9} + \frac{1}{9}) = \frac{2}{3}\)</span>$</p></li>
-<li><p>Depth 1, left node:
-$<span class="math notranslate nohighlight">\(G_1 = 1 - ((\frac{50}{50})^2 + (\frac{0}{50})^2 + (\frac{0}{50})^2) = 1 - (1 + 0 + 0) = 0\)</span>$</p></li>
-<li><p>Depth 2, left node:
-$<span class="math notranslate nohighlight">\(G_3 = 1 - ((\frac{0}{54})^2 + (\frac{49}{54})^2 + (\frac{5}{54})^2) \simeq 0.168\)</span>$</p></li>
+<li><p>Root node:</p></li>
 </ul>
+<div class="math notranslate nohighlight">
+\[G_0 = 1 - ((\frac{50}{150})^2 + (\frac{50}{150})^2 + (\frac{50}{150})^2) = 1 - (\frac{1}{9} + \frac{1}{9} + \frac{1}{9}) = \frac{2}{3}\]</div>
+<ul class="simple">
+<li><p>Depth 1, left node:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[G_1 = 1 - ((\frac{50}{50})^2 + (\frac{0}{50})^2 + (\frac{0}{50})^2) = 1 - (1 + 0 + 0) = 0\]</div>
+<ul class="simple">
+<li><p>Depth 2, left node:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[G_3 = 1 - ((\frac{0}{54})^2 + (\frac{49}{54})^2 + (\frac{5}{54})^2) \simeq 0.168\]</div>
 </div>
 <div class="section" id="example-decision-boundaries-for-the-trained-decision-tree">
 <h3>Example: decision boundaries for the trained Decision Tree<a class="headerlink" href="#example-decision-boundaries-for-the-trained-decision-tree" title="Permalink to this headline">¶</a></h3>
