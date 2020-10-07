@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Convolutional Neural Networks &#8212; Machine Learning Handbook</title>
     
-  <link rel="stylesheet" href="../_static/css/index.d431a4ee1c1efae0e38bdfebc22debff.css">
+  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
     
   <link rel="stylesheet"
@@ -25,7 +25,7 @@
     href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
 
     
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.bfb7730f9caf2ec0b46a44615585038c.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.2d2078699c18a0efb88233928e1cf6ed.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.30270b6e4c972e43c488.js">
+  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
 
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -283,7 +283,8 @@
 
         <!-- Full screen (wrap in <a> to have style consistency -->
         <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
                     class="fas fa-expand"></i></button></a>
 
         <!-- Launch buttons -->
@@ -336,6 +337,11 @@
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#topological-structure-of-objects">
+     Topological structure of objects
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#general-cnn-design">
      General CNN design
     </a>
@@ -354,6 +360,28 @@
     <a class="reference internal nav-link" href="#preserving-output-dimensions-with-padding">
      Preserving output dimensions with padding
     </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#valid-padding">
+       Valid padding
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#full-padding">
+       Full padding
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#same-padding">
+       Same padding
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#convolutions-inputs-and-outputs-tensors">
+     Convolutions inputs and outputs: tensors
+    </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#d-convolutions-on-3d-tensors">
@@ -369,10 +397,22 @@
     <a class="reference internal nav-link" href="#the-pooling-operation">
      The pooling operation
     </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#pooling-result">
+       Pooling result
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#pooling-output">
+       Pooling output
+      </a>
+     </li>
+    </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#pooling-output">
-     Pooling output
+    <a class="reference internal nav-link" href="#interpretation">
+     Interpretation
     </a>
    </li>
   </ul>
@@ -412,6 +452,11 @@
      Microsoft ResNet (2015)
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#depth-challenges-and-solutions">
+     Depth: challenges and solutions
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -433,32 +478,34 @@
     <a class="reference internal nav-link" href="#example-training-a-cnn-to-recognize-fashion-items">
      Example: training a CNN to recognize fashion items
     </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#environment-setup">
-     Environment setup
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#data-preprocessing">
-     Data preprocessing
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#expected-convnet-architecture">
-     Expected convnet architecture
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#interpretation">
-     Interpretation
-    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#environment-setup">
+       Environment setup
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#data-preprocessing">
+       Data preprocessing
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#expected-convnet-architecture">
+       Expected convnet architecture
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#convnet-training">
+       Convnet training
+      </a>
+     </li>
+    </ul>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#using-a-pretrained-model">
-   Using a pretrained model
+  <a class="reference internal nav-link" href="#using-a-pretrained-convnet">
+   Using a pretrained convnet
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -469,6 +516,11 @@
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#feature-extraction">
      Feature extraction
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fine-tuning">
+     Fine-tuning
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -497,7 +549,7 @@
 <li><p>Architecture</p></li>
 <li><p>History</p></li>
 <li><p>Training a convnet</p></li>
-<li><p>Using a pretrained model</p></li>
+<li><p>Using a pretrained convnet</p></li>
 </ul>
 </div>
 <div class="section" id="architecture">
@@ -507,9 +559,16 @@
 <p>The visual world has the following properties:</p>
 <ul class="simple">
 <li><p>Translation invariance.</p></li>
-<li><p>Spatial hierarchy: complex and abstract concepts are composed from simple elements.</p></li>
+<li><p>Locality: nearby pixels are more strongly correlated</p></li>
+<li><p>Spatial hierarchy: complex and abstract concepts are composed from simple, local elements.</p></li>
 </ul>
 <p>Classical models are not designed to detect local patterns in images.</p>
+<p><a class="reference external" href="https://youtu.be/shVKhOmT0HE"><img alt="Visual world" src="../_images/visual_world.png" /></a></p>
+</div>
+<div class="section" id="topological-structure-of-objects">
+<h3>Topological structure of objects<a class="headerlink" href="#topological-structure-of-objects" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://youtu.be/shVKhOmT0HE"><img alt="Topological structure" src="../_images/topological_structure.png" /></a></p>
+<p><a class="reference external" href="https://youtu.be/shVKhOmT0HE"><img alt="From edges to objects" src="../_images/edges_to_objects.png" /></a></p>
 </div>
 <div class="section" id="general-cnn-design">
 <h3>General CNN design<a class="headerlink" href="#general-cnn-design" title="Permalink to this headline">¶</a></h3>
@@ -517,7 +576,7 @@
 </div>
 <div class="section" id="the-convolution-operation">
 <h3>The convolution operation<a class="headerlink" href="#the-convolution-operation" title="Permalink to this headline">¶</a></h3>
-<p>Apply a filter or <strong>kernel</strong> to data. Result is called a <strong>feature map</strong>.</p>
+<p>Apply a <strong>kernel</strong> to data. Result is called a <strong>feature map</strong>.</p>
 <p><a class="reference external" href="https://developers.google.com/machine-learning/practica/image-classification/convolutional-neural-networks"><img alt="Convolution with a 3x3 filter of depth 1 applied on 5x5 data" src="../_images/convolution_overview.gif" /></a></p>
 <p><img alt="Convolution example" src="../_images/convolution_example.jpeg" /></p>
 </div>
@@ -534,13 +593,33 @@
 <div class="section" id="preserving-output-dimensions-with-padding">
 <h3>Preserving output dimensions with padding<a class="headerlink" href="#preserving-output-dimensions-with-padding" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference external" href="https://towardsdatascience.com/types-of-convolutions-in-deep-learning-717013397f4d"><img alt="Preserving output dimensions with padding" src="../_images/2d_convol.gif" /></a></p>
+<div class="section" id="valid-padding">
+<h4>Valid padding<a class="headerlink" href="#valid-padding" title="Permalink to this headline">¶</a></h4>
+<p>Output size = input size - kernel size + 1</p>
+<p><a class="reference external" href="https://youtu.be/shVKhOmT0HE"><img alt="Valid padding" src="../_images/padding_valid.png" /></a></p>
+</div>
+<div class="section" id="full-padding">
+<h4>Full padding<a class="headerlink" href="#full-padding" title="Permalink to this headline">¶</a></h4>
+<p>Output size = input size + kernel size - 1</p>
+<p><a class="reference external" href="https://youtu.be/shVKhOmT0HE"><img alt="Valid padding" src="../_images/padding_full.png" /></a></p>
+</div>
+<div class="section" id="same-padding">
+<h4>Same padding<a class="headerlink" href="#same-padding" title="Permalink to this headline">¶</a></h4>
+<p>Output size = input size</p>
+<p><a class="reference external" href="https://youtu.be/shVKhOmT0HE"><img alt="Valid padding" src="../_images/padding_same.png" /></a></p>
+</div>
+</div>
+<div class="section" id="convolutions-inputs-and-outputs-tensors">
+<h3>Convolutions inputs and outputs: tensors<a class="headerlink" href="#convolutions-inputs-and-outputs-tensors" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://youtu.be/shVKhOmT0HE"><img alt="Convolution inputs and outputs" src="../_images/conv_inputs_outputs.png" /></a></p>
 </div>
 <div class="section" id="d-convolutions-on-3d-tensors">
 <h3>2D convolutions on 3D tensors<a class="headerlink" href="#d-convolutions-on-3d-tensors" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p>An image has several color channels.</p></li>
-<li><p>Number of channels = filter depth.</p></li>
-<li><p>The convolution result is still a scalar.</p></li>
+<li><p>Convolution input data is 3-dimensional: images with height, width and color channels, or features maps produced by previous layers.</p></li>
+<li><p>Each convolution filter is a collection of <em>kernels</em> with distinct weights, one for every input channel.</p></li>
+<li><p>At each location, every input channel is convolved with the corresponding kernel. The results are summed to compute the (scalar) filter output for the location.</p></li>
+<li><p>Sliding one filter over the input data produces a 2D output feature map.</p></li>
 </ul>
 <p><a class="reference external" href="https://towardsdatascience.com/applied-deep-learning-part-4-convolutional-neural-networks-584bc134c1e2"><img alt="2D convolution on a 32x32x3 image with 10 filters" src="../_images/conv_image.png" /></a></p>
 <p><a class="reference external" href="https://stackoverflow.com/a/44628011/2380880"><img alt="2D convolution over RGB image" src="../_images/2D_conv_over_rgb_image.png" /></a></p>
@@ -560,10 +639,25 @@
 <li><p>Often done by selecting maximum values (<em>max pooling</em>).</p></li>
 </ul>
 <p><a class="reference external" href="https://developers.google.com/machine-learning/practica/image-classification/convolutional-neural-networks"><img alt="Max pooling with 2x2 filter and stride of 2" src="../_images/maxpool_animation.gif" /></a></p>
+<div class="section" id="pooling-result">
+<h4>Pooling result<a class="headerlink" href="#pooling-result" title="Permalink to this headline">¶</a></h4>
+<p><a class="reference external" href="https://youtu.be/shVKhOmT0HE"><img alt="Pooling result" src="../_images/pooling_result.png" /></a></p>
 </div>
 <div class="section" id="pooling-output">
-<h3>Pooling output<a class="headerlink" href="#pooling-output" title="Permalink to this headline">¶</a></h3>
+<h4>Pooling output<a class="headerlink" href="#pooling-output" title="Permalink to this headline">¶</a></h4>
 <p><a class="reference external" href="https://towardsdatascience.com/applied-deep-learning-part-4-convolutional-neural-networks-584bc134c1e2"><img alt="Pooling with a 2x2 filter and stride of 2 on 10 32x32 feature maps" src="../_images/maxpooling_image.png" /></a></p>
+</div>
+</div>
+<div class="section" id="interpretation">
+<h3>Interpretation<a class="headerlink" href="#interpretation" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Convolution layers act as <strong>feature extractors</strong>.</p></li>
+<li><p>Dense layers use the extracted features to classify data.</p></li>
+</ul>
+<p><img alt="A convnet" src="../_images/convnet.jpeg" /></p>
+<p><a class="reference external" href="https://harishnarayanan.org/writing/artistic-style-transfer/"><img alt="Feature extraction with a CNN" src="../_images/representation_learning.png" /></a></p>
+<p><a class="reference external" href="https://transcranial.github.io/keras-js/#/mnist-cnn"><img alt="Visualizing convnet layers on MNIST" src="../_images/keras_js_layers.png" /></a></p>
+<p><a class="reference external" href="http://scs.ryerson.ca/~aharley/vis/conv/flat.html"><img alt="Another visualization of intermediate layers on MNIST" src="../_images/conv_all_mnist.png" /></a></p>
 </div>
 </div>
 <div class="section" id="history">
@@ -625,6 +719,25 @@
 <p><img alt="ResNet" src="../_images/resnet_archi.png" /></p>
 <p><img alt="Deeper model" src="../_images/deeper_model.jpg" /></p>
 </div>
+<div class="section" id="depth-challenges-and-solutions">
+<h3>Depth: challenges and solutions<a class="headerlink" href="#depth-challenges-and-solutions" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Challenges</p>
+<ul>
+<li><p>Computational complexity</p></li>
+<li><p>Optimization difficulties</p></li>
+</ul>
+</li>
+<li><p>Solutions</p>
+<ul>
+<li><p>Careful initialization</p></li>
+<li><p>Sophisticated optimizers</p></li>
+<li><p>Normalisation layers</p></li>
+<li><p>Network design</p></li>
+</ul>
+</li>
+</ul>
+</div>
 </div>
 <div class="section" id="training-a-convnet">
 <h2>Training a convnet<a class="headerlink" href="#training-a-convnet" title="Permalink to this headline">¶</a></h2>
@@ -635,16 +748,16 @@
 </div>
 <div class="section" id="data-augmentation">
 <h3>Data augmentation<a class="headerlink" href="#data-augmentation" title="Permalink to this headline">¶</a></h3>
-<p>Enriching the dataset with new samples created by applying operations on existing ones.</p>
+<p>By design, convnets are only robust against translation. <strong>Data augmentation</strong> can make them robust against rotation and scaling.</p>
+<p>Principle: the dataset is enriched with new samples created by applying operations on existing ones.</p>
 <p><img alt="Data Augmentation" src="../_images/data_augmentation.png" /></p>
 </div>
 <div class="section" id="example-training-a-cnn-to-recognize-fashion-items">
 <h3>Example: training a CNN to recognize fashion items<a class="headerlink" href="#example-training-a-cnn-to-recognize-fashion-items" title="Permalink to this headline">¶</a></h3>
 <p>The <a class="reference external" href="https://github.com/zalandoresearch/fashion-mnist">Fashion-MNIST</a> dataset contains 70,000 28x28 grayscale images of fashion items.</p>
 <p>It is slightly more challenging than the ubiquitous MNIST handwritten digits dataset.</p>
-</div>
 <div class="section" id="environment-setup">
-<h3>Environment setup<a class="headerlink" href="#environment-setup" title="Permalink to this headline">¶</a></h3>
+<h4>Environment setup<a class="headerlink" href="#environment-setup" title="Permalink to this headline">¶</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">platform</span>
@@ -692,8 +805,8 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>TensorFlow version: 2.2.0
-Keras version: 2.3.0-tf
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>TensorFlow version: 2.0.0
+Keras version: 2.2.4-tf
 </pre></div>
 </div>
 </div>
@@ -771,7 +884,7 @@ Test images: (10000, 28, 28). Test labels: (10000,)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/convolutional_neural_networks_33_0.png" src="../_images/convolutional_neural_networks_33_0.png" />
+<img alt="../_images/convolutional_neural_networks_45_0.png" src="../_images/convolutional_neural_networks_45_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -807,36 +920,36 @@ Test images: (10000, 28, 28). Test labels: (10000,)
   </thead>
   <tbody>
     <tr>
-      <th>34294</th>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>24514</th>
+      <th>8153</th>
       <td>2</td>
     </tr>
     <tr>
-      <th>6343</th>
+      <th>22059</th>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>36821</th>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>4323</th>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>32743</th>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>51936</th>
       <td>0</td>
     </tr>
     <tr>
-      <th>42906</th>
-      <td>5</td>
+      <th>44577</th>
+      <td>2</td>
     </tr>
     <tr>
-      <th>26422</th>
-      <td>8</td>
-    </tr>
-    <tr>
-      <th>4430</th>
-      <td>6</td>
-    </tr>
-    <tr>
-      <th>33860</th>
-      <td>8</td>
-    </tr>
-    <tr>
-      <th>50375</th>
-      <td>1</td>
+      <th>42589</th>
+      <td>9</td>
     </tr>
   </tbody>
 </table>
@@ -844,7 +957,7 @@ Test images: (10000, 28, 28). Test labels: (10000,)
 </div>
 </div>
 <div class="section" id="data-preprocessing">
-<h3>Data preprocessing<a class="headerlink" href="#data-preprocessing" title="Permalink to this headline">¶</a></h3>
+<h4>Data preprocessing<a class="headerlink" href="#data-preprocessing" title="Permalink to this headline">¶</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Change pixel values from (0, 255) to (0, 1)</span>
@@ -873,7 +986,7 @@ x_test: (10000, 28, 28, 1). y_test: (10000, 10)
 </div>
 </div>
 <div class="section" id="expected-convnet-architecture">
-<h3>Expected convnet architecture<a class="headerlink" href="#expected-convnet-architecture" title="Permalink to this headline">¶</a></h3>
+<h4>Expected convnet architecture<a class="headerlink" href="#expected-convnet-architecture" title="Permalink to this headline">¶</a></h4>
 <p><img alt="Example CNN architecture" src="../_images/example_cnn_architecture.png" /></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -902,31 +1015,37 @@ x_test: (10000, 28, 28, 1). y_test: (10000, 10)
 <span class="n">cnn_model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.5</span><span class="p">))</span>
 <span class="c1"># Classification layer</span>
 <span class="n">cnn_model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;softmax&quot;</span><span class="p">))</span>
-
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print model summary</span>
 <span class="n">cnn_model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;sequential&quot;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;sequential_2&quot;
 _________________________________________________________________
 Layer (type)                 Output Shape              Param #   
 =================================================================
-conv2d (Conv2D)              (None, 26, 26, 32)        320       
+conv2d_2 (Conv2D)            (None, 26, 26, 32)        320       
 _________________________________________________________________
-max_pooling2d (MaxPooling2D) (None, 13, 13, 32)        0         
+max_pooling2d_2 (MaxPooling2 (None, 13, 13, 32)        0         
 _________________________________________________________________
-conv2d_1 (Conv2D)            (None, 11, 11, 64)        18496     
+conv2d_3 (Conv2D)            (None, 11, 11, 64)        18496     
 _________________________________________________________________
-max_pooling2d_1 (MaxPooling2 (None, 5, 5, 64)          0         
+max_pooling2d_3 (MaxPooling2 (None, 5, 5, 64)          0         
 _________________________________________________________________
-flatten (Flatten)            (None, 1600)              0         
+flatten_2 (Flatten)          (None, 1600)              0         
 _________________________________________________________________
-dense (Dense)                (None, 128)               204928    
+dense_4 (Dense)              (None, 128)               204928    
 _________________________________________________________________
-dropout (Dropout)            (None, 128)               0         
+dropout_2 (Dropout)          (None, 128)               0         
 _________________________________________________________________
-dense_1 (Dense)              (None, 10)                1290      
+dense_5 (Dense)              (None, 10)                1290      
 =================================================================
 Total params: 225,034
 Trainable params: 225,034
@@ -936,6 +1055,9 @@ _________________________________________________________________
 </div>
 </div>
 </div>
+</div>
+<div class="section" id="convnet-training">
+<h4>Convnet training<a class="headerlink" href="#convnet-training" title="Permalink to this headline">¶</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Preparing the model for training</span>
@@ -946,36 +1068,46 @@ _________________________________________________________________
 <span class="c1"># Training the model, using 10% of the training set for validation</span>
 <span class="c1"># (May take several minutes depending on your system)</span>
 <span class="n">history</span> <span class="o">=</span> <span class="n">cnn_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
-    <span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span> <span class="n">validation_split</span><span class="o">=</span><span class="mf">0.1</span>
+    <span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span> <span class="n">validation_split</span><span class="o">=</span><span class="mf">0.1</span>
 <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Train on 54000 samples, validate on 6000 samples
+Epoch 1/10
+54000/54000 - 31s - loss: 0.2915 - accuracy: 0.8961 - val_loss: 0.2692 - val_accuracy: 0.9013
+Epoch 2/10
+54000/54000 - 34s - loss: 0.2643 - accuracy: 0.9043 - val_loss: 0.2720 - val_accuracy: 0.9000
+Epoch 3/10
+54000/54000 - 25s - loss: 0.2423 - accuracy: 0.9126 - val_loss: 0.2521 - val_accuracy: 0.9077
+Epoch 4/10
+54000/54000 - 29s - loss: 0.2336 - accuracy: 0.9148 - val_loss: 0.2455 - val_accuracy: 0.9077
+Epoch 5/10
+54000/54000 - 34s - loss: 0.2169 - accuracy: 0.9212 - val_loss: 0.2495 - val_accuracy: 0.9102
+Epoch 6/10
+54000/54000 - 31s - loss: 0.2081 - accuracy: 0.9253 - val_loss: 0.2396 - val_accuracy: 0.9168
+Epoch 7/10
+54000/54000 - 32s - loss: 0.1936 - accuracy: 0.9291 - val_loss: 0.2454 - val_accuracy: 0.9137
+Epoch 8/10
+54000/54000 - 31s - loss: 0.1880 - accuracy: 0.9326 - val_loss: 0.2521 - val_accuracy: 0.9082
+Epoch 9/10
+54000/54000 - 27s - loss: 0.1782 - accuracy: 0.9352 - val_loss: 0.2562 - val_accuracy: 0.9115
+Epoch 10/10
+54000/54000 - 27s - loss: 0.1697 - accuracy: 0.9376 - val_loss: 0.2642 - val_accuracy: 0.9092
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot training history</span>
 <span class="n">plot_loss_acc</span><span class="p">(</span><span class="n">history</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/10
-422/422 [==============================] - 2s 4ms/step - loss: 0.5797 - accuracy: 0.7906 - val_loss: 0.3722 - val_accuracy: 0.8657
-Epoch 2/10
-422/422 [==============================] - 2s 4ms/step - loss: 0.3752 - accuracy: 0.8662 - val_loss: 0.3207 - val_accuracy: 0.8815
-Epoch 3/10
-422/422 [==============================] - 2s 4ms/step - loss: 0.3287 - accuracy: 0.8830 - val_loss: 0.2971 - val_accuracy: 0.8900
-Epoch 4/10
-422/422 [==============================] - 2s 4ms/step - loss: 0.2982 - accuracy: 0.8949 - val_loss: 0.2897 - val_accuracy: 0.8923
-Epoch 5/10
-422/422 [==============================] - 2s 4ms/step - loss: 0.2757 - accuracy: 0.9007 - val_loss: 0.2831 - val_accuracy: 0.8928
-Epoch 6/10
-422/422 [==============================] - 2s 4ms/step - loss: 0.2589 - accuracy: 0.9075 - val_loss: 0.2616 - val_accuracy: 0.9057
-Epoch 7/10
-422/422 [==============================] - 2s 4ms/step - loss: 0.2448 - accuracy: 0.9130 - val_loss: 0.2500 - val_accuracy: 0.9060
-Epoch 8/10
-422/422 [==============================] - 2s 4ms/step - loss: 0.2345 - accuracy: 0.9162 - val_loss: 0.2608 - val_accuracy: 0.9072
-Epoch 9/10
-422/422 [==============================] - 2s 4ms/step - loss: 0.2221 - accuracy: 0.9219 - val_loss: 0.2423 - val_accuracy: 0.9112
-Epoch 10/10
-422/422 [==============================] - 2s 4ms/step - loss: 0.2085 - accuracy: 0.9253 - val_loss: 0.2479 - val_accuracy: 0.9110
-</pre></div>
-</div>
-<img alt="../_images/convolutional_neural_networks_39_1.png" src="../_images/convolutional_neural_networks_39_1.png" />
+<img alt="../_images/convolutional_neural_networks_54_0.png" src="../_images/convolutional_neural_networks_54_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -988,34 +1120,32 @@ Epoch 10/10
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test accuracy: 0.90800
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test accuracy: 0.90460
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="section" id="interpretation">
-<h3>Interpretation<a class="headerlink" href="#interpretation" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li><p>Convolution layers act as <strong>feature extractors</strong>.</p></li>
-<li><p>Dense layers use the extracted features to classify data.</p></li>
-</ul>
-<p><a class="reference external" href="https://harishnarayanan.org/writing/artistic-style-transfer/"><img alt="Feature extraction with a CNN" src="../_images/representation_learning.png" /></a></p>
-<p><a class="reference external" href="https://transcranial.github.io/keras-js/#/mnist-cnn">Visualizing convnet layers on MNIST</a></p>
-<p><a class="reference external" href="http://scs.ryerson.ca/~aharley/vis/conv/flat.html"><img alt="Another visualization of intermediate layers on MNIST" src="../_images/conv_all_mnist.png" /></a></p>
 </div>
 </div>
-<div class="section" id="using-a-pretrained-model">
-<h2>Using a pretrained model<a class="headerlink" href="#using-a-pretrained-model" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="using-a-pretrained-convnet">
+<h2>Using a pretrained convnet<a class="headerlink" href="#using-a-pretrained-convnet" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="an-efficient-strategy">
 <h3>An efficient strategy<a class="headerlink" href="#an-efficient-strategy" title="Permalink to this headline">¶</a></h3>
-<p>A <em>pretrained model</em> is a saved network that was previously trained on a large dataset (typically on a large-scale image classification task).</p>
-<p>If the training set was general enough, it can act as a generic model and its learned features can be useful for many problems.</p>
+<p>A <em>pretrained convnet</em> is a saved network that was previously trained on a large dataset (typically on a large-scale image classification task). If the training set was general enough, it can act as a generic model and its learned features can be useful for many problems.</p>
+<p>It is an example of <em>transfer learning</em>.</p>
+<p>There are two ways to use a pretrained model: <em>feature extraction</em> and <em>fine-tuning</em>.</p>
 </div>
 <div class="section" id="feature-extraction">
 <h3>Feature extraction<a class="headerlink" href="#feature-extraction" title="Permalink to this headline">¶</a></h3>
-<p>Reuse the convolution base of a pretrained model, and add a custom classifier on top ot if.</p>
+<p>Reuse the convolution base of a pretrained model, and add a custom classifier trained from scratch on top ot if.</p>
 <p>State-of-the-art models (VGG, ResNet, Inception…) are regularly published by top AI institutions.</p>
+</div>
+<div class="section" id="fine-tuning">
+<h3>Fine-tuning<a class="headerlink" href="#fine-tuning" title="Permalink to this headline">¶</a></h3>
+<p>Slightly adjusts the top feature extraction layers of the model being reused, in order to make it more relevant for the new context.</p>
+<p>These top layers and the custom classification layers on top of them are jointly trained.</p>
+<p><img alt="Fine-tuning" src="../_images/fine_tuning.png" /></p>
 </div>
 <div class="section" id="example-using-a-pretrained-convnet-to-recognize-common-objects">
 <h3>Example: using a pretrained convnet to recognize common objects<a class="headerlink" href="#example-using-a-pretrained-convnet-to-recognize-common-objects" title="Permalink to this headline">¶</a></h3>
@@ -1032,9 +1162,7 @@ Epoch 10/10
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz
-170500096/170498071 [==============================] - 11s 0us/step
-Training images: (50000, 32, 32, 3). Training labels: (50000, 1)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training images: (50000, 32, 32, 3). Training labels: (50000, 1)
 Test images: (10000, 32, 32, 3). Test labels: (10000, 1)
 </pre></div>
 </div>
@@ -1053,7 +1181,7 @@ Test images: (10000, 32, 32, 3). Test labels: (10000, 1)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/convolutional_neural_networks_49_0.png" src="../_images/convolutional_neural_networks_49_0.png" />
+<img alt="../_images/convolutional_neural_networks_62_0.png" src="../_images/convolutional_neural_networks_62_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1092,13 +1220,11 @@ x_test: (10000, 32, 32, 3). y_test: (10000, 10)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://storage.googleapis.com/tensorflow/keras-applications/vgg16/vgg16_weights_tf_dim_ordering_tf_kernels_notop.h5
-58892288/58889256 [==============================] - 0s 0us/step
-Model: &quot;vgg16&quot;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;vgg16&quot;
 _________________________________________________________________
 Layer (type)                 Output Shape              Param #   
 =================================================================
-input_1 (InputLayer)         [(None, 32, 32, 3)]       0         
+input_2 (InputLayer)         [(None, 32, 32, 3)]       0         
 _________________________________________________________________
 block1_conv1 (Conv2D)        (None, 32, 32, 64)        1792      
 _________________________________________________________________
@@ -1161,19 +1287,19 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;sequential_5&quot;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;sequential_3&quot;
 _________________________________________________________________
 Layer (type)                 Output Shape              Param #   
 =================================================================
 vgg16 (Model)                (None, 1, 1, 512)         14714688  
 _________________________________________________________________
-flatten_5 (Flatten)          (None, 512)               0         
+flatten_3 (Flatten)          (None, 512)               0         
 _________________________________________________________________
-dense_10 (Dense)             (None, 512)               262656    
+dense_6 (Dense)              (None, 512)               262656    
 _________________________________________________________________
 dropout_3 (Dropout)          (None, 512)               0         
 _________________________________________________________________
-dense_11 (Dense)             (None, 10)                5130      
+dense_7 (Dense)              (None, 10)                5130      
 =================================================================
 Total params: 14,982,474
 Trainable params: 267,786
@@ -1193,56 +1319,66 @@ _________________________________________________________________
 <span class="c1"># Training the model, using 10% of the training set for validation</span>
 <span class="c1"># (May take several minutes depending on your system)</span>
 <span class="n">history</span> <span class="o">=</span> <span class="n">pretrained_cnn_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
-    <span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">validation_split</span><span class="o">=</span><span class="mf">0.1</span>
+    <span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">validation_split</span><span class="o">=</span><span class="mf">0.1</span>
 <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Train on 45000 samples, validate on 5000 samples
+Epoch 1/20
+45000/45000 - 396s - loss: 1.4510 - accuracy: 0.4911 - val_loss: 1.2314 - val_accuracy: 0.5674
+Epoch 2/20
+45000/45000 - 417s - loss: 1.2732 - accuracy: 0.5537 - val_loss: 1.1534 - val_accuracy: 0.5928
+Epoch 3/20
+45000/45000 - 408s - loss: 1.2234 - accuracy: 0.5702 - val_loss: 1.1371 - val_accuracy: 0.6020
+Epoch 4/20
+45000/45000 - 324s - loss: 1.1835 - accuracy: 0.5836 - val_loss: 1.1076 - val_accuracy: 0.6124
+Epoch 5/20
+45000/45000 - 744s - loss: 1.1595 - accuracy: 0.5926 - val_loss: 1.1065 - val_accuracy: 0.6142
+Epoch 6/20
+45000/45000 - 332s - loss: 1.1328 - accuracy: 0.6009 - val_loss: 1.1064 - val_accuracy: 0.6128
+Epoch 7/20
+45000/45000 - 325s - loss: 1.1131 - accuracy: 0.6108 - val_loss: 1.0831 - val_accuracy: 0.6212
+Epoch 8/20
+45000/45000 - 323s - loss: 1.0927 - accuracy: 0.6148 - val_loss: 1.0840 - val_accuracy: 0.6248
+Epoch 9/20
+45000/45000 - 623s - loss: 1.0787 - accuracy: 0.6207 - val_loss: 1.0865 - val_accuracy: 0.6210
+Epoch 10/20
+45000/45000 - 352s - loss: 1.0608 - accuracy: 0.6255 - val_loss: 1.0728 - val_accuracy: 0.6262
+Epoch 11/20
+45000/45000 - 346s - loss: 1.0455 - accuracy: 0.6313 - val_loss: 1.0640 - val_accuracy: 0.6292
+Epoch 12/20
+45000/45000 - 349s - loss: 1.0278 - accuracy: 0.6394 - val_loss: 1.0666 - val_accuracy: 0.6296
+Epoch 13/20
+45000/45000 - 346s - loss: 1.0165 - accuracy: 0.6428 - val_loss: 1.0568 - val_accuracy: 0.6294
+Epoch 14/20
+45000/45000 - 404s - loss: 1.0009 - accuracy: 0.6456 - val_loss: 1.0663 - val_accuracy: 0.6300
+Epoch 15/20
+45000/45000 - 351s - loss: 0.9874 - accuracy: 0.6488 - val_loss: 1.0621 - val_accuracy: 0.6342
+Epoch 16/20
+45000/45000 - 333s - loss: 0.9725 - accuracy: 0.6553 - val_loss: 1.0680 - val_accuracy: 0.6298
+Epoch 17/20
+45000/45000 - 374s - loss: 0.9600 - accuracy: 0.6607 - val_loss: 1.0786 - val_accuracy: 0.6278
+Epoch 18/20
+45000/45000 - 354s - loss: 0.9508 - accuracy: 0.6650 - val_loss: 1.0656 - val_accuracy: 0.6276
+Epoch 19/20
+45000/45000 - 349s - loss: 0.9318 - accuracy: 0.6665 - val_loss: 1.0849 - val_accuracy: 0.6246
+Epoch 20/20
+45000/45000 - 380s - loss: 0.9237 - accuracy: 0.6713 - val_loss: 1.0774 - val_accuracy: 0.6384
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot training history</span>
 <span class="n">plot_loss_acc</span><span class="p">(</span><span class="n">history</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/20
-1407/1407 [==============================] - 12s 8ms/step - loss: 1.4555 - accuracy: 0.4866 - val_loss: 1.2484 - val_accuracy: 0.5564
-Epoch 2/20
-1407/1407 [==============================] - 12s 8ms/step - loss: 1.2792 - accuracy: 0.5507 - val_loss: 1.1665 - val_accuracy: 0.5942
-Epoch 3/20
-1407/1407 [==============================] - 12s 8ms/step - loss: 1.2194 - accuracy: 0.5733 - val_loss: 1.1482 - val_accuracy: 0.6002
-Epoch 4/20
-1407/1407 [==============================] - 12s 8ms/step - loss: 1.1846 - accuracy: 0.5830 - val_loss: 1.1301 - val_accuracy: 0.6026
-Epoch 5/20
-1407/1407 [==============================] - 12s 8ms/step - loss: 1.1588 - accuracy: 0.5923 - val_loss: 1.1043 - val_accuracy: 0.6150
-Epoch 6/20
-1407/1407 [==============================] - 12s 8ms/step - loss: 1.1341 - accuracy: 0.6034 - val_loss: 1.0923 - val_accuracy: 0.6230
-Epoch 7/20
-1407/1407 [==============================] - 12s 8ms/step - loss: 1.1134 - accuracy: 0.6080 - val_loss: 1.0810 - val_accuracy: 0.6242
-Epoch 8/20
-1407/1407 [==============================] - 12s 8ms/step - loss: 1.0933 - accuracy: 0.6142 - val_loss: 1.0826 - val_accuracy: 0.6268
-Epoch 9/20
-1407/1407 [==============================] - 12s 8ms/step - loss: 1.0755 - accuracy: 0.6241 - val_loss: 1.0806 - val_accuracy: 0.6190
-Epoch 10/20
-1407/1407 [==============================] - 12s 8ms/step - loss: 1.0596 - accuracy: 0.6258 - val_loss: 1.0856 - val_accuracy: 0.6138
-Epoch 11/20
-1407/1407 [==============================] - 12s 8ms/step - loss: 1.0452 - accuracy: 0.6317 - val_loss: 1.0753 - val_accuracy: 0.6226
-Epoch 12/20
-1407/1407 [==============================] - 12s 8ms/step - loss: 1.0327 - accuracy: 0.6370 - val_loss: 1.0811 - val_accuracy: 0.6284
-Epoch 13/20
-1407/1407 [==============================] - 12s 8ms/step - loss: 1.0161 - accuracy: 0.6419 - val_loss: 1.0831 - val_accuracy: 0.6310
-Epoch 14/20
-1407/1407 [==============================] - 12s 8ms/step - loss: 1.0044 - accuracy: 0.6450 - val_loss: 1.0666 - val_accuracy: 0.6246
-Epoch 15/20
-1407/1407 [==============================] - 11s 8ms/step - loss: 0.9875 - accuracy: 0.6505 - val_loss: 1.0650 - val_accuracy: 0.6338
-Epoch 16/20
-1407/1407 [==============================] - 11s 8ms/step - loss: 0.9770 - accuracy: 0.6528 - val_loss: 1.0691 - val_accuracy: 0.6322
-Epoch 17/20
-1407/1407 [==============================] - 12s 8ms/step - loss: 0.9645 - accuracy: 0.6602 - val_loss: 1.0644 - val_accuracy: 0.6362
-Epoch 18/20
-1407/1407 [==============================] - 11s 8ms/step - loss: 0.9519 - accuracy: 0.6619 - val_loss: 1.0693 - val_accuracy: 0.6320
-Epoch 19/20
-1407/1407 [==============================] - 12s 8ms/step - loss: 0.9414 - accuracy: 0.6659 - val_loss: 1.0648 - val_accuracy: 0.6340
-Epoch 20/20
-1407/1407 [==============================] - 12s 8ms/step - loss: 0.9310 - accuracy: 0.6689 - val_loss: 1.0812 - val_accuracy: 0.6348
-</pre></div>
-</div>
-<img alt="../_images/convolutional_neural_networks_53_1.png" src="../_images/convolutional_neural_networks_53_1.png" />
+<img alt="../_images/convolutional_neural_networks_67_0.png" src="../_images/convolutional_neural_networks_67_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1255,7 +1391,7 @@ Epoch 20/20
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test accuracy: 0.62670
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test accuracy: 0.62180
 </pre></div>
 </div>
 </div>
@@ -1313,7 +1449,7 @@ Epoch 20/20
     </div>
 
     
-  <script src="../_static/js/index.30270b6e4c972e43c488.js"></script>
+  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
 
 
     
