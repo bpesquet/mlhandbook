@@ -25,7 +25,7 @@ launch_buttons:
   binderhub_url: "https://mybinder.org"
   colab_url: "https://colab.research.google.com"
 
-exclude_patterns: ["README.md", "algorithms/knn.ipynb", "fundamentals/deep_learning.ipynb", "tasks/data_analysis.ipynb", "tools/pytorch.ipynb"]
+exclude_patterns: ["README.md", "algorithms/knn.ipynb", "fundamentals/deep_learning.ipynb", "tasks/data_analysis.ipynb"]
 
 sphinx:
   config:
