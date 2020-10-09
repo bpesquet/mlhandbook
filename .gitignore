@@ -5,6 +5,7 @@ runs/
 *.dot
 fruit*.txt
 *.pkl
+data/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
