@@ -792,7 +792,7 @@ tensor([0.1669, 0.9538, 0.4398, 0.8256, 0.8639])
 </div>
 <div class="section" id="reshaping-with-view">
 <h3>Reshaping with <em>view()</em><a class="headerlink" href="#reshaping-with-view" title="Permalink to this headline">¶</a></h3>
-<p>PyTorch allows a tensor to be a <em>view</em> of an existing tensor. For memory efficiency reasons, view tensorw share the same underlying data with their base tensor.</p>
+<p>PyTorch allows a tensor to be a <em>view</em> of an existing tensor. For memory efficiency reasons, view tensors share the same underlying data with their base tensor.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Reshape into a (15,) vector</span>
@@ -1061,7 +1061,7 @@ symbolic expressions.</p></li>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create two tensors with autodiff activated</span>
-<span class="c1"># By default, operations are note tracked on user-created tensors</span>
+<span class="c1"># By default, operations are not tracked on user-created tensors</span>
 <span class="n">x1</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mf">2.0</span><span class="p">],</span> <span class="n">requires_grad</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">x2</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mf">5.0</span><span class="p">],</span> <span class="n">requires_grad</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>

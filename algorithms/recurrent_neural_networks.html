@@ -1199,17 +1199,17 @@ _________________________________________________________________
 <span class="n">basic_gru_model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">GRU</span><span class="p">(</span><span class="n">units</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="mi">1</span><span class="p">)))</span>
 
 <span class="c1"># Since TF 2.x, Keras separates biases for input and recurrent kernels</span>
-<span class="c1"># 3 weights for input + 3 input bias + 4 weights for previous state + 4 state bias = 12</span>
+<span class="c1"># 3 weights for input + 3 input bias + 3 weights for previous state + 3 state bias = 12</span>
 <span class="n">basic_gru_model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;sequential_5&quot;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;sequential_8&quot;
 _________________________________________________________________
 Layer (type)                 Output Shape              Param #   
 =================================================================
-gru (GRU)                    (None, 1)                 12        
+gru_5 (GRU)                  (None, 1)                 12        
 =================================================================
 Total params: 12
 Trainable params: 12
