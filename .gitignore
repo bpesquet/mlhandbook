@@ -1,6 +1,7 @@
 # Notebook execution output
 model.h5
 model.json
+model.png
 runs/
 *.dot
 fruit*.txt
