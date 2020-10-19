@@ -8,7 +8,7 @@ Accuracy
 Activation function
   A function (for example, ReLU or sigmoid) that generates a (typically nonlinear) output. Used in neural networks to define the output of a layer ([Wikipedia](https://en.wikipedia.org/wiki/Activation_function)).
 
-AUC
+AUROC
   Area Under the ROC Curve. An aggregate measure of a classifier' performance across all possible classification thresholds ([Wikipedia](https://en.wikipedia.org/wiki/Receiver_operating_characteristic#Area_under_the_curve)).
 
 Automatic differentiation (autodiff)
@@ -39,5 +39,5 @@ Precision
   Evaluation matrix measuring the frequency with which a model was correct when predicting the positive class ([Wikipedia](https://en.wikipedia.org/wiki/Evaluation_of_binary_classifiers)).
 
 Self-supervised learning
-  Form of unsupervised learning in which labels are automatically generated from the data itself, then a model is supervisely trained on the resulting dataset.
+  Form of Machine Learning in which labels are automatically generated from the data itself, then a model is supervisely trained on the resulting dataset.
 ```
