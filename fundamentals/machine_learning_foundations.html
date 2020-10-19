@@ -563,8 +563,8 @@
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#roc-curve-and-auc">
-     ROC curve and AUC
+    <a class="reference internal nav-link" href="#roc-curve-and-auroc">
+     ROC curve and AUROC
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -1361,15 +1361,15 @@ weighted avg       0.97      0.97      0.97     60000
 <li><p>Recall matters most when the cost of false negatives is high (example: tumor detection).</p></li>
 </ul>
 </div>
-<div class="section" id="roc-curve-and-auc">
-<h3>ROC curve and AUC<a class="headerlink" href="#roc-curve-and-auc" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="roc-curve-and-auroc">
+<h3>ROC curve and AUROC<a class="headerlink" href="#roc-curve-and-auroc" title="Permalink to this headline">¶</a></h3>
 <div class="math notranslate nohighlight">
 \[\text{TP Rate} = \frac{TP}{TP + FN} = Recall\;\;\;\;
 \text{FP Rate} = \frac{FP}{FP + TN}\]</div>
 <ul class="simple">
 <li><p>ROC stands for “Receiver Operating Characteristic”.</p></li>
 <li><p>A ROC curve plots TPR vs. FPR at different classification thresholds.</p></li>
-<li><p>AOC (“Area Under the ROC Curve”) provides an aggregate measure of performance across all possible classification thresholds.</p></li>
+<li><p>AUC or more precisely AUROC (“Area Under the ROC Curve”) provides an aggregate measure of performance across all possible classification thresholds.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
