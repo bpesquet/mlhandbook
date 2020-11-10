@@ -15,7 +15,7 @@
   - file: algorithms/convolutional_neural_networks
   - file: algorithms/recurrent_neural_networks
   - file: algorithms/autoencoders
-  - file: algorithms/generative_deep_learning
+  - file: algorithms/generative_adversarial_networks
 
 - part: Tools
   chapters:
