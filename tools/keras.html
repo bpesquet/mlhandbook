@@ -25,8 +25,8 @@
     href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
 
     
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.2d2078699c18a0efb88233928e1cf6ed.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -46,7 +46,7 @@
     <script src="../_static/copybutton.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.be0a4a0c39cd630af62a2fcf693f3f06.js"></script>
+    <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
@@ -84,15 +84,12 @@
   <h1 class="site-logo" id="site-title">Machine Learning Handbook</h1>
   
 </a>
-</div>
-
-<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form>
-
 <nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
-  <p class="caption">
+    <p class="caption collapsible-parent">
  <span class="caption-text">
   Fundamentals
  </span>
@@ -114,7 +111,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption collapsible-parent">
  <span class="caption-text">
   Algorithms
  </span>
@@ -156,12 +153,12 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../algorithms/generative_deep_learning.html">
-   Generative Deep Learning
+  <a class="reference internal" href="../algorithms/generative_adversarial_networks.html">
+   Generative Adversarial Networks
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption collapsible-parent">
  <span class="caption-text">
   Tools
  </span>
@@ -203,7 +200,7 @@
   </a>
  </li>
 </ul>
-<p class="caption">
+<p class="caption collapsible-parent">
  <span class="caption-text">
   Appendix
  </span>
@@ -221,9 +218,7 @@
  </li>
 </ul>
 
-</nav>
-
- <!-- To handle the deprecated key -->
+</nav> <!-- To handle the deprecated key -->
 
 <div class="navbar_extra_footer">
   Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
@@ -252,11 +247,11 @@
             <i class="fas fa-arrow-up"></i>
         </button>
         
-        <div class="dropdown-buttons-trigger">
+        
+<div class="dropdown-buttons-trigger">
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
             class="fas fa-download"></i></button>
 
-    
     <div class="dropdown-buttons">
         <!-- ipynb file if we had a myst markdown file -->
         
@@ -268,8 +263,8 @@
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
             onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
-    
 </div>
+
         <!-- Source interaction buttons -->
 
 <div class="dropdown-buttons-trigger">
@@ -433,8 +428,18 @@
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#reshape-layer">
+       Reshape layer
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#dropout-layer">
        Dropout layer
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#batchnormalization-layer">
+       BatchNormalization layer
       </a>
      </li>
     </ul>
@@ -452,6 +457,11 @@
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#conv2d-layer">
        Conv2D layer
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#conv2dtranspose-layer">
+       Conv2DTranspose layer
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
@@ -586,9 +596,12 @@
 <span class="kn">from</span> <span class="nn">tensorflow.keras.layers</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">Dense</span><span class="p">,</span>
     <span class="n">Flatten</span><span class="p">,</span>
+    <span class="n">Reshape</span><span class="p">,</span>
     <span class="n">Dropout</span><span class="p">,</span>
+    <span class="n">BatchNormalization</span><span class="p">,</span>
     <span class="n">Conv1D</span><span class="p">,</span>
     <span class="n">Conv2D</span><span class="p">,</span>
+    <span class="n">Conv2DTranspose</span><span class="p">,</span>
     <span class="n">MaxPooling2D</span><span class="p">,</span>
     <span class="n">SimpleRNN</span><span class="p">,</span>
     <span class="n">LSTM</span><span class="p">,</span>
@@ -599,8 +612,8 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>scikit-learn version: 0.22.1
-TensorFlow version: 2.0.0
-Keras version: 2.2.4-tf
+TensorFlow version: 2.3.1
+Keras version: 2.4.0
 </pre></div>
 </div>
 </div>
@@ -748,27 +761,26 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Train on 1000 samples
-Epoch 1/10
-1000/1000 [==============================] - 1s 852us/sample - loss: 1.0219 - accuracy: 0.2310
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/10
+32/32 [==============================] - 0s 1ms/step - loss: 0.4972 - accuracy: 0.9490
 Epoch 2/10
-1000/1000 [==============================] - 0s 71us/sample - loss: 0.8944 - accuracy: 0.2840
+32/32 [==============================] - 0s 1ms/step - loss: 0.4209 - accuracy: 0.9760
 Epoch 3/10
-1000/1000 [==============================] - 0s 73us/sample - loss: 0.7799 - accuracy: 0.3440
+32/32 [==============================] - 0s 2ms/step - loss: 0.3533 - accuracy: 0.9840
 Epoch 4/10
-1000/1000 [==============================] - 0s 78us/sample - loss: 0.6694 - accuracy: 0.4490
+32/32 [==============================] - 0s 1ms/step - loss: 0.2929 - accuracy: 0.9900
 Epoch 5/10
-1000/1000 [==============================] - 0s 77us/sample - loss: 0.5660 - accuracy: 0.8050
+32/32 [==============================] - 0s 1ms/step - loss: 0.2396 - accuracy: 0.9940
 Epoch 6/10
-1000/1000 [==============================] - 0s 72us/sample - loss: 0.4742 - accuracy: 0.9420
+32/32 [==============================] - 0s 1ms/step - loss: 0.1923 - accuracy: 0.9950
 Epoch 7/10
-1000/1000 [==============================] - 0s 70us/sample - loss: 0.3941 - accuracy: 0.9840
+32/32 [==============================] - 0s 1ms/step - loss: 0.1526 - accuracy: 0.9950
 Epoch 8/10
-1000/1000 [==============================] - 0s 69us/sample - loss: 0.3252 - accuracy: 0.9920
+32/32 [==============================] - 0s 2ms/step - loss: 0.1201 - accuracy: 0.9960
 Epoch 9/10
-1000/1000 [==============================] - 0s 68us/sample - loss: 0.2677 - accuracy: 0.9930
+32/32 [==============================] - 0s 2ms/step - loss: 0.0939 - accuracy: 0.9970
 Epoch 10/10
-1000/1000 [==============================] - 0s 68us/sample - loss: 0.2208 - accuracy: 0.9940
+32/32 [==============================] - 0s 1ms/step - loss: 0.0740 - accuracy: 0.9970
 </pre></div>
 </div>
 </div>
@@ -787,8 +799,8 @@ Epoch 10/10
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training loss: 0.19941
-Training accuracy: 0.99400
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training loss: 0.06517
+Training accuracy: 0.99700
 </pre></div>
 </div>
 </div>
@@ -813,7 +825,7 @@ Training accuracy: 0.99400
 <h3>What is a layer?<a class="headerlink" href="#what-is-a-layer" title="Permalink to this headline">¶</a></h3>
 <p>Layers are the basic building blocks of neural networks in Keras.</p>
 <p>A layer is a simple input-output transformation. It encapsulates a state (weights) and some computation.</p>
-<p>Keras offers many layers for various purposes (convolution, pooling, reshaping…). See the <a class="reference external" href="https://keras.io/api/layers/">official documentation</a> for details.</p>
+<p>Keras offers many layers for various purposes (convolution, pooling, normalization…). See the <a class="reference external" href="https://keras.io/api/layers/">official documentation</a> for details.</p>
 </div>
 <div class="section" id="core-layers">
 <h3>Core layers<a class="headerlink" href="#core-layers" title="Permalink to this headline">¶</a></h3>
@@ -843,10 +855,11 @@ Training accuracy: 0.99400
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">flatten_layer</span> <span class="o">=</span> <span class="n">Flatten</span><span class="p">()</span>
-
-<span class="c1"># Create a 4D tensor</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a 4D tensor</span>
 <span class="nb">input</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">64</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+
+<span class="c1"># Flatten it into a 2D tensor</span>
+<span class="n">flatten_layer</span> <span class="o">=</span> <span class="n">Flatten</span><span class="p">()</span>
 <span class="n">output</span> <span class="o">=</span> <span class="n">flatten_layer</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
 <span class="c1"># 576 = 3*3*64</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Output: </span><span class="si">{</span><span class="n">output</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -855,6 +868,32 @@ Training accuracy: 0.99400
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Output: (32, 576)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="reshape-layer">
+<h4>Reshape layer<a class="headerlink" href="#reshape-layer" title="Permalink to this headline">¶</a></h4>
+<p>Reshapes its input into a specified shape.</p>
+<ul class="simple">
+<li><p>Input shape: <em>(batch_size, input_dim1, input_dim2, …)</em></p></li>
+<li><p>Output shape: <em>(batch_size, target_shape)</em></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a 2D tensor</span>
+<span class="nb">input</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">3</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">*</span> <span class="mi">64</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+
+<span class="c1"># Reshape it into a 4D tensor</span>
+<span class="n">reshape_layer</span> <span class="o">=</span> <span class="n">Reshape</span><span class="p">(</span><span class="n">target_shape</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">64</span><span class="p">))</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">reshape_layer</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Output: </span><span class="si">{</span><span class="n">output</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Output: (32, 3, 3, 64)
 </pre></div>
 </div>
 </div>
@@ -872,6 +911,66 @@ Training accuracy: 0.99400
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># rate: percentage of input units randomly set to 0 during training</span>
 <span class="n">dropout_layer</span> <span class="o">=</span> <span class="n">Dropout</span><span class="p">(</span><span class="n">rate</span><span class="o">=.</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="batchnormalization-layer">
+<h4>BatchNormalization layer<a class="headerlink" href="#batchnormalization-layer" title="Permalink to this headline">¶</a></h4>
+<p>Applies a transformation that maintains the mean output close to 0 and the output standard deviation close to 1, as proposed in <a class="reference external" href="https://arxiv.org/abs/1502.03167">this paper</a> by Ioffe and Szegedy (2015).</p>
+<p>For an input <span class="math notranslate nohighlight">\(\pmb{x}^{(i)}\)</span>, the layer returns:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\pmb{x}^{(i)} - \mu}{\sqrt{\sigma^2 + \epsilon}} * \gamma + \beta\]</div>
+<ul class="simple">
+<li><p>During training, the mean <span class="math notranslate nohighlight">\(\mu\)</span> and the standard deviation <span class="math notranslate nohighlight">\(\sigma\)</span> are computed on the current batch.</p></li>
+<li><p>During inference, <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> are estimated using a moving average on the batches seen during training.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\gamma\)</span> is a learned output scaling factor (initialized as 1).</p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta\)</span> is a learned output offset factor (initialized as 0).</p></li>
+<li><p><span class="math notranslate nohighlight">\(\epsilon\)</span> is a small constant.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate random data</span>
+<span class="nb">input</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Mean: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span><span class="si">}</span><span class="s1">. Std: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># Apply batch normalization</span>
+<span class="n">bn_layer</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">bn_layer</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">training</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Mean: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">output</span><span class="p">)</span><span class="si">}</span><span class="s1">. Std: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">output</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean: 0.5045558214187622. Std: 0.32485315203666687
+Mean: -3.1789145538141383e-08. Std: 0.994976282119751
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a model with only a BN layer</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">([</span><span class="n">BatchNormalization</span><span class="p">(</span><span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,))])</span>
+<span class="c1"># Each BN layer has 4 parameters per input</span>
+<span class="c1"># output scale and offset are learned through backprop, and thus trainable</span>
+<span class="c1"># mean and std deviation are estimated by a moving average during training</span>
+<span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;sequential_11&quot;
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+batch_normalization_12 (Batc (None, 3)                 12        
+=================================================================
+Total params: 12
+Trainable params: 6
+Non-trainable params: 6
+_________________________________________________________________
 </pre></div>
 </div>
 </div>
@@ -933,6 +1032,41 @@ Training accuracy: 0.99400
 </div>
 </div>
 </div>
+<div class="section" id="conv2dtranspose-layer">
+<h4>Conv2DTranspose layer<a class="headerlink" href="#conv2dtranspose-layer" title="Permalink to this headline">¶</a></h4>
+<p>Applies a transposed convolution operation (a.k.a. Deconvolution), generally used for upsampling.</p>
+<ul class="simple">
+<li><p>Input shape: <em>(batch_size, rows, cols, channels)</em></p></li>
+<li><p>Output shape: <em>(batch_size, new_rows, new_cols, filters)</em></p></li>
+</ul>
+<p><a class="reference external" href="https://arxiv.org/abs/1603.07285v1"><img alt="Conv2DTranpose animation" src="../_images/conv2dtranspose.gif" /></a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a 4D tensor</span>
+<span class="nb">input</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+
+<span class="c1"># filters: number of output filters in the convolution</span>
+<span class="c1"># kernel_size: height and width of the 2D convolution window</span>
+<span class="c1"># strides: how much the input will be stretched</span>
+<span class="c1"># activation: activation function</span>
+<span class="c1"># padding: padding of the input such that output has the same height/width dimension</span>
+<span class="c1">#   &quot;valid&quot;: no padding, &quot;same&quot;: padding enabled</span>
+<span class="n">conv2dt_layer</span> <span class="o">=</span> <span class="n">Conv2DTranspose</span><span class="p">(</span>
+    <span class="n">filters</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s2">&quot;valid&quot;</span>
+<span class="p">)</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">conv2dt_layer</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+<span class="c1"># </span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Output: </span><span class="si">{</span><span class="n">output</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Output: (32, 5, 5, 12)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
 <div class="section" id="maxpooling2d-layer">
 <h4>MaxPooling2D layer<a class="headerlink" href="#maxpooling2d-layer" title="Permalink to this headline">¶</a></h4>
 <p>Implements the Max pooling operation for 2D spatial data.</p>
@@ -983,12 +1117,6 @@ Training accuracy: 0.99400
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(32, 4)
-(32, 10, 4)
-</pre></div>
-</div>
-</div>
 </div>
 </div>
 <div class="section" id="lstm-layer">
@@ -1020,12 +1148,6 @@ Training accuracy: 0.99400
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(32, 4)
-(32, 10, 4)
-</pre></div>
-</div>
-</div>
 </div>
 </div>
 <div class="section" id="gru-layer">
@@ -1054,12 +1176,6 @@ Training accuracy: 0.99400
 <span class="n">gru_layer</span> <span class="o">=</span> <span class="n">GRU</span><span class="p">(</span><span class="n">units</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">return_sequences</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">output</span> <span class="o">=</span> <span class="n">gru_layer</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>  <span class="c1"># (32, 10, 4)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(32, 4)
-(32, 10, 4)
 </pre></div>
 </div>
 </div>
