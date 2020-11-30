@@ -1,0 +1,1030 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Neural Style Transfer &#8212; Machine Learning Handbook</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Generative Adversarial Networks" href="generative_adversarial_networks.html" />
+    <link rel="prev" title="Autoencoders" href="autoencoders.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/logo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Machine Learning Handbook</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <p class="caption collapsible-parent">
+ <span class="caption-text">
+  Fundamentals
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fundamentals/introduction_to_machine_learning.html">
+   Introduction to Machine Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fundamentals/machine_learning_in_action.html">
+   Machine Learning in action
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fundamentals/machine_learning_foundations.html">
+   Machine Learning foundations
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Algorithms
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="linear_regression.html">
+   Linear Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="logistic_regression.html">
+   Logistic Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="decision_trees_and_random_forests.html">
+   Decision Trees &amp; Random Forests
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="artificial_neural_networks.html">
+   Artificial Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="convolutional_neural_networks.html">
+   Convolutional Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="recurrent_neural_networks.html">
+   Recurrent Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="autoencoders.html">
+   Autoencoders
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Neural Style Transfer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="generative_adversarial_networks.html">
+   Generative Adversarial Networks
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Tools
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tools/python.html">
+   Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tools/numpy.html">
+   NumPy
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tools/pandas.html">
+   pandas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tools/matplotlib.html">
+   Matplotlib and Seaborn
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tools/scikit-learn.html">
+   scikit-learn
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tools/keras.html">
+   Keras
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tools/pytorch.html">
+   PyTorch
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Appendix
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../appendix/acknowledgments.html">
+   Acknowledgments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../appendix/glossary.html">
+   Glossary
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/algorithms/neural_style_transfer.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/bpesquet/mlhandbook"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/bpesquet/mlhandbook/issues/new?title=Issue%20on%20page%20%2Falgorithms/neural_style_transfer.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/bpesquet/mlhandbook/edit/master/algorithms/neural_style_transfer.ipynb"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/bpesquet/mlhandbook/master?urlpath=tree/algorithms/neural_style_transfer.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/bpesquet/mlhandbook/blob/master/algorithms/neural_style_transfer.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#summary">
+   Summary
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#neural-style-transfer-in-a-nutshell">
+     Neural style transfer in a nutshell
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example">
+     Example
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#principle">
+   Principle
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#loss-definition">
+     Loss definition
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-content-loss">
+     The content loss
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-style-loss">
+     The style loss
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-total-variation-loss">
+     The total variation loss
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#gradient-descent">
+     Gradient descent
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-apply-style-transfer-to-an-image">
+   Example: apply style transfer to an image
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#environment-setup">
+     Environment setup
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#images-loading">
+     Images loading
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#utility-functions">
+     Utility functions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#loss-functions">
+     Loss functions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#model-definition">
+     Model definition
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#loss-computation">
+     Loss computation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#training-loop">
+     Training loop
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#generated-image-display">
+     Generated image display
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="neural-style-transfer">
+<h1>Neural Style Transfer<a class="headerlink" href="#neural-style-transfer" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Introduction</p></li>
+<li><p>Principle</p></li>
+<li><p>Example: apply style transfer to an image</p></li>
+</ul>
+</div>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="neural-style-transfer-in-a-nutshell">
+<h3>Neural style transfer in a nutshell<a class="headerlink" href="#neural-style-transfer-in-a-nutshell" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Reproduce an image with a new artistic style provided by another image.</p></li>
+<li><p>Blend a <em>content</em> image and a <em>style reference</em> image in a stylized output image.</p></li>
+<li><p>First described in <a class="reference external" href="https://arxiv.org/abs/1508.06576">A Neural Algorithm of Artistic Style</a> by Gatys et al (2015). Many refinements and variations since.</p></li>
+</ul>
+</div>
+<div class="section" id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://harishnarayanan.org/writing/artistic-style-transfer/"><img alt="Prisma style transfer example" src="../_images/style_transfer_prisma.png" /></a></p>
+</div>
+</div>
+<div class="section" id="principle">
+<h2>Principle<a class="headerlink" href="#principle" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="loss-definition">
+<h3>Loss definition<a class="headerlink" href="#loss-definition" title="Permalink to this headline">¶</a></h3>
+<p>The resulting image <span class="math notranslate nohighlight">\(\pmb{x}^*\)</span> minimizes a weighted sum of three losses: the content loss <span class="math notranslate nohighlight">\(\mathcal{L}_{content}(\pmb{c}, \pmb{x})\)</span>, the style loss <span class="math notranslate nohighlight">\(\mathcal{L}_{style}(\pmb{s}, \pmb{x})\)</span> and the total variation loss <span class="math notranslate nohighlight">\(\mathcal{L}_{total\_variation}(\pmb{x})\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\pmb{x}^* = \underset{\pmb{x}}{\mathrm{argmin}}(\alpha\mathcal{L}_{content}(\pmb{c}, \pmb{x}) + \beta\mathcal{L}_{style}(\pmb{s}, \pmb{x}) + \gamma\mathcal{L}_{total\_variation}(\pmb{x}))\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\pmb{x}\)</span>: generated image.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\pmb{c}\)</span>: content image.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\pmb{s}\)</span>: reference style image.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\alpha\)</span>, <span class="math notranslate nohighlight">\(\beta\)</span> and <span class="math notranslate nohighlight">\(\gamma\)</span>: weights.</p></li>
+</ul>
+</div>
+<div class="section" id="the-content-loss">
+<h3>The content loss<a class="headerlink" href="#the-content-loss" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Content = high-level structure of an image.</p></li>
+<li><p>Can be captured by the upper layer of a convolutional neural network.</p></li>
+<li><p>Content loss for a layer = distance between the feature maps of the content and generated images.</p></li>
+</ul>
+</div>
+<div class="section" id="the-style-loss">
+<h3>The style loss<a class="headerlink" href="#the-style-loss" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Style = low-level features of an image (textures, colors, visual patterns).</p></li>
+<li><p>Can be captured by using correlations across the different feature maps (filter responses) of a convnet.</p></li>
+<li><p>Feature correlations are computed via a Gram matrix (outer product of the feature maps for a given layer).</p></li>
+<li><p>Style loss for a layer = distance between the Gram matrices of the feature maps for the style and generated images.</p></li>
+</ul>
+</div>
+<div class="section" id="the-total-variation-loss">
+<h3>The total variation loss<a class="headerlink" href="#the-total-variation-loss" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Sum of the absolute differences for neighboring pixel-values in an image. Measures how much noise is in the image.</p></li>
+<li><p>Encourage local spatial continuity in the generated image (denoising).</p></li>
+<li><p>Act as a regularization loss.</p></li>
+</ul>
+</div>
+<div class="section" id="gradient-descent">
+<h3>Gradient descent<a class="headerlink" href="#gradient-descent" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Objective: minimize the total loss.</p></li>
+<li><p>Optimizer: <a class="reference external" href="http://aria42.com/blog/2014/12/understanding-lbfgs">L-BFGS</a> (original choice made by Gatys et al.) or Adam.</p></li>
+</ul>
+<p><img alt="Animation of style transfer" src="../_images/style_transfer_animated.gif" /></p>
+</div>
+</div>
+<div class="section" id="example-apply-style-transfer-to-an-image">
+<h2>Example: apply style transfer to an image<a class="headerlink" href="#example-apply-style-transfer-to-an-image" title="Permalink to this headline">¶</a></h2>
+<p>(Heavily inspired by <a class="reference external" href="https://keras.io/examples/generative/neural_style_transfer/">this Keras example</a>)</p>
+<div class="section" id="environment-setup">
+<h3>Environment setup<a class="headerlink" href="#environment-setup" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">platform</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Python version: </span><span class="si">{</span><span class="n">platform</span><span class="o">.</span><span class="n">python_version</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">platform</span><span class="o">.</span><span class="n">python_version_tuple</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="s2">&quot;6&quot;</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">display</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Python version: 3.7.5
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;TensorFlow version: </span><span class="si">{</span><span class="n">tf</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Keras version: </span><span class="si">{</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;GPU found :)&#39;</span> <span class="k">if</span> <span class="n">tf</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">list_physical_devices</span><span class="p">(</span><span class="s2">&quot;GPU&quot;</span><span class="p">)</span> <span class="k">else</span> <span class="s1">&#39;No GPU :(&#39;</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">tensorflow.keras</span> <span class="kn">import</span> <span class="n">Model</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.applications</span> <span class="kn">import</span> <span class="n">vgg19</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.utils</span> <span class="kn">import</span> <span class="n">get_file</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.preprocessing.image</span> <span class="kn">import</span> <span class="n">load_img</span><span class="p">,</span> <span class="n">save_img</span><span class="p">,</span> <span class="n">img_to_array</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.optimizers</span> <span class="kn">import</span> <span class="n">SGD</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.optimizers.schedules</span> <span class="kn">import</span> <span class="n">ExponentialDecay</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>TensorFlow version: 2.3.1
+Keras version: 2.4.0
+No GPU :(
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="images-loading">
+<h3>Images loading<a class="headerlink" href="#images-loading" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Download content and style images</span>
+<span class="n">base_image_path</span> <span class="o">=</span> <span class="n">get_file</span><span class="p">(</span><span class="s2">&quot;paris.jpg&quot;</span><span class="p">,</span> <span class="s2">&quot;https://i.imgur.com/F28w3Ac.jpg&quot;</span><span class="p">)</span>
+<span class="n">style_reference_image_path</span> <span class="o">=</span> <span class="n">get_file</span><span class="p">(</span>
+    <span class="s2">&quot;starry_night.jpg&quot;</span><span class="p">,</span> <span class="s2">&quot;https://i.imgur.com/9ooB60I.jpg&quot;</span>
+<span class="p">)</span>
+
+<span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="n">load_img</span><span class="p">(</span><span class="n">base_image_path</span><span class="p">)</span><span class="o">.</span><span class="n">size</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Input image dimensions: </span><span class="si">{</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://i.imgur.com/F28w3Ac.jpg
+106496/102437 [===============================] - 0s 0us/step
+Downloading data from https://i.imgur.com/9ooB60I.jpg
+942080/935806 [==============================] - 0s 0us/step
+Input image dimensions: (910, 607)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Show content images</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="n">base_image_path</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/neural_style_transfer_17_0.jpg" src="../_images/neural_style_transfer_17_0.jpg" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Show style reference image</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="n">style_reference_image_path</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/neural_style_transfer_18_0.jpg" src="../_images/neural_style_transfer_18_0.jpg" />
+</div>
+</div>
+</div>
+<div class="section" id="utility-functions">
+<h3>Utility functions<a class="headerlink" href="#utility-functions" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">preprocess_image</span><span class="p">(</span><span class="n">image_path</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Open, resize and format a picture into appropriate tensors&quot;&quot;&quot;</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">load_img</span><span class="p">(</span>
+        <span class="n">image_path</span><span class="p">,</span> <span class="n">target_size</span><span class="o">=</span><span class="p">(</span><span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">img_to_array</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="c1"># Convert image from RGB to BGR and zero-center each color channel w.r.t. the ImageNet dataset</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">vgg19</span><span class="o">.</span><span class="n">preprocess_input</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">convert_to_tensor</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">deprocess_image</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Convert a tensor into a valid image&quot;&quot;&quot;</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+    <span class="c1"># Remove zero-center by mean pixel applied by vgg19.preprocess_input()</span>
+    <span class="c1"># The following values are the mean pixel values of each color channel for the ImageNet dataset</span>
+    <span class="n">x</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="mf">103.939</span>
+    <span class="n">x</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="mf">116.779</span>
+    <span class="n">x</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">+=</span> <span class="mf">123.68</span>
+    <span class="c1"># &#39;BGR&#39;-&gt;&#39;RGB&#39;</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:,</span> <span class="p">:,</span> <span class="p">::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;uint8&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">x</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="loss-functions">
+<h3>Loss functions<a class="headerlink" href="#loss-functions" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The gram matrix of a 3D tensor (correlations between the feature maps of a convolutional layer)</span>
+<span class="k">def</span> <span class="nf">gram_matrix</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="c1"># Transpose feature maps tensor tensor so that 3rd dimension becomes 1st</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="c1"># Reshape feature maps tensor into a matrix. First dimension is the number of filters/maps </span>
+    <span class="n">features</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+    <span class="c1"># Compute the outer product of feature vectors with themselves</span>
+    <span class="n">gram</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">features</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">gram</span>
+
+
+<span class="c1"># The style loss is designed to maintain the style of the reference image in the generated image</span>
+<span class="c1"># It is based on the gram matrices (which capture style) of feature maps from the style reference image</span>
+<span class="c1"># and from the generated image</span>
+<span class="k">def</span> <span class="nf">style_loss</span><span class="p">(</span><span class="n">style</span><span class="p">,</span> <span class="n">combination</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="p">):</span>
+    <span class="n">S</span> <span class="o">=</span> <span class="n">gram_matrix</span><span class="p">(</span><span class="n">style</span><span class="p">)</span>
+    <span class="n">C</span> <span class="o">=</span> <span class="n">gram_matrix</span><span class="p">(</span><span class="n">combination</span><span class="p">)</span>
+    <span class="n">channels</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">size</span> <span class="o">=</span> <span class="n">height</span> <span class="o">*</span> <span class="n">width</span>
+    <span class="c1"># Compute distance between Gram matrices of style and generated images</span>
+    <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">S</span> <span class="o">-</span> <span class="n">C</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mf">4.0</span> <span class="o">*</span> <span class="p">(</span><span class="n">channels</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">size</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The content loss is designed to maintain the &quot;content&quot; of the base image in the generated image</span>
+<span class="k">def</span> <span class="nf">content_loss</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">combination</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">combination</span> <span class="o">-</span> <span class="n">base</span><span class="p">))</span>
+
+<span class="c1"># The total variation loss is designed to keep the generated image locally coherent</span>
+<span class="k">def</span> <span class="nf">total_variation_loss</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="p">):</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">square</span><span class="p">(</span>
+        <span class="n">x</span><span class="p">[:,</span> <span class="p">:</span> <span class="n">height</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="p">:</span> <span class="n">width</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="p">:]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:,</span> <span class="p">:</span> <span class="n">width</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="p">:]</span>
+    <span class="p">)</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">square</span><span class="p">(</span>
+        <span class="n">x</span><span class="p">[:,</span> <span class="p">:</span> <span class="n">height</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="p">:</span> <span class="n">width</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="p">:]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[:,</span> <span class="p">:</span> <span class="n">height</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:,</span> <span class="p">:]</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">,</span> <span class="mf">1.25</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="model-definition">
+<h3>Model definition<a class="headerlink" href="#model-definition" title="Permalink to this headline">¶</a></h3>
+<p>We use a <a class="reference external" href="https://arxiv.org/abs/1409.1556">VGG</a> model pretrained on the ImageNet dataset.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Using the convolutional base of VGG19, loaded with pre-trained ImageNet weights</span>
+<span class="n">vgg</span> <span class="o">=</span> <span class="n">vgg19</span><span class="o">.</span><span class="n">VGG19</span><span class="p">(</span><span class="n">weights</span><span class="o">=</span><span class="s2">&quot;imagenet&quot;</span><span class="p">,</span> <span class="n">include_top</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Get the symbolic outputs of each &quot;key&quot; layer (we gave them unique names)</span>
+<span class="n">outputs_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">([(</span><span class="n">layer</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">layer</span><span class="o">.</span><span class="n">output</span><span class="p">)</span> <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="n">vgg</span><span class="o">.</span><span class="n">layers</span><span class="p">])</span>
+
+<span class="c1"># Set up a model that returns the activation values for every layer in VGG19 (as a dict)</span>
+<span class="n">feature_extractor</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">vgg</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="n">outputs_dict</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://storage.googleapis.com/tensorflow/keras-applications/vgg19/vgg19_weights_tf_dim_ordering_tf_kernels_notop.h5
+80142336/80134624 [==============================] - 46s 1us/step
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vgg</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;vgg19&quot;
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+input_1 (InputLayer)         [(None, None, None, 3)]   0         
+_________________________________________________________________
+block1_conv1 (Conv2D)        (None, None, None, 64)    1792      
+_________________________________________________________________
+block1_conv2 (Conv2D)        (None, None, None, 64)    36928     
+_________________________________________________________________
+block1_pool (MaxPooling2D)   (None, None, None, 64)    0         
+_________________________________________________________________
+block2_conv1 (Conv2D)        (None, None, None, 128)   73856     
+_________________________________________________________________
+block2_conv2 (Conv2D)        (None, None, None, 128)   147584    
+_________________________________________________________________
+block2_pool (MaxPooling2D)   (None, None, None, 128)   0         
+_________________________________________________________________
+block3_conv1 (Conv2D)        (None, None, None, 256)   295168    
+_________________________________________________________________
+block3_conv2 (Conv2D)        (None, None, None, 256)   590080    
+_________________________________________________________________
+block3_conv3 (Conv2D)        (None, None, None, 256)   590080    
+_________________________________________________________________
+block3_conv4 (Conv2D)        (None, None, None, 256)   590080    
+_________________________________________________________________
+block3_pool (MaxPooling2D)   (None, None, None, 256)   0         
+_________________________________________________________________
+block4_conv1 (Conv2D)        (None, None, None, 512)   1180160   
+_________________________________________________________________
+block4_conv2 (Conv2D)        (None, None, None, 512)   2359808   
+_________________________________________________________________
+block4_conv3 (Conv2D)        (None, None, None, 512)   2359808   
+_________________________________________________________________
+block4_conv4 (Conv2D)        (None, None, None, 512)   2359808   
+_________________________________________________________________
+block4_pool (MaxPooling2D)   (None, None, None, 512)   0         
+_________________________________________________________________
+block5_conv1 (Conv2D)        (None, None, None, 512)   2359808   
+_________________________________________________________________
+block5_conv2 (Conv2D)        (None, None, None, 512)   2359808   
+_________________________________________________________________
+block5_conv3 (Conv2D)        (None, None, None, 512)   2359808   
+_________________________________________________________________
+block5_conv4 (Conv2D)        (None, None, None, 512)   2359808   
+_________________________________________________________________
+block5_pool (MaxPooling2D)   (None, None, None, 512)   0         
+=================================================================
+Total params: 20,024,384
+Trainable params: 20,024,384
+Non-trainable params: 0
+_________________________________________________________________
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="loss-computation">
+<h3>Loss computation<a class="headerlink" href="#loss-computation" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># List of layers to use for the style loss</span>
+<span class="n">style_layer_names</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;block1_conv1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;block2_conv1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;block3_conv1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;block4_conv1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;block5_conv1&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="c1"># The layer to use for the content loss</span>
+<span class="n">content_layer_name</span> <span class="o">=</span> <span class="s2">&quot;block5_conv2&quot;</span>
+
+<span class="c1"># Weights of the different loss components</span>
+<span class="n">total_variation_weight</span> <span class="o">=</span> <span class="mf">1e-6</span>
+<span class="n">style_weight</span> <span class="o">=</span> <span class="mf">1e-6</span>
+<span class="n">content_weight</span> <span class="o">=</span> <span class="mf">2.5e-8</span>
+
+<span class="k">def</span> <span class="nf">compute_loss</span><span class="p">(</span><span class="n">combination_image</span><span class="p">,</span> <span class="n">base_image</span><span class="p">,</span> <span class="n">style_reference_image</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="p">):</span>
+    <span class="n">input_tensor</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">base_image</span><span class="p">,</span> <span class="n">style_reference_image</span><span class="p">,</span> <span class="n">combination_image</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span>
+    <span class="p">)</span>
+    <span class="n">features</span> <span class="o">=</span> <span class="n">feature_extractor</span><span class="p">(</span><span class="n">input_tensor</span><span class="p">)</span>
+
+    <span class="c1"># Initialize the loss</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">())</span>
+
+    <span class="c1"># Add content loss</span>
+    <span class="n">layer_features</span> <span class="o">=</span> <span class="n">features</span><span class="p">[</span><span class="n">content_layer_name</span><span class="p">]</span>
+    <span class="n">base_image_features</span> <span class="o">=</span> <span class="n">layer_features</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:,</span> <span class="p">:]</span>
+    <span class="n">combination_features</span> <span class="o">=</span> <span class="n">layer_features</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:,</span> <span class="p">:]</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="n">loss</span> <span class="o">+</span> <span class="n">content_weight</span> <span class="o">*</span> <span class="n">content_loss</span><span class="p">(</span>
+        <span class="n">base_image_features</span><span class="p">,</span> <span class="n">combination_features</span>
+    <span class="p">)</span>
+    <span class="c1"># Add style loss</span>
+    <span class="k">for</span> <span class="n">layer_name</span> <span class="ow">in</span> <span class="n">style_layer_names</span><span class="p">:</span>
+        <span class="n">layer_features</span> <span class="o">=</span> <span class="n">features</span><span class="p">[</span><span class="n">layer_name</span><span class="p">]</span>
+        <span class="n">style_reference_features</span> <span class="o">=</span> <span class="n">layer_features</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:,</span> <span class="p">:]</span>
+        <span class="n">combination_features</span> <span class="o">=</span> <span class="n">layer_features</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:,</span> <span class="p">:]</span>
+        <span class="n">sl</span> <span class="o">=</span> <span class="n">style_loss</span><span class="p">(</span><span class="n">style_reference_features</span><span class="p">,</span> <span class="n">combination_features</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="p">)</span>
+        <span class="n">loss</span> <span class="o">+=</span> <span class="p">(</span><span class="n">style_weight</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">style_layer_names</span><span class="p">))</span> <span class="o">*</span> <span class="n">sl</span>
+
+    <span class="c1"># Add total variation loss</span>
+    <span class="n">loss</span> <span class="o">+=</span> <span class="n">total_variation_weight</span> <span class="o">*</span> <span class="n">total_variation_loss</span><span class="p">(</span><span class="n">combination_image</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">loss</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@tf</span><span class="o">.</span><span class="n">function</span>
+<span class="k">def</span> <span class="nf">compute_loss_and_grads</span><span class="p">(</span><span class="n">combination_image</span><span class="p">,</span> <span class="n">base_image</span><span class="p">,</span> <span class="n">style_reference_image</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">()</span> <span class="k">as</span> <span class="n">tape</span><span class="p">:</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">compute_loss</span><span class="p">(</span><span class="n">combination_image</span><span class="p">,</span> <span class="n">base_image</span><span class="p">,</span> <span class="n">style_reference_image</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="p">)</span>
+    <span class="n">grads</span> <span class="o">=</span> <span class="n">tape</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="n">combination_image</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">loss</span><span class="p">,</span> <span class="n">grads</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="training-loop">
+<h3>Training loop<a class="headerlink" href="#training-loop" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generated image height</span>
+<span class="n">gen_height</span> <span class="o">=</span> <span class="mi">400</span>
+<span class="c1"># Compute generated width so that input and generated images have same scale</span>
+<span class="n">gen_width</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">width</span> <span class="o">*</span> <span class="n">gen_height</span> <span class="o">/</span> <span class="n">height</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Generated image dimensions: </span><span class="si">{</span><span class="n">gen_width</span><span class="p">,</span> <span class="n">gen_height</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generated image dimensions: (599, 400)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">SGD</span><span class="p">(</span>
+    <span class="n">ExponentialDecay</span><span class="p">(</span>
+        <span class="n">initial_learning_rate</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span> <span class="n">decay_steps</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">decay_rate</span><span class="o">=</span><span class="mf">0.96</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">base_image</span> <span class="o">=</span> <span class="n">preprocess_image</span><span class="p">(</span><span class="n">base_image_path</span><span class="p">,</span> <span class="n">gen_height</span><span class="p">,</span> <span class="n">gen_width</span><span class="p">)</span>
+<span class="n">style_reference_image</span> <span class="o">=</span> <span class="n">preprocess_image</span><span class="p">(</span><span class="n">style_reference_image_path</span><span class="p">,</span> <span class="n">gen_height</span><span class="p">,</span> <span class="n">gen_width</span><span class="p">)</span>
+<span class="n">combination_image</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">preprocess_image</span><span class="p">(</span><span class="n">base_image_path</span><span class="p">,</span> <span class="n">gen_height</span><span class="p">,</span> <span class="n">gen_width</span><span class="p">))</span>
+
+<span class="c1"># Training loop</span>
+<span class="n">n_epochs</span> <span class="o">=</span> <span class="mi">4000</span>
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_epochs</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">loss</span><span class="p">,</span> <span class="n">grads</span> <span class="o">=</span> <span class="n">compute_loss_and_grads</span><span class="p">(</span>
+        <span class="n">combination_image</span><span class="p">,</span> <span class="n">base_image</span><span class="p">,</span> <span class="n">style_reference_image</span><span class="p">,</span> <span class="n">gen_height</span><span class="p">,</span> <span class="n">gen_width</span>
+    <span class="p">)</span>
+    <span class="n">optimizer</span><span class="o">.</span><span class="n">apply_gradients</span><span class="p">([(</span><span class="n">grads</span><span class="p">,</span> <span class="n">combination_image</span><span class="p">)])</span>
+    <span class="k">if</span> <span class="n">epoch</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Epoch [</span><span class="si">{</span><span class="n">epoch</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">n_epochs</span><span class="si">}</span><span class="s2">], loss: </span><span class="si">{</span><span class="n">loss</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Save final image</span>
+<span class="n">final_img</span> <span class="o">=</span> <span class="n">deprocess_image</span><span class="p">(</span><span class="n">combination_image</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="n">gen_height</span><span class="p">,</span> <span class="n">gen_width</span><span class="p">)</span>
+<span class="n">result_image_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;generated_image_epoch_</span><span class="si">{</span><span class="n">n_epochs</span><span class="si">}</span><span class="s2">.png&quot;</span>
+<span class="n">save_img</span><span class="p">(</span><span class="n">result_image_path</span><span class="p">,</span> <span class="n">final_img</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">14</span><span class="o">-</span><span class="mi">541</span><span class="n">b5edce50f</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_epochs</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span>     <span class="n">loss</span><span class="p">,</span> <span class="n">grads</span> <span class="o">=</span> <span class="n">compute_loss_and_grads</span><span class="p">(</span>
+<span class="ne">---&gt; </span><span class="mi">15</span>         <span class="n">combination_image</span><span class="p">,</span> <span class="n">base_image</span><span class="p">,</span> <span class="n">style_reference_image</span><span class="p">,</span> <span class="n">gen_height</span><span class="p">,</span> <span class="n">gen_width</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span>     <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span>     <span class="n">optimizer</span><span class="o">.</span><span class="n">apply_gradients</span><span class="p">([(</span><span class="n">grads</span><span class="p">,</span> <span class="n">combination_image</span><span class="p">)])</span>
+
+<span class="nn">~/miniconda3/envs/tf2/lib/python3.7/site-packages/tensorflow/python/eager/def_function.py</span> in <span class="ni">__call__</span><span class="nt">(self, *args, **kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">778</span>       <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">779</span>         <span class="n">compiler</span> <span class="o">=</span> <span class="s2">&quot;nonXla&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">780</span>         <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">781</span> 
+<span class="g g-Whitespace">    </span><span class="mi">782</span>       <span class="n">new_tracing_count</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_tracing_count</span><span class="p">()</span>
+
+<span class="nn">~/miniconda3/envs/tf2/lib/python3.7/site-packages/tensorflow/python/eager/def_function.py</span> in <span class="ni">_call</span><span class="nt">(self, *args, **kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">812</span>       <span class="c1"># In this case we have not created variables on the first call. So we can</span>
+<span class="g g-Whitespace">    </span><span class="mi">813</span>       <span class="c1"># run the first trace but we should fail if variables are created.</span>
+<span class="ne">--&gt; </span><span class="mi">814</span>       <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stateful_fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">815</span>       <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_created_variables</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">816</span>         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Creating variables on a non-first call to a function&quot;</span>
+
+<span class="nn">~/miniconda3/envs/tf2/lib/python3.7/site-packages/tensorflow/python/eager/function.py</span> in <span class="ni">__call__</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2827</span>     <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lock</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">2828</span>       <span class="n">graph_function</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_maybe_define_function</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">2829</span>     <span class="k">return</span> <span class="n">graph_function</span><span class="o">.</span><span class="n">_filtered_call</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>  <span class="c1"># pylint: disable=protected-access</span>
+<span class="g g-Whitespace">   </span><span class="mi">2830</span> 
+<span class="g g-Whitespace">   </span><span class="mi">2831</span>   <span class="nd">@property</span>
+
+<span class="nn">~/miniconda3/envs/tf2/lib/python3.7/site-packages/tensorflow/python/eager/function.py</span> in <span class="ni">_filtered_call</span><span class="nt">(self, args, kwargs, cancellation_manager)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1846</span>                            <span class="n">resource_variable_ops</span><span class="o">.</span><span class="n">BaseResourceVariable</span><span class="p">))],</span>
+<span class="g g-Whitespace">   </span><span class="mi">1847</span>         <span class="n">captured_inputs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">captured_inputs</span><span class="p">,</span>
+<span class="ne">-&gt; </span><span class="mi">1848</span>         <span class="n">cancellation_manager</span><span class="o">=</span><span class="n">cancellation_manager</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1849</span> 
+<span class="g g-Whitespace">   </span><span class="mi">1850</span>   <span class="k">def</span> <span class="nf">_call_flat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">captured_inputs</span><span class="p">,</span> <span class="n">cancellation_manager</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+<span class="nn">~/miniconda3/envs/tf2/lib/python3.7/site-packages/tensorflow/python/eager/function.py</span> in <span class="ni">_call_flat</span><span class="nt">(self, args, captured_inputs, cancellation_manager)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1922</span>       <span class="c1"># No tape is watching; skip to running the function.</span>
+<span class="g g-Whitespace">   </span><span class="mi">1923</span>       <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_call_outputs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_inference_function</span><span class="o">.</span><span class="n">call</span><span class="p">(</span>
+<span class="ne">-&gt; </span><span class="mi">1924</span>           <span class="n">ctx</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">cancellation_manager</span><span class="o">=</span><span class="n">cancellation_manager</span><span class="p">))</span>
+<span class="g g-Whitespace">   </span><span class="mi">1925</span>     <span class="n">forward_backward</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_select_forward_and_backward_functions</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1926</span>         <span class="n">args</span><span class="p">,</span>
+
+<span class="nn">~/miniconda3/envs/tf2/lib/python3.7/site-packages/tensorflow/python/eager/function.py</span> in <span class="ni">call</span><span class="nt">(self, ctx, args, cancellation_manager)</span>
+<span class="g g-Whitespace">    </span><span class="mi">548</span>               <span class="n">inputs</span><span class="o">=</span><span class="n">args</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">549</span>               <span class="n">attrs</span><span class="o">=</span><span class="n">attrs</span><span class="p">,</span>
+<span class="ne">--&gt; </span><span class="mi">550</span>               <span class="n">ctx</span><span class="o">=</span><span class="n">ctx</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">551</span>         <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">552</span>           <span class="n">outputs</span> <span class="o">=</span> <span class="n">execute</span><span class="o">.</span><span class="n">execute_with_cancellation</span><span class="p">(</span>
+
+<span class="nn">~/miniconda3/envs/tf2/lib/python3.7/site-packages/tensorflow/python/eager/execute.py</span> in <span class="ni">quick_execute</span><span class="nt">(op_name, num_outputs, inputs, attrs, ctx, name)</span>
+<span class="g g-Whitespace">     </span><span class="mi">58</span>     <span class="n">ctx</span><span class="o">.</span><span class="n">ensure_initialized</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">59</span>     <span class="n">tensors</span> <span class="o">=</span> <span class="n">pywrap_tfe</span><span class="o">.</span><span class="n">TFE_Py_Execute</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">device_name</span><span class="p">,</span> <span class="n">op_name</span><span class="p">,</span>
+<span class="ne">---&gt; </span><span class="mi">60</span>                                         <span class="n">inputs</span><span class="p">,</span> <span class="n">attrs</span><span class="p">,</span> <span class="n">num_outputs</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">61</span>   <span class="k">except</span> <span class="n">core</span><span class="o">.</span><span class="n">_NotOkStatusException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">62</span>     <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="generated-image-display">
+<h3>Generated image display<a class="headerlink" href="#generated-image-display" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Show final generated image</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="n">result_image_path</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./algorithms"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="autoencoders.html" title="previous page">Autoencoders</a>
+    <a class='right-next' id="next-link" href="generative_adversarial_networks.html" title="next page">Generative Adversarial Networks</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Baptiste Pesquet<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+  </body>
+</html>
