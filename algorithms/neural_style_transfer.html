@@ -535,7 +535,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Python version: 3.7.5
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Python version: 3.8.2
 </pre></div>
 </div>
 </div>
@@ -558,9 +558,9 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>TensorFlow version: 2.3.1
-Keras version: 2.4.0
-No GPU :(
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>TensorFlow version: 2.2.0
+Keras version: 2.3.0-tf
+GPU found :)
 </pre></div>
 </div>
 </div>
@@ -582,11 +582,7 @@ No GPU :(
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://i.imgur.com/F28w3Ac.jpg
-106496/102437 [===============================] - 0s 0us/step
-Downloading data from https://i.imgur.com/9ooB60I.jpg
-942080/935806 [==============================] - 0s 0us/step
-Input image dimensions: (910, 607)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Input image dimensions: (910, 607)
 </pre></div>
 </div>
 </div>
@@ -709,12 +705,6 @@ Input image dimensions: (910, 607)
 
 <span class="c1"># Set up a model that returns the activation values for every layer in VGG19 (as a dict)</span>
 <span class="n">feature_extractor</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">vgg</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="n">outputs_dict</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://storage.googleapis.com/tensorflow/keras-applications/vgg19/vgg19_weights_tf_dim_ordering_tf_kernels_notop.h5
-80142336/80134624 [==============================] - 46s 1us/step
 </pre></div>
 </div>
 </div>
@@ -895,65 +885,46 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">14</span><span class="o">-</span><span class="mi">541</span><span class="n">b5edce50f</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_epochs</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
-<span class="g g-Whitespace">     </span><span class="mi">14</span>     <span class="n">loss</span><span class="p">,</span> <span class="n">grads</span> <span class="o">=</span> <span class="n">compute_loss_and_grads</span><span class="p">(</span>
-<span class="ne">---&gt; </span><span class="mi">15</span>         <span class="n">combination_image</span><span class="p">,</span> <span class="n">base_image</span><span class="p">,</span> <span class="n">style_reference_image</span><span class="p">,</span> <span class="n">gen_height</span><span class="p">,</span> <span class="n">gen_width</span>
-<span class="g g-Whitespace">     </span><span class="mi">16</span>     <span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">17</span>     <span class="n">optimizer</span><span class="o">.</span><span class="n">apply_gradients</span><span class="p">([(</span><span class="n">grads</span><span class="p">,</span> <span class="n">combination_image</span><span class="p">)])</span>
-
-<span class="nn">~/miniconda3/envs/tf2/lib/python3.7/site-packages/tensorflow/python/eager/def_function.py</span> in <span class="ni">__call__</span><span class="nt">(self, *args, **kwds)</span>
-<span class="g g-Whitespace">    </span><span class="mi">778</span>       <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">779</span>         <span class="n">compiler</span> <span class="o">=</span> <span class="s2">&quot;nonXla&quot;</span>
-<span class="ne">--&gt; </span><span class="mi">780</span>         <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">781</span> 
-<span class="g g-Whitespace">    </span><span class="mi">782</span>       <span class="n">new_tracing_count</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_tracing_count</span><span class="p">()</span>
-
-<span class="nn">~/miniconda3/envs/tf2/lib/python3.7/site-packages/tensorflow/python/eager/def_function.py</span> in <span class="ni">_call</span><span class="nt">(self, *args, **kwds)</span>
-<span class="g g-Whitespace">    </span><span class="mi">812</span>       <span class="c1"># In this case we have not created variables on the first call. So we can</span>
-<span class="g g-Whitespace">    </span><span class="mi">813</span>       <span class="c1"># run the first trace but we should fail if variables are created.</span>
-<span class="ne">--&gt; </span><span class="mi">814</span>       <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stateful_fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">815</span>       <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_created_variables</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">816</span>         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Creating variables on a non-first call to a function&quot;</span>
-
-<span class="nn">~/miniconda3/envs/tf2/lib/python3.7/site-packages/tensorflow/python/eager/function.py</span> in <span class="ni">__call__</span><span class="nt">(self, *args, **kwargs)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2827</span>     <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lock</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">2828</span>       <span class="n">graph_function</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_maybe_define_function</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">2829</span>     <span class="k">return</span> <span class="n">graph_function</span><span class="o">.</span><span class="n">_filtered_call</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>  <span class="c1"># pylint: disable=protected-access</span>
-<span class="g g-Whitespace">   </span><span class="mi">2830</span> 
-<span class="g g-Whitespace">   </span><span class="mi">2831</span>   <span class="nd">@property</span>
-
-<span class="nn">~/miniconda3/envs/tf2/lib/python3.7/site-packages/tensorflow/python/eager/function.py</span> in <span class="ni">_filtered_call</span><span class="nt">(self, args, kwargs, cancellation_manager)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1846</span>                            <span class="n">resource_variable_ops</span><span class="o">.</span><span class="n">BaseResourceVariable</span><span class="p">))],</span>
-<span class="g g-Whitespace">   </span><span class="mi">1847</span>         <span class="n">captured_inputs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">captured_inputs</span><span class="p">,</span>
-<span class="ne">-&gt; </span><span class="mi">1848</span>         <span class="n">cancellation_manager</span><span class="o">=</span><span class="n">cancellation_manager</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1849</span> 
-<span class="g g-Whitespace">   </span><span class="mi">1850</span>   <span class="k">def</span> <span class="nf">_call_flat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">captured_inputs</span><span class="p">,</span> <span class="n">cancellation_manager</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-
-<span class="nn">~/miniconda3/envs/tf2/lib/python3.7/site-packages/tensorflow/python/eager/function.py</span> in <span class="ni">_call_flat</span><span class="nt">(self, args, captured_inputs, cancellation_manager)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1922</span>       <span class="c1"># No tape is watching; skip to running the function.</span>
-<span class="g g-Whitespace">   </span><span class="mi">1923</span>       <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_call_outputs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_inference_function</span><span class="o">.</span><span class="n">call</span><span class="p">(</span>
-<span class="ne">-&gt; </span><span class="mi">1924</span>           <span class="n">ctx</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">cancellation_manager</span><span class="o">=</span><span class="n">cancellation_manager</span><span class="p">))</span>
-<span class="g g-Whitespace">   </span><span class="mi">1925</span>     <span class="n">forward_backward</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_select_forward_and_backward_functions</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1926</span>         <span class="n">args</span><span class="p">,</span>
-
-<span class="nn">~/miniconda3/envs/tf2/lib/python3.7/site-packages/tensorflow/python/eager/function.py</span> in <span class="ni">call</span><span class="nt">(self, ctx, args, cancellation_manager)</span>
-<span class="g g-Whitespace">    </span><span class="mi">548</span>               <span class="n">inputs</span><span class="o">=</span><span class="n">args</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">549</span>               <span class="n">attrs</span><span class="o">=</span><span class="n">attrs</span><span class="p">,</span>
-<span class="ne">--&gt; </span><span class="mi">550</span>               <span class="n">ctx</span><span class="o">=</span><span class="n">ctx</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">551</span>         <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">552</span>           <span class="n">outputs</span> <span class="o">=</span> <span class="n">execute</span><span class="o">.</span><span class="n">execute_with_cancellation</span><span class="p">(</span>
-
-<span class="nn">~/miniconda3/envs/tf2/lib/python3.7/site-packages/tensorflow/python/eager/execute.py</span> in <span class="ni">quick_execute</span><span class="nt">(op_name, num_outputs, inputs, attrs, ctx, name)</span>
-<span class="g g-Whitespace">     </span><span class="mi">58</span>     <span class="n">ctx</span><span class="o">.</span><span class="n">ensure_initialized</span><span class="p">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">59</span>     <span class="n">tensors</span> <span class="o">=</span> <span class="n">pywrap_tfe</span><span class="o">.</span><span class="n">TFE_Py_Execute</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">device_name</span><span class="p">,</span> <span class="n">op_name</span><span class="p">,</span>
-<span class="ne">---&gt; </span><span class="mi">60</span>                                         <span class="n">inputs</span><span class="p">,</span> <span class="n">attrs</span><span class="p">,</span> <span class="n">num_outputs</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">61</span>   <span class="k">except</span> <span class="n">core</span><span class="o">.</span><span class="n">_NotOkStatusException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">62</span>     <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-
-<span class="ne">KeyboardInterrupt</span>: 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch [100/4000], loss: 11018.34
+Epoch [200/4000], loss: 8514.22
+Epoch [300/4000], loss: 7571.62
+Epoch [400/4000], loss: 7064.01
+Epoch [500/4000], loss: 6736.22
+Epoch [600/4000], loss: 6501.81
+Epoch [700/4000], loss: 6323.29
+Epoch [800/4000], loss: 6181.49
+Epoch [900/4000], loss: 6065.40
+Epoch [1000/4000], loss: 5967.84
+Epoch [1100/4000], loss: 5884.72
+Epoch [1200/4000], loss: 5812.83
+Epoch [1300/4000], loss: 5750.32
+Epoch [1400/4000], loss: 5695.63
+Epoch [1500/4000], loss: 5647.32
+Epoch [1600/4000], loss: 5604.25
+Epoch [1700/4000], loss: 5565.57
+Epoch [1800/4000], loss: 5530.69
+Epoch [1900/4000], loss: 5499.09
+Epoch [2000/4000], loss: 5470.43
+Epoch [2100/4000], loss: 5444.34
+Epoch [2200/4000], loss: 5420.45
+Epoch [2300/4000], loss: 5398.52
+Epoch [2400/4000], loss: 5378.34
+Epoch [2500/4000], loss: 5359.73
+Epoch [2600/4000], loss: 5342.55
+Epoch [2700/4000], loss: 5326.65
+Epoch [2800/4000], loss: 5311.85
+Epoch [2900/4000], loss: 5298.08
+Epoch [3000/4000], loss: 5285.24
+Epoch [3100/4000], loss: 5273.25
+Epoch [3200/4000], loss: 5262.03
+Epoch [3300/4000], loss: 5251.54
+Epoch [3400/4000], loss: 5241.72
+Epoch [3500/4000], loss: 5232.52
+Epoch [3600/4000], loss: 5223.90
+Epoch [3700/4000], loss: 5215.81
+Epoch [3800/4000], loss: 5208.19
+Epoch [3900/4000], loss: 5201.01
+Epoch [4000/4000], loss: 5194.25
 </pre></div>
 </div>
 </div>
@@ -967,6 +938,9 @@ _________________________________________________________________
 <span class="n">display</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="n">result_image_path</span><span class="p">))</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/neural_style_transfer_34_0.png" src="../_images/neural_style_transfer_34_0.png" />
 </div>
 </div>
 </div>
