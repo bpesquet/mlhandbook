@@ -5,7 +5,7 @@ email: baptiste.pesquet@ensc.fr
 logo: logo.png
 
 execute:
-  execute_notebooks: 'off'
+  execute_notebooks: "off"
 
 html:
   home_page_in_navbar: false
@@ -17,7 +17,7 @@ latex:
   latex_documents:
     targetname: mlhandbook.tex
 
-repository: 
+repository:
   url: https://github.com/bpesquet/mlhandbook
 
 launch_buttons:
@@ -25,10 +25,16 @@ launch_buttons:
   binderhub_url: "https://mybinder.org"
   colab_url: "https://colab.research.google.com"
 
-exclude_patterns: ["README.md", "algorithms/knn.ipynb", "algorithms/neural_style_transfer.ipynb" ,"fundamentals/deep_learning.ipynb", "tasks/data_analysis.ipynb"]
+exclude_patterns:
+  [
+    "README.md",
+    "algorithms/knn.ipynb",
+    "fundamentals/deep_learning.ipynb",
+    "tasks/data_analysis.ipynb",
+  ]
 
 sphinx:
   config:
     html_js_files:
-    # Needed for Plotly
-    - https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js
+      # Needed for Plotly
+      - https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js

@@ -2,32 +2,33 @@
 
 - part: Fundamentals
   chapters:
-  - file: fundamentals/introduction_to_machine_learning
-  - file: fundamentals/machine_learning_in_action
-  - file: fundamentals/machine_learning_foundations
+    - file: fundamentals/introduction_to_machine_learning
+    - file: fundamentals/machine_learning_in_action
+    - file: fundamentals/machine_learning_foundations
 
 - part: Algorithms
   chapters:
-  - file: algorithms/linear_regression
-  - file: algorithms/logistic_regression
-  - file: algorithms/decision_trees_and_random_forests
-  - file: algorithms/artificial_neural_networks
-  - file: algorithms/convolutional_neural_networks
-  - file: algorithms/recurrent_neural_networks
-  - file: algorithms/autoencoders
-  - file: algorithms/generative_adversarial_networks
+    - file: algorithms/linear_regression
+    - file: algorithms/logistic_regression
+    - file: algorithms/decision_trees_and_random_forests
+    - file: algorithms/artificial_neural_networks
+    - file: algorithms/convolutional_neural_networks
+    - file: algorithms/recurrent_neural_networks
+    - file: algorithms/autoencoders
+    - file: algorithms/neural_style_transfer.ipynb
+    - file: algorithms/generative_adversarial_networks
 
 - part: Tools
   chapters:
-  - file: tools/python
-  - file: tools/numpy
-  - file: tools/pandas
-  - file: tools/matplotlib
-  - file: tools/scikit-learn
-  - file: tools/keras
-  - file: tools/pytorch
+    - file: tools/python
+    - file: tools/numpy
+    - file: tools/pandas
+    - file: tools/matplotlib
+    - file: tools/scikit-learn
+    - file: tools/keras
+    - file: tools/pytorch
 
 - part: Appendix
   chapters:
-  - file: appendix/acknowledgments
-  - file: appendix/glossary
+    - file: appendix/acknowledgments
+    - file: appendix/glossary
