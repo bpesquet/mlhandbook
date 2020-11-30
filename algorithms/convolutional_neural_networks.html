@@ -778,7 +778,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Python version: 3.7.5
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Python version: 3.8.2
 </pre></div>
 </div>
 </div>
@@ -800,6 +800,7 @@
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;TensorFlow version: </span><span class="si">{</span><span class="n">tf</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Keras version: </span><span class="si">{</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;GPU found :)&#39;</span> <span class="k">if</span> <span class="n">tf</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">list_physical_devices</span><span class="p">(</span><span class="s2">&quot;GPU&quot;</span><span class="p">)</span> <span class="k">else</span> <span class="s1">&#39;No GPU :(&#39;</span><span class="p">)</span>
 
 <span class="kn">from</span> <span class="nn">tensorflow.keras.models</span> <span class="kn">import</span> <span class="n">Sequential</span>
 <span class="kn">from</span> <span class="nn">tensorflow.keras.layers</span> <span class="kn">import</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">Flatten</span><span class="p">,</span> <span class="n">Conv2D</span><span class="p">,</span> <span class="n">MaxPooling2D</span><span class="p">,</span> <span class="n">Dropout</span>
@@ -810,8 +811,9 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>TensorFlow version: 2.0.0
-Keras version: 2.2.4-tf
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>TensorFlow version: 2.2.0
+Keras version: 2.3.0-tf
+GPU found :)
 </pre></div>
 </div>
 </div>
@@ -925,36 +927,36 @@ Test images: (10000, 28, 28). Test labels: (10000,)
   </thead>
   <tbody>
     <tr>
-      <th>8153</th>
-      <td>2</td>
+      <th>3125</th>
+      <td>1</td>
     </tr>
     <tr>
-      <th>22059</th>
+      <th>7693</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>44649</th>
       <td>9</td>
     </tr>
     <tr>
-      <th>36821</th>
-      <td>9</td>
+      <th>23038</th>
+      <td>5</td>
     </tr>
     <tr>
-      <th>4323</th>
-      <td>2</td>
+      <th>43956</th>
+      <td>8</td>
     </tr>
     <tr>
-      <th>32743</th>
-      <td>4</td>
+      <th>54978</th>
+      <td>5</td>
     </tr>
     <tr>
-      <th>51936</th>
+      <th>27951</th>
       <td>0</td>
     </tr>
     <tr>
-      <th>44577</th>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>42589</th>
-      <td>9</td>
+      <th>50393</th>
+      <td>0</td>
     </tr>
   </tbody>
 </table>
@@ -1079,27 +1081,26 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Train on 54000 samples, validate on 6000 samples
-Epoch 1/10
-54000/54000 - 31s - loss: 0.2915 - accuracy: 0.8961 - val_loss: 0.2692 - val_accuracy: 0.9013
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/10
+422/422 - 2s - loss: 0.5704 - accuracy: 0.7918 - val_loss: 0.3851 - val_accuracy: 0.8628
 Epoch 2/10
-54000/54000 - 34s - loss: 0.2643 - accuracy: 0.9043 - val_loss: 0.2720 - val_accuracy: 0.9000
+422/422 - 2s - loss: 0.3767 - accuracy: 0.8660 - val_loss: 0.3208 - val_accuracy: 0.8848
 Epoch 3/10
-54000/54000 - 25s - loss: 0.2423 - accuracy: 0.9126 - val_loss: 0.2521 - val_accuracy: 0.9077
+422/422 - 2s - loss: 0.3276 - accuracy: 0.8837 - val_loss: 0.2964 - val_accuracy: 0.8913
 Epoch 4/10
-54000/54000 - 29s - loss: 0.2336 - accuracy: 0.9148 - val_loss: 0.2455 - val_accuracy: 0.9077
+422/422 - 2s - loss: 0.2994 - accuracy: 0.8935 - val_loss: 0.2852 - val_accuracy: 0.8972
 Epoch 5/10
-54000/54000 - 34s - loss: 0.2169 - accuracy: 0.9212 - val_loss: 0.2495 - val_accuracy: 0.9102
+422/422 - 2s - loss: 0.2757 - accuracy: 0.9019 - val_loss: 0.2617 - val_accuracy: 0.9022
 Epoch 6/10
-54000/54000 - 31s - loss: 0.2081 - accuracy: 0.9253 - val_loss: 0.2396 - val_accuracy: 0.9168
+422/422 - 2s - loss: 0.2555 - accuracy: 0.9073 - val_loss: 0.2650 - val_accuracy: 0.9037
 Epoch 7/10
-54000/54000 - 32s - loss: 0.1936 - accuracy: 0.9291 - val_loss: 0.2454 - val_accuracy: 0.9137
+422/422 - 2s - loss: 0.2464 - accuracy: 0.9113 - val_loss: 0.2532 - val_accuracy: 0.9065
 Epoch 8/10
-54000/54000 - 31s - loss: 0.1880 - accuracy: 0.9326 - val_loss: 0.2521 - val_accuracy: 0.9082
+422/422 - 2s - loss: 0.2316 - accuracy: 0.9163 - val_loss: 0.2647 - val_accuracy: 0.9043
 Epoch 9/10
-54000/54000 - 27s - loss: 0.1782 - accuracy: 0.9352 - val_loss: 0.2562 - val_accuracy: 0.9115
+422/422 - 2s - loss: 0.2194 - accuracy: 0.9211 - val_loss: 0.2434 - val_accuracy: 0.9090
 Epoch 10/10
-54000/54000 - 27s - loss: 0.1697 - accuracy: 0.9376 - val_loss: 0.2642 - val_accuracy: 0.9092
+422/422 - 2s - loss: 0.2096 - accuracy: 0.9238 - val_loss: 0.2446 - val_accuracy: 0.9095
 </pre></div>
 </div>
 </div>
@@ -1125,7 +1126,7 @@ Epoch 10/10
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test accuracy: 0.90460
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test accuracy: 0.90490
 </pre></div>
 </div>
 </div>
@@ -1218,7 +1219,7 @@ x_test: (10000, 32, 32, 3). y_test: (10000, 10)
 
 <span class="c1"># Freezing the convolutional base</span>
 <span class="c1"># This prevents weight updates during training</span>
-<span class="n">conv_base</span><span class="o">.</span><span class="n">trainable</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">conv_base</span><span class="o">.</span><span class="n">trainable</span> <span class="o">=</span> <span class="kc">True</span>
 
 <span class="n">conv_base</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
 </pre></div>
@@ -1268,8 +1269,8 @@ _________________________________________________________________
 block5_pool (MaxPooling2D)   (None, 1, 1, 512)         0         
 =================================================================
 Total params: 14,714,688
-Trainable params: 0
-Non-trainable params: 14,714,688
+Trainable params: 14,714,688
+Non-trainable params: 0
 _________________________________________________________________
 </pre></div>
 </div>
@@ -1307,8 +1308,8 @@ _________________________________________________________________
 dense_7 (Dense)              (None, 10)                5130      
 =================================================================
 Total params: 14,982,474
-Trainable params: 267,786
-Non-trainable params: 14,714,688
+Trainable params: 14,982,474
+Non-trainable params: 0
 _________________________________________________________________
 </pre></div>
 </div>
@@ -1324,53 +1325,52 @@ _________________________________________________________________
 <span class="c1"># Training the model, using 10% of the training set for validation</span>
 <span class="c1"># (May take several minutes depending on your system)</span>
 <span class="n">history</span> <span class="o">=</span> <span class="n">pretrained_cnn_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
-    <span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">validation_split</span><span class="o">=</span><span class="mf">0.1</span>
+    <span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">validation_split</span><span class="o">=</span><span class="mf">0.1</span>
 <span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Train on 45000 samples, validate on 5000 samples
-Epoch 1/20
-45000/45000 - 396s - loss: 1.4510 - accuracy: 0.4911 - val_loss: 1.2314 - val_accuracy: 0.5674
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/20
+1407/1407 [==============================] - 32s 23ms/step - loss: 1.8921 - accuracy: 0.2318 - val_loss: 1.6812 - val_accuracy: 0.3294
 Epoch 2/20
-45000/45000 - 417s - loss: 1.2732 - accuracy: 0.5537 - val_loss: 1.1534 - val_accuracy: 0.5928
+1407/1407 [==============================] - 32s 23ms/step - loss: 1.5082 - accuracy: 0.4034 - val_loss: 1.3254 - val_accuracy: 0.4954
 Epoch 3/20
-45000/45000 - 408s - loss: 1.2234 - accuracy: 0.5702 - val_loss: 1.1371 - val_accuracy: 0.6020
+1407/1407 [==============================] - 32s 23ms/step - loss: 1.2922 - accuracy: 0.5203 - val_loss: 1.1041 - val_accuracy: 0.5972
 Epoch 4/20
-45000/45000 - 324s - loss: 1.1835 - accuracy: 0.5836 - val_loss: 1.1076 - val_accuracy: 0.6124
+1407/1407 [==============================] - 32s 23ms/step - loss: 1.1098 - accuracy: 0.6035 - val_loss: 1.0196 - val_accuracy: 0.6404
 Epoch 5/20
-45000/45000 - 744s - loss: 1.1595 - accuracy: 0.5926 - val_loss: 1.1065 - val_accuracy: 0.6142
+1407/1407 [==============================] - 32s 23ms/step - loss: 0.9700 - accuracy: 0.6658 - val_loss: 1.0281 - val_accuracy: 0.6640
 Epoch 6/20
-45000/45000 - 332s - loss: 1.1328 - accuracy: 0.6009 - val_loss: 1.1064 - val_accuracy: 0.6128
+1407/1407 [==============================] - 32s 23ms/step - loss: 0.8654 - accuracy: 0.7048 - val_loss: 0.9230 - val_accuracy: 0.6878
 Epoch 7/20
-45000/45000 - 325s - loss: 1.1131 - accuracy: 0.6108 - val_loss: 1.0831 - val_accuracy: 0.6212
+1407/1407 [==============================] - 32s 23ms/step - loss: 0.7846 - accuracy: 0.7339 - val_loss: 0.8297 - val_accuracy: 0.7274
 Epoch 8/20
-45000/45000 - 323s - loss: 1.0927 - accuracy: 0.6148 - val_loss: 1.0840 - val_accuracy: 0.6248
+1407/1407 [==============================] - 32s 23ms/step - loss: 0.7059 - accuracy: 0.7638 - val_loss: 0.7953 - val_accuracy: 0.7314
 Epoch 9/20
-45000/45000 - 623s - loss: 1.0787 - accuracy: 0.6207 - val_loss: 1.0865 - val_accuracy: 0.6210
+1407/1407 [==============================] - 32s 22ms/step - loss: 0.6679 - accuracy: 0.7784 - val_loss: 0.7050 - val_accuracy: 0.7664
 Epoch 10/20
-45000/45000 - 352s - loss: 1.0608 - accuracy: 0.6255 - val_loss: 1.0728 - val_accuracy: 0.6262
+1407/1407 [==============================] - 32s 23ms/step - loss: 0.6064 - accuracy: 0.8004 - val_loss: 0.7716 - val_accuracy: 0.7492
 Epoch 11/20
-45000/45000 - 346s - loss: 1.0455 - accuracy: 0.6313 - val_loss: 1.0640 - val_accuracy: 0.6292
+1407/1407 [==============================] - 32s 23ms/step - loss: 0.5642 - accuracy: 0.8168 - val_loss: 0.7555 - val_accuracy: 0.7500
 Epoch 12/20
-45000/45000 - 349s - loss: 1.0278 - accuracy: 0.6394 - val_loss: 1.0666 - val_accuracy: 0.6296
+1407/1407 [==============================] - 32s 23ms/step - loss: 0.5278 - accuracy: 0.8286 - val_loss: 0.7933 - val_accuracy: 0.7618
 Epoch 13/20
-45000/45000 - 346s - loss: 1.0165 - accuracy: 0.6428 - val_loss: 1.0568 - val_accuracy: 0.6294
+1407/1407 [==============================] - 32s 23ms/step - loss: 0.4874 - accuracy: 0.8450 - val_loss: 0.7566 - val_accuracy: 0.7668
 Epoch 14/20
-45000/45000 - 404s - loss: 1.0009 - accuracy: 0.6456 - val_loss: 1.0663 - val_accuracy: 0.6300
+1407/1407 [==============================] - 32s 22ms/step - loss: 0.4611 - accuracy: 0.8525 - val_loss: 0.8808 - val_accuracy: 0.7600
 Epoch 15/20
-45000/45000 - 351s - loss: 0.9874 - accuracy: 0.6488 - val_loss: 1.0621 - val_accuracy: 0.6342
+1407/1407 [==============================] - 32s 23ms/step - loss: 0.4506 - accuracy: 0.8560 - val_loss: 0.8341 - val_accuracy: 0.7744
 Epoch 16/20
-45000/45000 - 333s - loss: 0.9725 - accuracy: 0.6553 - val_loss: 1.0680 - val_accuracy: 0.6298
+1407/1407 [==============================] - 32s 23ms/step - loss: 0.4932 - accuracy: 0.8467 - val_loss: 0.8174 - val_accuracy: 0.7480
 Epoch 17/20
-45000/45000 - 374s - loss: 0.9600 - accuracy: 0.6607 - val_loss: 1.0786 - val_accuracy: 0.6278
+1407/1407 [==============================] - 32s 23ms/step - loss: 0.4208 - accuracy: 0.8676 - val_loss: 0.9205 - val_accuracy: 0.7742
 Epoch 18/20
-45000/45000 - 354s - loss: 0.9508 - accuracy: 0.6650 - val_loss: 1.0656 - val_accuracy: 0.6276
+1407/1407 [==============================] - 32s 23ms/step - loss: 0.3635 - accuracy: 0.8837 - val_loss: 0.8235 - val_accuracy: 0.7892
 Epoch 19/20
-45000/45000 - 349s - loss: 0.9318 - accuracy: 0.6665 - val_loss: 1.0849 - val_accuracy: 0.6246
+1407/1407 [==============================] - 32s 23ms/step - loss: 0.3885 - accuracy: 0.8815 - val_loss: 0.7806 - val_accuracy: 0.7718
 Epoch 20/20
-45000/45000 - 380s - loss: 0.9237 - accuracy: 0.6713 - val_loss: 1.0774 - val_accuracy: 0.6384
+1407/1407 [==============================] - 32s 23ms/step - loss: 0.3386 - accuracy: 0.8944 - val_loss: 0.7647 - val_accuracy: 0.7880
 </pre></div>
 </div>
 </div>
@@ -1396,7 +1396,7 @@ Epoch 20/20
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test accuracy: 0.62180
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test accuracy: 0.78610
 </pre></div>
 </div>
 </div>
