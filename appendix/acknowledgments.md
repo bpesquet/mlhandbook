@@ -15,6 +15,7 @@ All these resources inspired this book and are well worth studying. Thanks to th
 - Google's [Machine Learning Crash Course](https://developers.google.com/machine-learning/crash-course).
 - Andrew Ng's [Machine Learning Course](https://www.coursera.org/learn/machine-learning) and [Deep Learning Specialization](https://www.deeplearning.ai/) on Coursera.
 - UCLxDeepMind [lecture series](https://deepmind.com/learning-resources/deep-learning-lecture-series-2020).
+- [Intellipaat's Machine Learning Course](https://intellipaat.com/machine-learning-certification-training-course/) - Master skills such as Python, ML algorithms, statistics, supervised and unsupervised learning, etc.
 
 ## Repositories
 
