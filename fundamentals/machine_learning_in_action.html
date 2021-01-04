@@ -40,7 +40,6 @@
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
     <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
@@ -1094,14 +1093,14 @@ Test dataset: (4128, 10)
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>median_house_value    1.000000
-median_income         0.686489
-total_rooms           0.138169
-housing_median_age    0.107661
-households            0.070977
-total_bedrooms        0.052991
-population           -0.018141
-longitude            -0.045351
-latitude             -0.145444
+median_income         0.690068
+total_rooms           0.124909
+housing_median_age    0.103321
+households            0.055487
+total_bedrooms        0.039623
+population           -0.032645
+longitude            -0.047732
+latitude             -0.143036
 Name: median_house_value, dtype: float64
 </pre></div>
 </div>
@@ -1204,17 +1203,17 @@ Name: median_house_value, dtype: float64
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>median_house_value          1.000000
-median_income               0.686489
-rooms_per_household         0.155415
-total_rooms                 0.138169
-housing_median_age          0.107661
-households                  0.070977
-total_bedrooms              0.052991
-population                 -0.018141
-population_per_household   -0.032319
-longitude                  -0.045351
-latitude                   -0.145444
-bedrooms_per_room          -0.253723
+median_income               0.690068
+rooms_per_household         0.147446
+total_rooms                 0.124909
+housing_median_age          0.103321
+households                  0.055487
+total_bedrooms              0.039623
+population_per_household   -0.022404
+population                 -0.032645
+longitude                  -0.047732
+latitude                   -0.143036
+bedrooms_per_room          -0.259958
 Name: median_house_value, dtype: float64
 </pre></div>
 </div>
@@ -1261,7 +1260,7 @@ Training labels: (16512,)
 <p>Three options exist:</p>
 <ul class="simple">
 <li><p>Remove the corresponding data samples.</p></li>
-<li><p>Remove the whole features.</p></li>
+<li><p>Remove the whole feature(s).</p></li>
 <li><p>Replace the missing values (using 0, the mean, the median or something else).</p></li>
 </ul>
 <div class="cell docutils container">
@@ -1302,8 +1301,8 @@ Training labels: (16512,)
   <tbody>
     <tr>
       <th>total_bedrooms</th>
-      <td>156</td>
-      <td>0.944767</td>
+      <td>170</td>
+      <td>1.029554</td>
     </tr>
     <tr>
       <th>ocean_proximity</th>
@@ -1368,64 +1367,64 @@ Training labels: (16512,)
   </thead>
   <tbody>
     <tr>
-      <th>19391</th>
-      <td>-120.85</td>
-      <td>37.78</td>
-      <td>25.0</td>
-      <td>421.0</td>
+      <th>19959</th>
+      <td>-119.32</td>
+      <td>36.25</td>
+      <td>21.0</td>
+      <td>1231.0</td>
       <td>NaN</td>
-      <td>303.0</td>
-      <td>106.0</td>
-      <td>2.2679</td>
+      <td>609.0</td>
+      <td>206.0</td>
+      <td>2.8365</td>
       <td>INLAND</td>
     </tr>
     <tr>
-      <th>17923</th>
-      <td>-121.97</td>
-      <td>37.35</td>
+      <th>3529</th>
+      <td>-118.53</td>
+      <td>34.26</td>
+      <td>18.0</td>
+      <td>3674.0</td>
+      <td>NaN</td>
+      <td>1590.0</td>
+      <td>550.0</td>
+      <td>8.1760</td>
+      <td>&lt;1H OCEAN</td>
+    </tr>
+    <tr>
+      <th>3958</th>
+      <td>-118.59</td>
+      <td>34.20</td>
+      <td>21.0</td>
+      <td>1789.0</td>
+      <td>NaN</td>
+      <td>2300.0</td>
+      <td>677.0</td>
+      <td>2.7540</td>
+      <td>&lt;1H OCEAN</td>
+    </tr>
+    <tr>
+      <th>1097</th>
+      <td>-121.77</td>
+      <td>39.66</td>
+      <td>20.0</td>
+      <td>3759.0</td>
+      <td>NaN</td>
+      <td>1705.0</td>
+      <td>600.0</td>
+      <td>4.7120</td>
+      <td>INLAND</td>
+    </tr>
+    <tr>
+      <th>5665</th>
+      <td>-118.29</td>
+      <td>33.73</td>
       <td>30.0</td>
-      <td>1955.0</td>
+      <td>3161.0</td>
       <td>NaN</td>
-      <td>999.0</td>
-      <td>386.0</td>
-      <td>4.6328</td>
-      <td>&lt;1H OCEAN</td>
-    </tr>
-    <tr>
-      <th>18246</th>
-      <td>-122.08</td>
-      <td>37.39</td>
-      <td>4.0</td>
-      <td>2292.0</td>
-      <td>NaN</td>
-      <td>1050.0</td>
-      <td>584.0</td>
-      <td>4.8036</td>
-      <td>NEAR BAY</td>
-    </tr>
-    <tr>
-      <th>4391</th>
-      <td>-118.27</td>
-      <td>34.07</td>
-      <td>27.0</td>
-      <td>1190.0</td>
-      <td>NaN</td>
-      <td>1795.0</td>
-      <td>422.0</td>
-      <td>1.7016</td>
-      <td>&lt;1H OCEAN</td>
-    </tr>
-    <tr>
-      <th>2115</th>
-      <td>-119.72</td>
-      <td>36.76</td>
-      <td>23.0</td>
-      <td>6403.0</td>
-      <td>NaN</td>
-      <td>3573.0</td>
-      <td>1260.0</td>
-      <td>2.3006</td>
-      <td>INLAND</td>
+      <td>1865.0</td>
+      <td>771.0</td>
+      <td>2.7139</td>
+      <td>NEAR OCEAN</td>
     </tr>
   </tbody>
 </table>
@@ -1462,9 +1461,9 @@ Training labels: (16512,)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[4 5 2]
- [3 2 8]
- [7 7 6]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[1 5 3]
+ [5 1 2]
+ [3 8 5]]
 </pre></div>
 </div>
 </div>
@@ -1484,11 +1483,11 @@ Training labels: (16512,)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[4.66666667 4.66666667 5.33333333]
-[[-0.39223227  0.16222142 -1.33630621]
- [-0.98058068 -1.29777137  1.06904497]
- [ 1.37281295  1.13554995  0.26726124]]
-Mean: -2.4671622769447922e-17. Std: 0.9999999999999999
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[3.         4.66666667 3.33333333]
+[[-1.22474487  0.11624764 -0.26726124]
+ [ 1.22474487 -1.27872403 -1.06904497]
+ [ 0.          1.16247639  1.33630621]]
+Mean: -9.868649107779169e-17. Std: 1.0
 </pre></div>
 </div>
 </div>
@@ -1552,10 +1551,10 @@ Mean: -2.4671622769447922e-17. Std: 0.9999999999999999
 Index([&#39;ocean_proximity&#39;], dtype=&#39;object&#39;)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;1H OCEAN     7251
-INLAND        5297
-NEAR OCEAN    2134
-NEAR BAY      1825
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;1H OCEAN     7335
+INLAND        5196
+NEAR OCEAN    2154
+NEAR BAY      1822
 ISLAND           5
 Name: ocean_proximity, dtype: int64
 </pre></div>
@@ -1588,8 +1587,8 @@ Name: ocean_proximity, dtype: int64
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x_train: (16512, 13)
-[-1.28587979  0.970395   -0.92252949 -0.5380901  -0.59041733 -0.66576734
- -0.44777892  0.3817485   0.          0.          0.          1.
+[-1.27184996  1.06848724 -0.60559772  0.29134585  0.27167814 -0.02686146
+  0.26033286  0.69527061  0.          0.          0.          1.
   0.        ]
 </pre></div>
 </div>
@@ -1647,7 +1646,7 @@ Name: ocean_proximity, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training error for linear regression: 68837.80
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training error for linear regression: 68621.92
 </pre></div>
 </div>
 </div>
@@ -1691,17 +1690,17 @@ Name: ocean_proximity, dtype: int64
     <span class="k">return</span> <span class="n">rmse_scores</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 
 
+<span class="n">lin_crossval_mean</span> <span class="o">=</span> <span class="n">compute_crossval_mean_score</span><span class="p">(</span><span class="n">lin_model</span><span class="p">,</span> <span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mean CV error for linear regression: </span><span class="si">{</span><span class="n">lin_crossval_mean</span><span class="si">:</span><span class="s2">.02f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
 <span class="n">dt_crossval_mean</span> <span class="o">=</span> <span class="n">compute_crossval_mean_score</span><span class="p">(</span><span class="n">dt_model</span><span class="p">,</span> <span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mean CV error for decision tree: </span><span class="si">{</span><span class="n">dt_crossval_mean</span><span class="si">:</span><span class="s2">.02f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="n">lin_crossval_mean</span> <span class="o">=</span> <span class="n">compute_crossval_mean_score</span><span class="p">(</span><span class="n">dt_model</span><span class="p">,</span> <span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mean CV error for linear regression: </span><span class="si">{</span><span class="n">lin_crossval_mean</span><span class="si">:</span><span class="s2">.02f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean CV error for decision tree: 68298.40
-Mean CV error for linear regression: 68614.25
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean CV error for linear regression: 68760.88
+Mean CV error for decision tree: 68062.34
 </pre></div>
 </div>
 </div>
@@ -1709,7 +1708,7 @@ Mean CV error for linear regression: 68614.25
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fit a random forest model to the training set</span>
-<span class="n">rf_model</span> <span class="o">=</span> <span class="n">RandomForestRegressor</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">rf_model</span> <span class="o">=</span> <span class="n">RandomForestRegressor</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
 <span class="n">rf_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 
 <span class="n">rf_rmse</span> <span class="o">=</span> <span class="n">compute_error</span><span class="p">(</span><span class="n">rf_model</span><span class="p">,</span> <span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
@@ -1721,8 +1720,8 @@ Mean CV error for linear regression: 68614.25
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training error for random forest: 18278.07
-Mean CV error for random forest: 49214.49
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training error for random forest: 19694.91
+Mean CV error for random forest: 50334.36
 </pre></div>
 </div>
 </div>
@@ -1765,7 +1764,7 @@ Mean CV error for random forest: 49214.49
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;max_features&#39;: 6, &#39;n_estimators&#39;: 30}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;max_features&#39;: 8, &#39;n_estimators&#39;: 30}
 </pre></div>
 </div>
 </div>
@@ -1795,7 +1794,7 @@ Mean CV error for random forest: 49214.49
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test data: (4128, 9)
 Test labels: (4128,)
-Test error for final model: 48302.02
+Test error for final model: 49029.37
 </pre></div>
 </div>
 </div>
@@ -1875,7 +1874,7 @@ Test error for final model: 48302.02
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted result: 310236.73
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted result: 277796.67
 </pre></div>
 </div>
 </div>
