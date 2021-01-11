@@ -29,7 +29,7 @@ exclude_patterns:
   [
     "README.md",
     "algorithms/knn.ipynb",
-    "fundamentals/deep_learning.ipynb",
+    "overview/deep_learning.ipynb",
     "tasks/data_analysis.ipynb",
   ]
 

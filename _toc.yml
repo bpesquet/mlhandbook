@@ -1,10 +1,16 @@
 - file: index
 
+- part: overview
+  chapters:
+    - file: overview/introduction_to_machine_learning
+    - file: overview/machine_learning_in_action
+
 - part: Fundamentals
   chapters:
-    - file: fundamentals/introduction_to_machine_learning
-    - file: fundamentals/machine_learning_in_action
-    - file: fundamentals/machine_learning_foundations
+    - file: fundamentals/anatomy_of_a_ml_system
+    - file: fundamentals/gradient_descent
+    - file: fundamentals/performance_measures
+    - file: fundamentals/losses
 
 - part: Algorithms
   chapters:
