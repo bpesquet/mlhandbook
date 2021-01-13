@@ -11,6 +11,7 @@
     - file: fundamentals/gradient_descent
     - file: fundamentals/performance_measures
     - file: fundamentals/losses
+    - file: fundamentals/activation_functions
 
 - part: Algorithms
   chapters:
