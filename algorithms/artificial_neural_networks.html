@@ -90,23 +90,50 @@
 <nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
     <p class="caption collapsible-parent">
  <span class="caption-text">
+  overview
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../overview/introduction_to_machine_learning.html">
+   Introduction to Machine Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../overview/machine_learning_in_action.html">
+   Machine Learning in action
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
   Fundamentals
  </span>
 </p>
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="../fundamentals/introduction_to_machine_learning.html">
-   Introduction to Machine Learning
+  <a class="reference internal" href="../fundamentals/problem_formulation.html">
+   Problem formulation
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../fundamentals/machine_learning_in_action.html">
-   Machine Learning in action
+  <a class="reference internal" href="../fundamentals/gradient_descent.html">
+   Gradient Descent
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../fundamentals/machine_learning_foundations.html">
-   Machine Learning foundations
+  <a class="reference internal" href="../fundamentals/performance_measures.html">
+   Performance measures
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fundamentals/losses.html">
+   Losses
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fundamentals/activation_functions.html">
+   Activation functions
   </a>
  </li>
 </ul>
@@ -411,13 +438,6 @@
     <a class="reference internal nav-link" href="#activation-functions">
      Activation functions
     </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#environment-setup">
-       Environment setup
-      </a>
-     </li>
-    </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#single-neuron-classifier">
@@ -511,7 +531,7 @@
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id1">
+    <a class="reference internal nav-link" href="#environment-setup">
      Environment setup
     </a>
    </li>
@@ -555,38 +575,6 @@
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#gradient-descent-optimization-algorithms">
-     Gradient descent optimization algorithms
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#momentum">
-     Momentum
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#momentum-equations">
-       Momentum equations
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#momentum-vs-plain-gd">
-       Momentum Vs plain GD
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#rmsprop">
-     RMSprop
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#adam-and-other-techniques">
-     Adam and other techniques
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#the-optimization-generalization-dilemna">
      The optimization/generalization dilemna
     </a>
@@ -614,7 +602,7 @@
     </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id2">
+    <a class="reference internal nav-link" href="#id1">
      Interactive recap
     </a>
    </li>
@@ -629,12 +617,12 @@
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id3">
+      <a class="reference internal nav-link" href="#id2">
        Regularization
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id4">
+      <a class="reference internal nav-link" href="#id3">
        Dropout
       </a>
      </li>
@@ -758,87 +746,12 @@
 <li><p><strong>ReLU</strong> (<em>Rectified Linear Unit</em>)</p></li>
 </ul>
 </li>
+<li><p>See <a class="reference internal" href="../fundamentals/activation_functions.html"><span class="doc std std-doc">Activation functions</span></a> for details.</p></li>
 </ul>
-<div class="math notranslate nohighlight">
-\[\sigma(z) = \frac{1}{1 + e^{-z}}\;\;\;\;
-tanh(z) = 2\sigma(2z) - 1\;\;\;\;
-ReLU(z) = max(0,z)\]</div>
-<div class="section" id="environment-setup">
-<h4>Environment setup<a class="headerlink" href="#environment-setup" title="Permalink to this headline">¶</a></h4>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">platform</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Python version: </span><span class="si">{</span><span class="n">platform</span><span class="o">.</span><span class="n">python_version</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">platform</span><span class="o">.</span><span class="n">python_version_tuple</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="s2">&quot;6&quot;</span><span class="p">)</span>
-
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">matplotlib.colors</span> <span class="kn">import</span> <span class="n">ListedColormap</span>
-<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Python version: 3.7.5
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Setup plots</span>
-<span class="o">%</span><span class="k">matplotlib</span> inline
-<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.figsize&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">8</span>
-<span class="o">%</span><span class="k">config</span> InlineBackend.figure_format = &#39;retina&#39;
-<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define activation functions</span>
-
-
-<span class="k">def</span> <span class="nf">sigmoid</span><span class="p">(</span><span class="n">z</span><span class="p">):</span>
-    <span class="k">return</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">z</span><span class="p">))</span>
-
-
-<span class="k">def</span> <span class="nf">tanh</span><span class="p">(</span><span class="n">z</span><span class="p">):</span>
-    <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">sigmoid</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">z</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
-
-
-<span class="k">def</span> <span class="nf">relu</span><span class="p">(</span><span class="n">z</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell tag_hide-input docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot activation functions</span>
-<span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">z</span><span class="p">),</span> <span class="s2">&quot;g--&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Sigmoid&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">tanh</span><span class="p">(</span><span class="n">z</span><span class="p">),</span> <span class="s2">&quot;b-&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Tanh&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">relu</span><span class="p">(</span><span class="n">z</span><span class="p">),</span> <span class="s2">&quot;m-.&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;ReLU&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/artificial_neural_networks_21_0.png" src="../_images/artificial_neural_networks_21_0.png" />
-</div>
-</div>
-</div>
 </div>
 <div class="section" id="single-neuron-classifier">
 <h3>Single neuron classifier<a class="headerlink" href="#single-neuron-classifier" title="Permalink to this headline">¶</a></h3>
-<p>Equivalent to logistic regression.</p>
+<p>Equivalent to <a class="reference internal" href="logistic_regression.html"><span class="doc std std-doc">logistic regression</span></a>.</p>
 <div class="math notranslate nohighlight">
 \[\mathcal{L}(\boldsymbol{\pmb{\theta}}) = -\frac{1}{m}\sum_{i=1}^m \left(y^{(i)} \log_e(y'^{(i)}) + (1-y^{(i)}) \log_e(1-y'^{(i)})\right)\]</div>
 <p><a class="reference external" href="https://youtu.be/FBggC-XVF4M"><img alt="Neural classifier" src="../_images/neural_classifier.png" /></a></p>
@@ -926,9 +839,42 @@ ReLU(z) = max(0,z)\]</div>
 </div>
 <div class="section" id="neural-networks-in-action">
 <h2>Neural networks in action<a class="headerlink" href="#neural-networks-in-action" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id1">
-<h3>Environment setup<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="environment-setup">
+<h3>Environment setup<a class="headerlink" href="#environment-setup" title="Permalink to this headline">¶</a></h3>
 <p>The following examples use <a class="reference external" href="https://keras.io">Keras</a>, a user-friendly neural networks API built on top of <a class="reference external" href="https://www.tensorflow.org/">TensorFlow</a>, Google’s Machine Learning platform.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">platform</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Python version: </span><span class="si">{</span><span class="n">platform</span><span class="o">.</span><span class="n">python_version</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">platform</span><span class="o">.</span><span class="n">python_version_tuple</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="s2">&quot;6&quot;</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib.colors</span> <span class="kn">import</span> <span class="n">ListedColormap</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Python version: 3.7.5
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Setup plots</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.figsize&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">8</span>
+<span class="o">%</span><span class="k">config</span> InlineBackend.figure_format = &#39;retina&#39;
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sklearn</span>
@@ -953,8 +899,8 @@ ReLU(z) = max(0,z)\]</div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>scikit-learn version: 0.22.1
-TensorFlow version: 2.0.0
-Keras version: 2.2.4-tf
+TensorFlow version: 2.3.1
+Keras version: 2.4.0
 </pre></div>
 </div>
 </div>
@@ -1051,7 +997,7 @@ Keras version: 2.2.4-tf
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x_train: (1000, 2). y_train: (1000,)
 </pre></div>
 </div>
-<img alt="../_images/artificial_neural_networks_43_1.png" src="../_images/artificial_neural_networks_43_1.png" />
+<img alt="../_images/artificial_neural_networks_40_1.png" src="../_images/artificial_neural_networks_40_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1111,7 +1057,7 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training loss: 0.01250
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training loss: 0.00833
 Training accuracy: 0.99900
 </pre></div>
 </div>
@@ -1125,7 +1071,7 @@ Training accuracy: 0.99900
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/artificial_neural_networks_47_0.png" src="../_images/artificial_neural_networks_47_0.png" />
+<img alt="../_images/artificial_neural_networks_44_0.png" src="../_images/artificial_neural_networks_44_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1136,7 +1082,7 @@ Training accuracy: 0.99900
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/artificial_neural_networks_48_0.png" src="../_images/artificial_neural_networks_48_0.png" />
+<img alt="../_images/artificial_neural_networks_45_0.png" src="../_images/artificial_neural_networks_45_0.png" />
 </div>
 </div>
 </div>
@@ -1156,7 +1102,7 @@ Training accuracy: 0.99900
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x_train: (1000, 2). y_train: (1000,)
 </pre></div>
 </div>
-<img alt="../_images/artificial_neural_networks_50_1.png" src="../_images/artificial_neural_networks_50_1.png" />
+<img alt="../_images/artificial_neural_networks_47_1.png" src="../_images/artificial_neural_networks_47_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1170,7 +1116,7 @@ Training accuracy: 0.99900
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/artificial_neural_networks_51_0.png" src="../_images/artificial_neural_networks_51_0.png" />
+<img alt="../_images/artificial_neural_networks_48_0.png" src="../_images/artificial_neural_networks_48_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1180,7 +1126,7 @@ Training accuracy: 0.99900
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/artificial_neural_networks_52_0.png" src="../_images/artificial_neural_networks_52_0.png" />
+<img alt="../_images/artificial_neural_networks_49_0.png" src="../_images/artificial_neural_networks_49_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1202,7 +1148,7 @@ Training accuracy: 0.99900
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/artificial_neural_networks_53_0.png" src="../_images/artificial_neural_networks_53_0.png" />
+<img alt="../_images/artificial_neural_networks_50_0.png" src="../_images/artificial_neural_networks_50_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1212,7 +1158,7 @@ Training accuracy: 0.99900
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/artificial_neural_networks_54_0.png" src="../_images/artificial_neural_networks_54_0.png" />
+<img alt="../_images/artificial_neural_networks_51_0.png" src="../_images/artificial_neural_networks_51_0.png" />
 </div>
 </div>
 </div>
@@ -1250,7 +1196,7 @@ Test images: (10000, 28, 28). Test labels: (10000,)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/artificial_neural_networks_57_0.png" src="../_images/artificial_neural_networks_57_0.png" />
+<img alt="../_images/artificial_neural_networks_54_0.png" src="../_images/artificial_neural_networks_54_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1286,36 +1232,36 @@ Test images: (10000, 28, 28). Test labels: (10000,)
   </thead>
   <tbody>
     <tr>
-      <th>21579</th>
-      <td>3</td>
+      <th>4547</th>
+      <td>9</td>
     </tr>
     <tr>
-      <th>48659</th>
-      <td>5</td>
+      <th>31524</th>
+      <td>9</td>
     </tr>
     <tr>
-      <th>6724</th>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>42568</th>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>59244</th>
+      <th>14693</th>
       <td>0</td>
     </tr>
     <tr>
-      <th>3763</th>
+      <th>49595</th>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>7466</th>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>5237</th>
       <td>1</td>
     </tr>
     <tr>
-      <th>34395</th>
-      <td>7</td>
+      <th>43744</th>
+      <td>6</td>
     </tr>
     <tr>
-      <th>14602</th>
-      <td>4</td>
+      <th>1301</th>
+      <td>2</td>
     </tr>
   </tbody>
 </table>
@@ -1384,7 +1330,7 @@ y_test: (10000, 10)
   </thead>
   <tbody>
     <tr>
-      <th>1859</th>
+      <th>34168</th>
       <td>0.0</td>
       <td>1.0</td>
       <td>0.0</td>
@@ -1397,7 +1343,20 @@ y_test: (10000, 10)
       <td>0.0</td>
     </tr>
     <tr>
-      <th>8392</th>
+      <th>146</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>50904</th>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -1410,12 +1369,51 @@ y_test: (10000, 10)
       <td>0.0</td>
     </tr>
     <tr>
-      <th>2342</th>
+      <th>46299</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>36996</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>47307</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>13848</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -1423,65 +1421,13 @@ y_test: (10000, 10)
       <td>0.0</td>
     </tr>
     <tr>
-      <th>5808</th>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>3679</th>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>56708</th>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>29058</th>
-      <td>0.0</td>
-      <td>0.0</td>
+      <th>4937</th>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>24951</th>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -1542,7 +1488,7 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/artificial_neural_networks_64_0.png" src="../_images/artificial_neural_networks_64_0.png" />
+<img alt="../_images/artificial_neural_networks_61_0.png" src="../_images/artificial_neural_networks_61_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1555,7 +1501,7 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test accuracy: 0.94620
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test accuracy: 0.94770
 </pre></div>
 </div>
 </div>
@@ -1577,7 +1523,7 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/artificial_neural_networks_66_0.png" src="../_images/artificial_neural_networks_66_0.png" />
+<img alt="../_images/artificial_neural_networks_63_0.png" src="../_images/artificial_neural_networks_63_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1608,41 +1554,6 @@ _________________________________________________________________
 <li><p>Mini-batch size</p></li>
 <li><p>…</p></li>
 </ul>
-</div>
-<div class="section" id="gradient-descent-optimization-algorithms">
-<h3>Gradient descent optimization algorithms<a class="headerlink" href="#gradient-descent-optimization-algorithms" title="Permalink to this headline">¶</a></h3>
-<p><a class="reference external" href="https://towardsdatascience.com/10-gradient-descent-optimisation-algorithms-86989510b5e9"><img alt="Gradient Descent evolution map" src="../_images/gradient_descent_evolution_map.png" /></a></p>
-</div>
-<div class="section" id="momentum">
-<h3>Momentum<a class="headerlink" href="#momentum" title="Permalink to this headline">¶</a></h3>
-<p>Momentum optimization accelerates the descent speed in the direction of the minimum by accumulating previous gradients. It can also escape plateaux faster then plain GD.</p>
-<p><a class="reference external" href="https://youtu.be/qPKKtvkVAjY"><img alt="Momemtum demo" src="../_images/gd_momentum_demo.gif" /></a></p>
-<div class="section" id="momentum-equations">
-<h4>Momentum equations<a class="headerlink" href="#momentum-equations" title="Permalink to this headline">¶</a></h4>
-<div class="math notranslate nohighlight">
-\[\pmb{m_{k+1}} = \beta_k \pmb{m_k} - \nabla_{\boldsymbol{\theta}}\mathcal{L}(\boldsymbol{\theta_k})\]</div>
-<div class="math notranslate nohighlight">
-\[\pmb{\theta_{k+1}} = \pmb{\theta_k} + \eta_k\pmb{m_{k+1}}\]</div>
-<p><span class="math notranslate nohighlight">\(\beta_k \in [0,1]\)</span> is a friction factor that prevents gradients updates from growing too large. A typical value is 0.9.</p>
-</div>
-<div class="section" id="momentum-vs-plain-gd">
-<h4>Momentum Vs plain GD<a class="headerlink" href="#momentum-vs-plain-gd" title="Permalink to this headline">¶</a></h4>
-<p><a class="reference external" href="https://youtu.be/kVU8zTI-Od0"><img alt="Momentum Vs plain GD" src="../_images/gd_momentum.png" /></a></p>
-</div>
-</div>
-<div class="section" id="rmsprop">
-<h3>RMSprop<a class="headerlink" href="#rmsprop" title="Permalink to this headline">¶</a></h3>
-<p><em>RMSprop</em> decays the learning rate differently for each parameter, scaling down the gradient vector along the steepest dimensions. The underlying idea is to adjust the descent direction a bit more towards the global minimum.</p>
-<div class="math notranslate nohighlight">
-\[\pmb{v_{k+1}} = \beta_k \pmb{v_k} + (1-\beta_k) \left(\nabla_{\boldsymbol{\theta}}\mathcal{L}(\boldsymbol{\theta_k})\right)^2\]</div>
-<div class="math notranslate nohighlight">
-\[\pmb{\theta_{k+1}} = \pmb{\theta_k} - \frac{\eta_k}{\sqrt{\pmb{v_{k}}+\epsilon}}\nabla_{\boldsymbol{\theta}}\mathcal{L}(\boldsymbol{\theta_k})\]</div>
-<p><span class="math notranslate nohighlight">\(\epsilon\)</span> is a smoothing term to avoid divisions by zero. A typical value is <span class="math notranslate nohighlight">\(10^{-10}\)</span>.</p>
-</div>
-<div class="section" id="adam-and-other-techniques">
-<h3>Adam and other techniques<a class="headerlink" href="#adam-and-other-techniques" title="Permalink to this headline">¶</a></h3>
-<p><em>Adam</em> (<em>Adaptive Moment Estimation</em>) combines the ideas of momentum and RMSprop. It is the <em>de facto</em> choice nowadays.</p>
-<p>Gradient descent optimization is a rich subfield of Machine Learning. Read more in the article <a class="reference external" href="http://ruder.io/optimizing-gradient-descent/">An overview of gradient descent optimization algorithms</a>.</p>
 </div>
 <div class="section" id="the-optimization-generalization-dilemna">
 <h3>The optimization/generalization dilemna<a class="headerlink" href="#the-optimization-generalization-dilemna" title="Permalink to this headline">¶</a></h3>
@@ -1676,7 +1587,7 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/artificial_neural_networks_78_0.png" src="../_images/artificial_neural_networks_78_0.png" />
+<img alt="../_images/artificial_neural_networks_69_0.png" src="../_images/artificial_neural_networks_69_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1706,7 +1617,7 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/artificial_neural_networks_79_0.png" src="../_images/artificial_neural_networks_79_0.png" />
+<img alt="../_images/artificial_neural_networks_70_0.png" src="../_images/artificial_neural_networks_70_0.png" />
 </div>
 </div>
 </div>
@@ -1745,7 +1656,7 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/artificial_neural_networks_82_0.png" src="../_images/artificial_neural_networks_82_0.png" />
+<img alt="../_images/artificial_neural_networks_73_0.png" src="../_images/artificial_neural_networks_73_0.png" />
 </div>
 </div>
 </div>
@@ -1773,13 +1684,13 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/artificial_neural_networks_84_0.png" src="../_images/artificial_neural_networks_84_0.png" />
+<img alt="../_images/artificial_neural_networks_75_0.png" src="../_images/artificial_neural_networks_75_0.png" />
 </div>
 </div>
 </div>
 </div>
-<div class="section" id="id2">
-<h3>Interactive recap<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id1">
+<h3>Interactive recap<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference external" href="https://playground.tensorflow.org/#activation=tanh&amp;batchSize=10&amp;dataset=spiral%C2%AEDataset=reg-plane&amp;learningRate=0.03%C2%AEularizationRate=0&amp;noise=0&amp;networkShape=4,2&amp;seed=0.22058&amp;showTestData=false&amp;discretize=false&amp;percTrainData=50&amp;x=true&amp;y=true&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=classification&amp;initZero=false&amp;hideText=false"><img alt="Neural networks playground (complete)" src="../_images/nn_playground_complete.png" /></a></p>
 </div>
 <div class="section" id="overfitting-on-a-real-world-example">
@@ -1920,7 +1831,31 @@ First label: 1
   </thead>
   <tbody>
     <tr>
-      <th>1908</th>
+      <th>5023</th>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>8072</th>
       <td>0.0</td>
       <td>1.0</td>
       <td>1.0</td>
@@ -1944,31 +1879,7 @@ First label: 1
       <td>0.0</td>
     </tr>
     <tr>
-      <th>11016</th>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>...</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>11869</th>
+      <th>1848</th>
       <td>0.0</td>
       <td>1.0</td>
       <td>1.0</td>
@@ -1992,7 +1903,7 @@ First label: 1
       <td>0.0</td>
     </tr>
     <tr>
-      <th>12335</th>
+      <th>1208</th>
       <td>0.0</td>
       <td>1.0</td>
       <td>1.0</td>
@@ -2016,7 +1927,7 @@ First label: 1
       <td>0.0</td>
     </tr>
     <tr>
-      <th>12918</th>
+      <th>1233</th>
       <td>0.0</td>
       <td>1.0</td>
       <td>1.0</td>
@@ -2040,7 +1951,31 @@ First label: 1
       <td>0.0</td>
     </tr>
     <tr>
-      <th>1509</th>
+      <th>1344</th>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>1868</th>
       <td>0.0</td>
       <td>1.0</td>
       <td>1.0</td>
@@ -2064,7 +1999,7 @@ First label: 1
       <td>0.0</td>
     </tr>
     <tr>
-      <th>522</th>
+      <th>11818</th>
       <td>0.0</td>
       <td>1.0</td>
       <td>1.0</td>
@@ -2088,7 +2023,7 @@ First label: 1
       <td>0.0</td>
     </tr>
     <tr>
-      <th>14298</th>
+      <th>7813</th>
       <td>0.0</td>
       <td>1.0</td>
       <td>1.0</td>
@@ -2112,31 +2047,7 @@ First label: 1
       <td>0.0</td>
     </tr>
     <tr>
-      <th>13054</th>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>...</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>6184</th>
+      <th>4467</th>
       <td>0.0</td>
       <td>1.0</td>
       <td>1.0</td>
@@ -2209,7 +2120,7 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/artificial_neural_networks_92_0.png" src="../_images/artificial_neural_networks_92_0.png" />
+<img alt="../_images/artificial_neural_networks_83_0.png" src="../_images/artificial_neural_networks_83_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2222,7 +2133,7 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test accuracy: 0.85164
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test accuracy: 0.85052
 </pre></div>
 </div>
 </div>
@@ -2266,12 +2177,12 @@ Non-trainable params: 0
 _________________________________________________________________
 </pre></div>
 </div>
-<img alt="../_images/artificial_neural_networks_95_1.png" src="../_images/artificial_neural_networks_95_1.png" />
+<img alt="../_images/artificial_neural_networks_86_1.png" src="../_images/artificial_neural_networks_86_1.png" />
 </div>
 </div>
 </div>
-<div class="section" id="id3">
-<h4>Regularization<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id2">
+<h4>Regularization<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create the same model as before but now using L2 regularization</span>
@@ -2316,12 +2227,12 @@ Non-trainable params: 0
 _________________________________________________________________
 </pre></div>
 </div>
-<img alt="../_images/artificial_neural_networks_97_1.png" src="../_images/artificial_neural_networks_97_1.png" />
+<img alt="../_images/artificial_neural_networks_88_1.png" src="../_images/artificial_neural_networks_88_1.png" />
 </div>
 </div>
 </div>
-<div class="section" id="id4">
-<h4>Dropout<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id3">
+<h4>Dropout<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add 50% dropout to the two hidden layers</span>
@@ -2372,7 +2283,7 @@ Non-trainable params: 0
 _________________________________________________________________
 </pre></div>
 </div>
-<img alt="../_images/artificial_neural_networks_99_1.png" src="../_images/artificial_neural_networks_99_1.png" />
+<img alt="../_images/artificial_neural_networks_90_1.png" src="../_images/artificial_neural_networks_90_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2385,7 +2296,7 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test accuracy: 0.87516
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test accuracy: 0.87732
 </pre></div>
 </div>
 </div>

@@ -1,0 +1,675 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Problem formulation &#8212; Machine Learning Handbook</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Gradient Descent" href="gradient_descent.html" />
+    <link rel="prev" title="Machine Learning in action" href="../overview/machine_learning_in_action.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/logo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Machine Learning Handbook</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <p class="caption collapsible-parent">
+ <span class="caption-text">
+  overview
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../overview/introduction_to_machine_learning.html">
+   Introduction to Machine Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../overview/machine_learning_in_action.html">
+   Machine Learning in action
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Fundamentals
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Problem formulation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="gradient_descent.html">
+   Gradient Descent
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="performance_measures.html">
+   Performance measures
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="losses.html">
+   Losses
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="activation_functions.html">
+   Activation functions
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Algorithms
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../algorithms/linear_regression.html">
+   Linear Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../algorithms/logistic_regression.html">
+   Logistic Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../algorithms/decision_trees_and_random_forests.html">
+   Decision Trees &amp; Random Forests
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../algorithms/artificial_neural_networks.html">
+   Artificial Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../algorithms/convolutional_neural_networks.html">
+   Convolutional Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../algorithms/recurrent_neural_networks.html">
+   Recurrent Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../algorithms/autoencoders.html">
+   Autoencoders
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../algorithms/neural_style_transfer.html">
+   Neural Style Transfer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../algorithms/generative_adversarial_networks.html">
+   Generative Adversarial Networks
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Tools
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tools/python.html">
+   Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tools/numpy.html">
+   NumPy
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tools/pandas.html">
+   pandas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tools/matplotlib.html">
+   Matplotlib and Seaborn
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tools/scikit-learn.html">
+   scikit-learn
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tools/keras.html">
+   Keras
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tools/pytorch.html">
+   PyTorch
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Appendix
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../appendix/acknowledgments.html">
+   Acknowledgments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../appendix/glossary.html">
+   Glossary
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/fundamentals/problem_formulation.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/bpesquet/mlhandbook"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/bpesquet/mlhandbook/issues/new?title=Issue%20on%20page%20%2Ffundamentals/problem_formulation.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/bpesquet/mlhandbook/edit/master/fundamentals/problem_formulation.ipynb"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/bpesquet/mlhandbook/master?urlpath=tree/fundamentals/problem_formulation.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/bpesquet/mlhandbook/blob/master/fundamentals/problem_formulation.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data">
+   Data
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#inputs">
+     Inputs
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#design-matrix">
+     Design matrix
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#multidimensional-data-reshaping">
+     Multidimensional data: reshaping
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#multidimensional-data-scaling">
+     Multidimensional data: scaling
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#targets">
+     Targets
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model">
+   Model
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#definition">
+     Definition
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hypothesis-function">
+     Hypothesis function
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#multiclass-classification">
+     Multiclass classification
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#model-lifecycle">
+     Model lifecycle
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hyperparameters">
+     Hyperparameters
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#loss">
+   Loss
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Definition
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#optimization-algorithm">
+   Optimization algorithm
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     Definition
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="problem-formulation">
+<h1>Problem formulation<a class="headerlink" href="#problem-formulation" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Data</p></li>
+<li><p>Model</p></li>
+<li><p>Loss</p></li>
+<li><p>Optimization algorithm</p></li>
+</ul>
+<div class="section" id="data">
+<h2>Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="inputs">
+<h3>Inputs<a class="headerlink" href="#inputs" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(m\)</span>: number of samples and associated results in the dataset.</p></li>
+<li><p><span class="math notranslate nohighlight">\(n\)</span>: number of features. A <strong>feature</strong> is an attribute (a property) of the data samples.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\pmb{x}^{(i)}\)</span>: data <strong>sample</strong> (example), vector of <span class="math notranslate nohighlight">\(n\)</span> features.</p></li>
+<li><p><span class="math notranslate nohighlight">\(x^{(i)}_j\)</span>: value of the <span class="math notranslate nohighlight">\(j\)</span>th feature for the <span class="math notranslate nohighlight">\(i\)</span>th data sample.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}\pmb{x}^{(i)} = \begin{pmatrix}
+       \ x^{(i)}_1 \\
+       \ x^{(i)}_2 \\
+       \ \vdots \\
+       \ x^{(i)}_n
+     \end{pmatrix} \in \pmb{R}^n\end{split}\]</div>
+</div>
+<div class="section" id="design-matrix">
+<h3>Design matrix<a class="headerlink" href="#design-matrix" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\pmb{X}\)</span>: matrix of the form (<em>samples, features</em>) expected by most ML algorithms and called <em>design matrix</em>.</p>
+<ul>
+<li><p>First dimension is for the <span class="math notranslate nohighlight">\(m\)</span> samples.</p></li>
+<li><p>Second dimension is for the <span class="math notranslate nohighlight">\(n\)</span> features of each sample.</p></li>
+</ul>
+</li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}\pmb{X} = \begin{bmatrix}
+       \ x^{(1)T} \\
+       \ x^{(2)T} \\
+       \ \vdots \\
+       \ x^{(m)T} \\
+     \end{bmatrix} = 
+\begin{bmatrix}
+       \ x^{(1)}_1 &amp; x^{(1)}_2 &amp; \cdots &amp; x^{(1)}_n \\
+       \ x^{(2)}_1 &amp; x^{(2)}_2 &amp; \cdots &amp; x^{(2)}_n \\
+       \ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+       \ x^{(m)}_1 &amp; x^{(m)}_2 &amp; \cdots &amp; x^{(m)}_n
+     \end{bmatrix} \in \pmb{R}^{m \times n} \end{split}\]</div>
+</div>
+<div class="section" id="multidimensional-data-reshaping">
+<h3>Multidimensional data: reshaping<a class="headerlink" href="#multidimensional-data-reshaping" title="Permalink to this headline">¶</a></h3>
+<p>A bitmap image can be represented as a 3D multidimensional array (<em>height, width, color_channels</em>).</p>
+<p>A video can be represented as a 4D multidimensional array (<em>frames, height, width, color_channels</em>).</p>
+<p>They have to be <strong>reshaped</strong>, or <em>flattened</em> in that case, into a vector before being fed to most ML models.</p>
+<p><img alt="Image to vector" src="../_images/image2vector.jpeg" /></p>
+</div>
+<div class="section" id="multidimensional-data-scaling">
+<h3>Multidimensional data: scaling<a class="headerlink" href="#multidimensional-data-scaling" title="Permalink to this headline">¶</a></h3>
+<p>Individual pixel values for images and videos are typically integers in the [0:255] range.</p>
+<p>Scaling them to obtain floats into the <span class="math notranslate nohighlight">\([0,1]\)</span> range is a common practice.</p>
+</div>
+<div class="section" id="targets">
+<h3>Targets<a class="headerlink" href="#targets" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(y^{(i)}\)</span>: <strong>target</strong>, or <strong>label</strong> (expected result) for a data sample.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\pmb{y}\)</span>: vector of labels for all <span class="math notranslate nohighlight">\(m\)</span> samples in a dataset.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}\pmb{y} = \begin{pmatrix}
+       \ y^{(1)} \\
+       \ y^{(2)} \\
+       \ \vdots \\
+       \ y^{(m)}
+     \end{pmatrix} \in \pmb{R}^m\end{split}\]</div>
+</div>
+</div>
+<div class="section" id="model">
+<h2>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="definition">
+<h3>Definition<a class="headerlink" href="#definition" title="Permalink to this headline">¶</a></h3>
+<p>The representation learnt from data during training is called a <strong>model</strong>. It defines the relationship between inputs and outputs, and thus produces results from data. Most (but not all) ML systems are model-based.</p>
+<p><a class="reference external" href="https://github.com/ageron/handson-ml2"><img alt="Extract from the book Hands-on Machine Learning with Scikit-Learn &amp; TensorFlow by A. Géron" src="../_images/instance_model_learning.png" /></a></p>
+</div>
+<div class="section" id="hypothesis-function">
+<h3>Hypothesis function<a class="headerlink" href="#hypothesis-function" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\pmb{\theta}\)</span> (sometime noted <span class="math notranslate nohighlight">\(\pmb{\omega}\)</span>): model’s internal parameters vector.</p></li>
+<li><p><span class="math notranslate nohighlight">\(h_\theta()\)</span>: model’s prediction function (<em>hypothesis function</em>), using the model parameters <span class="math notranslate nohighlight">\(\pmb{\theta}\)</span> to define the relationship between features and labels.</p></li>
+<li><p><span class="math notranslate nohighlight">\(y'^{(i)}\)</span> (sometimes noted <span class="math notranslate nohighlight">\(\hat{y}^{(i)}\)</span>): hypothesis function output (model prediction).</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[y'^{(i)} = h_\theta(\pmb{x}^{(i)})\]</div>
+</div>
+<div class="section" id="multiclass-classification">
+<h3>Multiclass classification<a class="headerlink" href="#multiclass-classification" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\pmb{y}^{(i)}\)</span> et <span class="math notranslate nohighlight">\(\pmb{y}'^{(i)}\)</span> are vectors with as many elements as the number of predicted classes <span class="math notranslate nohighlight">\(K\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\pmb{y}^{(i)}\)</span> (the <em>ground truth</em>) is a <strong>binary vector</strong> of <span class="math notranslate nohighlight">\(K\)</span> values. <span class="math notranslate nohighlight">\(y^{(i)}_k\)</span> is equal to 1 if the <span class="math notranslate nohighlight">\(i\)</span>th sample’s class corresponds to <span class="math notranslate nohighlight">\(k\)</span>, 0 otherwise.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\pmb{y}'^{(i)}\)</span> is a <strong>probability vector</strong> of <span class="math notranslate nohighlight">\(K\)</span> values, computed by the model. <span class="math notranslate nohighlight">\(y'^{(i)}_k\)</span> represents the probability that the <span class="math notranslate nohighlight">\(i\)</span>th sample belongs to class <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}\pmb{y}^{(i)} = \begin{pmatrix}
+       \ y^{(i)}_1 \\
+       \ y^{(i)}_2 \\
+       \ \vdots \\
+       \ y^{(i)}_K
+     \end{pmatrix} \in \pmb{R}^K
+\;\;\;
+\pmb{y}'^{(i)} = \begin{pmatrix}
+       \ y'^{(i)}_1 \\
+       \ y'^{(i)}_2 \\
+       \ \vdots \\
+       \ y'^{(i)}_K
+     \end{pmatrix} \in \pmb{R}^K\end{split}\]</div>
+</div>
+<div class="section" id="model-lifecycle">
+<h3>Model lifecycle<a class="headerlink" href="#model-lifecycle" title="Permalink to this headline">¶</a></h3>
+<p>There are two (repeatable) phases:</p>
+<ul class="simple">
+<li><p><strong>Training</strong>: using training input samples, the model learns to find a relationship between features and labels.</p></li>
+<li><p><strong>Inference</strong>: the trained model is used to make predictions.</p></li>
+</ul>
+</div>
+<div class="section" id="hyperparameters">
+<h3>Hyperparameters<a class="headerlink" href="#hyperparameters" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Many ML models also have user-defined properties called <strong>hyperparameters</strong>.</p>
+<ul>
+<li><p>Examples: maximum depth of a decision tree, number oy layers of a neural network…</p></li>
+</ul>
+</li>
+<li><p>Contrary to internal parameters, they are not automatically updated during training.</p></li>
+<li><p>The hyperparameters directly affect the model’s performance and must be tweaked during the training and tuning steps.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="loss">
+<h2>Loss<a class="headerlink" href="#loss" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3>Definition<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mathcal{L_{\pmb{X, y}}(\pmb{\theta})}\)</span>, sometimes noted <span class="math notranslate nohighlight">\(\mathcal{J_{\pmb{X, y}}(\pmb{\theta})}\)</span>: <strong>loss</strong> (or <strong>cost</strong>) function that quantifies the difference, often called <strong>error</strong>, between expected results (called <em>ground truth</em>) and actual results computed by the model.</p></li>
+<li><p>During model training, the input dataset <span class="math notranslate nohighlight">\(\pmb{X}\)</span> and the expected results <span class="math notranslate nohighlight">\(\pmb{y}\)</span> are treated as constants. The loss depends solely on the model parameters <span class="math notranslate nohighlight">\(\pmb{\theta}\)</span>. To simplify notations, the loss function will be written <span class="math notranslate nohighlight">\(\mathcal{L(\pmb{\theta})}\)</span>.</p></li>
+<li><p>Different loss functions exist. The choice depends on the learning type. See <a class="reference internal" href="losses.html"><span class="doc std std-doc">Losses</span></a> for details.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="optimization-algorithm">
+<h2>Optimization algorithm<a class="headerlink" href="#optimization-algorithm" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id2">
+<h3>Definition<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Used during the training phase.</p></li>
+<li><p>Objective: find the set of model parameters <span class="math notranslate nohighlight">\(\pmb{\theta}^{*}\)</span> that minimizes the loss.</p></li>
+<li><p>For each learning type, several algorithms of various complexity exist.</p></li>
+</ul>
+<p><a class="reference external" href="https://developers.google.com/machine-learning/crash-course/reducing-loss/an-iterative-approach"><img alt="Optimization: linear regression" src="../_images/LossSideBySide.png" /></a></p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./fundamentals"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="../overview/machine_learning_in_action.html" title="previous page">Machine Learning in action</a>
+    <a class='right-next' id="next-link" href="gradient_descent.html" title="next page">Gradient Descent</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Baptiste Pesquet<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+  </body>
+</html>

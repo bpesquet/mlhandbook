@@ -90,23 +90,50 @@
 <nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
     <p class="caption collapsible-parent">
  <span class="caption-text">
+  overview
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../overview/introduction_to_machine_learning.html">
+   Introduction to Machine Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../overview/machine_learning_in_action.html">
+   Machine Learning in action
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
   Fundamentals
  </span>
 </p>
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="../fundamentals/introduction_to_machine_learning.html">
-   Introduction to Machine Learning
+  <a class="reference internal" href="../fundamentals/problem_formulation.html">
+   Problem formulation
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../fundamentals/machine_learning_in_action.html">
-   Machine Learning in action
+  <a class="reference internal" href="../fundamentals/gradient_descent.html">
+   Gradient Descent
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../fundamentals/machine_learning_foundations.html">
-   Machine Learning foundations
+  <a class="reference internal" href="../fundamentals/performance_measures.html">
+   Performance measures
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fundamentals/losses.html">
+   Losses
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fundamentals/activation_functions.html">
+   Activation functions
   </a>
  </li>
 </ul>
@@ -346,16 +373,6 @@
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-logistic-function-sigmoid">
-     The logistic function (sigmoid)
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#environment-setup">
-     Environment setup
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#loss-function-binary-crossentropy-log-loss">
      Loss function: Binary Crossentropy (log loss)
     </a>
@@ -383,18 +400,8 @@
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-softmax-function">
-     The softmax function
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#model-output">
      Model output
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#model-prediction">
-     Model prediction
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -439,7 +446,7 @@
 <div class="section" id="problem-formulation">
 <h3>Problem formulation<a class="headerlink" href="#problem-formulation" title="Permalink to this headline">¶</a></h3>
 <p>Logistic regression is a classification algorithm used to estimate the probability that a data sample belongs to a particular class.</p>
-<p>A logistic regression model computes a weighted sum of the input features (plus a bias term), then applies the <em>logistic</em> function to this sum in order to output a probability.</p>
+<p>A logistic regression model computes a weighted sum of the input features (plus a bias term), then applies the <a class="reference internal" href="../fundamentals/activation_functions.html#activations-sigmoid"><span class="std std-ref">logistic function</span></a> to this sum in order to output a probability.</p>
 <div class="math notranslate nohighlight">
 \[y' = \mathcal{h}_\theta(\pmb{x}) = \sigma(\pmb{\theta}^T\pmb{x})\]</div>
 <p>The function output is thresholded to form the model’s prediction:</p>
@@ -448,14 +455,27 @@
 <li><p><span class="math notranslate nohighlight">\(1\)</span> if <span class="math notranslate nohighlight">\(y' \geqslant 0.5\)</span></p></li>
 </ul>
 </div>
-<div class="section" id="the-logistic-function-sigmoid">
-<h3>The logistic function (sigmoid)<a class="headerlink" href="#the-logistic-function-sigmoid" title="Permalink to this headline">¶</a></h3>
-<p>Outputs a number between 0 and 1.</p>
-<div class="math notranslate nohighlight">
-\[\sigma(z) = \frac{1}{1 + e^{-z}}\]</div>
+<div class="section" id="loss-function-binary-crossentropy-log-loss">
+<h3>Loss function: Binary Crossentropy (log loss)<a class="headerlink" href="#loss-function-binary-crossentropy-log-loss" title="Permalink to this headline">¶</a></h3>
+<p>See <a class="reference internal" href="../fundamentals/losses.html#losses-bce"><span class="std std-ref">loss definition</span></a> for details.</p>
 </div>
-<div class="section" id="environment-setup">
-<h3>Environment setup<a class="headerlink" href="#environment-setup" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="model-training">
+<h3>Model training<a class="headerlink" href="#model-training" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>No analytical solution because of the non-linear <span class="math notranslate nohighlight">\(\sigma()\)</span> function: gradient descent is the only option.</p></li>
+<li><p>Since the loss function is convex, GD (with the right hyperparameters) is guaranteed to find the global loss minimum.</p></li>
+<li><p>Different GD optimizers exist: <em>newton-cg</em>, <em>l-bfgs</em>, <em>sag</em>… <em>Stochastic gradient descent</em> is another possibility, efficient for large numbers of samples and features.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}\nabla_{\theta}\mathcal{L}(\pmb{\theta}) = \begin{pmatrix}
+       \ \frac{\partial}{\partial \theta_0} \mathcal{L}(\boldsymbol{\theta}) \\
+       \ \frac{\partial}{\partial \theta_1} \mathcal{L}(\boldsymbol{\theta}) \\
+       \ \vdots \\
+       \ \frac{\partial}{\partial \theta_n} \mathcal{L}(\boldsymbol{\theta})
+     \end{pmatrix} = \frac{2}{m}\pmb{X}^T\left(\sigma(\pmb{X}\pmb{\theta}) - \pmb{y}\right)\end{split}\]</div>
+</div>
+<div class="section" id="example-classify-planar-data">
+<h3>Example: classify planar data<a class="headerlink" href="#example-classify-planar-data" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">platform</span>
@@ -468,7 +488,6 @@
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">matplotlib.colors</span> <span class="kn">import</span> <span class="n">ListedColormap</span>
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-<span class="kn">from</span> <span class="nn">scipy.special</span> <span class="kn">import</span> <span class="n">softmax</span>
 </pre></div>
 </div>
 </div>
@@ -491,55 +510,6 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sigmoid</span><span class="p">(</span><span class="n">z</span><span class="p">):</span>
-    <span class="k">return</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">z</span><span class="p">))</span>
-
-<span class="c1"># Plot sigmoid function</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;k-&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;k:&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mf">1.1</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">],</span> <span class="s2">&quot;k-&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">z</span><span class="p">),</span> <span class="s2">&quot;b-&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Sigmoid function&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/logistic_regression_8_0.png" src="../_images/logistic_regression_8_0.png" />
-</div>
-</div>
-</div>
-<div class="section" id="loss-function-binary-crossentropy-log-loss">
-<h3>Loss function: Binary Crossentropy (log loss)<a class="headerlink" href="#loss-function-binary-crossentropy-log-loss" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(y^{(i)}\)</span>: expected result (either 0 or 1) for the <span class="math notranslate nohighlight">\(i\)</span>th data sample.</p></li>
-<li><p><span class="math notranslate nohighlight">\(y'^{(i)}\)</span>: model output (probability) for the <span class="math notranslate nohighlight">\(i\)</span>th data sample.</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[\mathcal{L}(\boldsymbol{\pmb{\theta}}) = -\frac{1}{m}\sum_{i=1}^m \left(y^{(i)} \log_e(y'^{(i)}) + (1-y^{(i)}) \log_e(1-y'^{(i)})\right)\]</div>
-</div>
-<div class="section" id="model-training">
-<h3>Model training<a class="headerlink" href="#model-training" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li><p>No analytical solution because of the non-linear <span class="math notranslate nohighlight">\(\sigma()\)</span> function: gradient descent is the only option.</p></li>
-<li><p>Since the loss function is convex, GD (with the right hyperparameters) is guaranteed to find the global loss minimum.</p></li>
-<li><p>Different GD optimizers exist: <em>newton-cg</em>, <em>l-bfgs</em>, <em>sag</em>… <em>Stochastic gradient descent</em> is another possibility, efficient for large numbers of samples and features.</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[\begin{split}\nabla_{\theta}\mathcal{L}(\pmb{\theta}) = \begin{pmatrix}
-       \ \frac{\partial}{\partial \theta_0} \mathcal{L}(\boldsymbol{\theta}) \\
-       \ \frac{\partial}{\partial \theta_1} \mathcal{L}(\boldsymbol{\theta}) \\
-       \ \vdots \\
-       \ \frac{\partial}{\partial \theta_n} \mathcal{L}(\boldsymbol{\theta})
-     \end{pmatrix} = \frac{2}{m}\pmb{X}^T\left(\sigma(\pmb{X}\pmb{\theta}) - \pmb{y}\right)\end{split}\]</div>
-</div>
-<div class="section" id="example-classify-planar-data">
-<h3>Example: classify planar data<a class="headerlink" href="#example-classify-planar-data" title="Permalink to this headline">¶</a></h3>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sklearn</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;scikit-learn version: </span><span class="si">{</span><span class="n">sklearn</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -557,7 +527,7 @@
 </div>
 </div>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_data</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Plot some 2D data&quot;&quot;&quot;</span>
@@ -609,7 +579,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/logistic_regression_14_0.png" src="../_images/logistic_regression_14_0.png" />
+<img alt="../_images/logistic_regression_11_0.png" src="../_images/logistic_regression_11_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -626,7 +596,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model weights: [[-2.35776802 -2.8645241 ]], bias: [-1.04656418]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model weights: [[-1.0902534  -3.32774639]], bias: [-0.92580342]
 </pre></div>
 </div>
 </div>
@@ -641,12 +611,12 @@
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              precision    recall  f1-score   support
 
-           0       0.94      0.94      0.94       502
-           1       0.94      0.94      0.94       498
+           0       0.87      0.95      0.91       502
+           1       0.95      0.86      0.90       498
 
-    accuracy                           0.94      1000
-   macro avg       0.94      0.94      0.94      1000
-weighted avg       0.94      0.94      0.94      1000
+    accuracy                           0.91      1000
+   macro avg       0.91      0.91      0.91      1000
+weighted avg       0.91      0.91      0.91      1000
 </pre></div>
 </div>
 </div>
@@ -659,7 +629,7 @@ weighted avg       0.94      0.94      0.94      1000
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/logistic_regression_17_0.png" src="../_images/logistic_regression_17_0.png" />
+<img alt="../_images/logistic_regression_14_0.png" src="../_images/logistic_regression_14_0.png" />
 </div>
 </div>
 </div>
@@ -669,41 +639,13 @@ weighted avg       0.94      0.94      0.94      1000
 <div class="section" id="id1">
 <h3>Problem formulation<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <p><em>Softmax regression</em> is a generalization of logistic regression for multiclass classification.</p>
-<p>A softmax regression model computes the scores <span class="math notranslate nohighlight">\(s_k(\pmb{x})\)</span> for each class <span class="math notranslate nohighlight">\(k\)</span>, then estimates probabilities for each class by applying the <em>softmax</em> function. It predicts the class with the highest probability.</p>
+<p>A softmax regression model computes the scores <span class="math notranslate nohighlight">\(s_k(\pmb{x})\)</span> for each class <span class="math notranslate nohighlight">\(k\)</span>, then estimates probabilities for each class by applying the <a class="reference internal" href="../fundamentals/activation_functions.html#activations-softmax"><span class="std std-ref">softmax</span></a> function to compute a probability distribution.</p>
+<p>For a sample <span class="math notranslate nohighlight">\(\pmb{x}^{(i)}\)</span>, the model predicts the class <span class="math notranslate nohighlight">\(k\)</span> that has the highest probability.</p>
 <div class="math notranslate nohighlight">
 \[s_k(\pmb{x}) = {\pmb{\theta}^{(k)}}^T\pmb{x}\]</div>
-<p>Each class <span class="math notranslate nohighlight">\(k\)</span> has its own parameter vector <span class="math notranslate nohighlight">\(\pmb{\theta}^{(k)}\)</span>.</p>
-</div>
-<div class="section" id="the-softmax-function">
-<h3>The softmax function<a class="headerlink" href="#the-softmax-function" title="Permalink to this headline">¶</a></h3>
-<p>Transforms a vector <span class="math notranslate nohighlight">\(\pmb{v} \in \pmb{R}^K\)</span> into a probability distribution. Multiclass generalization of the <em>sigmoid</em> function.</p>
 <div class="math notranslate nohighlight">
-\[\sigma(s(\pmb{x}))_k = \frac{e^{s_k(\pmb{x})}}{\sum_{k=1}^K {e^{s_k(\pmb{x})}}}\;\;\;\;
-\sum_{k=1}^K \sigma(s(\pmb{x}))_k = 1\]</div>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(K\)</span>: number of classes.</p></li>
-<li><p><span class="math notranslate nohighlight">\(s(\pmb{x})\)</span>: vector containing the scores of each class for the instance <span class="math notranslate nohighlight">\(\pmb{x}\)</span>.</p></li>
-<li><p><span class="math notranslate nohighlight">\(\sigma(s(\pmb{x}))_k\)</span>: probability that <span class="math notranslate nohighlight">\(\pmb{x}\)</span> belongs to class <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print probability distribution for a sample vector</span>
-<span class="n">scores</span> <span class="o">=</span> <span class="p">[</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">]</span>
-<span class="n">s</span> <span class="o">=</span> <span class="n">softmax</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-
-<span class="c1"># Sum of all probabilities is equal to 1</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.8360188  0.11314284 0.05083836]
-1.0
-</pre></div>
-</div>
-</div>
-</div>
+\[\mathrm{prediction} = \underset{k}{\mathrm{argmax}}\;\sigma(s(\pmb{x}^{(i)}))_k\]</div>
+<p>Each class <span class="math notranslate nohighlight">\(k\)</span> has its own parameter vector <span class="math notranslate nohighlight">\(\pmb{\theta}^{(k)}\)</span>.</p>
 </div>
 <div class="section" id="model-output">
 <h3>Model output<a class="headerlink" href="#model-output" title="Permalink to this headline">¶</a></h3>
@@ -730,17 +672,9 @@ weighted avg       0.94      0.94      0.94      1000
        \ \sigma(s(\pmb{x}^{(i)}))_K
      \end{pmatrix} \in \pmb{R}^K\end{split}\]</div>
 </div>
-<div class="section" id="model-prediction">
-<h3>Model prediction<a class="headerlink" href="#model-prediction" title="Permalink to this headline">¶</a></h3>
-<p>For a sample <span class="math notranslate nohighlight">\(\pmb{x}^{(i)}\)</span>, the model predicts the class <span class="math notranslate nohighlight">\(k\)</span> that has the highest probability.</p>
-<div class="math notranslate nohighlight">
-\[\mathrm{prediction} = \underset{k}{\mathrm{argmax}}\;\sigma(s(\pmb{x}^{(i)}))_k\]</div>
-</div>
 <div class="section" id="loss-function-categorical-crossentropy">
 <h3>Loss function: Categorical Crossentropy<a class="headerlink" href="#loss-function-categorical-crossentropy" title="Permalink to this headline">¶</a></h3>
-<div class="math notranslate nohighlight">
-\[\mathcal{L}(\boldsymbol{\pmb{\theta}}) = -\frac{1}{m}\sum_{i=1}^m\sum_{k=1}^K y^{(i)}_k \log_e(y'^{(i)}_k)\]</div>
-<p>Equivalent to <em>Binary Crossentropy</em> when <span class="math notranslate nohighlight">\(K = 2\)</span></p>
+<p>See <a class="reference internal" href="../fundamentals/losses.html#losses-cce"><span class="std std-ref">loss definition</span></a> for details.</p>
 </div>
 <div class="section" id="id2">
 <h3>Model training<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
@@ -762,7 +696,7 @@ weighted avg       0.94      0.94      0.94      1000
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/logistic_regression_27_0.png" src="../_images/logistic_regression_27_0.png" />
+<img alt="../_images/logistic_regression_21_0.png" src="../_images/logistic_regression_21_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -779,9 +713,9 @@ weighted avg       0.94      0.94      0.94      1000
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model weights: [[ -4.8616626  -11.79229943]
- [ -0.93856268  16.22689287]
- [  1.62272391  -0.10383712]], bias: [-111.0439455   -33.49403086    2.17896489]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model weights: [[-4.99198480e+00 -1.48012730e+01]
+ [-1.96745014e+00  1.90771561e+01]
+ [ 1.12269348e+00 -1.12178718e-02]], bias: [-139.24640687  -39.03892016    2.11628107]
 </pre></div>
 </div>
 </div>
@@ -797,8 +731,8 @@ weighted avg       0.94      0.94      0.94      1000
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              precision    recall  f1-score   support
 
            0       1.00      1.00      1.00       334
-           1       1.00      0.99      1.00       333
-           2       0.99      1.00      1.00       333
+           1       1.00      0.99      0.99       333
+           2       0.99      1.00      0.99       333
 
     accuracy                           1.00      1000
    macro avg       1.00      1.00      1.00      1000
@@ -815,7 +749,7 @@ weighted avg       1.00      1.00      1.00      1000
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/logistic_regression_30_0.png" src="../_images/logistic_regression_30_0.png" />
+<img alt="../_images/logistic_regression_24_0.png" src="../_images/logistic_regression_24_0.png" />
 </div>
 </div>
 </div>
