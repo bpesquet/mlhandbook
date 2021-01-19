@@ -26,12 +26,7 @@ launch_buttons:
   colab_url: "https://colab.research.google.com"
 
 exclude_patterns:
-  [
-    "README.md",
-    "algorithms/knn.ipynb",
-    "overview/deep_learning.ipynb",
-    "tasks/data_analysis.ipynb",
-  ]
+  ["README.md", "algorithms/knn.ipynb", "tasks/data_analysis.ipynb"]
 
 sphinx:
   config:
