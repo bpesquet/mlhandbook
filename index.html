@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Machine Learning Handbook &#8212; Machine Learning Handbook</title>
     
-  <link rel="stylesheet" href="_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+  <link rel="stylesheet" href="_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
     
   <link rel="stylesheet"
@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="_static/js/index.3da636dd464baa7582d2.js">
+  <link rel="preload" as="script" href="_static/js/index.d3f166471bb80abb5163.js">
 
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
@@ -219,10 +219,21 @@
    scikit-learn
   </a>
  </li>
- <li class="toctree-l1">
+ <li class="toctree-l1 collapsible-parent">
   <a class="reference internal" href="tools/keras.html">
    Keras
   </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference external" href="https://github.com/bpesquet/mlrecipes/blob/main/keras/linear_regression.py">
+     Linear Regression
+     <i class="fas fa-external-link-alt">
+     </i>
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="tools/pytorch.html">
@@ -329,22 +340,6 @@
     <!-- Table of contents -->
     <div class="d-none d-md-block col-md-2 bd-toc show">
         
-        <div class="tocsection onthispage pt-5 pb-3">
-            <i class="fas fa-list"></i> Contents
-        </div>
-        <nav id="bd-toc-nav">
-            <ul class="nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#acknowledgments">
-   Acknowledgments
-  </a>
-  <ul class="nav section-nav flex-column">
-  </ul>
- </li>
-</ul>
-
-        </nav>
-        
     </div>
 </div>
     <div id="main-content" class="row">
@@ -354,17 +349,14 @@
                 
   <div class="section" id="machine-learning-handbook">
 <h1>Machine Learning Handbook<a class="headerlink" href="#machine-learning-handbook" title="Permalink to this headline">¶</a></h1>
-<p>This book contains theorical explanations and Python-based demonstrations for various Machine Learning concepts, techniques and tools.</p>
-<p>It was created to support the Machine Learning course taught at French engineering schools <a class="reference external" href="https://ensc.bordeaux-inp.fr">ENSC</a>. <a class="reference external" href="https://enseirb-matmeca.bordeaux-inp.fr">ENSEIRB-MATMECA</a> and <a class="reference external" href="https://www.institutoptique.fr">IOGS</a>.</p>
+<p>This book provides theorical explanations, Python-based demonstrations and practical challenges for various Machine Learning concepts, techniques and tools.</p>
+<p>It is the main textbook for courses I teach at French engineering schools <a class="reference external" href="https://ensc.bordeaux-inp.fr">ENSC</a>. <a class="reference external" href="https://enseirb-matmeca.bordeaux-inp.fr">ENSEIRB-MATMECA</a> and <a class="reference external" href="https://www.institutoptique.fr">IOGS</a>. Its content is inspired by a large number of sources, from which many ideas and some illustrations were borrowed (<a class="reference internal" href="appendix/acknowledgments.html"><span class="doc std std-doc">more details</span></a>).</p>
+<p>Demonstrations and challenges leverage the essential tools of the Python ecosystem for Machine Learning: <a class="reference internal" href="tools/numpy.html"><span class="doc std std-doc">NumPy</span></a>, <a class="reference internal" href="tools/pandas.html"><span class="doc std std-doc">pandas</span></a>, <a class="reference internal" href="tools/scikit-learn.html"><span class="doc std std-doc">scikit-learn</span></a>, <a class="reference internal" href="tools/keras.html"><span class="doc std std-doc">Keras</span></a> and <a class="reference internal" href="tools/pytorch.html"><span class="doc std std-doc">PyTorch</span></a>.</p>
+<p><img alt="Tools used in this website" src="_images/python_ecosystem.png" /></p>
+<p>The book content is designed to be browsed thematically rather than sequentially.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Because this book is built with <a class="reference external" href="https://jupyter.org/">Jupyter Notebooks</a>, you can launch live Jupyter sessions in the cloud directly from any chapter. To do so, open a chapter, press the <i class="fas fa-rocket" title="rocket"></i> button in the toolbar above and select a hosted notebook environment. You will be able to interact with the code and regenerate the chapter output.</p>
-</div>
-<p>This book is constantly evolving, with new content added regularly.</p>
-<div class="section" id="acknowledgments">
-<h2>Acknowledgments<a class="headerlink" href="#acknowledgments" title="Permalink to this headline">¶</a></h2>
-<p>This material is inspired by a large number of sources, from which many ideas and some illustrations were borrowed. More details <a class="reference internal" href="appendix/acknowledgments.html"><span class="doc std std-doc">here</span></a>.</p>
-<div class="toctree-wrapper compound">
+<p>From any chapter, you can launch a live session in the cloud by pressing the <i class="fas fa-rocket" title="rocket"></i> button in the toolbar above and selecting a hosted runtime environment. You will be able to interact with the code and regenerate the chapter output.</p>
 </div>
 <div class="toctree-wrapper compound">
 </div>
@@ -374,6 +366,7 @@
 </div>
 <div class="toctree-wrapper compound">
 </div>
+<div class="toctree-wrapper compound">
 </div>
 </div>
 
@@ -425,7 +418,7 @@
     </div>
 
     
-  <script src="_static/js/index.3da636dd464baa7582d2.js"></script>
+  <script src="_static/js/index.d3f166471bb80abb5163.js"></script>
 
 
     
