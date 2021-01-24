@@ -33,6 +33,9 @@
     - file: tools/matplotlib
     - file: tools/scikit-learn
     - file: tools/keras
+      sections:
+        - url: https://github.com/bpesquet/mlrecipes/blob/main/keras/linear_regression.py
+          title: Linear Regression
     - file: tools/pytorch
 
 - part: Appendix
