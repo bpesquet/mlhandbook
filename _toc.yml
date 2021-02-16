@@ -3,6 +3,7 @@
 - part: overview
   chapters:
     - file: overview/introduction_to_machine_learning
+    - file: overview/the_python_ecosystem
     - file: overview/machine_learning_in_action
 
 - part: Fundamentals
@@ -22,7 +23,7 @@
     - file: algorithms/convolutional_neural_networks
     - file: algorithms/recurrent_neural_networks
     - file: algorithms/autoencoders
-    - file: algorithms/neural_style_transfer.ipynb
+    - file: algorithms/neural_style_transfer
     - file: algorithms/generative_adversarial_networks
 
 - part: Tools
@@ -33,9 +34,6 @@
     - file: tools/matplotlib
     - file: tools/scikit-learn
     - file: tools/keras
-      sections:
-        - url: https://github.com/bpesquet/mlrecipes/blob/main/keras/linear_regression.py
-          title: Linear Regression
     - file: tools/pytorch
 
 - part: Appendix
