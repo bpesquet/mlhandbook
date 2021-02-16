@@ -3,6 +3,7 @@ title: Machine Learning Handbook
 author: Baptiste Pesquet
 email: baptiste.pesquet@ensc.fr
 logo: logo.png
+copyright: 2020, 2021
 
 execute:
   execute_notebooks: "off"
