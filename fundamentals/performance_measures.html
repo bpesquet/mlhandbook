@@ -43,11 +43,8 @@
     <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe"
@@ -55,6 +52,9 @@
         const thebe_selector_output = ".output"
     </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Losses" href="losses.html" />
@@ -97,6 +97,11 @@
  <li class="toctree-l1">
   <a class="reference internal" href="../overview/introduction_to_machine_learning.html">
    Introduction to Machine Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../overview/the_python_ecosystem.html">
+   The Python ecosystem
   </a>
  </li>
  <li class="toctree-l1">
@@ -220,21 +225,10 @@
    scikit-learn
   </a>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1">
   <a class="reference internal" href="../tools/keras.html">
    Keras
   </a>
-  <ul class="collapse-ul">
-   <li class="toctree-l2">
-    <a class="reference external" href="https://github.com/bpesquet/mlrecipes/blob/main/keras/linear_regression.py">
-     Linear Regression
-     <i class="fas fa-external-link-alt">
-     </i>
-    </a>
-   </li>
-  </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../tools/pytorch.html">
@@ -1048,7 +1042,7 @@ Test accuracy: 0.91640
         
           By Baptiste Pesquet<br/>
         
-            &copy; Copyright 2020.<br/>
+            &copy; Copyright 2020, 2021.<br/>
       </p>
     </div>
   </footer>

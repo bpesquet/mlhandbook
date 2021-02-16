@@ -43,11 +43,8 @@
     <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe"
@@ -55,6 +52,9 @@
         const thebe_selector_output = ".output"
     </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Recurrent Neural Networks" href="recurrent_neural_networks.html" />
@@ -97,6 +97,11 @@
  <li class="toctree-l1">
   <a class="reference internal" href="../overview/introduction_to_machine_learning.html">
    Introduction to Machine Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../overview/the_python_ecosystem.html">
+   The Python ecosystem
   </a>
  </li>
  <li class="toctree-l1">
@@ -220,21 +225,10 @@
    scikit-learn
   </a>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1">
   <a class="reference internal" href="../tools/keras.html">
    Keras
   </a>
-  <ul class="collapse-ul">
-   <li class="toctree-l2">
-    <a class="reference external" href="https://github.com/bpesquet/mlrecipes/blob/main/keras/linear_regression.py">
-     Linear Regression
-     <i class="fas fa-external-link-alt">
-     </i>
-    </a>
-   </li>
-  </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../tools/pytorch.html">
@@ -1037,7 +1031,7 @@ x_test: (10000, 28, 28, 1). y_test: (10000, 10)
 <span class="c1"># Convolution module 1: Conv2D+MaxPooling2D</span>
 <span class="c1">#   filters: number of convolution filters</span>
 <span class="c1">#   kernel_size: size of the convolution kernel (2D convolution window)</span>
-<span class="c1">#   input_shape: shapre of the input feature map</span>
+<span class="c1">#   input_shape: shape of the input feature map</span>
 <span class="c1">#   (Here, The expected input shape is a 3D tensor corresponding to an image)</span>
 <span class="n">cnn_model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
     <span class="n">Conv2D</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span><span class="p">,</span> <span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
@@ -1253,7 +1247,7 @@ x_test: (10000, 32, 32, 3). y_test: (10000, 10)
 
 <span class="c1"># Freezing the convolutional base</span>
 <span class="c1"># This prevents weight updates during training</span>
-<span class="n">conv_base</span><span class="o">.</span><span class="n">trainable</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">conv_base</span><span class="o">.</span><span class="n">trainable</span> <span class="o">=</span> <span class="kc">False</span>
 
 <span class="n">conv_base</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
 </pre></div>
@@ -1477,7 +1471,7 @@ Epoch 20/20
         
           By Baptiste Pesquet<br/>
         
-            &copy; Copyright 2020.<br/>
+            &copy; Copyright 2020, 2021.<br/>
       </p>
     </div>
   </footer>

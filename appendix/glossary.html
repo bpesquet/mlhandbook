@@ -43,11 +43,8 @@
     <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe"
@@ -55,6 +52,7 @@
         const thebe_selector_output = ".output"
     </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="prev" title="Acknowledgments" href="acknowledgments.html" />
@@ -96,6 +94,11 @@
  <li class="toctree-l1">
   <a class="reference internal" href="../overview/introduction_to_machine_learning.html">
    Introduction to Machine Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../overview/the_python_ecosystem.html">
+   The Python ecosystem
   </a>
  </li>
  <li class="toctree-l1">
@@ -219,21 +222,10 @@
    scikit-learn
   </a>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1">
   <a class="reference internal" href="../tools/keras.html">
    Keras
   </a>
-  <ul class="collapse-ul">
-   <li class="toctree-l2">
-    <a class="reference external" href="https://github.com/bpesquet/mlrecipes/blob/main/keras/linear_regression.py">
-     Linear Regression
-     <i class="fas fa-external-link-alt">
-     </i>
-    </a>
-   </li>
-  </ul>
-  <i class="fas fa-chevron-down">
-  </i>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../tools/pytorch.html">
@@ -350,31 +342,31 @@
   <div class="section" id="glossary">
 <h1>Glossary<a class="headerlink" href="#glossary" title="Permalink to this headline">¶</a></h1>
 <dl class="glossary simple">
-<dt id="term-Accuracy">Accuracy</dt><dd><p>Evaluation metrix measuring the fraction of predictions that a classification model got right (<a class="reference external" href="https://en.wikipedia.org/wiki/Evaluation_of_binary_classifiers">Wikipedia</a>).</p>
+<dt id="term-Accuracy">Accuracy<a class="headerlink" href="#term-Accuracy" title="Permalink to this term">¶</a></dt><dd><p>Evaluation metrix measuring the fraction of predictions that a classification model got right (<a class="reference external" href="https://en.wikipedia.org/wiki/Evaluation_of_binary_classifiers">Wikipedia</a>).</p>
 </dd>
-<dt id="term-Activation-function">Activation function</dt><dd><p>A function (for example, ReLU or sigmoid) that generates a (typically nonlinear) output. Used in neural networks to define the output of a layer (<a class="reference external" href="https://en.wikipedia.org/wiki/Activation_function">Wikipedia</a>).</p>
+<dt id="term-Activation-function">Activation function<a class="headerlink" href="#term-Activation-function" title="Permalink to this term">¶</a></dt><dd><p>A function (for example, ReLU or sigmoid) that generates a (typically nonlinear) output. Used in neural networks to define the output of a layer (<a class="reference external" href="https://en.wikipedia.org/wiki/Activation_function">Wikipedia</a>).</p>
 </dd>
-<dt id="term-AUROC">AUROC</dt><dd><p>Area Under the ROC Curve. An aggregate measure of a classifier’ performance across all possible classification thresholds (<a class="reference external" href="https://en.wikipedia.org/wiki/Receiver_operating_characteristic#Area_under_the_curve">Wikipedia</a>).</p>
+<dt id="term-AUROC">AUROC<a class="headerlink" href="#term-AUROC" title="Permalink to this term">¶</a></dt><dd><p>Area Under the ROC Curve. An aggregate measure of a classifier’ performance across all possible classification thresholds (<a class="reference external" href="https://en.wikipedia.org/wiki/Receiver_operating_characteristic#Area_under_the_curve">Wikipedia</a>).</p>
 </dd>
-<dt id="term-Automatic-differentiation-autodiff">Automatic differentiation (autodiff)</dt><dd><p>Soon!</p>
+<dt id="term-Automatic-differentiation-autodiff">Automatic differentiation (autodiff)<a class="headerlink" href="#term-Automatic-differentiation-autodiff" title="Permalink to this term">¶</a></dt><dd><p>Soon!</p>
 </dd>
-<dt id="term-Backpropagation">Backpropagation</dt><dd><p>Mathematical technique used to obtain the gradients of the loss function with respect to the weights of a neural network. Applies the chain rule to compute the gradients one layer at a time, iterating backward from the last layer (<a class="reference external" href="https://en.wikipedia.org/wiki/Backpropagation">Wikipedia</a>).</p>
+<dt id="term-Backpropagation">Backpropagation<a class="headerlink" href="#term-Backpropagation" title="Permalink to this term">¶</a></dt><dd><p>Mathematical technique used to obtain the gradients of the loss function with respect to the weights of a neural network. Applies the chain rule to compute the gradients one layer at a time, iterating backwards from the output layer (<a class="reference external" href="https://en.wikipedia.org/wiki/Backpropagation">Wikipedia</a>).</p>
 </dd>
-<dt id="term-Batch">Batch</dt><dd><p>A set of examples used in one iteration (that is, one gradient update) during model training. Batch size defines the number of examples in a batch (<a class="reference external" href="https://en.wikipedia.org/wiki/Stochastic_gradient_descent">Wikipedia</a>).</p>
+<dt id="term-Batch">Batch<a class="headerlink" href="#term-Batch" title="Permalink to this term">¶</a></dt><dd><p>A set of examples used in one iteration (that is, one gradient update) during model training. Batch size defines the number of examples in a batch (<a class="reference external" href="https://en.wikipedia.org/wiki/Stochastic_gradient_descent">Wikipedia</a>).</p>
 </dd>
-<dt id="term-Bias">Bias</dt><dd><p>Soon!</p>
+<dt id="term-Bias">Bias<a class="headerlink" href="#term-Bias" title="Permalink to this term">¶</a></dt><dd><p>Soon!</p>
 </dd>
-<dt id="term-Boosting">Boosting</dt><dd><p>Soon!</p>
+<dt id="term-Boosting">Boosting<a class="headerlink" href="#term-Boosting" title="Permalink to this term">¶</a></dt><dd><p>Soon!</p>
 </dd>
-<dt id="term-Broadcasting">Broadcasting</dt><dd><p>Soon!</p>
+<dt id="term-Broadcasting">Broadcasting<a class="headerlink" href="#term-Broadcasting" title="Permalink to this term">¶</a></dt><dd><p>Soon!</p>
 </dd>
-<dt id="term-Confusion-matrix">Confusion matrix</dt><dd><p>Soon!</p>
+<dt id="term-Confusion-matrix">Confusion matrix<a class="headerlink" href="#term-Confusion-matrix" title="Permalink to this term">¶</a></dt><dd><p>Soon!</p>
 </dd>
-<dt id="term-Decision-boundary">Decision boundary</dt><dd><p>Frontier between the classes learned by a classification model.</p>
+<dt id="term-Decision-boundary">Decision boundary<a class="headerlink" href="#term-Decision-boundary" title="Permalink to this term">¶</a></dt><dd><p>Frontier between the classes learned by a classification model.</p>
 </dd>
-<dt id="term-Precision">Precision</dt><dd><p>Evaluation matrix measuring the frequency with which a model was correct when predicting the positive class (<a class="reference external" href="https://en.wikipedia.org/wiki/Evaluation_of_binary_classifiers">Wikipedia</a>).</p>
+<dt id="term-Precision">Precision<a class="headerlink" href="#term-Precision" title="Permalink to this term">¶</a></dt><dd><p>Evaluation matrix measuring the frequency with which a model was correct when predicting the positive class (<a class="reference external" href="https://en.wikipedia.org/wiki/Evaluation_of_binary_classifiers">Wikipedia</a>).</p>
 </dd>
-<dt id="term-Self-supervised-learning">Self-supervised learning</dt><dd><p>Form of Machine Learning in which labels are automatically generated from the data itself, then a model is supervisely trained on the resulting dataset.</p>
+<dt id="term-Self-supervised-learning">Self-supervised learning<a class="headerlink" href="#term-Self-supervised-learning" title="Permalink to this term">¶</a></dt><dd><p>Form of Machine Learning in which labels are automatically generated from the data itself, then a model is supervisely trained on the resulting dataset.</p>
 </dd>
 </dl>
 </div>
@@ -416,7 +408,7 @@
         
           By Baptiste Pesquet<br/>
         
-            &copy; Copyright 2020.<br/>
+            &copy; Copyright 2020, 2021.<br/>
       </p>
     </div>
   </footer>

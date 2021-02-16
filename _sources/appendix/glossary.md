@@ -15,7 +15,7 @@ Automatic differentiation (autodiff)
   Soon!
 
 Backpropagation
-  Mathematical technique used to obtain the gradients of the loss function with respect to the weights of a neural network. Applies the chain rule to compute the gradients one layer at a time, iterating backward from the last layer ([Wikipedia](https://en.wikipedia.org/wiki/Backpropagation)).
+  Mathematical technique used to obtain the gradients of the loss function with respect to the weights of a neural network. Applies the chain rule to compute the gradients one layer at a time, iterating backwards from the output layer ([Wikipedia](https://en.wikipedia.org/wiki/Backpropagation)).
 
 Batch
   A set of examples used in one iteration (that is, one gradient update) during model training. Batch size defines the number of examples in a batch ([Wikipedia](https://en.wikipedia.org/wiki/Stochastic_gradient_descent)).
