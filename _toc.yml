@@ -9,10 +9,8 @@
 - part: Fundamentals
   chapters:
     - file: fundamentals/handling_data
-    - file: fundamentals/gradient_descent
-    - file: fundamentals/performance_measures
-    - file: fundamentals/losses
-    - file: fundamentals/activation_functions
+    - file: fundamentals/assessing_results
+    - file: fundamentals/training_models
 
 - part: Algorithms
   chapters:
@@ -28,6 +26,7 @@
 
 - part: Reference
   chapters:
+    - file: reference/activation_functions
     - file: reference/python
     - file: reference/numpy
     - file: reference/pytorch
