@@ -8,7 +8,7 @@
 
 - part: Fundamentals
   chapters:
-    - file: fundamentals/problem_formulation
+    - file: fundamentals/handling_data
     - file: fundamentals/gradient_descent
     - file: fundamentals/performance_measures
     - file: fundamentals/losses
@@ -26,15 +26,18 @@
     - file: algorithms/neural_style_transfer
     - file: algorithms/generative_adversarial_networks
 
+- part: Reference
+  chapters:
+    - file: reference/python
+    - file: reference/numpy
+    - file: reference/pytorch
+
 - part: Tools
   chapters:
-    - file: tools/python
-    - file: tools/numpy
     - file: tools/pandas
     - file: tools/matplotlib
     - file: tools/scikit-learn
     - file: tools/keras
-    - file: tools/pytorch
 
 - part: Appendix
   chapters:
