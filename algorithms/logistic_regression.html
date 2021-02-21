@@ -117,28 +117,18 @@
 </p>
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="../fundamentals/problem_formulation.html">
-   Problem formulation
+  <a class="reference internal" href="../fundamentals/handling_data.html">
+   Handling data
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../fundamentals/gradient_descent.html">
-   Gradient Descent
+  <a class="reference internal" href="../fundamentals/assessing_results.html">
+   Assessing results
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../fundamentals/performance_measures.html">
-   Performance measures
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../fundamentals/losses.html">
-   Losses
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../fundamentals/activation_functions.html">
-   Activation functions
+  <a class="reference internal" href="../fundamentals/training_models.html">
+   Training models
   </a>
  </li>
 </ul>
@@ -196,43 +186,33 @@
 </ul>
 <p class="caption collapsible-parent">
  <span class="caption-text">
-  Tools
+  Reference
  </span>
 </p>
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="../tools/python.html">
-   Python
+  <a class="reference internal" href="../reference/activation_functions.html">
+   Activation functions
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../tools/numpy.html">
-   NumPy
+  <a class="reference internal" href="../reference/python.html">
+   Python cheasheet
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../tools/pandas.html">
-   pandas
+  <a class="reference internal" href="../reference/numpy.html">
+   NumPy API
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../tools/matplotlib.html">
-   Matplotlib and Seaborn
+  <a class="reference internal" href="../reference/pytorch.html">
+   PyTorch API
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../tools/scikit-learn.html">
-   scikit-learn
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../tools/keras.html">
-   Keras
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../tools/pytorch.html">
-   PyTorch
+  <a class="reference internal" href="../reference/keras.html">
+   Keras API
   </a>
  </li>
 </ul>
@@ -395,8 +375,8 @@
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#softmax-regression">
-   Softmax regression
+  <a class="reference internal nav-link" href="#multivariate-regression">
+   Multivariate regression
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -451,7 +431,7 @@
 <div class="section" id="problem-formulation">
 <h3>Problem formulation<a class="headerlink" href="#problem-formulation" title="Permalink to this headline">¶</a></h3>
 <p>Logistic regression is a classification algorithm used to estimate the probability that a data sample belongs to a particular class.</p>
-<p>A logistic regression model computes a weighted sum of the input features (plus a bias term), then applies the <a class="reference internal" href="../fundamentals/activation_functions.html#activations-sigmoid"><span class="std std-ref">logistic function</span></a> to this sum in order to output a probability.</p>
+<p>A logistic regression model computes a weighted sum of the input features (plus a bias term), then applies the <a class="reference internal" href="../reference/activation_functions.html#activations-sigmoid"><span class="std std-ref">logistic function</span></a> to this sum in order to output a probability.</p>
 <div class="math notranslate nohighlight">
 \[y' = \mathcal{h}_\theta(\pmb{x}) = \sigma(\pmb{\theta}^T\pmb{x})\]</div>
 <p>The function output is thresholded to form the model’s prediction:</p>
@@ -462,7 +442,7 @@
 </div>
 <div class="section" id="loss-function-binary-crossentropy-log-loss">
 <h3>Loss function: Binary Crossentropy (log loss)<a class="headerlink" href="#loss-function-binary-crossentropy-log-loss" title="Permalink to this headline">¶</a></h3>
-<p>See <a class="reference internal" href="../fundamentals/losses.html#losses-bce"><span class="std std-ref">loss definition</span></a> for details.</p>
+<p>See <a class="reference internal" href="../fundamentals/assessing_results.html#loss-bce"><span class="std std-ref">loss definition</span></a> for details.</p>
 </div>
 <div class="section" id="model-training">
 <h3>Model training<a class="headerlink" href="#model-training" title="Permalink to this headline">¶</a></h3>
@@ -639,12 +619,12 @@ weighted avg       0.91      0.91      0.91      1000
 </div>
 </div>
 </div>
-<div class="section" id="softmax-regression">
-<h2>Softmax regression<a class="headerlink" href="#softmax-regression" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="multivariate-regression">
+<h2>Multivariate regression<a class="headerlink" href="#multivariate-regression" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id1">
 <h3>Problem formulation<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
-<p><em>Softmax regression</em> is a generalization of logistic regression for multiclass classification.</p>
-<p>A softmax regression model computes the scores <span class="math notranslate nohighlight">\(s_k(\pmb{x})\)</span> for each class <span class="math notranslate nohighlight">\(k\)</span>, then estimates probabilities for each class by applying the <a class="reference internal" href="../fundamentals/activation_functions.html#activations-softmax"><span class="std std-ref">softmax</span></a> function to compute a probability distribution.</p>
+<p><strong>Multivariate regression</strong>, also called <em>softmax regression</em>, is a generalization of logistic regression for multiclass classification.</p>
+<p>A softmax regression model computes the scores <span class="math notranslate nohighlight">\(s_k(\pmb{x})\)</span> for each class <span class="math notranslate nohighlight">\(k\)</span>, then estimates probabilities for each class by applying the <a class="reference internal" href="../reference/activation_functions.html#activations-softmax"><span class="std std-ref">softmax</span></a> function to compute a probability distribution.</p>
 <p>For a sample <span class="math notranslate nohighlight">\(\pmb{x}^{(i)}\)</span>, the model predicts the class <span class="math notranslate nohighlight">\(k\)</span> that has the highest probability.</p>
 <div class="math notranslate nohighlight">
 \[s_k(\pmb{x}) = {\pmb{\theta}^{(k)}}^T\pmb{x}\]</div>
@@ -679,7 +659,7 @@ weighted avg       0.91      0.91      0.91      1000
 </div>
 <div class="section" id="loss-function-categorical-crossentropy">
 <h3>Loss function: Categorical Crossentropy<a class="headerlink" href="#loss-function-categorical-crossentropy" title="Permalink to this headline">¶</a></h3>
-<p>See <a class="reference internal" href="../fundamentals/losses.html#losses-cce"><span class="std std-ref">loss definition</span></a> for details.</p>
+<p>See <a class="reference internal" href="../fundamentals/assessing_results.html#loss-cce"><span class="std std-ref">loss definition</span></a> for details.</p>
 </div>
 <div class="section" id="id2">
 <h3>Model training<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
