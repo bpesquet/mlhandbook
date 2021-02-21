@@ -30,13 +30,7 @@
     - file: reference/python
     - file: reference/numpy
     - file: reference/pytorch
-
-- part: Tools
-  chapters:
-    - file: tools/pandas
-    - file: tools/matplotlib
-    - file: tools/scikit-learn
-    - file: tools/keras
+    - file: reference/keras
 
 - part: Appendix
   chapters:
