@@ -26,7 +26,7 @@
 
     
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.37f24b989f4638ff9c27c22dc7559d4f.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.e7340bb3dbd8dde6db86f25597f54a1b.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -338,7 +338,8 @@
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
         <div class="tocsection onthispage pt-5 pb-3">
-            <i class="fas fa-list"></i> Contents
+            <i class="fas fa-list"></i>
+            Contents
         </div>
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
@@ -1247,10 +1248,10 @@ Recall = \frac{1}{1 + 8} = 11\%\]</div>
 <ul class="simple">
 <li><p>Weighted average (<em>harmonic mean</em>) of precision and recall.</p></li>
 <li><p>Also known as <em>balanced F-score</em> or <em>F-measure</em>.</p></li>
+<li><p>Favors classifiers that have similar precision and recall.</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[F1 = 2 \times \frac{Precision \times Recall}{Precision + Recall}\]</div>
-<p>Good metric in case of class imbalance, when precision and recall are both important.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Using scikit-learn to compute several metrics about the SGD classifier</span>
@@ -1282,6 +1283,8 @@ weighted avg       0.97      0.97      0.97     60000
 <li><p>A ROC curve plots TPR vs. FPR at different classification thresholds.</p></li>
 <li><p>AUC or more precisely AUROC (“Area Under the ROC Curve”) provides an aggregate measure of performance across all possible classification thresholds.</p></li>
 </ul>
+<p><a class="reference external" href="https://github.com/dariyasydykova/open_projects/tree/master/ROC_animation"><img alt="AUROC animation" src="../_images/auroc_animation.gif" /></a></p>
+<p><a class="reference external" href="https://github.com/dariyasydykova/open_projects/tree/master/ROC_animation"><img alt="AUROC shape animation" src="../_images/auroc_shape_animation.gif" /></a></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot ROC curve for the SGD classifier</span>
@@ -1291,7 +1294,7 @@ weighted avg       0.97      0.97      0.97     60000
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/assessing_results_61_0.png" src="../_images/assessing_results_61_0.png" />
+<img alt="../_images/assessing_results_63_0.png" src="../_images/assessing_results_63_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1309,7 +1312,7 @@ weighted avg       0.97      0.97      0.97     60000
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/assessing_results_62_0.png" src="../_images/assessing_results_62_0.png" />
+<img alt="../_images/assessing_results_64_0.png" src="../_images/assessing_results_64_0.png" />
 </div>
 </div>
 </div>
@@ -1346,7 +1349,7 @@ Test accuracy: 0.91540
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/assessing_results_65_0.png" src="../_images/assessing_results_65_0.png" />
+<img alt="../_images/assessing_results_67_0.png" src="../_images/assessing_results_67_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
