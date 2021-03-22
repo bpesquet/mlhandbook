@@ -849,7 +849,9 @@ symbolic expressions.</p></li>
 </div>
 <div class="section" id="step-2-backward-pass">
 <h5>Step 2: backward pass<a class="headerlink" href="#step-2-backward-pass" title="Permalink to this headline">¶</a></h5>
-<p>The chain rule is applied to compute every intermediate gradient, starting from output.</p>
+<p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Chain_rule">chain rule</a> is applied to compute every intermediate gradient, starting from output.</p>
+<div class="math notranslate nohighlight">
+\[y = f(g(x)) \;\;\;\; \frac{\partial y}{\partial x} = \frac{\partial f}{\partial g} \frac{\partial g}{\partial x}\;\;\;\; \frac{\partial y}{\partial x} = \sum_{i=1}^n \frac{\partial f}{\partial g^{(i)}} \frac{\partial g^{(i)}}{\partial x}\]</div>
 <p><img alt="Autodiff backward pass" src="../_images/autodiff_backward_pass.png" /></p>
 <div class="math notranslate nohighlight">
 \[y=v_5=v_4-v_3\]</div>
