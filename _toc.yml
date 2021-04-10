@@ -5,6 +5,7 @@
     - file: overview/introduction_to_machine_learning
     - file: overview/the_python_ecosystem
     - file: overview/machine_learning_in_action
+    - file: overview/introduction_to_reinforcement_learning
 
 - part: Fundamentals
   chapters:
