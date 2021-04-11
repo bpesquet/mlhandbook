@@ -369,11 +369,6 @@
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-exploration-vs-exploitation-dilemna">
-     The exploration vs. exploitation dilemna
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#reinforcement-learning-examples">
      Reinforcement Learning examples
     </a>
@@ -390,6 +385,11 @@
    Problem formulation
   </a>
   <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-exploration-vs-exploitation-dilemna">
+     The exploration vs. exploitation dilemna
+    </a>
+   </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#general-abstraction">
      General abstraction
@@ -458,8 +458,8 @@
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#temporal-difference-learning">
-     Temporal Difference Learning
+    <a class="reference internal nav-link" href="#td-learning">
+     TD Learning
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -470,13 +470,28 @@
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#deep-rl-algorithms">
-   Deep RL algorithms
+  <a class="reference internal nav-link" href="#approximate-methods">
+   Approximate methods
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Context
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#policy-gradients">
+     Policy gradients
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#dqn">
      DQN
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#actor-critic-methods">
+     Actor-Critic methods
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -556,11 +571,6 @@ NumPy version: 1.18.1
 <p>RL is also different from <strong>unsupervised learning</strong>: finding structure in unlabeled data could help, but does not solve the reward maximisation problem which is at the heart of RL.</p>
 <p>Lastly, RL is different from <strong>evolutionary methods</strong>, which only consider the final outcome and ignore the intermediate steps RL is concerned with.</p>
 </div>
-<div class="section" id="the-exploration-vs-exploitation-dilemna">
-<h3>The exploration vs. exploitation dilemna<a class="headerlink" href="#the-exploration-vs-exploitation-dilemna" title="Permalink to this headline">¶</a></h3>
-<p>The learner has to exploit what it has already experienced, but it also has to explore in order to discover better actions. Neither exploration nor exploitation can be pursued exclusively without failing at the task at hand.</p>
-<p><img alt="" src="../_images/exploration_exploitation.png" /></p>
-</div>
 <div class="section" id="reinforcement-learning-examples">
 <h3>Reinforcement Learning examples<a class="headerlink" href="#reinforcement-learning-examples" title="Permalink to this headline">¶</a></h3>
 <p>RL can be applied to a wide variety of contexts. To name a few:</p>
@@ -603,6 +613,11 @@ NumPy version: 1.18.1
 </div>
 <div class="section" id="problem-formulation">
 <h2>Problem formulation<a class="headerlink" href="#problem-formulation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="the-exploration-vs-exploitation-dilemna">
+<h3>The exploration vs. exploitation dilemna<a class="headerlink" href="#the-exploration-vs-exploitation-dilemna" title="Permalink to this headline">¶</a></h3>
+<p>The learner has to exploit what it has already experienced, but it also has to explore in order to discover better actions. Neither exploration nor exploitation can be pursued exclusively without failing at the task at hand.</p>
+<p><img alt="" src="../_images/exploration_exploitation.png" /></p>
+</div>
 <div class="section" id="general-abstraction">
 <h3>General abstraction<a class="headerlink" href="#general-abstraction" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
@@ -684,7 +699,7 @@ NumPy version: 1.18.1
 <div class="math notranslate nohighlight">
 \[V^{\pi^*}(s) = V^*(s) = \underset{a}{max} \sum\limits_{s', r}p(s',r | s,a)\left[r + \gamma V^*(s')\right]= \underset{a}{max}\;Q^*(s,a)\]</div>
 <div class="math notranslate nohighlight">
-\[Q^{\pi^*}(s,a) = Q^*(s,a) = \sum\limits_{s',r} p(s',r | s,a) \left[r + \gamma\; \underset{a'}{max} \;Q^*(s',a')\right]\]</div>
+\[Q^{\pi^*}(s,a) = Q^*(s,a) = \sum\limits_{s',r} p(s',r | s,a) \left[r + \gamma \cdot \underset{a'}{max} \;Q^*(s',a')\right]\]</div>
 <p>When the agent is in state <span class="math notranslate nohighlight">\(s\)</span>, it should choose the action with the highest Q-value for that state.</p>
 <div class="math notranslate nohighlight">
 \[\pi^*(s) = \underset{a}{argmax} \;Q^*(s,a)\]</div>
@@ -801,24 +816,26 @@ Optimal action for state 2 is a1
 </div>
 </div>
 </div>
-<div class="section" id="temporal-difference-learning">
-<h3>Temporal Difference Learning<a class="headerlink" href="#temporal-difference-learning" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="td-learning">
+<h3>TD Learning<a class="headerlink" href="#td-learning" title="Permalink to this headline">¶</a></h3>
 <p>When the transition probabilities and rewards are not known in advance, the agent has to experience each state and each transition: once to know the rewards, several times to estimate the probabilities. It must use an <strong>exploration policy</strong> (for example, a purely random one) to traverse the MDP.</p>
 <p>As it progresses, the <strong>Temporal Difference (TD) Learning</strong> algorithm updates the estimates of the state values based on the transition and rewards that are actually observed.</p>
 <div class="math notranslate nohighlight">
-\[V_{k+1}(s) \leftarrow V_k(s) + \alpha\left(r + \gamma V_k(s') - V_k(s)\right)\]</div>
+\[V_{k+1}(s) \leftarrow V_k(s) + \alpha\left(r + \gamma V_k(s') - V_k(s)\right) = V_k(s) + \alpha\cdot\delta_k(s, a, s')\]</div>
 <div class="math notranslate nohighlight">
 \[V_{k+1}(s) \leftarrow (1-\alpha)V_k(s) + \alpha\left(r + \gamma V_k(s')\right)\]</div>
 <div class="math notranslate nohighlight">
 \[V(s) \underset{\alpha}\leftarrow r + \gamma V(s')\]</div>
-<p><span class="math notranslate nohighlight">\(\alpha\)</span>: learning rate, usually small (example: <span class="math notranslate nohighlight">\(0.001\)</span>).</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\alpha\)</span>: learning rate, usually small (example: <span class="math notranslate nohighlight">\(0.001\)</span>).</p></li>
+<li><p><span class="math notranslate nohighlight">\(\delta_k(s, a, s') = r + \gamma V_k(s') - V_k(s)\)</span>: TD error.</p></li>
+</ul>
 </div>
 <div class="section" id="q-learning">
 <h3>Q-Learning<a class="headerlink" href="#q-learning" title="Permalink to this headline">¶</a></h3>
 <p>Adapted from the Q-Value Iteration algorithm for situations in which transitions and rewards are initially unknown, <strong>Q-Learning</strong> watches the agent play and gradually improves its estimations of the Q-values. Once it has accurate Q-Value estimates (or close enough), then the optimal policy is choosing the action that has the highest Q-Value (i.e. the <em>greedy</em> policy).</p>
 <div class="math notranslate nohighlight">
 \[Q(s) \underset{\alpha}\leftarrow r + \gamma \cdot \underset{a}{max} \;Q(s',a')\]</div>
-<p>For each pair <span class="math notranslate nohighlight">\((s, a)\)</span>, this algorithm keeps track of a <em>running average</em> of the rewards <span class="math notranslate nohighlight">\(r\)</span> the agent gets upon leaving the state <span class="math notranslate nohighlight">\(s\)</span> with action <span class="math notranslate nohighlight">\(a\)</span>, plus the sum of discounted future rewards it expects to get. To estimate this sum, it takes the maximum of the Q-Value estimates for the next state <span class="math notranslate nohighlight">\(s′\)</span> (we assume that the target policy would act optimally from then on).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Perform an action and receive next state and reward</span>
@@ -832,7 +849,7 @@ Optimal action for state 2 is a1
 <span class="c1"># Explore the MDP</span>
 <span class="k">def</span> <span class="nf">exploration_policy</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
     <span class="c1"># Returns a random action</span>
-    <span class="c1"># This exploration policy is sufficient in this simple problem</span>
+    <span class="c1"># This basic exploration policy is sufficient for this simple problem</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">possible_actions</span><span class="p">[</span><span class="n">state</span><span class="p">])</span>
 </pre></div>
 </div>
@@ -911,17 +928,42 @@ Optimal action for state 2 is a1
 </div>
 </div>
 </div>
-<div class="section" id="deep-rl-algorithms">
-<h2>Deep RL algorithms<a class="headerlink" href="#deep-rl-algorithms" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="approximate-methods">
+<h2>Approximate methods<a class="headerlink" href="#approximate-methods" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="id1">
+<h2>Context<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>The previous methods become intractable for problems with arbitrarily large state spaces. In such cases, it is hopeless to find an optimal policy or the optimal value function, even in the limit of infinite time and data. The goal instead is to discover a good approximate solution, using functions with a manageable number of parameters.</p>
+<p>When dealing with large state spaces, <strong>generalization</strong> (the ability to make sensible decisions based on previous similar encounters) becomes a key issue. Generalization from examples is what <strong>supervised learning</strong> is all about, and many supervized methods have been applied to supplement RL algorithms.</p>
+<p>For years, linear combinations of handcrafted features were necessary to estimate value functions through supervised models. Recently, reseachers have started to harness the power of <strong>Deep Learning</strong> for this task, eliminating the need for manual feature engineering.</p>
+<div class="section" id="policy-gradients">
+<h3>Policy gradients<a class="headerlink" href="#policy-gradients" title="Permalink to this headline">¶</a></h3>
+<p>Instead of trying to evaluate actions, <strong>Policy Gradients (PG)</strong> methods learn a parameterized policy that can select actions without consulting a value function. Policy parameters are optimized by following the <em>gradients</em> towards higher rewards.</p>
+<p>One popular class of PG algorithms, called REINFORCE algorithms, was <span class="xref myst">introduced</span> back in 1992.</p>
+</div>
 <div class="section" id="dqn">
 <h3>DQN<a class="headerlink" href="#dqn" title="Permalink to this headline">¶</a></h3>
+<p><strong>Deep Q-Network (DQN)</strong> was the first RL algorithm to feature a DL model. Introduced in 2014, it was used to learn to play old-school Atari games like Breakout.</p>
+<p>DQN runs a deep neural network for approximating Q-Values. The network takes a state s (i.e. the last 4 screenshots of the game) as input, and outputs an estimation of the Q-Values of all actions in that state.</p>
 <p><img alt="" src="../_images/dqn.png" /></p>
+</div>
+<div class="section" id="actor-critic-methods">
+<h3>Actor-Critic methods<a class="headerlink" href="#actor-critic-methods" title="Permalink to this headline">¶</a></h3>
+<p>This family of algorithms combines Policy Gradients with Deep Q-Networks. An Actor-Critic agent contains two neural networks: a policy net and a DQN.</p>
+<ul class="simple">
+<li><p>the DQN (critic) is trained normally, learning from the agent’s experiences;</p></li>
+<li><p>the policy net (actor) relies on the action values estimated by the DQN, a bit like an athlete learning with the help of a coach. After each action selection, the critic evaluates the new state to determine whether things have gone better or worse than expected.</p></li>
+</ul>
 </div>
 <div class="section" id="a3c">
 <h3>A3C<a class="headerlink" href="#a3c" title="Permalink to this headline">¶</a></h3>
+<p>Introduced by DeepMind researchers in 2016, <strong>Asynchronous Advantage Actor-Critic (A3C)</strong> is an Actor-Critic variant where multiple agents learn in parallel, exploring different copies of the environment. At regular intervals, but asynchronously (hence the name), each agent pushes some weight updates to a master network, then it pulls the latest weights from that network. Each agent thus contributes to improving the master network and benefits from what the other agents have learned.</p>
+<p><img alt="" src="../_images/A3C.png" /></p>
 </div>
 <div class="section" id="ppo">
 <h3>PPO<a class="headerlink" href="#ppo" title="Permalink to this headline">¶</a></h3>
+<p><strong>Proximal Policy Optimization (PPO)</strong> is an algorithm based on Advantage Actor-Critic (A2C). In a nutshell, it makes RL less sensitive to step size without the tradeoffs incurred by other approaches.</p>
+<p>In 2019, OpenAI Five, based on the PPO algorithm, defeated the world champions at the multiplayer game Dota 2.</p>
 </div>
 </div>
 </div>
