@@ -1,0 +1,983 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Introduction to Reinforcement Learning &#8212; Machine Learning Handbook</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.e7340bb3dbd8dde6db86f25597f54a1b.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Handling data" href="../fundamentals/handling_data.html" />
+    <link rel="prev" title="Machine Learning in action" href="machine_learning_in_action.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/logo.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Machine Learning Handbook</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <p class="caption collapsible-parent">
+ <span class="caption-text">
+  overview
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="introduction_to_machine_learning.html">
+   Introduction to Machine Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="the_python_ecosystem.html">
+   The Python ecosystem
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="machine_learning_in_action.html">
+   Machine Learning in action
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Introduction to Reinforcement Learning
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Fundamentals
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fundamentals/handling_data.html">
+   Handling data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fundamentals/assessing_results.html">
+   Assessing results
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fundamentals/training_models.html">
+   Training models
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Algorithms
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../algorithms/linear_regression.html">
+   Linear Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../algorithms/logistic_regression.html">
+   Logistic Regression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../algorithms/decision_trees_and_random_forests.html">
+   Decision Trees &amp; Random Forests
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../algorithms/artificial_neural_networks.html">
+   Artificial Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../algorithms/convolutional_neural_networks.html">
+   Convolutional Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../algorithms/recurrent_neural_networks.html">
+   Recurrent Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../algorithms/autoencoders.html">
+   Autoencoders
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../algorithms/neural_style_transfer.html">
+   Neural Style Transfer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../algorithms/generative_adversarial_networks.html">
+   Generative Adversarial Networks
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Reference
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../reference/activation_functions.html">
+   Activation functions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../reference/python.html">
+   Python cheatsheet
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../reference/numpy.html">
+   NumPy API
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../reference/pytorch.html">
+   PyTorch API
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../reference/keras.html">
+   Keras API
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Appendix
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../appendix/acknowledgments.html">
+   Acknowledgments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../appendix/glossary.html">
+   Glossary
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/overview/introduction_to_reinforcement_learning.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/bpesquet/mlhandbook"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/bpesquet/mlhandbook/issues/new?title=Issue%20on%20page%20%2Foverview/introduction_to_reinforcement_learning.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/bpesquet/mlhandbook/edit/master/overview/introduction_to_reinforcement_learning.ipynb"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/bpesquet/mlhandbook/master?urlpath=tree/overview/introduction_to_reinforcement_learning.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/bpesquet/mlhandbook/blob/master/overview/introduction_to_reinforcement_learning.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i>
+            Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#environnement-setup">
+   Environnement setup
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-is-reinforcement-learning">
+   What is Reinforcement Learning?
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#rl-in-a-nutshell">
+     RL in a nutshell
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#a-specific-subfield-of-ml">
+     A specific subfield of ML
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-exploration-vs-exploitation-dilemna">
+     The exploration vs. exploitation dilemna
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#reinforcement-learning-examples">
+     Reinforcement Learning examples
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#recent-breakthroughs">
+     Recent breakthroughs
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#problem-formulation">
+   Problem formulation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#general-abstraction">
+     General abstraction
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#policy">
+     Policy
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#reward">
+     Reward
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#return">
+     Return
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#markov-decision-processes">
+     Markov Decision Processes
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#value-function">
+     Value function
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#state-value-function">
+     State value function
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#action-state-value-function">
+     Action-state value function
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#optimality">
+     Optimality
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tabular-methods">
+   Tabular methods
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#context">
+     Context
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#value-iteration">
+     Value Iteration
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#q-value-iteration">
+     Q-Value Iteration
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#temporal-difference-learning">
+     Temporal Difference Learning
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#q-learning">
+     Q-Learning
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#deep-rl-algorithms">
+   Deep RL algorithms
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dqn">
+     DQN
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#a3c">
+     A3C
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ppo">
+     PPO
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+        </nav>
+        
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="introduction-to-reinforcement-learning">
+<h1>Introduction to Reinforcement Learning<a class="headerlink" href="#introduction-to-reinforcement-learning" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="environnement-setup">
+<h2>Environnement setup<a class="headerlink" href="#environnement-setup" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">platform</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Python version: </span><span class="si">{</span><span class="n">platform</span><span class="o">.</span><span class="n">python_version</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">platform</span><span class="o">.</span><span class="n">python_version_tuple</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="s2">&quot;6&quot;</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;NumPy version: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Python version: 3.7.5
+NumPy version: 1.18.1
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Setup plots</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.figsize&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">8</span>
+<span class="o">%</span><span class="k">config</span> InlineBackend.figure_format = &#39;retina&#39;
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="what-is-reinforcement-learning">
+<h2>What is Reinforcement Learning?<a class="headerlink" href="#what-is-reinforcement-learning" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="rl-in-a-nutshell">
+<h3>RL in a nutshell<a class="headerlink" href="#rl-in-a-nutshell" title="Permalink to this headline">¶</a></h3>
+<p>Reinforcement Learning (RL) is about <strong>learning to control dynamic systems</strong>.</p>
+<p>The learner (often called an <em>agent</em>) is not told explicitly which <strong>actions</strong> to take, but instead must discover which actions yield the most <strong>reward</strong> over time by trying them.</p>
+<p>Actions may affect not only the immediate reward but also the next situation and, through that, all subsequent rewards.</p>
+<p><img alt="Learning to ride a bike!" src="../_images/prosper_bike.gif" /></p>
+</div>
+<div class="section" id="a-specific-subfield-of-ml">
+<h3>A specific subfield of ML<a class="headerlink" href="#a-specific-subfield-of-ml" title="Permalink to this headline">¶</a></h3>
+<p>RL is different from <strong>supervised learning</strong>, where correct answers (desired behaviour) are given to the learner during training. A RL learner must be able to learn from its own experience.</p>
+<p>RL is also different from <strong>unsupervised learning</strong>: finding structure in unlabeled data could help, but does not solve the reward maximisation problem which is at the heart of RL.</p>
+<p>Lastly, RL is different from <strong>evolutionary methods</strong>, which only consider the final outcome and ignore the intermediate steps RL is concerned with.</p>
+</div>
+<div class="section" id="the-exploration-vs-exploitation-dilemna">
+<h3>The exploration vs. exploitation dilemna<a class="headerlink" href="#the-exploration-vs-exploitation-dilemna" title="Permalink to this headline">¶</a></h3>
+<p>The learner has to exploit what it has already experienced, but it also has to explore in order to discover better actions. Neither exploration nor exploitation can be pursued exclusively without failing at the task at hand.</p>
+<p><img alt="" src="../_images/exploration_exploitation.png" /></p>
+</div>
+<div class="section" id="reinforcement-learning-examples">
+<h3>Reinforcement Learning examples<a class="headerlink" href="#reinforcement-learning-examples" title="Permalink to this headline">¶</a></h3>
+<p>RL can be applied to a wide variety of contexts. To name a few:</p>
+<ul class="simple">
+<li><p>controlling a robot;</p></li>
+<li><p>manage a financial portfolio;</p></li>
+<li><p>steering a ship;</p></li>
+<li><p>playing a game.</p></li>
+</ul>
+</div>
+<div class="section" id="recent-breakthroughs">
+<h3>Recent breakthroughs<a class="headerlink" href="#recent-breakthroughs" title="Permalink to this headline">¶</a></h3>
+<p>RL is not a new field but went mainstream in recent years, mostly due to game-related feats:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://deepmind.com/research/case-studies/alphago-the-story-so-far">AlphaGo</a> beat Go champion Lee Sedol in 2016;</p></li>
+<li><p><a class="reference external" href="https://deepmind.com/blog/article/alphazero-shedding-new-light-grand-games-chess-shogi-and-go">AlphaZero</a> achieved superhuman level at chess, shogi and go in less than 24 hours in 2017;</p></li>
+<li><p><a class="reference external" href="https://openai.com/blog/openai-five/">OpenAI Five</a> demonstrated expert level play against other competitive Dota 2 teams in 2019;</p></li>
+<li><p><a class="reference external" href="https://deepmind.com/blog/article/alphastar-mastering-real-time-strategy-game-starcraft-ii">AlphaStar</a> reached StarCraft 2 Grandmaster level (top 0.2% of human players) also in 2019.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">YouTubeVideo</span>
+
+<span class="n">YouTubeVideo</span><span class="p">(</span><span class="s2">&quot;WXuK6gekU1Y&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<iframe
+    width="400"
+    height="300"
+    src="https://www.youtube.com/embed/WXuK6gekU1Y"
+    frameborder="0"
+    allowfullscreen
+></iframe>
+</div></div>
+</div>
+</div>
+</div>
+<div class="section" id="problem-formulation">
+<h2>Problem formulation<a class="headerlink" href="#problem-formulation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="general-abstraction">
+<h3>General abstraction<a class="headerlink" href="#general-abstraction" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(s_t\)</span>: observed state of the dynamic system at step <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(a_t\)</span>: action taken by the agent at step <span class="math notranslate nohighlight">\(t\)</span> in order to (try to) control the system.</p></li>
+<li><p><span class="math notranslate nohighlight">\(r_t\)</span>: reward received by the agent at step <span class="math notranslate nohighlight">\(t\)</span> (result of <span class="math notranslate nohighlight">\(a_{t-1}\)</span>).</p></li>
+</ul>
+<p><img alt="" src="../_images/rl_schema.png" /></p>
+</div>
+<div class="section" id="policy">
+<h3>Policy<a class="headerlink" href="#policy" title="Permalink to this headline">¶</a></h3>
+<p>The algorithm used by the learner to determine its actions is called its <strong>policy</strong>. Policies may be <em>deterministic</em> or <em>stochastic</em> (involving some randomness).</p>
+<p>Formally, a policy <span class="math notranslate nohighlight">\(\pi\)</span> is a mapping from states to probabilities of selecting each possible action.</p>
+<p><span class="math notranslate nohighlight">\(\pi(a|s)\)</span>: probability that the agent will choose the action <span class="math notranslate nohighlight">\(a\)</span> when in state <span class="math notranslate nohighlight">\(s\)</span>.</p>
+</div>
+<div class="section" id="reward">
+<h3>Reward<a class="headerlink" href="#reward" title="Permalink to this headline">¶</a></h3>
+<p>A <strong>reward signal</strong> defines the goal in a RL problem. The learner’s sole objective is to maximize the total reward it receives in the long run. Rewards are its only guidance it gets.</p>
+<p><span class="math notranslate nohighlight">\(R_t=r(s,a,s')\)</span>: reward received at step <span class="math notranslate nohighlight">\(t\)</span> when system goes from state <span class="math notranslate nohighlight">\(s\)</span> to state <span class="math notranslate nohighlight">\(s'\)</span>, given a chosen action <span class="math notranslate nohighlight">\(a\)</span>.</p>
+</div>
+<div class="section" id="return">
+<h3>Return<a class="headerlink" href="#return" title="Permalink to this headline">¶</a></h3>
+<p>It is common to evaluate actions based on the sum of all the rewards that came after them, usually applying a <em>discount factor</em> <span class="math notranslate nohighlight">\(\gamma \in [0,1]\)</span>.</p>
+<p><span class="math notranslate nohighlight">\(G_t\)</span>: sum of discounted rewards, called <strong>return</strong>.</p>
+<div class="math notranslate nohighlight">
+\[G_t = R_{t+1} + \gamma R_{t+2} +\gamma^2 R_{t+3} + · · · = \sum\limits_{k=0}^\infty \gamma^k R_{t+k+1} = R_{t+1} + \gamma G_{t+1}\]</div>
+<p>Usually <span class="math notranslate nohighlight">\(0.9&lt;\gamma&lt;0.99\)</span>.</p>
+</div>
+<div class="section" id="markov-decision-processes">
+<h3>Markov Decision Processes<a class="headerlink" href="#markov-decision-processes" title="Permalink to this headline">¶</a></h3>
+<p><strong>Markov Decision Processes</strong> (MDP) provide a mathematical framework for modeling decision making in discrete-time situations where outcomes are partly under the control of a decision maker. They were first described in the 1950s by Richard Bellman as an extension of (Andrey) <strong>Markov chains</strong>.</p>
+<p>The dynamics of a MDP is defined as the transition probability <span class="math notranslate nohighlight">\(p(s',r | s,a)\)</span> of getting state <span class="math notranslate nohighlight">\(s'\)</span> and reward <span class="math notranslate nohighlight">\(r\)</span> after having selected action <span class="math notranslate nohighlight">\(a\)</span> in state <span class="math notranslate nohighlight">\(s\)</span>.</p>
+<p>Many RL problems with discrete actions can be modeled as Markov Decision Processes.</p>
+<p><img alt="" src="../_images/mdp_example.png" /></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">transition_probabilities</span> <span class="o">=</span> <span class="p">[</span>  <span class="c1"># shape=[s, a, s&#39;]</span>
+    <span class="p">[[</span><span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]],</span>
+    <span class="p">[[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="kc">None</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]],</span>
+    <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">],</span> <span class="kc">None</span><span class="p">],</span>
+<span class="p">]</span>
+<span class="n">rewards</span> <span class="o">=</span> <span class="p">[</span>  <span class="c1"># shape=[s, a, s&#39;]</span>
+    <span class="p">[[</span><span class="o">+</span><span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]],</span>
+    <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">50</span><span class="p">]],</span>
+    <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="o">+</span><span class="mi">40</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]],</span>
+<span class="p">]</span>
+<span class="n">possible_actions</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="value-function">
+<h3>Value function<a class="headerlink" href="#value-function" title="Permalink to this headline">¶</a></h3>
+<p>Whereas the reward signal indicates what is good in an immediate sense, a <strong>value function</strong> specifies what is good in the long run.</p>
+<p>Action choices should be made based on value judgments, seeking actions that bring about states of highest value, not highest reward.</p>
+<p>Unfortunately, rewards are basically given directly by the environment, whereas values must be <strong>estimated</strong> and re-estimated from the sequences of observations an agent makes over its entire lifetime.</p>
+</div>
+<div class="section" id="state-value-function">
+<h3>State value function<a class="headerlink" href="#state-value-function" title="Permalink to this headline">¶</a></h3>
+<p><span class="math notranslate nohighlight">\(G^\pi(s)\)</span>: long-term gain obtained by applying the actions from policy <span class="math notranslate nohighlight">\(\pi\)</span>, starting in state <span class="math notranslate nohighlight">\(s\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[G^\pi(s) = \sum\limits_{k = 0}^\infty \gamma^k R_{t+k+1}\]</div>
+<p><span class="math notranslate nohighlight">\(V^\pi(s)\)</span>: averaged sum of the returns <span class="math notranslate nohighlight">\(G^\pi(s)\)</span> that the agent will get by starting from state <span class="math notranslate nohighlight">\(s\)</span> and following <span class="math notranslate nohighlight">\(\pi\)</span> thereafter.</p>
+<div class="math notranslate nohighlight">
+\[V^\pi(s) = \mathbb{E} \left[ G^\pi(s) \right] = \mathbb{E}\left( \sum\limits_{t = 0}^\infty \gamma^t R_t \bigg| S_0 = s, \pi \right) = \sum\limits_{a} \pi(a|s) \sum\limits_{s', r}p(s',r | s,a)\left[r + \gamma V^{\pi}(s')\right]\]</div>
+</div>
+<div class="section" id="action-state-value-function">
+<h3>Action-state value function<a class="headerlink" href="#action-state-value-function" title="Permalink to this headline">¶</a></h3>
+<p><span class="math notranslate nohighlight">\(Q^\pi(s,a)\)</span> (also called <strong>Q-Value</strong>): expected return starting from state <span class="math notranslate nohighlight">\(s\)</span>, taking the action <span class="math notranslate nohighlight">\(a\)</span>, and thereafter following policy <span class="math notranslate nohighlight">\(\pi\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[Q^\pi(s,a) = \mathbb{E}\left( \sum\limits_{t=0}^\infty \gamma^t R_t \bigg| S_0 = s, A_0=a, \pi \right)\]</div>
+<div class="math notranslate nohighlight">
+\[Q^\pi(s,a) = \sum\limits_{s', r} p(s',r | s,a) \left[r + \gamma V^{\pi}(s')\right]\]</div>
+</div>
+<div class="section" id="optimality">
+<h3>Optimality<a class="headerlink" href="#optimality" title="Permalink to this headline">¶</a></h3>
+<p>The optimal policy <span class="math notranslate nohighlight">\(\pi^*\)</span> is the one that achieves the biggest reward over the long run.</p>
+<div class="math notranslate nohighlight">
+\[V^{\pi^*}(s) = V^*(s) = \underset{a}{max} \sum\limits_{s', r}p(s',r | s,a)\left[r + \gamma V^*(s')\right]= \underset{a}{max}\;Q^*(s,a)\]</div>
+<div class="math notranslate nohighlight">
+\[Q^{\pi^*}(s,a) = Q^*(s,a) = \sum\limits_{s',r} p(s',r | s,a) \left[r + \gamma\; \underset{a'}{max} \;Q^*(s',a')\right]\]</div>
+<p>When the agent is in state <span class="math notranslate nohighlight">\(s\)</span>, it should choose the action with the highest Q-value for that state.</p>
+<div class="math notranslate nohighlight">
+\[\pi^*(s) = \underset{a}{argmax} \;Q^*(s,a)\]</div>
+</div>
+</div>
+<div class="section" id="tabular-methods">
+<h2>Tabular methods<a class="headerlink" href="#tabular-methods" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="context">
+<h3>Context<a class="headerlink" href="#context" title="Permalink to this headline">¶</a></h3>
+<p>When the number of states and actions is limited, approximate value functions can be represented as arrays (<em>tables</em>) and stored in memory.</p>
+<p>In this case, basic algorithms can often find exact solutions, i.e. the optimal value function and the optimal policy.</p>
+<p>These <strong>tabular methods</strong> implement the core ideas of RL and form the building blocks of more powerful ones, used when the state and action spaces are too large.</p>
+</div>
+<div class="section" id="value-iteration">
+<h3>Value Iteration<a class="headerlink" href="#value-iteration" title="Permalink to this headline">¶</a></h3>
+<p>Method for finding the optimal state value for each state.</p>
+<ul class="simple">
+<li><p>init all state value estimates to zero;</p></li>
+<li><p>iteratively update them using the following equation:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[V_{k+1}(s) \leftarrow \underset{a}{max} \sum\limits_{s', r}p(s',r | s,a)\left[r + \gamma V_k(s')\right] = \underset{a}{max}\; Q_k(s,a)\]</div>
+<p>Given enough iterations, these estimates will converge to the optimal state values.</p>
+</div>
+<div class="section" id="q-value-iteration">
+<h3>Q-Value Iteration<a class="headerlink" href="#q-value-iteration" title="Permalink to this headline">¶</a></h3>
+<p>Like the Value iteration algorithm, iteratively compute <span class="math notranslate nohighlight">\(Q_{k+1}(s,a)\)</span> for all <span class="math notranslate nohighlight">\((s,a)\)</span> until convergence.</p>
+<div class="math notranslate nohighlight">
+\[Q_{k+1}(s,a) \leftarrow \sum\limits_{s',r} p(s',r | s,a) \left[r + \gamma \cdot \underset{a'}{max} \;Q_k(s',a')\right]\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Init action-state values to 0 for all possible actions in all states</span>
+<span class="k">def</span> <span class="nf">init_q_values</span><span class="p">():</span>
+    <span class="n">Q_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">)</span>  <span class="c1"># -np.inf for impossible actions</span>
+    <span class="k">for</span> <span class="n">state</span><span class="p">,</span> <span class="n">actions</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">possible_actions</span><span class="p">):</span>
+        <span class="n">Q_values</span><span class="p">[</span><span class="n">state</span><span class="p">,</span> <span class="n">actions</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>  <span class="c1"># for all possible actions</span>
+    <span class="k">return</span> <span class="n">Q_values</span>
+
+<span class="n">init_q_values</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[  0.,   0.,   0.],
+       [  0., -inf,   0.],
+       [-inf,   0., -inf]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Q_values</span> <span class="o">=</span> <span class="n">init_q_values</span><span class="p">()</span>
+
+<span class="n">gamma</span> <span class="o">=</span> <span class="mf">0.9</span>  <span class="c1"># Discount factor - try changing it to 0.95</span>
+<span class="n">n_iterations_q_value</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">n_states</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">possible_actions</span><span class="p">)</span>
+
+<span class="n">history_q_value</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># Store training history for plotting (later)</span>
+<span class="k">for</span> <span class="n">iteration</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_iterations_q_value</span><span class="p">):</span>
+    <span class="n">Q_prev</span> <span class="o">=</span> <span class="n">Q_values</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">history_q_value</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Q_prev</span><span class="p">)</span>
+    <span class="c1"># Compute Q_k+1 for all states and actions</span>
+    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_states</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">possible_actions</span><span class="p">[</span><span class="n">s</span><span class="p">]:</span>
+            <span class="n">Q_values</span><span class="p">[</span><span class="n">s</span><span class="p">,</span> <span class="n">a</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span>
+                <span class="p">[</span>
+                    <span class="n">transition_probabilities</span><span class="p">[</span><span class="n">s</span><span class="p">][</span><span class="n">a</span><span class="p">][</span><span class="n">sp</span><span class="p">]</span>
+                    <span class="o">*</span> <span class="p">(</span><span class="n">rewards</span><span class="p">[</span><span class="n">s</span><span class="p">][</span><span class="n">a</span><span class="p">][</span><span class="n">sp</span><span class="p">]</span> <span class="o">+</span> <span class="n">gamma</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">Q_prev</span><span class="p">[</span><span class="n">sp</span><span class="p">]))</span>
+                    <span class="k">for</span> <span class="n">sp</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_states</span><span class="p">)</span>
+                <span class="p">]</span>
+            <span class="p">)</span>
+
+<span class="n">history_q_value</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">history_q_value</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Show final action-state values</span>
+<span class="n">Q_values</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[18.91891892, 17.02702702, 13.62162162],
+       [ 0.        ,        -inf, -4.87971488],
+       [       -inf, 50.13365013,        -inf]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">print_optimal_actions</span><span class="p">(</span><span class="n">q_values</span><span class="p">):</span>
+    <span class="c1"># Find action with maximum Q-value for each state</span>
+    <span class="n">optimal_actions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">q_values</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_states</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Optimal action for state </span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s2"> is a</span><span class="si">{</span><span class="n">optimal_actions</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<span class="n">print_optimal_actions</span><span class="p">(</span><span class="n">Q_values</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimal action for state 0 is a0
+Optimal action for state 1 is a0
+Optimal action for state 2 is a1
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="temporal-difference-learning">
+<h3>Temporal Difference Learning<a class="headerlink" href="#temporal-difference-learning" title="Permalink to this headline">¶</a></h3>
+<p>When the transition probabilities and rewards are not known in advance, the agent has to experience each state and each transition: once to know the rewards, several times to estimate the probabilities. It must use an <strong>exploration policy</strong> (for example, a purely random one) to traverse the MDP.</p>
+<p>As it progresses, the <strong>Temporal Difference (TD) Learning</strong> algorithm updates the estimates of the state values based on the transition and rewards that are actually observed.</p>
+<div class="math notranslate nohighlight">
+\[V_{k+1}(s) \leftarrow V_k(s) + \alpha\left(r + \gamma V_k(s') - V_k(s)\right)\]</div>
+<div class="math notranslate nohighlight">
+\[V_{k+1}(s) \leftarrow (1-\alpha)V_k(s) + \alpha\left(r + \gamma V_k(s')\right)\]</div>
+<div class="math notranslate nohighlight">
+\[V(s) \underset{\alpha}\leftarrow r + \gamma V(s')\]</div>
+<p><span class="math notranslate nohighlight">\(\alpha\)</span>: learning rate, usually small (example: <span class="math notranslate nohighlight">\(0.001\)</span>).</p>
+</div>
+<div class="section" id="q-learning">
+<h3>Q-Learning<a class="headerlink" href="#q-learning" title="Permalink to this headline">¶</a></h3>
+<p>Adapted from the Q-Value Iteration algorithm for situations in which transitions and rewards are initially unknown, <strong>Q-Learning</strong> watches the agent play and gradually improves its estimations of the Q-values. Once it has accurate Q-Value estimates (or close enough), then the optimal policy is choosing the action that has the highest Q-Value (i.e. the <em>greedy</em> policy).</p>
+<div class="math notranslate nohighlight">
+\[Q(s) \underset{\alpha}\leftarrow r + \gamma \cdot \underset{a}{max} \;Q(s',a')\]</div>
+<p>For each pair <span class="math notranslate nohighlight">\((s, a)\)</span>, this algorithm keeps track of a <em>running average</em> of the rewards <span class="math notranslate nohighlight">\(r\)</span> the agent gets upon leaving the state <span class="math notranslate nohighlight">\(s\)</span> with action <span class="math notranslate nohighlight">\(a\)</span>, plus the sum of discounted future rewards it expects to get. To estimate this sum, it takes the maximum of the Q-Value estimates for the next state <span class="math notranslate nohighlight">\(s′\)</span> (we assume that the target policy would act optimally from then on).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Perform an action and receive next state and reward</span>
+<span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">action</span><span class="p">):</span>
+    <span class="n">probas</span> <span class="o">=</span> <span class="n">transition_probabilities</span><span class="p">[</span><span class="n">state</span><span class="p">][</span><span class="n">action</span><span class="p">]</span>
+    <span class="n">next_state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n_states</span><span class="p">),</span> <span class="n">p</span><span class="o">=</span><span class="n">probas</span><span class="p">)</span>
+    <span class="n">reward</span> <span class="o">=</span> <span class="n">rewards</span><span class="p">[</span><span class="n">state</span><span class="p">][</span><span class="n">action</span><span class="p">][</span><span class="n">next_state</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">next_state</span><span class="p">,</span> <span class="n">reward</span>
+
+
+<span class="c1"># Explore the MDP</span>
+<span class="k">def</span> <span class="nf">exploration_policy</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+    <span class="c1"># Returns a random action</span>
+    <span class="c1"># This exploration policy is sufficient in this simple problem</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">possible_actions</span><span class="p">[</span><span class="n">state</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Q_values</span> <span class="o">=</span> <span class="n">init_q_values</span><span class="p">()</span>
+
+<span class="n">alpha0</span> <span class="o">=</span> <span class="mf">0.05</span>  <span class="c1"># initial learning rate</span>
+<span class="n">decay</span> <span class="o">=</span> <span class="mf">0.005</span>  <span class="c1"># learning rate decay</span>
+<span class="n">gamma</span> <span class="o">=</span> <span class="mf">0.9</span>  <span class="c1"># discount factor</span>
+<span class="n">n_iterations_q_learning</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">state</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># initial state</span>
+<span class="n">history_q_learning</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># Training history</span>
+
+<span class="k">for</span> <span class="n">iteration</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_iterations_q_learning</span><span class="p">):</span>
+    <span class="n">history_q_learning</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Q_values</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
+    <span class="n">action</span> <span class="o">=</span> <span class="n">exploration_policy</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+    <span class="n">next_state</span><span class="p">,</span> <span class="n">reward</span> <span class="o">=</span> <span class="n">step</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">action</span><span class="p">)</span>
+    <span class="n">next_q_value</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">Q_values</span><span class="p">[</span><span class="n">next_state</span><span class="p">])</span>  <span class="c1"># greedy policy at the next step</span>
+    <span class="n">alpha</span> <span class="o">=</span> <span class="n">alpha0</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">iteration</span> <span class="o">*</span> <span class="n">decay</span><span class="p">)</span>  <span class="c1"># learning rate decay</span>
+    <span class="n">Q_values</span><span class="p">[</span><span class="n">state</span><span class="p">,</span> <span class="n">action</span><span class="p">]</span> <span class="o">*=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">alpha</span>
+    <span class="n">Q_values</span><span class="p">[</span><span class="n">state</span><span class="p">,</span> <span class="n">action</span><span class="p">]</span> <span class="o">+=</span> <span class="n">alpha</span> <span class="o">*</span> <span class="p">(</span><span class="n">reward</span> <span class="o">+</span> <span class="n">gamma</span> <span class="o">*</span> <span class="n">next_q_value</span><span class="p">)</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">next_state</span>
+
+<span class="n">history_q_learning</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">history_q_learning</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Show final action-state values</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Q_values</span><span class="p">)</span>
+
+<span class="n">print_optimal_actions</span><span class="p">(</span><span class="n">Q_values</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[17.54602252 15.67928154 12.80360984]
+ [ 0.                -inf -9.06402578]
+ [       -inf 47.71780988        -inf]]
+Optimal action for state 0 is a0
+Optimal action for state 1 is a0
+Optimal action for state 2 is a1
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">final_Q_value</span> <span class="o">=</span> <span class="n">history_q_value</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>  <span class="c1"># final q-value for s0 and a0</span>
+
+<span class="c1"># Plot training history for Q-Value Iteration and Q-Learning methods</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Q-Value$(s_0, a_0)$&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Q-Value Iteration&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Q-Learning&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">history</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span>
+    <span class="n">axes</span><span class="p">,</span>
+    <span class="p">(</span><span class="n">n_iterations_q_value</span><span class="p">,</span> <span class="n">n_iterations_q_learning</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">history_q_value</span><span class="p">,</span> <span class="n">history_q_learning</span><span class="p">),</span>
+<span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">width</span><span class="p">],</span> <span class="p">[</span><span class="n">final_Q_value</span><span class="p">,</span> <span class="n">final_Q_value</span><span class="p">],</span> <span class="s2">&quot;k--&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">width</span><span class="p">),</span> <span class="n">history</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;b-&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Iterations&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">24</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/introduction_to_reinforcement_learning_36_0.png" src="../_images/introduction_to_reinforcement_learning_36_0.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="deep-rl-algorithms">
+<h2>Deep RL algorithms<a class="headerlink" href="#deep-rl-algorithms" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="dqn">
+<h3>DQN<a class="headerlink" href="#dqn" title="Permalink to this headline">¶</a></h3>
+<p><img alt="" src="../_images/dqn.png" /></p>
+</div>
+<div class="section" id="a3c">
+<h3>A3C<a class="headerlink" href="#a3c" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="ppo">
+<h3>PPO<a class="headerlink" href="#ppo" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./overview"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="machine_learning_in_action.html" title="previous page">Machine Learning in action</a>
+    <a class='right-next' id="next-link" href="../fundamentals/handling_data.html" title="next page">Handling data</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Baptiste Pesquet<br/>
+        
+            &copy; Copyright 2020, 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>
