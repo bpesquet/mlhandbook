@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Machine Learning Handbook &#8212; Machine Learning Handbook</title>
     
-  <link rel="stylesheet" href="_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+  <link href="_static/css/theme.css" rel="stylesheet" />
+  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
 
     
   <link rel="stylesheet"
@@ -19,14 +20,10 @@
 
     
       
-  <link rel="stylesheet"
-    href="_static/vendor/open-sans_all/1.44.1/index.css">
-  <link rel="stylesheet"
-    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
 
     
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/sphinx-book-theme.e7340bb3dbd8dde6db86f25597f54a1b.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.acff12b8f9c144ce68a297486a2fa670.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
@@ -34,7 +31,7 @@
     <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="_static/js/index.d3f166471bb80abb5163.js">
+  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
 
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
@@ -44,7 +41,7 @@
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
+    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe"
@@ -56,14 +53,14 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Introduction to Machine Learning" href="overview/introduction_to_machine_learning.html" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
-
-
-
+    
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
     
 
     <div class="container-xl">
@@ -72,25 +69,25 @@
 <div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
     
         <div class="navbar-brand-box">
-<a class="navbar-brand text-wrap" href="#">
-  
-  <img src="_static/logo.png" class="logo" alt="logo">
-  
-  
-  <h1 class="site-logo" id="site-title">Machine Learning Handbook</h1>
-  
-</a>
+    <a class="navbar-brand text-wrap" href="#">
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Machine Learning Handbook</h1>
+      
+    </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form>
-<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
-    <p class="caption collapsible-parent">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <p class="caption">
  <span class="caption-text">
   overview
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="overview/introduction_to_machine_learning.html">
    Introduction to Machine Learning
@@ -112,12 +109,12 @@
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p class="caption">
  <span class="caption-text">
   Fundamentals
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="fundamentals/handling_data.html">
    Handling data
@@ -134,108 +131,185 @@
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p class="caption">
  <span class="caption-text">
   Algorithms
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="algorithms/classic_ml.html">
+   Classic Machine Learning
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="algorithms/k_nearest_neighbors.html">
+     K-Nearest Neighbors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="algorithms/linear_regression.html">
+     Linear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="algorithms/logistic_regression.html">
+     Logistic Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="algorithms/decision_trees_and_random_forests.html">
+     Decision Trees &amp; Random Forests
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="algorithms/bayesian_methods.html">
+     Bayesian Methods
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="algorithms/support_vector_machines.html">
+     Support Vector Machines
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="algorithms/k_means.html">
+     K-Means
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="algorithms/nn_deep_learning.html">
+   Neural Networks and Deep Learning
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="algorithms/artificial_neural_networks.html">
+     Artificial Neural Networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="algorithms/convolutional_neural_networks.html">
+     Convolutional Neural Networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="algorithms/recurrent_neural_networks.html">
+     Recurrent Neural Networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="algorithms/autoencoders.html">
+     Autoencoders
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="algorithms/neural_style_transfer.html">
+     Neural Style Transfer
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="algorithms/generative_adversarial_networks.html">
+     Generative Adversarial Networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="algorithms/transformers.html">
+     Transformers
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Issues
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="algorithms/linear_regression.html">
-   Linear Regression
+  <a class="reference internal" href="issues/interpretability_explainability.html">
+   Interpretability &amp; explainability
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="algorithms/logistic_regression.html">
-   Logistic Regression
+  <a class="reference internal" href="issues/fairness.html">
+   Fairness
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="algorithms/decision_trees_and_random_forests.html">
-   Decision Trees &amp; Random Forests
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="algorithms/artificial_neural_networks.html">
-   Artificial Neural Networks
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="algorithms/convolutional_neural_networks.html">
-   Convolutional Neural Networks
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="algorithms/recurrent_neural_networks.html">
-   Recurrent Neural Networks
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="algorithms/autoencoders.html">
-   Autoencoders
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="algorithms/neural_style_transfer.html">
-   Neural Style Transfer
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="algorithms/generative_adversarial_networks.html">
-   Generative Adversarial Networks
+  <a class="reference internal" href="issues/robustness.html">
+   Robustness
   </a>
  </li>
 </ul>
-<p class="caption collapsible-parent">
+<p class="caption">
  <span class="caption-text">
   Reference
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="reference/activation_functions.html">
    Activation functions
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="reference/python.html">
-   Python cheatsheet
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="reference/tools.html">
+   Tools
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="reference/python.html">
+     Python cheatsheet
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="reference/numpy.html">
+     NumPy API
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="reference/pytorch.html">
+     PyTorch API
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="reference/keras.html">
+     Keras API
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="reference/numpy.html">
-   NumPy API
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="reference/pytorch.html">
-   PyTorch API
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="reference/keras.html">
-   Keras API
-  </a>
- </li>
-</ul>
-<p class="caption collapsible-parent">
- <span class="caption-text">
-  Appendix
- </span>
-</p>
-<ul class="nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="appendix/acknowledgments.html">
-   Acknowledgments
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="appendix/glossary.html">
+  <a class="reference internal" href="reference/glossary.html">
    Glossary
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="reference/acknowledgments.html">
+   Acknowledgments
   </a>
  </li>
 </ul>
 
+    </div>
 </nav> <!-- To handle the deprecated key -->
 
 <div class="navbar_extra_footer">
@@ -303,12 +377,12 @@
     </div>
 </div>
 
-
             <!-- Full screen (wrap in <a> to have style consistency -->
-            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-                    title="Fullscreen mode"><i
-                        class="fas fa-expand"></i></button></a>
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
 
             <!-- Launch buttons -->
 
@@ -328,7 +402,7 @@
   <div class="section" id="machine-learning-handbook">
 <h1>Machine Learning Handbook<a class="headerlink" href="#machine-learning-handbook" title="Permalink to this headline">¶</a></h1>
 <p>This book provides theorical explanations, Python-based demonstrations and practical challenges for various Machine Learning concepts, techniques and tools.</p>
-<p>It is the main textbook for courses I teach at French engineering schools <a class="reference external" href="https://ensc.bordeaux-inp.fr">ENSC</a>. <a class="reference external" href="https://enseirb-matmeca.bordeaux-inp.fr">ENSEIRB-MATMECA</a> and <a class="reference external" href="https://www.institutoptique.fr">IOGS</a>. Its content is inspired by a large number of sources, from which numerous ideas and some illustrations were borrowed (<a class="reference internal" href="appendix/acknowledgments.html"><span class="doc std std-doc">more details</span></a>).</p>
+<p>It is the main textbook for courses I teach at French engineering schools <a class="reference external" href="https://ensc.bordeaux-inp.fr">ENSC</a>. <a class="reference external" href="https://enseirb-matmeca.bordeaux-inp.fr">ENSEIRB-MATMECA</a> and <a class="reference external" href="https://www.institutoptique.fr">IOGS</a>. Its content is inspired by a large number of sources, from which numerous ideas and some illustrations were borrowed (<a class="reference internal" href="reference/acknowledgments.html"><span class="doc std std-doc">more details</span></a>).</p>
 <p>Demonstrations and challenges leverage the essential tools of the Python ecosystem for Machine Learning: <a class="reference external" href="https://numpy.org/">NumPy</a>, <a class="reference external" href="https://pandas.pydata.org/">pandas</a>, <a class="reference external" href="https://scikit-learn.org">scikit-learn</a>, <a class="reference external" href="https://keras.io/">Keras</a> and <a class="reference external" href="https://pytorch.org/">PyTorch</a>.</p>
 <p><img alt="Tools used in this website" src="_images/python_ecosystem.png" /></p>
 <p>This book is designed to be browsed thematically rather than sequentially.</p>
@@ -383,7 +457,7 @@
     <div class="container">
       <p>
         
-          By Baptiste Pesquet<br/>
+          By Baptiste Pesquet & contributors<br/>
         
             &copy; Copyright 2020, 2021.<br/>
       </p>
@@ -394,11 +468,9 @@
 
       </div>
     </div>
+  
+  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
 
-    
-  <script src="_static/js/index.d3f166471bb80abb5163.js"></script>
-
-
-    
+  
   </body>
 </html>
