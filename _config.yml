@@ -1,7 +1,7 @@
 # Book settings
 title: Machine Learning Handbook
-author: Baptiste Pesquet
-email: baptiste.pesquet@ensc.fr
+author: Baptiste Pesquet & contributors
+email: bpesquet@gmail.com
 logo: logo.png
 copyright: 2020, 2021
 
@@ -26,8 +26,7 @@ launch_buttons:
   binderhub_url: "https://mybinder.org"
   colab_url: "https://colab.research.google.com"
 
-exclude_patterns:
-  ["README.md", "algorithms/knn.ipynb", "tasks/data_analysis.ipynb"]
+exclude_patterns: ["README.md", "tasks/data_analysis.ipynb"]
 
 sphinx:
   config:

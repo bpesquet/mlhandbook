@@ -15,25 +15,39 @@
 
 - part: Algorithms
   chapters:
-    - file: algorithms/linear_regression
-    - file: algorithms/logistic_regression
-    - file: algorithms/decision_trees_and_random_forests
-    - file: algorithms/artificial_neural_networks
-    - file: algorithms/convolutional_neural_networks
-    - file: algorithms/recurrent_neural_networks
-    - file: algorithms/autoencoders
-    - file: algorithms/neural_style_transfer
-    - file: algorithms/generative_adversarial_networks
+    - file: algorithms/classic_ml
+      sections:
+        - file: algorithms/k_nearest_neighbors.ipynb
+        - file: algorithms/linear_regression
+        - file: algorithms/logistic_regression
+        - file: algorithms/decision_trees_and_random_forests
+        - file: algorithms/bayesian_methods
+        - file: algorithms/support_vector_machines
+        - file: algorithms/k_means
+    - file: algorithms/nn_deep_learning
+      sections:
+        - file: algorithms/artificial_neural_networks
+        - file: algorithms/convolutional_neural_networks
+        - file: algorithms/recurrent_neural_networks
+        - file: algorithms/autoencoders
+        - file: algorithms/neural_style_transfer
+        - file: algorithms/generative_adversarial_networks
+        - file: algorithms/transformers
+
+- part: Issues
+  chapters:
+    - file: issues/interpretability_explainability
+    - file: issues/fairness
+    - file: issues/robustness
 
 - part: Reference
   chapters:
     - file: reference/activation_functions
-    - file: reference/python
-    - file: reference/numpy
-    - file: reference/pytorch
-    - file: reference/keras
-
-- part: Appendix
-  chapters:
-    - file: appendix/acknowledgments
-    - file: appendix/glossary
+    - file: reference/tools
+      sections:
+        - file: reference/python
+        - file: reference/numpy
+        - file: reference/pytorch
+        - file: reference/keras
+    - file: reference/glossary
+    - file: reference/acknowledgments
