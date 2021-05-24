@@ -63,7 +63,7 @@
             - file: katas/training/jena_weather
     - file: katas/coding_algorithms
       sections:
-        - file: katas/coding/rl_cliffworld
+        - file: katas/coding/q_learning_cliffworld
 
 - part: Issues
   chapters:

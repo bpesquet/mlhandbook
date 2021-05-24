@@ -1,4 +1,4 @@
-# Train models
+# Train models on classic datasets
 
 ```{tableofcontents}
 
