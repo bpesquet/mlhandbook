@@ -6,7 +6,6 @@ runs/
 *.dot
 fruit*.txt
 *.pkl
-data/
 # Neural style transfer
 generated_image*
 
