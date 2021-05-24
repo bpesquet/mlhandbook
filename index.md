@@ -14,11 +14,11 @@ Demonstrations and challenges leverage the essential tools of the Python ecosyst
 
 ## Usage
 
-All chapters are written as [Jupyter Notebooks](https://jupyter.org/) gathering explanations and example code. When teaching, I use [reveal.js](https://revealjs.com/) combined with [RISE](https://rise.readthedocs.io/en/stable/) to showcase them as slideshows.
+All chapters are written as [Jupyter Notebooks](https://jupyter.org/) combining explanations and example code. When teaching, I use [reveal.js](https://revealjs.com/) and [RISE](https://rise.readthedocs.io/en/stable/) to showcase them as live presentations.
 
-Most katas are self-correcting: blank places must be filled with answers that are checked by subsequent code.
+Most katas are self-correcting activities: blank places must be filled with answers that are checked by subsequent code.
 
-The content is designed to be browsed thematically rather than sequentially.
+The content of this site is designed to be browsed thematically rather than sequentially.
 
 ```{admonition} Interactivity
 :class: tip
