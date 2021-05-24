@@ -552,6 +552,26 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#about">
+   About
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#usage">
+   Usage
+  </a>
+  <ul class="nav section-nav flex-column">
+  </ul>
+ </li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -562,13 +582,21 @@
                 
   <div class="section" id="machine-learning-handbook">
 <h1>Machine Learning Handbook<a class="headerlink" href="#machine-learning-handbook" title="Permalink to this headline">¶</a></h1>
-<p>This book provides theorical explanations, Python-based demonstrations and practical challenges for various Machine Learning concepts, techniques and tools.</p>
-<p>It is the main textbook for courses I teach at French engineering schools <a class="reference external" href="https://ensc.bordeaux-inp.fr">ENSC</a>. <a class="reference external" href="https://enseirb-matmeca.bordeaux-inp.fr">ENSEIRB-MATMECA</a> and <a class="reference external" href="https://www.institutoptique.fr">IOGS</a>. Its content is inspired by a large number of sources, from which numerous ideas and some illustrations were borrowed (<a class="reference internal" href="reference/acknowledgments.html"><span class="doc std std-doc">more details</span></a>).</p>
+<p>This site provides theorical explanations, Python-based demonstrations and practical challenges (<em>katas</em>) for various Machine Learning concepts, techniques and tools.</p>
+<div class="section" id="about">
+<h2>About<a class="headerlink" href="#about" title="Permalink to this headline">¶</a></h2>
+<p>This is the main textbook for courses I teach at French engineering schools <a class="reference external" href="https://ensc.bordeaux-inp.fr">ENSC</a>. <a class="reference external" href="https://enseirb-matmeca.bordeaux-inp.fr">ENSEIRB-MATMECA</a> and <a class="reference external" href="https://www.institutoptique.fr">IOGS</a>.</p>
+<p>Its content is inspired by a large number of sources, from which numerous ideas and several illustrations were borrowed (<a class="reference internal" href="reference/acknowledgments.html"><span class="doc std std-doc">more details</span></a>).</p>
 <p>Demonstrations and challenges leverage the essential tools of the Python ecosystem for Machine Learning: <a class="reference external" href="https://numpy.org/">NumPy</a>, <a class="reference external" href="https://pandas.pydata.org/">pandas</a>, <a class="reference external" href="https://scikit-learn.org">scikit-learn</a>, <a class="reference external" href="https://keras.io/">Keras</a> and <a class="reference external" href="https://pytorch.org/">PyTorch</a>.</p>
 <p><img alt="Tools used in this website" src="_images/python_ecosystem.png" /></p>
-<p>This book is designed to be browsed thematically rather than sequentially.</p>
+</div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>All chapters are written as <a class="reference external" href="https://jupyter.org/">Jupyter Notebooks</a> gathering explanations and example code. When teaching, I use <a class="reference external" href="https://revealjs.com/">reveal.js</a> combined with <a class="reference external" href="https://rise.readthedocs.io/en/stable/">RISE</a> to showcase them as slideshows.</p>
+<p>Most katas are self-correcting: blank places must be filled with answers that are checked by subsequent code.</p>
+<p>The content is designed to be browsed thematically rather than sequentially.</p>
 <div class="tip admonition">
-<p class="admonition-title">Interacting with content</p>
+<p class="admonition-title">Interactivity</p>
 <p>From any chapter, you can launch a live session in the cloud by pressing the <i class="fas fa-rocket" title="rocket"></i> button in the toolbar above and selecting a hosted runtime environment. You will be able to test the code and regenerate the chapter output.</p>
 </div>
 <div class="toctree-wrapper compound">
@@ -582,6 +610,7 @@
 <div class="toctree-wrapper compound">
 </div>
 <div class="toctree-wrapper compound">
+</div>
 </div>
 </div>
 

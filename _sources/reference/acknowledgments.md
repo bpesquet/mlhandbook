@@ -1,6 +1,11 @@
 # Acknowledgments
 
-All these resources inspired this book and are well worth studying. Thanks to the following authors and organizations for sharing their knowledge!
+I have drawn, sometimes rather heavily, from the following resources. Thanks to the authors and organizations for sharing their knowledge.
+
+```{admonition} intellectual property
+:class: note
+The content of this site is only used for educational purposes. Anyway, if you think it violates your intellectual property rights, reach out to me and we'll fix that.
+```
 
 ## Books
 
@@ -14,7 +19,7 @@ All these resources inspired this book and are well worth studying. Thanks to th
 
 - Google's [Machine Learning Crash Course](https://developers.google.com/machine-learning/crash-course).
 - Andrew Ng's [Machine Learning Course](https://www.coursera.org/learn/machine-learning) and [Deep Learning Specialization](https://www.deeplearning.ai/) on Coursera.
-- UCLxDeepMind [lecture series](https://deepmind.com/learning-resources/deep-learning-lecture-series-2020).
+- UCLxDeepMind [lecture series On Deep Learning](https://deepmind.com/learning-resources/deep-learning-lecture-series-2020).
 
 ## Repositories
 
