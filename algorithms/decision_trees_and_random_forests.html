@@ -583,8 +583,8 @@
             <nav id="bd-toc-nav">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#summary">
-   Summary
+  <a class="reference internal nav-link" href="#environment-setup">
+   Environment setup
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -600,11 +600,6 @@
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#example-training-a-decision-tree-to-classify-flowers">
      Example: training a Decision Tree to classify flowers
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#environment-setup">
-     Environment setup
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -743,37 +738,8 @@
                 
   <div class="section" id="decision-trees-random-forests">
 <h1>Decision Trees &amp; Random Forests<a class="headerlink" href="#decision-trees-random-forests" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="summary">
-<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p>Decision Trees</p></li>
-<li><p>Ensemble learning</p></li>
-<li><p>Random Forests</p></li>
-</ul>
-</div>
-<div class="section" id="decision-trees">
-<h2>Decision Trees<a class="headerlink" href="#decision-trees" title="Permalink to this headline">¶</a></h2>
-<p>(Heavily inspired by Chapter 6 of <a class="reference external" href="https://github.com/ageron/handson-ml2">Hands-On Machine Learning</a> by Aurélien Géron)</p>
-<div class="section" id="decision-trees-in-a-nutshell">
-<h3>Decision Trees in a nutshell<a class="headerlink" href="#decision-trees-in-a-nutshell" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li><p>Supervised method, used for classification or regression.</p></li>
-<li><p>Build a tree-like structure based on a series of questions on the data.</p></li>
-</ul>
-<p><a class="reference external" href="https://jakevdp.github.io/PythonDataScienceHandbook/05.08-random-forests.html"><img alt="Decision Tree Example" src="../_images/dt_pdsh.png" /></a></p>
-</div>
-<div class="section" id="example-training-a-decision-tree-to-classify-flowers">
-<h3>Example: training a Decision Tree to classify flowers<a class="headerlink" href="#example-training-a-decision-tree-to-classify-flowers" title="Permalink to this headline">¶</a></h3>
-<p><a class="reference external" href="https://archive.ics.uci.edu/ml/datasets/iris">Iris</a> is a well-known multiclass dataset. It contains 3 classes of flowers with 50 samples each. There are a total of 4 features for each sample:</p>
-<ul class="simple">
-<li><p>sepal length</p></li>
-<li><p>sepal width</p></li>
-<li><p>petal length</p></li>
-<li><p>petal width</p></li>
-</ul>
-</div>
 <div class="section" id="environment-setup">
-<h3>Environment setup<a class="headerlink" href="#environment-setup" title="Permalink to this headline">¶</a></h3>
+<h2>Environment setup<a class="headerlink" href="#environment-setup" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">platform</span>
@@ -858,6 +824,27 @@
 </div>
 </div>
 </div>
+</div>
+<div class="section" id="decision-trees">
+<h2>Decision Trees<a class="headerlink" href="#decision-trees" title="Permalink to this headline">¶</a></h2>
+<p>(Heavily inspired by Chapter 6 of <a class="reference external" href="https://github.com/ageron/handson-ml2">Hands-On Machine Learning</a> by Aurélien Géron)</p>
+<div class="section" id="decision-trees-in-a-nutshell">
+<h3>Decision Trees in a nutshell<a class="headerlink" href="#decision-trees-in-a-nutshell" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Supervised method, used for classification or regression.</p></li>
+<li><p>Build a tree-like structure based on a series of questions on the data.</p></li>
+</ul>
+<p><a class="reference external" href="https://jakevdp.github.io/PythonDataScienceHandbook/05.08-random-forests.html"><img alt="Decision Tree Example" src="../_images/dt_pdsh.png" /></a></p>
+</div>
+<div class="section" id="example-training-a-decision-tree-to-classify-flowers">
+<h3>Example: training a Decision Tree to classify flowers<a class="headerlink" href="#example-training-a-decision-tree-to-classify-flowers" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://archive.ics.uci.edu/ml/datasets/iris">Iris</a> is a well-known multiclass dataset. It contains 3 classes of flowers with 50 samples each. There are a total of 4 features for each sample:</p>
+<ul class="simple">
+<li><p>sepal length</p></li>
+<li><p>sepal width</p></li>
+<li><p>petal length</p></li>
+<li><p>petal width</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load the Iris dataset</span>
@@ -902,94 +889,94 @@
   </thead>
   <tbody>
     <tr>
-      <th>52</th>
-      <td>6.9</td>
-      <td>3.1</td>
-      <td>4.9</td>
-      <td>1.5</td>
-      <td>1</td>
-      <td>versicolor</td>
-    </tr>
-    <tr>
-      <th>61</th>
-      <td>5.9</td>
+      <th>145</th>
+      <td>6.7</td>
       <td>3.0</td>
-      <td>4.2</td>
-      <td>1.5</td>
-      <td>1</td>
-      <td>versicolor</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>5.1</td>
-      <td>3.5</td>
-      <td>1.4</td>
-      <td>0.3</td>
-      <td>0</td>
-      <td>setosa</td>
-    </tr>
-    <tr>
-      <th>119</th>
-      <td>6.0</td>
-      <td>2.2</td>
-      <td>5.0</td>
-      <td>1.5</td>
+      <td>5.2</td>
+      <td>2.3</td>
       <td>2</td>
       <td>virginica</td>
     </tr>
     <tr>
-      <th>67</th>
-      <td>5.8</td>
-      <td>2.7</td>
-      <td>4.1</td>
+      <th>80</th>
+      <td>5.5</td>
+      <td>2.4</td>
+      <td>3.8</td>
+      <td>1.1</td>
+      <td>1</td>
+      <td>versicolor</td>
+    </tr>
+    <tr>
+      <th>113</th>
+      <td>5.7</td>
+      <td>2.5</td>
+      <td>5.0</td>
+      <td>2.0</td>
+      <td>2</td>
+      <td>virginica</td>
+    </tr>
+    <tr>
+      <th>120</th>
+      <td>6.9</td>
+      <td>3.2</td>
+      <td>5.7</td>
+      <td>2.3</td>
+      <td>2</td>
+      <td>virginica</td>
+    </tr>
+    <tr>
+      <th>126</th>
+      <td>6.2</td>
+      <td>2.8</td>
+      <td>4.8</td>
+      <td>1.8</td>
+      <td>2</td>
+      <td>virginica</td>
+    </tr>
+    <tr>
+      <th>96</th>
+      <td>5.7</td>
+      <td>2.9</td>
+      <td>4.2</td>
+      <td>1.3</td>
+      <td>1</td>
+      <td>versicolor</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>4.4</td>
+      <td>3.0</td>
+      <td>1.3</td>
+      <td>0.2</td>
+      <td>0</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>81</th>
+      <td>5.5</td>
+      <td>2.4</td>
+      <td>3.7</td>
       <td>1.0</td>
       <td>1</td>
       <td>versicolor</td>
     </tr>
     <tr>
-      <th>73</th>
-      <td>6.1</td>
-      <td>2.8</td>
-      <td>4.7</td>
-      <td>1.2</td>
+      <th>88</th>
+      <td>5.6</td>
+      <td>3.0</td>
+      <td>4.1</td>
+      <td>1.3</td>
       <td>1</td>
       <td>versicolor</td>
     </tr>
     <tr>
-      <th>101</th>
-      <td>5.8</td>
-      <td>2.7</td>
+      <th>0</th>
       <td>5.1</td>
-      <td>1.9</td>
-      <td>2</td>
-      <td>virginica</td>
-    </tr>
-    <tr>
-      <th>112</th>
-      <td>6.8</td>
-      <td>3.0</td>
-      <td>5.5</td>
-      <td>2.1</td>
-      <td>2</td>
-      <td>virginica</td>
-    </tr>
-    <tr>
-      <th>114</th>
-      <td>5.8</td>
-      <td>2.8</td>
-      <td>5.1</td>
-      <td>2.4</td>
-      <td>2</td>
-      <td>virginica</td>
-    </tr>
-    <tr>
-      <th>124</th>
-      <td>6.7</td>
-      <td>3.3</td>
-      <td>5.7</td>
-      <td>2.1</td>
-      <td>2</td>
-      <td>virginica</td>
+      <td>3.5</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>0</td>
+      <td>setosa</td>
     </tr>
   </tbody>
 </table>
@@ -1051,7 +1038,7 @@ y_train: (150,)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/decision_trees_and_random_forests_13_0.svg" src="../_images/decision_trees_and_random_forests_13_0.svg" /></div>
+<img alt="../_images/decision_trees_and_random_forests_12_0.svg" src="../_images/decision_trees_and_random_forests_12_0.svg" /></div>
 </div>
 </div>
 <div class="section" id="tree-nodes">
@@ -1106,7 +1093,7 @@ y_train: (150,)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/decision_trees_and_random_forests_18_0.png" src="../_images/decision_trees_and_random_forests_18_0.png" />
+<img alt="../_images/decision_trees_and_random_forests_17_0.png" src="../_images/decision_trees_and_random_forests_17_0.png" />
 </div>
 </div>
 </div>
@@ -1210,7 +1197,7 @@ y_train: (150,)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/decision_trees_and_random_forests_27_0.svg" src="../_images/decision_trees_and_random_forests_27_0.svg" /></div>
+<img alt="../_images/decision_trees_and_random_forests_26_0.svg" src="../_images/decision_trees_and_random_forests_26_0.svg" /></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1236,7 +1223,7 @@ y_train: (150,)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/decision_trees_and_random_forests_28_0.png" src="../_images/decision_trees_and_random_forests_28_0.png" />
+<img alt="../_images/decision_trees_and_random_forests_27_0.png" src="../_images/decision_trees_and_random_forests_27_0.png" />
 </div>
 </div>
 </div>
@@ -1361,8 +1348,8 @@ y_train: (150,)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>First DTR error: [0.03182588]
-Boosted ensemble error: [0.06359804]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>First DTR error: [0.1301599]
+Boosted ensemble error: [0.04451791]
 </pre></div>
 </div>
 </div>
@@ -1422,7 +1409,7 @@ Boosted ensemble error: [0.06359804]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/decision_trees_and_random_forests_44_0.png" src="../_images/decision_trees_and_random_forests_44_0.png" />
+<img alt="../_images/decision_trees_and_random_forests_43_0.png" src="../_images/decision_trees_and_random_forests_43_0.png" />
 </div>
 </div>
 </div>
