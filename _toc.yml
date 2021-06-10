@@ -61,6 +61,7 @@
         - file: katas/time_series
           sections:
             - file: katas/training/jena_weather
+            - file: katas/training/household
     - file: katas/coding_algorithms
       sections:
         - file: katas/coding/q_learning_cliffworld
