@@ -23,7 +23,7 @@
 
     
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.acff12b8f9c144ce68a297486a2fa670.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -42,15 +42,15 @@
     <script src="../_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe"
         const thebe_selector_input = "pre"
         const thebe_selector_output = ".output"
     </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -74,6 +74,10 @@
         <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
       <img src="../_static/logo.png" class="logo" alt="logo">
       
       
@@ -83,7 +87,7 @@
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
         <p class="caption">
  <span class="caption-text">
@@ -585,11 +589,11 @@
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
             </div>
-            <nav id="bd-toc-nav">
+            <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#summary">
-   Summary
+  <a class="reference internal nav-link" href="#environment-setup">
+   Environment setup
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -664,48 +668,8 @@
                 
   <div class="section" id="logistic-regression">
 <h1>Logistic Regression<a class="headerlink" href="#logistic-regression" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="summary">
-<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p>Binary classification</p></li>
-<li><p>Softmax regression</p></li>
-</ul>
-</div>
-<div class="section" id="binary-classification">
-<h2>Binary classification<a class="headerlink" href="#binary-classification" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="problem-formulation">
-<h3>Problem formulation<a class="headerlink" href="#problem-formulation" title="Permalink to this headline">¶</a></h3>
-<p>Logistic regression is a classification algorithm used to estimate the probability that a data sample belongs to a particular class.</p>
-<p>A logistic regression model computes a weighted sum of the input features (plus a bias term), then applies the <a class="reference internal" href="../reference/activation_functions.html#activations-sigmoid"><span class="std std-ref">logistic function</span></a> to this sum in order to output a probability.</p>
-<div class="math notranslate nohighlight">
-\[y' = \mathcal{h}_\theta(\pmb{x}) = \sigma(\pmb{\theta}^T\pmb{x})\]</div>
-<p>The function output is thresholded to form the model’s prediction:</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(0\)</span> if <span class="math notranslate nohighlight">\(y' \lt 0.5\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(1\)</span> if <span class="math notranslate nohighlight">\(y' \geqslant 0.5\)</span></p></li>
-</ul>
-</div>
-<div class="section" id="loss-function-binary-crossentropy-log-loss">
-<h3>Loss function: Binary Crossentropy (log loss)<a class="headerlink" href="#loss-function-binary-crossentropy-log-loss" title="Permalink to this headline">¶</a></h3>
-<p>See <a class="reference internal" href="../fundamentals/assessing_results.html#loss-bce"><span class="std std-ref">loss definition</span></a> for details.</p>
-</div>
-<div class="section" id="model-training">
-<h3>Model training<a class="headerlink" href="#model-training" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li><p>No analytical solution because of the non-linear <span class="math notranslate nohighlight">\(\sigma()\)</span> function: gradient descent is the only option.</p></li>
-<li><p>Since the loss function is convex, GD (with the right hyperparameters) is guaranteed to find the global loss minimum.</p></li>
-<li><p>Different GD optimizers exist: <em>newton-cg</em>, <em>l-bfgs</em>, <em>sag</em>… <em>Stochastic gradient descent</em> is another possibility, efficient for large numbers of samples and features.</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[\begin{split}\nabla_{\theta}\mathcal{L}(\pmb{\theta}) = \begin{pmatrix}
-       \ \frac{\partial}{\partial \theta_0} \mathcal{L}(\boldsymbol{\theta}) \\
-       \ \frac{\partial}{\partial \theta_1} \mathcal{L}(\boldsymbol{\theta}) \\
-       \ \vdots \\
-       \ \frac{\partial}{\partial \theta_n} \mathcal{L}(\boldsymbol{\theta})
-     \end{pmatrix} = \frac{2}{m}\pmb{X}^T\left(\sigma(\pmb{X}\pmb{\theta}) - \pmb{y}\right)\end{split}\]</div>
-</div>
-<div class="section" id="example-classify-planar-data">
-<h3>Example: classify planar data<a class="headerlink" href="#example-classify-planar-data" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="environment-setup">
+<h2>Environment setup<a class="headerlink" href="#environment-setup" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">platform</span>
@@ -793,6 +757,42 @@
 </div>
 </div>
 </div>
+</div>
+<div class="section" id="binary-classification">
+<h2>Binary classification<a class="headerlink" href="#binary-classification" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="problem-formulation">
+<h3>Problem formulation<a class="headerlink" href="#problem-formulation" title="Permalink to this headline">¶</a></h3>
+<p>Logistic regression is a classification algorithm used to estimate the probability that a data sample belongs to a particular class.</p>
+<p>A logistic regression model computes a weighted sum of the input features (plus a bias term), then applies the <a class="reference internal" href="../reference/activation_functions.html#activations-sigmoid"><span class="std std-ref">logistic function</span></a> to this sum in order to output a probability.</p>
+<div class="math notranslate nohighlight">
+\[y' = \mathcal{h}_\theta(\pmb{x}) = \sigma(\pmb{\theta}^T\pmb{x})\]</div>
+<p>The function output is thresholded to form the model’s prediction:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(0\)</span> if <span class="math notranslate nohighlight">\(y' \lt 0.5\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(1\)</span> if <span class="math notranslate nohighlight">\(y' \geqslant 0.5\)</span></p></li>
+</ul>
+</div>
+<div class="section" id="loss-function-binary-crossentropy-log-loss">
+<h3>Loss function: Binary Crossentropy (log loss)<a class="headerlink" href="#loss-function-binary-crossentropy-log-loss" title="Permalink to this headline">¶</a></h3>
+<p>See <a class="reference internal" href="../fundamentals/assessing_results.html#loss-bce"><span class="std std-ref">loss definition</span></a> for details.</p>
+</div>
+<div class="section" id="model-training">
+<h3>Model training<a class="headerlink" href="#model-training" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>No analytical solution because of the non-linear <span class="math notranslate nohighlight">\(\sigma()\)</span> function: gradient descent is the only option.</p></li>
+<li><p>Since the loss function is convex, GD (with the right hyperparameters) is guaranteed to find the global loss minimum.</p></li>
+<li><p>Different GD optimizers exist: <em>newton-cg</em>, <em>l-bfgs</em>, <em>sag</em>… <em>Stochastic gradient descent</em> is another possibility, efficient for large numbers of samples and features.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}\nabla_{\theta}\mathcal{L}(\pmb{\theta}) = \begin{pmatrix}
+       \ \frac{\partial}{\partial \theta_0} \mathcal{L}(\boldsymbol{\theta}) \\
+       \ \frac{\partial}{\partial \theta_1} \mathcal{L}(\boldsymbol{\theta}) \\
+       \ \vdots \\
+       \ \frac{\partial}{\partial \theta_n} \mathcal{L}(\boldsymbol{\theta})
+     \end{pmatrix} = \frac{2}{m}\pmb{X}^T\left(\sigma(\pmb{X}\pmb{\theta}) - \pmb{y}\right)\end{split}\]</div>
+</div>
+<div class="section" id="example-classify-planar-data">
+<h3>Example: classify planar data<a class="headerlink" href="#example-classify-planar-data" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate 2 classes of linearly separable data</span>
@@ -826,7 +826,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model weights: [[-1.0902534  -3.32774639]], bias: [-0.92580342]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model weights: [[-2.96719034 -2.55668143]], bias: [-0.57585284]
 </pre></div>
 </div>
 </div>
@@ -841,12 +841,12 @@
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              precision    recall  f1-score   support
 
-           0       0.87      0.95      0.91       502
-           1       0.95      0.86      0.90       498
+           0       0.96      0.92      0.94       502
+           1       0.92      0.96      0.94       498
 
-    accuracy                           0.91      1000
-   macro avg       0.91      0.91      0.91      1000
-weighted avg       0.91      0.91      0.91      1000
+    accuracy                           0.94      1000
+   macro avg       0.94      0.94      0.94      1000
+weighted avg       0.94      0.94      0.94      1000
 </pre></div>
 </div>
 </div>
@@ -943,9 +943,9 @@ weighted avg       0.91      0.91      0.91      1000
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model weights: [[-4.99198480e+00 -1.48012730e+01]
- [-1.96745014e+00  1.90771561e+01]
- [ 1.12269348e+00 -1.12178718e-02]], bias: [-139.24640687  -39.03892016    2.11628107]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model weights: [[ -5.76624648 -17.43149458]
+ [ -1.27339599  19.17812979]
+ [  1.5231193   -0.91647832]], bias: [-133.15588019  -38.36388245    2.53712564]
 </pre></div>
 </div>
 </div>
@@ -961,12 +961,12 @@ weighted avg       0.91      0.91      0.91      1000
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              precision    recall  f1-score   support
 
            0       1.00      1.00      1.00       334
-           1       1.00      0.99      0.99       333
-           2       0.99      1.00      0.99       333
+           1       0.99      0.99      0.99       333
+           2       0.99      0.99      0.99       333
 
-    accuracy                           1.00      1000
-   macro avg       1.00      1.00      1.00      1000
-weighted avg       1.00      1.00      1.00      1000
+    accuracy                           0.99      1000
+   macro avg       0.99      0.99      0.99      1000
+weighted avg       1.00      0.99      0.99      1000
 </pre></div>
 </div>
 </div>
@@ -1009,16 +1009,36 @@ weighted avg       1.00      1.00      1.00      1000
               </div>
               
         
-        <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="linear_regression.html" title="previous page">Linear Regression</a>
-    <a class='right-next' id="next-link" href="decision_trees_and_random_forests.html" title="next page">Decision Trees &amp; Random Forests</a>
 
-        </div>
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="linear_regression.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Linear Regression</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="decision_trees_and_random_forests.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Decision Trees &amp; Random Forests</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
         
         </div>
     </div>
-    <footer class="footer mt-5 mt-md-0">
+    <footer class="footer">
     <div class="container">
       <p>
         
