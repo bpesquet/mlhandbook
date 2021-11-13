@@ -1,5 +1,0 @@
-# Tabular data
-
-```{tableofcontents}
-
-```

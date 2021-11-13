@@ -4,7 +4,7 @@ I have drawn, sometimes rather heavily, from the following resources. Thanks to 
 
 ```{admonition} intellectual property
 :class: note
-The content of this site is only used for educational purposes. Anyway, if you think it violates your intellectual property rights, reach out to me and we'll fix that.
+The content of this site is used for educational purposes only. Anyway, if you think it violates your intellectual property rights, reach out to me and we'll fix that.
 ```
 
 ## Books
