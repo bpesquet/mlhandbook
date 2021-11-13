@@ -1,5 +1,0 @@
-# Code algorithms
-
-```{tableofcontents}
-
-```

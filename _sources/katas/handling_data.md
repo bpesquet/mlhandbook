@@ -1,5 +1,0 @@
-# Handle data
-
-```{tableofcontents}
-
-```

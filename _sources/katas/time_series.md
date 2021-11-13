@@ -1,5 +1,0 @@
-# Time series
-
-```{tableofcontents}
-
-```
