@@ -9,6 +9,7 @@
     - file: overview/introduction_to_machine_learning
     - file: overview/machine_learning_in_action
     - file: overview/introduction_to_reinforcement_learning
+    - file: overview/introduction_to_mlops
 
 - part: Fundamentals
   chapters:
