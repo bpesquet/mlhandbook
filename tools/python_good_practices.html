@@ -1130,7 +1130,9 @@ poetry shell
 <p>Tools like <a class="reference external" href="https://papermill.readthedocs.io">papermill</a> can orchestrate the execution of several notebooks in a row. External parameters can be passed to notebooks, and the runtime flow can depend on the execution results of each notebook.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">notebook_dir</span> <span class="o">=</span> <span class="s2">&quot;./papermill&quot;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Doesn&#39;t work on Google Colaboratory. Workaround here: </span>
+<span class="c1"># https://colab.research.google.com/github/rjdoubleu/Colab-Papermill-Patch/blob/master/Colab-Papermill-Driver.ipynb</span>
+<span class="n">notebook_dir</span> <span class="o">=</span> <span class="s2">&quot;./papermill&quot;</span>
 <span class="n">result</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">execute_notebook</span><span class="p">(</span>
     <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">notebook_dir</span><span class="p">,</span> <span class="s2">&quot;simple_input.ipynb&quot;</span><span class="p">),</span>
     <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">notebook_dir</span><span class="p">,</span> <span class="s2">&quot;simple_output.ipynb&quot;</span><span class="p">),</span>
