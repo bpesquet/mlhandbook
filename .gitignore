@@ -8,6 +8,8 @@ fruit*.txt
 *.pkl
 # Neural style transfer
 generated_image*
+# Python good practices
+simple_output.ipynb
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
