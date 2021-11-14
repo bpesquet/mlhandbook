@@ -1,0 +1,834 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Introduction to MLOps &#8212; Machine Learning Handbook</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Handling data" href="../fundamentals/handling_data.html" />
+    <link rel="prev" title="Introduction to Reinforcement Learning" href="introduction_to_reinforcement_learning.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/mlhandbook_logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Machine Learning Handbook</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference external" href="https://www.bpesquet.fr/mlkatas">
+   Machine Learning Katas
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  overview
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="introduction_to_machine_learning.html">
+   Introduction to Machine Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="machine_learning_in_action.html">
+   Machine Learning in action
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="introduction_to_reinforcement_learning.html">
+   Introduction to Reinforcement Learning
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Introduction to MLOps
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Fundamentals
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fundamentals/handling_data.html">
+   Handling data
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fundamentals/assessing_results.html">
+   Assessing results
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../fundamentals/training_models.html">
+   Training models
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Algorithms
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../algorithms/classic_ml.html">
+   Classic Machine Learning
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algorithms/k_nearest_neighbors.html">
+     K-Nearest Neighbors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algorithms/linear_regression.html">
+     Linear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algorithms/logistic_regression.html">
+     Logistic Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algorithms/decision_trees_and_random_forests.html">
+     Decision Trees &amp; Random Forests
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algorithms/bayesian_methods.html">
+     Bayesian Methods
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algorithms/support_vector_machines.html">
+     Support Vector Machines
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algorithms/k_means.html">
+     K-Means
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../algorithms/nn_deep_learning.html">
+   Neural Networks and Deep Learning
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algorithms/artificial_neural_networks.html">
+     Artificial Neural Networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algorithms/convolutional_neural_networks.html">
+     Convolutional Neural Networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algorithms/recurrent_neural_networks.html">
+     Recurrent Neural Networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algorithms/autoencoders.html">
+     Autoencoders
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algorithms/neural_style_transfer.html">
+     Neural Style Transfer
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algorithms/generative_adversarial_networks.html">
+     Generative Adversarial Networks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../algorithms/transformers.html">
+     Transformers
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Tools
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../tools/python.html">
+   Python
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../tools/python_ecosystem.html">
+     The Python ecosystem
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../tools/python_cheatsheet.html">
+     Python cheatsheet
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../tools/python_good_practices.html">
+     Python good practices
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tools/numpy.html">
+   NumPy
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tools/keras.html">
+   Keras
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tools/pytorch.html">
+   PyTorch
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Reference
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../reference/activation_functions.html">
+   Activation functions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../reference/glossary.html">
+   Glossary
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../reference/acknowledgments.html">
+   Acknowledgments
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/overview/introduction_to_mlops.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/bpesquet/mlhandbook"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/bpesquet/mlhandbook/issues/new?title=Issue%20on%20page%20%2Foverview/introduction_to_mlops.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/bpesquet/mlhandbook/edit/master/overview/introduction_to_mlops.ipynb"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/bpesquet/mlhandbook/master?urlpath=tree/overview/introduction_to_mlops.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/bpesquet/mlhandbook/blob/master/overview/introduction_to_mlops.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#environment-setup">
+   Environment setup
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-machine-learning-workflow">
+   The Machine Learning workflow
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#codifying-problems-and-metrics">
+     Codifying problems and metrics
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-collection-and-cleaning">
+     Data collection and cleaning
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#feature-engineering">
+     Feature engineering
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#model-training-and-tuning">
+     Model training and tuning
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#model-validation">
+     Model validation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#model-deployment">
+     Model deployment
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#monitoring-validation">
+     Monitoring, validation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#from-devops-to-mlops">
+   From DevOps to MLOps
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#motivation">
+     Motivation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#elements-of-a-ml-system">
+     Elements of a ML system
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#devops">
+     DevOps
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mlops">
+     MLOps
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mlops-core-principles">
+     MLOps core principles
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#manual-process">
+     Manual process
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ml-pipeline-automation">
+     ML pipeline automation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mlops-resources">
+     MLOps resources
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#overview-of-some-mlops-tools">
+   Overview of some MLOps tools
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#flask-fastapi">
+     Flask &amp; FastAPI
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dvc">
+     DVC
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mlflow">
+     MLflow
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="introduction-to-mlops">
+<h1>Introduction to MLOps<a class="headerlink" href="#introduction-to-mlops" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="environment-setup">
+<h2>Environment setup<a class="headerlink" href="#environment-setup" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">platform</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Python version: </span><span class="si">{</span><span class="n">platform</span><span class="o">.</span><span class="n">python_version</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">platform</span><span class="o">.</span><span class="n">python_version_tuple</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="s2">&quot;6&quot;</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">YouTubeVideo</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Python version: 3.7.5
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="the-machine-learning-workflow">
+<h2>The Machine Learning workflow<a class="headerlink" href="#the-machine-learning-workflow" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://www.redhat.com/files/summit/session-assets/2019/T957A0.pdf"><img alt="ML workflow by RedHat" src="../_images/wiidii_ml_workflow.png" /></a></p>
+<div class="section" id="codifying-problems-and-metrics">
+<h3>Codifying problems and metrics<a class="headerlink" href="#codifying-problems-and-metrics" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Main questions:</p>
+<ul>
+<li><p>What is the business objective?</p></li>
+<li><p>How to measure success?</p></li>
+<li><p>What are the technical, temoral and organisational constraints?</p></li>
+</ul>
+</li>
+<li><p>Possible solutions: communicate with PO and stakeholders, knowing product and client needs.</p></li>
+</ul>
+</div>
+<div class="section" id="data-collection-and-cleaning">
+<h3>Data collection and cleaning<a class="headerlink" href="#data-collection-and-cleaning" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Main questions:</p>
+<ul>
+<li><p>Which data?</p></li>
+<li><p>Is it free/in adequate quantity/noisy/labelled/biased?</p></li>
+<li><p>Is it stable or evolving?</p></li>
+</ul>
+</li>
+<li><p>Possible solutions: <a class="reference external" href="https://github.com/awesomedata/awesome-public-datasets">public datasets</a>, <a class="reference external" href="https://dvc.org/">DVC</a>, <a class="reference external" href="https://github.com/doccano/doccano">Doccano</a>, manual work.</p></li>
+</ul>
+</div>
+<div class="section" id="feature-engineering">
+<h3>Feature engineering<a class="headerlink" href="#feature-engineering" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Main questions:</p>
+<ul>
+<li><p>What is the format of my input data?</p></li>
+<li><p>Whet features could potentially be useful for my models?</p></li>
+<li><p>How are they retrieved during training and production?</p></li>
+</ul>
+</li>
+<li><p>Possible solutions: data pipelines, feature stores, domain experts.</p></li>
+</ul>
+<p><a class="reference external" href="https://www.tecton.ai/blog/what-is-a-feature-store/"><img alt="Feature store" src="../_images/feature_store.png" /></a></p>
+</div>
+<div class="section" id="model-training-and-tuning">
+<h3>Model training and tuning<a class="headerlink" href="#model-training-and-tuning" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Main questions:</p>
+<ul>
+<li><p>Which model(s)?</p></li>
+<li><p>How to optimize its performance?</p></li>
+<li><p>How to track model versions?</p></li>
+</ul>
+</li>
+<li><p>Possible solutions: starting simple, hyperparameter tuning, <a class="reference external" href="https://mlflow.org">MLflow</a>.</p></li>
+</ul>
+</div>
+<div class="section" id="model-validation">
+<h3>Model validation<a class="headerlink" href="#model-validation" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Main questions:</p>
+<ul>
+<li><p>Does the model address the business objective?</p></li>
+<li><p>How to measure its performance?</p></li>
+<li><p>Are there uptime constraints for my model?</p></li>
+</ul>
+</li>
+<li><p>Possible solutions: testing set, <a class="reference external" href="https://en.wikipedia.org/wiki/Continuous_integration">continuous integration</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Memoization">memoization</a>.</p></li>
+</ul>
+</div>
+<div class="section" id="model-deployment">
+<h3>Model deployment<a class="headerlink" href="#model-deployment" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Main questions:</p>
+<ul>
+<li><p>How to serve my model?</p></li>
+<li><p>How to handle model versioning?</p></li>
+<li><p>How to handle scaling?</p></li>
+</ul>
+</li>
+<li><p>Possible solutions: <a class="reference external" href="https://fastapi.tiangolo.com/">FastAPI</a>, <a class="reference external" href="https://www.docker.com/">Docker</a>, <a class="reference external" href="https://kubernetes.io/">Kubernetes</a>, <a class="reference external" href="https://www.cortex.dev/">Cortex</a>, <a class="reference external" href="https://databricks.com/">Databricks</a>, stress tests.</p></li>
+</ul>
+</div>
+<div class="section" id="monitoring-validation">
+<h3>Monitoring, validation<a class="headerlink" href="#monitoring-validation" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Main questions:</p>
+<ul>
+<li><p>How to check model performance in production?</p></li>
+<li><p>How to prevent <a class="reference external" href="https://c3.ai/glossary/data-science/model-drift/">model drifting</a>?</p></li>
+<li><p>How to explain model results?</p></li>
+</ul>
+</li>
+<li><p>Possible solutions: <a class="reference external" href="https://en.wikipedia.org/wiki/A/B_testing">A/B testing</a>, <a class="reference external" href="https://martinfowler.com/bliki/CanaryRelease.html">canary release</a>, <a class="reference external" href="https://github.com/EthicalML/awesome-production-machine-learning#explaining-black-box-models-and-datasets">explainability tools</a>.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="from-devops-to-mlops">
+<h2>From DevOps to MLOps<a class="headerlink" href="#from-devops-to-mlops" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="motivation">
+<h3>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>“The real challenge isn’t building an ML model, the challenge is building an integrated ML system and to continuously operate it in production.”</p>
+</div></blockquote>
+</div>
+<div class="section" id="elements-of-a-ml-system">
+<h3>Elements of a ML system<a class="headerlink" href="#elements-of-a-ml-system" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning"><img alt="Elements of a ML system" src="../_images/elements-of-ml.png" /></a></p>
+</div>
+<div class="section" id="devops">
+<h3>DevOps<a class="headerlink" href="#devops" title="Permalink to this headline">¶</a></h3>
+<p>DevOps is a set of practices that combines software development (<em>Dev</em>) and IT operations (<em>Ops</em>). Its goal is to shorten the product delivery loop while maintaining high quality.</p>
+<p>It implies constant collaboration between the development and infrastructure teams, as well as the use of several tools to automate and streamline the push to production and monitoring of a project.</p>
+<p><img alt="DevOps illustrated" src="../_images/schema-devops.png" /></p>
+</div>
+<div class="section" id="mlops">
+<h3>MLOps<a class="headerlink" href="#mlops" title="Permalink to this headline">¶</a></h3>
+<p>MLOps is the process of automating and productionalizing Machine Learning-based systems. MLOps integrates data- and model-specific tasks into the DevOps workflow cycle to obtain a unified release process. Like DevOps, it combines ML system development (<em>Dev</em>) and ML system operation (<em>Ops</em>).</p>
+<p><a class="reference external" href="https://www.phdata.io/blog/mlops-vs-devops-whats-the-difference/"><img alt="MLOps illustrated" src="../_images/schema-mlops.png" /></a></p>
+<p><a class="reference external" href="https://ml-ops.org/content/mlops-principles"><img alt="The MLOps loop" src="../_images/mlops-loop-en.jpg" /></a></p>
+</div>
+<div class="section" id="mlops-core-principles">
+<h3>MLOps core principles<a class="headerlink" href="#mlops-core-principles" title="Permalink to this headline">¶</a></h3>
+<p>Like DevOps, MLOps is built on the following <a class="reference external" href="https://ml-ops.org/content/mlops-principles">principles</a>:</p>
+<ul class="simple">
+<li><p>Automation.</p></li>
+<li><p>Continuous X (integration, delivery and training).</p></li>
+<li><p>Versioning.</p></li>
+<li><p>Testing.</p></li>
+</ul>
+</div>
+<div class="section" id="manual-process">
+<h3>Manual process<a class="headerlink" href="#manual-process" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning#mlops_level_2_cicd_pipeline_automation"><img alt="Basic MLOps" src="../_images/mlops_basic.png" /></a></p>
+</div>
+<div class="section" id="ml-pipeline-automation">
+<h3>ML pipeline automation<a class="headerlink" href="#ml-pipeline-automation" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning#mlops_level_1_ml_pipeline_automation"><img alt="Advanced MLOps" src="../_images/mlops_training_pipeline.png" /></a></p>
+</div>
+<div class="section" id="mlops-resources">
+<h3>MLOps resources<a class="headerlink" href="#mlops-resources" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning">MLOps: Continuous delivery and automation pipelines in machine learning</a></p></li>
+<li><p><a class="reference external" href="https://ml-ops.org/">Machine Learning Operations</a></p></li>
+<li><p><a class="reference external" href="https://www.oreilly.com/radar/mlops-and-devops-why-data-makes-it-different/">MLOps and DevOps: Why Data Makes It Different</a></p></li>
+<li><p><a class="reference external" href="https://services.google.com/fh/files/misc/practitioners_guide_to_mlops_whitepaper.pdf">Practitioners guide to MLOps</a></p></li>
+<li><p><a class="reference external" href="https://github.com/visenger/awesome-mlops">Awesome MLOps</a></p></li>
+<li><p><a class="reference external" href="https://mattturck.com/data2021/">The 2021 Machine Learning, AI and Data Landscape</a></p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="overview-of-some-mlops-tools">
+<h2>Overview of some MLOps tools<a class="headerlink" href="#overview-of-some-mlops-tools" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="flask-fastapi">
+<h3>Flask &amp; FastAPI<a class="headerlink" href="#flask-fastapi" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://flask.palletsprojects.com">Flask</a> is a fast and lightweight web framework written in Python. It can be used to deploy Machine Learning models as APIs.</p>
+<p><a class="reference external" href="https://fastapi.tiangolo.com/">FastAPI</a> is another lightweight web framework for builiding APIs. it has become the standard for deploying Python ML models on the web.</p>
+</div>
+<div class="section" id="dvc">
+<h3>DVC<a class="headerlink" href="#dvc" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://dvc.org/">DVC</a> (“Data Version Control”) is an open source project that extends <a class="reference external" href="https://git-scm.com/">Git</a> version control to data and model files. DVC uses a remote repository (including supports all major cloud providers) to store all the data and models for a project. In the actual code repository, a pointer to this remote location is stored to access the actual artifacts.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">YouTubeVideo</span><span class="p">(</span><span class="s2">&quot;UbL7VUpv1Bs&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<iframe
+    width="400"
+    height="300"
+    src="https://www.youtube.com/embed/UbL7VUpv1Bs"
+    frameborder="0"
+    allowfullscreen
+></iframe>
+</div></div>
+</div>
+</div>
+<div class="section" id="mlflow">
+<h3>MLflow<a class="headerlink" href="#mlflow" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://mlflow.org">MLflow</a> is an open source platform for managing the end-to-end machine learning lifecycle. It can:</p>
+<ul class="simple">
+<li><p>track ML experiments (training runs) to record and compare parameters and results;</p></li>
+<li><p>package ML code in a reusable, reproducible form;</p></li>
+<li><p>manage and deploy models from a variety of ML libraries to a variety of model serving and inference platforms.</p></li>
+</ul>
+<p>MLflow can be used with any ML library, in any programming language. Python, R and Java are supported out-of-the-box. It is included in several ML cloud platforms, like <a class="reference external" href="https://databricks.com/product/managed-mlflow">Databricks</a>.</p>
+<p><a class="reference external" href="https://www.datanami.com/2018/06/05/databricks-launches-mlflow-to-simplify-machine-learning-lifecycle/"><img alt="MLflow components" src="../_images/mlflow-components.png" /></a></p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./overview"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="introduction_to_reinforcement_learning.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Introduction to Reinforcement Learning</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../fundamentals/handling_data.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Handling data</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Baptiste Pesquet<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
