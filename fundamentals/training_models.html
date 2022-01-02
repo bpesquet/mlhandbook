@@ -872,10 +872,13 @@
 <h3>Numerical differentiation<a class="headerlink" href="#numerical-differentiation" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>Finite difference approximation of derivatives.</p></li>
+<li><p>Interpretations: instantaneous rate of change, slope of the tangent.</p></li>
 <li><p>Generally unstable and limited to a small set of functions.</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[\frac{\partial f(\pmb{x})}{\partial x_i} = \frac{f(\pmb{x} + h\pmb{e}_i) - f(\pmb{x})}{h}\]</div>
+\[g'(a) = \frac{\partial g(a)}{\partial a} = \lim_{h \to 0} \frac{g(a + h) - g(a)}{h}\]</div>
+<div class="math notranslate nohighlight">
+\[\frac{\partial f(\pmb{x})}{\partial x_i} = \lim_{h \to 0} \frac{f(\pmb{x} + h\pmb{e}_i) - f(\pmb{x})}{h}\]</div>
 </div>
 <div class="section" id="symbolic-differentiation">
 <h3>Symbolic differentiation<a class="headerlink" href="#symbolic-differentiation" title="Permalink to this headline">¶</a></h3>
