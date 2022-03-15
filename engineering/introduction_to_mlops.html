@@ -51,8 +51,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Handling data" href="../fundamentals/handling_data.html" />
-    <link rel="prev" title="Introduction to Reinforcement Learning" href="introduction_to_reinforcement_learning.html" />
+    <link rel="next" title="Machine Learning issues" href="machine_learning_issues.html" />
+    <link rel="prev" title="Transformers" href="../algorithms/transformers.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -106,25 +106,20 @@ const thebe_selector_output = ".output, .cell_output"
   overview
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="introduction_to_machine_learning.html">
+  <a class="reference internal" href="../overview/introduction_to_machine_learning.html">
    Introduction to Machine Learning
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="machine_learning_in_action.html">
+  <a class="reference internal" href="../overview/machine_learning_in_action.html">
    Machine Learning in action
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="introduction_to_reinforcement_learning.html">
+  <a class="reference internal" href="../overview/introduction_to_reinforcement_learning.html">
    Introduction to Reinforcement Learning
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Introduction to MLOps
   </a>
  </li>
 </ul>
@@ -253,6 +248,23 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p class="caption">
  <span class="caption-text">
+  Engineering
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Introduction to MLOps
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="machine_learning_issues.html">
+   Machine Learning issues
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
   Tools
  </span>
 </p>
@@ -362,7 +374,7 @@ const thebe_selector_output = ".output, .cell_output"
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/overview/introduction_to_mlops.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/engineering/introduction_to_mlops.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -382,10 +394,10 @@ const thebe_selector_output = ".output, .cell_output"
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/bpesquet/mlhandbook/issues/new?title=Issue%20on%20page%20%2Foverview/introduction_to_mlops.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/bpesquet/mlhandbook/issues/new?title=Issue%20on%20page%20%2Fengineering/introduction_to_mlops.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/bpesquet/mlhandbook/edit/master/overview/introduction_to_mlops.ipynb"><button
+        <a class="edit-button" href="https://github.com/bpesquet/mlhandbook/edit/master/engineering/introduction_to_mlops.ipynb"><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
     </div>
@@ -405,7 +417,7 @@ const thebe_selector_output = ".output, .cell_output"
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/bpesquet/mlhandbook/master?urlpath=tree/overview/introduction_to_mlops.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/bpesquet/mlhandbook/master?urlpath=tree/engineering/introduction_to_mlops.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../_static/images/logo_binder.svg"
@@ -413,7 +425,7 @@ const thebe_selector_output = ".output, .cell_output"
         
         
         
-        <a class="colab-button" href="https://colab.research.google.com/github/bpesquet/mlhandbook/blob/master/overview/introduction_to_mlops.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+        <a class="colab-button" href="https://colab.research.google.com/github/bpesquet/mlhandbook/blob/master/engineering/introduction_to_mlops.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
                 title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
                     src="../_static/images/logo_colab.png"
                     alt="Interact on Colab">Colab</button></a>
@@ -921,7 +933,7 @@ const thebe_selector_output = ".output, .cell_output"
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./overview"
+            path: "./engineering"
         },
         predefinedOutput: true
     }
@@ -933,17 +945,17 @@ const thebe_selector_output = ".output, .cell_output"
             
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="introduction_to_reinforcement_learning.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="../algorithms/transformers.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Introduction to Reinforcement Learning</p>
+            <p class="prev-next-title">Transformers</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="../fundamentals/handling_data.html" title="next page">
+    <a class='right-next' id="next-link" href="machine_learning_issues.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Handling data</p>
+        <p class="prev-next-title">Machine Learning issues</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
