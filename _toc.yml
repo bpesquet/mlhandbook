@@ -9,7 +9,6 @@
     - file: overview/introduction_to_machine_learning
     - file: overview/machine_learning_in_action
     - file: overview/introduction_to_reinforcement_learning
-    - file: overview/introduction_to_mlops
 
 - part: Fundamentals
   chapters:
@@ -37,6 +36,11 @@
         - file: algorithms/neural_style_transfer
         - file: algorithms/generative_adversarial_networks
         - file: algorithms/transformers
+
+- part: Engineering
+  chapters:
+    - file: engineering/introduction_to_mlops
+    - file: engineering/machine_learning_issues
 
 - part: Tools
   chapters:
