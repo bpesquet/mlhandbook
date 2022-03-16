@@ -48,6 +48,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -494,26 +496,28 @@ const thebe_selector_output = ".output, .cell_output"
     <a class="reference internal nav-link" href="#an-attribution-method-lime">
      An attribution method: LIME
     </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#how-lime-works">
-     How LIME works
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#lime-for-images-1-2">
-     LIME for images (1/2)
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#lime-for-images-2-2">
-     LIME for images (2/2)
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#lime-in-action">
-     LIME in action
-    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#how-lime-works">
+       How LIME works
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#lime-for-images-1-2">
+       LIME for images (1/2)
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#lime-for-images-2-2">
+       LIME for images (2/2)
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#lime-in-action">
+       LIME in action
+      </a>
+     </li>
+    </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#additional-resources">
@@ -526,16 +530,134 @@ const thebe_selector_output = ".output, .cell_output"
   <a class="reference internal nav-link" href="#bias-and-fairness">
    Bias and fairness
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#definition-bias">
+     Definition: bias
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#definition-fairness">
+     Definition: fairness
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bias-and-fairness-in-ml">
+     Bias and fairness in ML
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#semantic-understanding-or-lack-thereof">
+     Semantic understanding (or lack thereof)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#biases-examples">
+     Biases examples
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#bias-example-1-sheeps-everywhere">
+       Bias example 1: sheeps everywhere!
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#bias-example-2-resume-screening">
+       Bias example 2: resumé screening
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#bias-example-3-skin-cancer-detection">
+       Bias example 3: skin cancer detection
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#bias-example-4-crime-relapse-assessment">
+       Bias example 4: crime relapse assessment
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#bias-example-5-car-insurance-rates">
+       Bias example 5: car insurance rates
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#technical-vs-holistic-approaches-the-lecun-gebru-twitter-feud">
+     Technical Vs holistic approaches: the LeCun/Gebru Twitter feud
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#debunking-myths">
+     Debunking myths
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bias-management">
+     Bias management
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#methods-for-fair-ml">
+     Methods for fair ML
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Additional resources
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#robustness">
    Robustness
   </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#privacy">
-   Privacy
-  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#definition">
+     Definition
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#adversarial-examples">
+     Adversarial examples
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#adversarial-white-box-attacks-example">
+       Adversarial white-box attacks: example
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#adversarial-white-box-attacks-demo">
+       Adversarial white-box attacks: demo
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#adversarial-white-box-attacks-explanation">
+       Adversarial white-box attacks: explanation
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#adversarial-black-box-attacks">
+       Adversarial black-box attacks
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#adversarial-training">
+       Adversarial training
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     Additional resources
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#ethics">
@@ -611,26 +733,28 @@ const thebe_selector_output = ".output, .cell_output"
     <a class="reference internal nav-link" href="#an-attribution-method-lime">
      An attribution method: LIME
     </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#how-lime-works">
-     How LIME works
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#lime-for-images-1-2">
-     LIME for images (1/2)
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#lime-for-images-2-2">
-     LIME for images (2/2)
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#lime-in-action">
-     LIME in action
-    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#how-lime-works">
+       How LIME works
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#lime-for-images-1-2">
+       LIME for images (1/2)
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#lime-for-images-2-2">
+       LIME for images (2/2)
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#lime-in-action">
+       LIME in action
+      </a>
+     </li>
+    </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#additional-resources">
@@ -643,16 +767,134 @@ const thebe_selector_output = ".output, .cell_output"
   <a class="reference internal nav-link" href="#bias-and-fairness">
    Bias and fairness
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#definition-bias">
+     Definition: bias
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#definition-fairness">
+     Definition: fairness
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bias-and-fairness-in-ml">
+     Bias and fairness in ML
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#semantic-understanding-or-lack-thereof">
+     Semantic understanding (or lack thereof)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#biases-examples">
+     Biases examples
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#bias-example-1-sheeps-everywhere">
+       Bias example 1: sheeps everywhere!
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#bias-example-2-resume-screening">
+       Bias example 2: resumé screening
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#bias-example-3-skin-cancer-detection">
+       Bias example 3: skin cancer detection
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#bias-example-4-crime-relapse-assessment">
+       Bias example 4: crime relapse assessment
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#bias-example-5-car-insurance-rates">
+       Bias example 5: car insurance rates
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#technical-vs-holistic-approaches-the-lecun-gebru-twitter-feud">
+     Technical Vs holistic approaches: the LeCun/Gebru Twitter feud
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#debunking-myths">
+     Debunking myths
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bias-management">
+     Bias management
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#methods-for-fair-ml">
+     Methods for fair ML
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Additional resources
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#robustness">
    Robustness
   </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#privacy">
-   Privacy
-  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#definition">
+     Definition
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#adversarial-examples">
+     Adversarial examples
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#adversarial-white-box-attacks-example">
+       Adversarial white-box attacks: example
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#adversarial-white-box-attacks-demo">
+       Adversarial white-box attacks: demo
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#adversarial-white-box-attacks-explanation">
+       Adversarial white-box attacks: explanation
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#adversarial-black-box-attacks">
+       Adversarial black-box attacks
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#adversarial-training">
+       Adversarial training
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     Additional resources
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#ethics">
@@ -714,6 +956,8 @@ Requirement already satisfied: decorator&lt;5,&gt;=4.3 in /Users/baptiste/minico
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;NumPy version: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">YouTubeVideo</span>
 </pre></div>
 </div>
 </div>
@@ -801,25 +1045,24 @@ NumPy version: 1.18.1
 <h3>An attribution method: LIME<a class="headerlink" href="#an-attribution-method-lime" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference external" href="https://github.com/marcotcr/lime">LIME</a> (<em>Local Interpretable Model-agnostic Explanations</em>) aims to explain the rationale behind a model’s predictions, in order to help users decide when to trust or not to trust these predictions.</p>
 <p><img alt="LIME objective" src="../_images/lime1.jpg" /></p>
-</div>
 <div class="section" id="how-lime-works">
-<h3>How LIME works<a class="headerlink" href="#how-lime-works" title="Permalink to this headline">¶</a></h3>
+<h4>How LIME works<a class="headerlink" href="#how-lime-works" title="Permalink to this headline">¶</a></h4>
 <p>LIME trains a local linear approximation of the model’s behaviour. The linear coefficients represent the contributions of the features to the prediction.</p>
 <p>In the following picture, the linear model (dashed line) is a good approximation in the neighborhood of the explained instance (bright red cross).</p>
 <p><a class="reference external" href="https://github.com/marcotcr/lime"><img alt="LIME in action" src="../_images/lime.png" /></a></p>
 </div>
 <div class="section" id="lime-for-images-1-2">
-<h3>LIME for images (1/2)<a class="headerlink" href="#lime-for-images-1-2" title="Permalink to this headline">¶</a></h3>
+<h4>LIME for images (1/2)<a class="headerlink" href="#lime-for-images-1-2" title="Permalink to this headline">¶</a></h4>
 <p>When explaining classification results for an image, LIME starts by dividing it into interpretable components (contiguous blocks of pixels).</p>
 <p><img alt="Image division into superpixels" src="../_images/lime_image.jpg" /></p>
 </div>
 <div class="section" id="lime-for-images-2-2">
-<h3>LIME for images (2/2)<a class="headerlink" href="#lime-for-images-2-2" title="Permalink to this headline">¶</a></h3>
+<h4>LIME for images (2/2)<a class="headerlink" href="#lime-for-images-2-2" title="Permalink to this headline">¶</a></h4>
 <p>A dataset of “perturbed” instances (images for which some of the interpretable components are grayed) and the corresponding model probabilities is used to train a simple (linear) model. The superpixels with highest positive weights are presented as an explanation.</p>
 <p><img alt="LIME process with images" src="../_images/lime_image_exp.jpg" /></p>
 </div>
 <div class="section" id="lime-in-action">
-<h3>LIME in action<a class="headerlink" href="#lime-in-action" title="Permalink to this headline">¶</a></h3>
+<h4>LIME in action<a class="headerlink" href="#lime-in-action" title="Permalink to this headline">¶</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load the Iris dataset (https://archive.ics.uci.edu/ml/datasets/iris)</span>
@@ -38133,10 +38376,12 @@ x_test: (30, 4). y_test: (30,)
 </div>
 </div>
 </div>
+</div>
 <div class="section" id="additional-resources">
 <h3>Additional resources<a class="headerlink" href="#additional-resources" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p><a class="reference external" href="https://arxiv.org/abs/2012.01805v1">Interpretability and Explainability: A Machine Learning Zoo Mini-tour</a></p></li>
+<li><p>Marcinkevičs, Ričards, and Julia E. Vogt. “Interpretability and Explainability: A Machine Learning Zoo Mini-Tour.” ArXiv:2012.01805 [Cs], December 3, 2020. <a class="reference external" href="http://arxiv.org/abs/2012.01805">http://arxiv.org/abs/2012.01805</a></p></li>
+<li><p>Xie, Ning, Gabrielle Ras, Marcel van Gerven, and Derek Doran. “Explainable Deep Learning: A Field Guide for the Uninitiated.” ArXiv:2004.14545 [Cs, Stat], April 29, 2020. <a class="reference external" href="http://arxiv.org/abs/2004.14545">http://arxiv.org/abs/2004.14545</a></p></li>
 <li><p><a class="reference external" href="https://github.com/EthicalML/awesome-production-machine-learning#explaining-black-box-models-and-datasets">Explaining Black Box Models and Datasets</a></p></li>
 <li><p><a class="reference external" href="https://www.oreilly.com/content/introduction-to-local-interpretable-model-agnostic-explanations-lime/">Local Interpretable Model-Agnostic Explanations (LIME): An Introduction</a></p></li>
 </ul>
@@ -38144,12 +38389,181 @@ x_test: (30, 4). y_test: (30,)
 </div>
 <div class="section" id="bias-and-fairness">
 <h2>Bias and fairness<a class="headerlink" href="#bias-and-fairness" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="definition-bias">
+<h3>Definition: bias<a class="headerlink" href="#definition-bias" title="Permalink to this headline">¶</a></h3>
+<p>Generally speaking, a <strong>bias</strong> is a disproportionate weight in favor of or against an idea, thing or group.</p>
+<p>There are many types of bias, including:</p>
+<ul class="simple">
+<li><p><strong>Cognitive bias</strong>, a repeating or basic misstep in thinking.</p></li>
+<li><p><strong>Conflicts of interest</strong>, when one has intersecting interests (financial, personal, etc.) which could potentially corrupt.</p></li>
+<li><p><strong>Prejudices</strong>, forming an opinion before becoming aware of the relevant facts.</p></li>
+<li><p><strong>Algorithmic bias</strong>, studied below.</p></li>
+</ul>
+<p>(<a class="reference external" href="https://en.wikipedia.org/wiki/Bias">Source</a>)</p>
+</div>
+<div class="section" id="definition-fairness">
+<h3>Definition: fairness<a class="headerlink" href="#definition-fairness" title="Permalink to this headline">¶</a></h3>
+<p><strong>Fairness</strong> is a broad concept potentially refering to justice, equality, solidarity or even sports.</p>
+<p>It can be defined as the absence of bias.</p>
+<p>(<a class="reference external" href="https://en.wikipedia.org/wiki/Fairness">Source</a>)</p>
+</div>
+<div class="section" id="bias-and-fairness-in-ml">
+<h3>Bias and fairness in ML<a class="headerlink" href="#bias-and-fairness-in-ml" title="Permalink to this headline">¶</a></h3>
+<p>Like all computer-based disciplines, Machine Learning is concerned with <strong>algorithmic biases</strong>: systematic and repeatable errors in a computer system that create unfair outcomes.</p>
+<p>Its specific nature and expanding application in many fields has given rise to new problems and controversies.</p>
+<p>Research about fairness in Machine Learning is a relatively recent topic.</p>
+<p>(<a class="reference external" href="https://en.wikipedia.org/wiki/Algorithmic_bias">Source</a>)</p>
+</div>
+<div class="section" id="semantic-understanding-or-lack-thereof">
+<h3>Semantic understanding (or lack thereof)<a class="headerlink" href="#semantic-understanding-or-lack-thereof" title="Permalink to this headline">¶</a></h3>
+<p>A Machine Learning model has <strong>no semantic understanding</strong> of what it’s looking at. It’s just detecting patterns in the sequence of numbers used as input data.</p>
+<p>The model might find some wrong patterns, without anyone noticing.</p>
+</div>
+<div class="section" id="biases-examples">
+<h3>Biases examples<a class="headerlink" href="#biases-examples" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="bias-example-1-sheeps-everywhere">
+<h4>Bias example 1: sheeps everywhere!<a class="headerlink" href="#bias-example-1-sheeps-everywhere" title="Permalink to this headline">¶</a></h4>
+<p><a class="reference external" href="https://www.aiweirdness.com/do-neural-nets-dream-of-electric-18-03-02/"><img alt="AI sheeps" src="../_images/ai_sheeps_everywhere.jpg" /></a></p>
+</div>
+<div class="section" id="bias-example-2-resume-screening">
+<h4>Bias example 2: resumé screening<a class="headerlink" href="#bias-example-2-resume-screening" title="Permalink to this headline">¶</a></h4>
+<p>Like many large-scaled companies, Amazon tried to build an automated, ML-based resumé screening tool to speed up its recruitment process. Trained on its male-dominated employee base, the tool taught itself that male candidates were preferable to women.</p>
+<p>It was scraped before being put into production.</p>
+<p>“Fun” fact: gender was not explicitly marked on the resumés. The system was seeing patterns in the sample set of “successful employees” in other things. For example, women might use different words to describe accomplishments, or have played different sports at school.</p>
+<p>(<a class="reference external" href="https://www.reuters.com/article/us-amazon-com-jobs-automation-insight/amazon-scraps-secret-ai-recruiting-tool-that-showed-bias-against-women-idUSKCN1MK08G">Source</a>)</p>
+</div>
+<div class="section" id="bias-example-3-skin-cancer-detection">
+<h4>Bias example 3: skin cancer detection<a class="headerlink" href="#bias-example-3-skin-cancer-detection" title="Permalink to this headline">¶</a></h4>
+<p>ML systems trained on images taken from people with lighter skin types might not be as accurate for people with darker skin, and vice versa.</p>
+<p>The problem could arise because of imbalance in the training set, or because the model should be built differently depending on the skin tone.</p>
+<p>(<a class="reference external" href="https://www.ncri.org.uk/ai-to-spot-skin-cancer-lacking-pictures-of-darker-skin/">Source</a>)</p>
+</div>
+<div class="section" id="bias-example-4-crime-relapse-assessment">
+<h4>Bias example 4: crime relapse assessment<a class="headerlink" href="#bias-example-4-crime-relapse-assessment" title="Permalink to this headline">¶</a></h4>
+<p>COMPAS, a tool used by courts in the United States to make pretrial detention and release decisions, was proven to be biased again African Americans. It demonstrates higher false positive rates for African-American offenders than Caucasian offenders in falsely predicting them to be at a higher risk of recommitting a crime or recidivism.</p>
+<p><img alt="COMPAS bias" src="../_images/compas_bias.png" /></p>
+<p>Trained on a dataset of criminal history, the software uses features like prior arrests and friend/family arrests that are problematic, given the differences in controlling and policing between ethnic groups in the US.</p>
+<p>(<a class="reference external" href="https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing">Source</a>)</p>
+</div>
+<div class="section" id="bias-example-5-car-insurance-rates">
+<h4>Bias example 5: car insurance rates<a class="headerlink" href="#bias-example-5-car-insurance-rates" title="Permalink to this headline">¶</a></h4>
+<p>Even patterns in the data that are entirely accurate and correct predictors may imply ethical or legal concerns.</p>
+<p>For example, women might tend to be safer drivers. An ML model trained on historical data could easily learn to associate women with lower risk (and lower rates), even through this may be illegal!</p>
+</div>
+</div>
+<div class="section" id="technical-vs-holistic-approaches-the-lecun-gebru-twitter-feud">
+<h3>Technical Vs holistic approaches: the LeCun/Gebru Twitter feud<a class="headerlink" href="#technical-vs-holistic-approaches-the-lecun-gebru-twitter-feud" title="Permalink to this headline">¶</a></h3>
+<p>In June 2020, Facebook chief AI scientist Yann LeCun and (then) co-lead of the Google Ethical AI team Timnit Gebru got into a <a class="reference external" href="https://twitter.com/timnitGebru/status/1274809417653866496">heated debate on Twitter</a> about bias in AI, leading to LeCun leaving Twitter for a while.</p>
+<p>LeCun’s solution was primarily technical (“ML systems are biased when data is biased”). Gebru argued that social and structural problems, like the lack of diversity in the AI workforce, also contributed to bias.</p>
+<p>This argument illustrates the somewhat irreconciliable points of view in the Machine Learning scientific community regarding bias and fairness.</p>
+<p>(<a class="reference external" href="https://syncedreview.com/2020/06/30/yann-lecun-quits-twitter-amid-acrimonious-exchanges-on-ai-bias/">Source</a>)</p>
+</div>
+<div class="section" id="debunking-myths">
+<h3>Debunking myths<a class="headerlink" href="#debunking-myths" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Myth #1: “~~AI is maths, so it cannot be biased~~”.</p></li>
+<li><p>Myth #2: “~~ML is inherently biased~~”.</p></li>
+<li><p>As often, reality is more nuanced than this black-or-white (no pun intended 😉) scenario.</p></li>
+</ul>
+</div>
+<div class="section" id="bias-management">
+<h3>Bias management<a class="headerlink" href="#bias-management" title="Permalink to this headline">¶</a></h3>
+<p>All in all, ML systems can be both extremely powerful and extremely limited.</p>
+<p>Lessening bias could involve the following steps:</p>
+<ol class="simple">
+<li><p>Methodological rigour in the collection and management of the training data.</p></li>
+<li><p>Technical tools to analyse and diagnose the behavior of the model.</p></li>
+<li><p>Training, education and caution in the deployment of ML in products.</p></li>
+</ol>
+</div>
+<div class="section" id="methods-for-fair-ml">
+<h3>Methods for fair ML<a class="headerlink" href="#methods-for-fair-ml" title="Permalink to this headline">¶</a></h3>
+<p>Methods that target biases in the algorithms fall under three categories.</p>
+<ol class="simple">
+<li><p><strong>Pre-processing</strong>: try to transform the data so that the underlying discrimination is removed.</p></li>
+<li><p><strong>In-processing</strong>: try to modify and change learning algorithms in order to remove discrimination during the training process (for example, changing the objective function or imposing a constraint).</p></li>
+<li><p><strong>Post-processing</strong>: using side information about the similarity between samples, update the model’s results to satisfy the desired fairness constraints (“treat similar individuals similarly”).</p></li>
+</ol>
+</div>
+<div class="section" id="id1">
+<h3>Additional resources<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Mehrabi, Ninareh, Fred Morstatter, Nripsuta Saxena, Kristina Lerman, and Aram Galstyan. “A Survey on Bias and Fairness in Machine Learning.” ArXiv:1908.09635 [Cs], January 25, 2022. <a class="reference external" href="http://arxiv.org/abs/1908.09635">http://arxiv.org/abs/1908.09635</a></p></li>
+<li><p>Bellamy, Rachel K. E., Kuntal Dey, Michael Hind, Samuel C. Hoffman, Stephanie Houde, Kalapriya Kannan, Pranay Lohia, et al. “AI Fairness 360: An Extensible Toolkit for Detecting, Understanding, and Mitigating Unwanted Algorithmic Bias.” ArXiv:1810.01943 [Cs], October 3, 2018. <a class="reference external" href="http://arxiv.org/abs/1810.01943">http://arxiv.org/abs/1810.01943</a></p></li>
+<li><p><a class="reference external" href="https://sites.google.com/view/fatecv-tutorial">Tutorial on Fairness Accountability Transparency and Ethics in Computer Vision at CVPR 2020</a></p></li>
+<li><p><a class="reference external" href="https://www.ben-evans.com/benedictevans/2019/4/15/notes-on-ai-bias">Notes on AI Bias</a></p></li>
+</ul>
+</div>
 </div>
 <div class="section" id="robustness">
 <h2>Robustness<a class="headerlink" href="#robustness" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="definition">
+<h3>Definition<a class="headerlink" href="#definition" title="Permalink to this headline">¶</a></h3>
+<p>Machine Learning models are trained in controlled, sandboxed environments. However, this might not be the case when they are deployed to production.</p>
+<p>In those situations, the model  might be exposed to several <em>risks</em>.</p>
+<p><strong>Robustness</strong> is the ability of the ML model (or the system incorporating it) to fulfill its role even when confronted to external perturbations.</p>
+<p>Related to <a class="reference internal" href="introduction_to_mlops.html"><span class="doc std std-doc">MLOps</span></a>, this issue lies at the intersection of models and software. We’ll study one model-specific risk: adversarial attacks.</p>
 </div>
-<div class="section" id="privacy">
-<h2>Privacy<a class="headerlink" href="#privacy" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="adversarial-examples">
+<h3>Adversarial examples<a class="headerlink" href="#adversarial-examples" title="Permalink to this headline">¶</a></h3>
+<p>Several Machine Learning models, including state-of-the-art neural networks, are vulnerable to <strong>adversarial examples</strong>.</p>
+<p>These examples contain small but carefully crafted modifications that may fool the model.</p>
+<div class="section" id="adversarial-white-box-attacks-example">
+<h4>Adversarial white-box attacks: example<a class="headerlink" href="#adversarial-white-box-attacks-example" title="Permalink to this headline">¶</a></h4>
+<p>Misclassification by GoogLeNet after adding a specific amount of data to the input.</p>
+<p><img alt="Panda or gibbon?" src="../_images/adversarial_panda.png" /></p>
+</div>
+<div class="section" id="adversarial-white-box-attacks-demo">
+<h4>Adversarial white-box attacks: demo<a class="headerlink" href="#adversarial-white-box-attacks-demo" title="Permalink to this headline">¶</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">YouTubeVideo</span><span class="p">(</span><span class="s2">&quot;zQ_uMenoBCk&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<iframe
+    width="400"
+    height="300"
+    src="https://www.youtube.com/embed/zQ_uMenoBCk"
+    frameborder="0"
+    allowfullscreen
+></iframe>
+</div></div>
+</div>
+</div>
+<div class="section" id="adversarial-white-box-attacks-explanation">
+<h4>Adversarial white-box attacks: explanation<a class="headerlink" href="#adversarial-white-box-attacks-explanation" title="Permalink to this headline">¶</a></h4>
+<p>Since the loss function and parameters (weights) of the network are known, we can engineer a impercertible perturbation that, added to the input, causes the loss value to go up.</p>
+<p>Formally, let <span class="math notranslate nohighlight">\(\theta\)</span> be the parameters of a model, <span class="math notranslate nohighlight">\(x\)</span> its inputs, <span class="math notranslate nohighlight">\(y\)</span> the targets associated with <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(\mathcal{J}(\theta, x, y)\)</span> the loss function used to train the neural network.</p>
+<p><span class="math notranslate nohighlight">\(\nabla_{x}\mathcal{J}(\theta, x, y)\)</span> is the gradient of the loss function w.r.t. the inputs <span class="math notranslate nohighlight">\(x\)</span>. It represents how much the error changes when a small modification to <span class="math notranslate nohighlight">\(x\)</span> is made.</p>
+<p><span class="math notranslate nohighlight">\(\eta = \epsilon \mathcal{sign}(\nabla_{x}\mathcal{J}(\theta, x, y))\)</span> is the perturbation that causes an increase in the loss value while being small enough to be hard to detect.</p>
+</div>
+<div class="section" id="adversarial-black-box-attacks">
+<h4>Adversarial black-box attacks<a class="headerlink" href="#adversarial-black-box-attacks" title="Permalink to this headline">¶</a></h4>
+<p>In most situations, access to the model’s internals is impossible. Researchers have nonetheless found a way to try to trick the model by:</p>
+<ol class="simple">
+<li><p>training a <em>substitute model</em> by observing the outputs of the original model on a synthetic dataset.</p></li>
+<li><p>using the substitute model to generate adversarial examples, using a white-box technique.</p></li>
+</ol>
+<p>The original model will very often misclassify examples generated this way.</p>
+</div>
+<div class="section" id="adversarial-training">
+<h4>Adversarial training<a class="headerlink" href="#adversarial-training" title="Permalink to this headline">¶</a></h4>
+<p>Training a model on a mixture of adversarial and clean examples increases its robustness against adversarial attacks, even acting a a form of regularization to fight overfitting.</p>
+<p><a class="reference external" href="http://cs231n.stanford.edu/"><img alt="Adversarial training curves" src="../_images/adversarial_training_curves.png" /></a></p>
+</div>
+</div>
+<div class="section" id="id2">
+<h3>Additional resources<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Szegedy, Christian, Wojciech Zaremba, Ilya Sutskever, Joan Bruna, Dumitru Erhan, Ian Goodfellow, and Rob Fergus. “Intriguing Properties of Neural Networks.” ArXiv:1312.6199 [Cs], February 19, 2014. <a class="reference external" href="http://arxiv.org/abs/1312.6199">http://arxiv.org/abs/1312.6199</a></p></li>
+<li><p>Goodfellow, Ian J., Jonathon Shlens, and Christian Szegedy. “Explaining and Harnessing Adversarial Examples.” ArXiv:1412.6572 [Cs, Stat], March 20, 2015. <a class="reference external" href="http://arxiv.org/abs/1412.6572">http://arxiv.org/abs/1412.6572</a></p></li>
+<li><p>Papernot, Nicolas, Patrick McDaniel, Ian Goodfellow, Somesh Jha, Z. Berkay Celik, and Ananthram Swami. “Practical Black-Box Attacks against Machine Learning.” ArXiv:1602.02697 [Cs], March 19, 2017. <a class="reference external" href="http://arxiv.org/abs/1602.02697">http://arxiv.org/abs/1602.02697</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=CIfsB_EYsVI">Lecture 16 | Adversarial Examples and Adversarial Training</a> (YouTube)</p></li>
+</ul>
+</div>
 </div>
 <div class="section" id="ethics">
 <h2>Ethics<a class="headerlink" href="#ethics" title="Permalink to this headline">¶</a></h2>
