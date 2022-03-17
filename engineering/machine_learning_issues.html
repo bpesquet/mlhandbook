@@ -1362,7 +1362,7 @@ x_test: (30, 4). y_test: (30,)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test accuracy: 0.90000
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test accuracy: 0.93333
 </pre></div>
 </div>
 </div>
@@ -38485,25 +38485,25 @@ x_test: (30, 4). y_test: (30,)
 /***/ })
 /******/ ]);
 //# sourceMappingURL=bundle.js.map </script></head><body>
-        <div class="lime top_div" id="top_divYJX13PN4UYD64IN"></div>
+        <div class="lime top_div" id="top_divJHO43ZNYBF58QDL"></div>
 
         <script>
-        var top_div = d3.select('#top_divYJX13PN4UYD64IN').classed('lime top_div', true);
+        var top_div = d3.select('#top_divJHO43ZNYBF58QDL').classed('lime top_div', true);
 
             var pp_div = top_div.append('div')
                                 .classed('lime predict_proba', true);
             var pp_svg = pp_div.append('svg').style('width', '100%');
-            var pp = new lime.PredictProba(pp_svg, ["setosa", "versicolor", "virginica"], [0.0, 0.22, 0.78]);
+            var pp = new lime.PredictProba(pp_svg, ["setosa", "versicolor", "virginica"], [1.0, 0.0, 0.0]);
 
 
         var exp_div;
             var exp = new lime.Explanation(["setosa", "versicolor", "virginica"]);
 
                 exp_div = top_div.append('div').classed('lime explanation', true);
-                exp.show([["petal length (cm) > 5.10", 0.5391928837527833], ["sepal width (cm) <= 2.80", 0.028827683644005994]], 2, exp_div);
+                exp.show([["petal length (cm) <= 1.60", 0.4570943275478726], ["0.30 < petal width (cm) <= 1.30", -0.03706530791987005]], 0, exp_div);
 
         var raw_div = top_div.append('div');
-            exp.show_raw_tabular([["petal length (cm)", "5.60", 0.5391928837527833], ["sepal width (cm)", "2.60", 0.028827683644005994]], 2, raw_div);
+            exp.show_raw_tabular([["petal length (cm)", "1.30", 0.4570943275478726], ["petal width (cm)", "0.40", -0.03706530791987005]], 0, raw_div);
 
         </script>
         </body></html></div></div>
@@ -38515,8 +38515,8 @@ x_test: (30, 4). y_test: (30,)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;petal length (cm) &gt; 5.10&#39;, 0.5391928837527833),
- (&#39;sepal width (cm) &lt;= 2.80&#39;, 0.028827683644005994)]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;petal width (cm) &gt; 1.80&#39;, 0.5422203956617914),
+ (&#39;petal length (cm) &gt; 5.10&#39;, 0.36372880423287635)]
 </pre></div>
 </div>
 </div>
@@ -38717,7 +38717,7 @@ x_test: (30, 4). y_test: (30,)
 <h3>Definition<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <p>A branch of philosophy, <strong>ethics</strong> seeks to resolve questions of human morality by defining concepts such as good and evil, right and wrong, virtue and vice, justice and crime.</p>
 <blockquote>
-<div><p>“”Ethics is the capacity to think critically about moral values and direct our actions in terms of such values.” (Larry Churchill)</p>
+<div><p>“Ethics is the capacity to think critically about moral values and direct our actions in terms of such values.” (Larry Churchill)</p>
 </div></blockquote>
 <p>(<a class="reference external" href="https://en.wikipedia.org/wiki/Ethics">Source</a>)</p>
 </div>
@@ -38795,7 +38795,7 @@ x_test: (30, 4). y_test: (30,)
 <ul class="simple">
 <li><p>Article 1: “All human beings are born free and equal in dignity and rights. They are endowed with reason and conscience and should act towards one another in a spirit of brotherhood.”</p></li>
 <li><p>Article 12: “No one shall be subjected to arbitrary interference with his privacy, family, home or correspondence, nor to attacks upon his honour and reputation. Everyone has the right to the protection of the law against such interference or attacks.”</p></li>
-<li><p>ARticle 30: “Nothing in this Declaration may be interpreted as implying for any State, group or person any right to engage in any activity or to perform any act aimed at the destruction of any of the rights and freedoms set forth herein.”</p></li>
+<li><p>Article 30: “Nothing in this Declaration may be interpreted as implying for any State, group or person any right to engage in any activity or to perform any act aimed at the destruction of any of the rights and freedoms set forth herein.”</p></li>
 </ul>
 </div>
 <div class="section" id="id4">
