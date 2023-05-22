@@ -12,6 +12,7 @@ python = "^3.7"
 jupyter-book = "^0.15.1"
 notebook = "^6.5.4"
 rise = "^5.7.1"
+jupyter-contrib-nbextensions = "^0.7.0"
 
 
 [build-system]
