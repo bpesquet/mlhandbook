@@ -1,771 +1,525 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
     <title>Decision Trees &amp; Random Forests &#8212; Machine Learning Handbook</title>
-    
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    
-      
-
-    
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.css?digest=84ace793992934648b4de8eed757e5a2" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.9d8b4a8b9bb19db25eeaddc40d639ba2.js"></script>
-    <script >const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'algorithms/decision_trees_and_random_forests';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Bayesian Methods" href="bayesian_methods.html" />
     <link rel="prev" title="Logistic Regression" href="logistic_regression.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
-
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<div class="col-12 col-md-3 bd-sidebar site-navigation " id="site-navigation">
-    
-        <div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../_static/mlhandbook_logo.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">Machine Learning Handbook</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="../_static/mlhandbook_logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/mlhandbook_logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference external" href="https://www.bpesquet.fr/mlkatas">
-   Machine Learning Katas
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference external" href="https://www.bpesquet.fr/mlkatas">Machine Learning Katas</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  overview
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">overview</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../overview/introduction_to_machine_learning.html">
-   Introduction to Machine Learning
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../overview/machine_learning_in_action.html">
-   Machine Learning in action
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../overview/introduction_to_reinforcement_learning.html">
-   Introduction to Reinforcement Learning
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/introduction_to_machine_learning.html">Introduction to Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/machine_learning_in_action.html">Machine Learning in action</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/introduction_to_reinforcement_learning.html">Introduction to Reinforcement Learning</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Fundamentals
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fundamentals</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../fundamentals/handling_data.html">
-   Handling data
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../fundamentals/assessing_results.html">
-   Assessing results
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../fundamentals/training_models.html">
-   Training models
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../fundamentals/handling_data.html">Handling data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fundamentals/assessing_results.html">Assessing results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fundamentals/training_models.html">Training models</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Algorithms
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Algorithms</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active has-children">
-  <a class="reference internal" href="classic_ml.html">
-   Classic Machine Learning
-  </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul class="current">
-   <li class="toctree-l2">
-    <a class="reference internal" href="k_nearest_neighbors.html">
-     K-Nearest Neighbors
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="linear_regression.html">
-     Linear Regression
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="logistic_regression.html">
-     Logistic Regression
-    </a>
-   </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
-     Decision Trees &amp; Random Forests
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="bayesian_methods.html">
-     Bayesian Methods
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="support_vector_machines.html">
-     Support Vector Machines
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="k_means.html">
-     K-Means
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="nn_deep_learning.html">
-   Neural Networks and Deep Learning
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
-  <label for="toctree-checkbox-2">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="artificial_neural_networks.html">
-     Artificial Neural Networks
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="convolutional_neural_networks.html">
-     Convolutional Neural Networks
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="recurrent_neural_networks.html">
-     Recurrent Neural Networks
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="autoencoders.html">
-     Autoencoders
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="neural_style_transfer.html">
-     Neural Style Transfer
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="generative_adversarial_networks.html">
-     Generative Adversarial Networks
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="transformers.html">
-     Transformers
-    </a>
-   </li>
-  </ul>
- </li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="classic_ml.html">Classic Machine Learning</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="k_nearest_neighbors.html">K-Nearest Neighbors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linear_regression.html">Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logistic_regression.html">Logistic Regression</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Decision Trees &amp; Random Forests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bayesian_methods.html">Bayesian Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="support_vector_machines.html">Support Vector Machines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="k_means.html">K-Means</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Engineering
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../engineering/introduction_to_mlops.html">
-   Introduction to MLOps
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../engineering/machine_learning_issues.html">
-   Machine Learning issues
-  </a>
- </li>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="nn_deep_learning.html">Neural Networks and Deep Learning</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="artificial_neural_networks.html">Artificial Neural Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="convolutional_neural_networks.html">Convolutional Neural Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recurrent_neural_networks.html">Recurrent Neural Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="autoencoders.html">Autoencoders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="neural_style_transfer.html">Neural Style Transfer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generative_adversarial_networks.html">Generative Adversarial Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="transformers.html">Transformers</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Tools
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../tools/python.html">
-   Python
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
-  <label for="toctree-checkbox-3">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../tools/python_ecosystem.html">
-     The Python ecosystem
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../tools/python_cheatsheet.html">
-     Python cheatsheet
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../tools/python_good_practices.html">
-     Python good practices
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../tools/numpy.html">
-   NumPy
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../tools/keras.html">
-   Keras
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../tools/pytorch.html">
-   PyTorch
-  </a>
- </li>
+</li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Reference
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Engineering</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../reference/activation_functions.html">
-   Activation functions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../reference/glossary.html">
-   Glossary
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../reference/acknowledgments.html">
-   Acknowledgments
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../engineering/introduction_to_mlops.html">Introduction to MLOps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../engineering/machine_learning_issues.html">Machine Learning issues</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tools</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tools/python.html">Python</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tools/python_ecosystem.html">The Python ecosystem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/python_cheatsheet.html">Python cheatsheet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/python_good_practices.html">Python good practices</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/numpy.html">NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/keras.html">Keras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/pytorch.html">PyTorch</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../reference/activation_functions.html">Activation functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/acknowledgments.html">Acknowledgments</a></li>
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
-          
-<!-- This is an invisible pixel that we watch to see if we've scrolled. -->
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
 <div class="sbt-scroll-pixel-helper"></div>
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            <div class="topbar-left">
-                
-                <label class="nav-toggle-button" for="__navigation">
-                    <div class="visually-hidden">Toggle navigation</div>
-                    <i class="fas fa-bars"></i>
-                </label>
-                
-            </div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/bpesquet/mlhandbook/master?urlpath=tree/algorithms/decision_trees_and_random_forests.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/bpesquet/mlhandbook/blob/master/algorithms/decision_trees_and_random_forests.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/bpesquet/mlhandbook" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/bpesquet/mlhandbook/edit/master/algorithms/decision_trees_and_random_forests.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/bpesquet/mlhandbook/issues/new?title=Issue%20on%20page%20%2Falgorithms/decision_trees_and_random_forests.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/algorithms/decision_trees_and_random_forests.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Decision Trees & Random Forests</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
             
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/algorithms/decision_trees_and_random_forests.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/bpesquet/mlhandbook"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/bpesquet/mlhandbook/issues/new?title=Issue%20on%20page%20%2Falgorithms/decision_trees_and_random_forests.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/bpesquet/mlhandbook/edit/master/algorithms/decision_trees_and_random_forests.ipynb"><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/bpesquet/mlhandbook/master?urlpath=tree/algorithms/decision_trees_and_random_forests.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        <a class="colab-button" href="https://colab.research.google.com/github/bpesquet/mlhandbook/blob/master/algorithms/decision_trees_and_random_forests.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
-                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
-                    src="../_static/images/logo_colab.png"
-                    alt="Interact on Colab">Colab</button></a>
-        
-        
-        
-    </div>
-</div>
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div>
+                <h2> Contents </h2>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
+            <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#environment-setup">
-   Environment setup
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#decision-trees">
-   Decision Trees
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#decision-trees-in-a-nutshell">
-     Decision Trees in a nutshell
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-training-a-decision-tree-to-classify-flowers">
-     Example: training a Decision Tree to classify flowers
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#tree-nodes">
-     Tree nodes
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-gini-score">
-     The Gini score
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-gini-scores-for-the-trained-decision-tree">
-     Example: Gini scores for the trained Decision Tree
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-decision-boundaries-for-the-trained-decision-tree">
-     Example: decision boundaries for the trained Decision Tree
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#using-a-decision-tree-for-predictions">
-     Using a Decision Tree for predictions
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-training-process">
-     The training process
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-training-a-decision-tree-on-planar-data">
-     Example: training a Decision Tree on planar data
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#decision-trees-for-regression-problems">
-     Decision Trees for regression problems
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-fitting-a-sine-curve-with-a-decision-tree">
-     Example: fitting a sine curve with a Decision Tree
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#advantages-of-decision-trees">
-     Advantages of Decision Trees
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#decision-trees-shortcomings">
-     Decision Trees shortcomings
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#ensemble-learning">
-   Ensemble learning
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#general-idea">
-     General idea
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#hard-voting-classifiers">
-     Hard voting classifiers
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#soft-voting-classifiers">
-     Soft voting classifiers
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#bagging-and-pasting">
-     Bagging and pasting
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#boosting">
-     Boosting
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#adaboost">
-       AdaBoost
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#gradient-boosting">
-       Gradient boosting
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#example-gradient-boosting-for-regression">
-       Example: gradient boosting for regression
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#random-forests">
-   Random Forests
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#random-forests-in-a-nutshell">
-     Random Forests in a nutshell
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-training-a-random-forest-to-classify-flowers">
-     Example: training a Random Forest to classify flowers
-    </a>
-   </li>
-  </ul>
- </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup">Environment setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-trees">Decision Trees</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-trees-in-a-nutshell">Decision Trees in a nutshell</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-training-a-decision-tree-to-classify-flowers">Example: training a Decision Tree to classify flowers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tree-nodes">Tree nodes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-gini-score">The Gini score</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-gini-scores-for-the-trained-decision-tree">Example: Gini scores for the trained Decision Tree</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-decision-boundaries-for-the-trained-decision-tree">Example: decision boundaries for the trained Decision Tree</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-a-decision-tree-for-predictions">Using a Decision Tree for predictions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-training-process">The training process</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-training-a-decision-tree-on-planar-data">Example: training a Decision Tree on planar data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-trees-for-regression-problems">Decision Trees for regression problems</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-fitting-a-sine-curve-with-a-decision-tree">Example: fitting a sine curve with a Decision Tree</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#advantages-of-decision-trees">Advantages of Decision Trees</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-trees-shortcomings">Decision Trees shortcomings</a></li>
 </ul>
-
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-learning">Ensemble learning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#general-idea">General idea</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hard-voting-classifiers">Hard voting classifiers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#soft-voting-classifiers">Soft voting classifiers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bagging-and-pasting">Bagging and pasting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boosting">Boosting</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#adaboost">AdaBoost</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-boosting">Gradient boosting</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-gradient-boosting-for-regression">Example: gradient boosting for regression</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-forests">Random Forests</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#random-forests-in-a-nutshell">Random Forests in a nutshell</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-training-a-random-forest-to-classify-flowers">Example: training a Random Forest to classify flowers</a></li>
+</ul>
+</li>
+</ul>
             </nav>
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Decision Trees & Random Forests</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#environment-setup">
-   Environment setup
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#decision-trees">
-   Decision Trees
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#decision-trees-in-a-nutshell">
-     Decision Trees in a nutshell
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-training-a-decision-tree-to-classify-flowers">
-     Example: training a Decision Tree to classify flowers
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#tree-nodes">
-     Tree nodes
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-gini-score">
-     The Gini score
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-gini-scores-for-the-trained-decision-tree">
-     Example: Gini scores for the trained Decision Tree
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-decision-boundaries-for-the-trained-decision-tree">
-     Example: decision boundaries for the trained Decision Tree
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#using-a-decision-tree-for-predictions">
-     Using a Decision Tree for predictions
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-training-process">
-     The training process
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-training-a-decision-tree-on-planar-data">
-     Example: training a Decision Tree on planar data
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#decision-trees-for-regression-problems">
-     Decision Trees for regression problems
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-fitting-a-sine-curve-with-a-decision-tree">
-     Example: fitting a sine curve with a Decision Tree
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#advantages-of-decision-trees">
-     Advantages of Decision Trees
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#decision-trees-shortcomings">
-     Decision Trees shortcomings
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#ensemble-learning">
-   Ensemble learning
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#general-idea">
-     General idea
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#hard-voting-classifiers">
-     Hard voting classifiers
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#soft-voting-classifiers">
-     Soft voting classifiers
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#bagging-and-pasting">
-     Bagging and pasting
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#boosting">
-     Boosting
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#adaboost">
-       AdaBoost
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#gradient-boosting">
-       Gradient boosting
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#example-gradient-boosting-for-regression">
-       Example: gradient boosting for regression
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#random-forests">
-   Random Forests
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#random-forests-in-a-nutshell">
-     Random Forests in a nutshell
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-training-a-random-forest-to-classify-flowers">
-     Example: training a Random Forest to classify flowers
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
 
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            
-              <div>
+              
                 
-  <div class="section" id="decision-trees-random-forests">
-<h1>Decision Trees &amp; Random Forests<a class="headerlink" href="#decision-trees-random-forests" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="environment-setup">
-<h2>Environment setup<a class="headerlink" href="#environment-setup" title="Permalink to this headline">¶</a></h2>
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="decision-trees-random-forests">
+<h1>Decision Trees &amp; Random Forests<a class="headerlink" href="#decision-trees-random-forests" title="Permalink to this heading">#</a></h1>
+<section id="environment-setup">
+<h2>Environment setup<a class="headerlink" href="#environment-setup" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">platform</span>
@@ -824,6 +578,11 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the decision boundary for a model using 2 features</span>
 <span class="c1"># Taken from https://github.com/ageron/handson-ml2/blob/master/06_decision_trees.ipynb</span>
@@ -849,21 +608,22 @@ const thebe_selector_output = ".output, .cell_output"
 </pre></div>
 </div>
 </div>
+</details>
 </div>
-</div>
-<div class="section" id="decision-trees">
-<h2>Decision Trees<a class="headerlink" href="#decision-trees" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="decision-trees">
+<h2>Decision Trees<a class="headerlink" href="#decision-trees" title="Permalink to this heading">#</a></h2>
 <p>(Heavily inspired by Chapter 6 of <a class="reference external" href="https://github.com/ageron/handson-ml2">Hands-On Machine Learning</a> by Aurélien Géron)</p>
-<div class="section" id="decision-trees-in-a-nutshell">
-<h3>Decision Trees in a nutshell<a class="headerlink" href="#decision-trees-in-a-nutshell" title="Permalink to this headline">¶</a></h3>
+<section id="decision-trees-in-a-nutshell">
+<h3>Decision Trees in a nutshell<a class="headerlink" href="#decision-trees-in-a-nutshell" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Supervised method, used for classification or regression.</p></li>
 <li><p>Build a tree-like structure based on a series of questions on the data.</p></li>
 </ul>
 <p><a class="reference external" href="https://jakevdp.github.io/PythonDataScienceHandbook/05.08-random-forests.html"><img alt="Decision Tree Example" src="../_images/dt_pdsh.png" /></a></p>
-</div>
-<div class="section" id="example-training-a-decision-tree-to-classify-flowers">
-<h3>Example: training a Decision Tree to classify flowers<a class="headerlink" href="#example-training-a-decision-tree-to-classify-flowers" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="example-training-a-decision-tree-to-classify-flowers">
+<h3>Example: training a Decision Tree to classify flowers<a class="headerlink" href="#example-training-a-decision-tree-to-classify-flowers" title="Permalink to this heading">#</a></h3>
 <p><a class="reference external" href="https://archive.ics.uci.edu/ml/datasets/iris">Iris</a> is a well-known multiclass dataset. It contains 3 classes of flowers with 50 samples each. There are a total of 4 features for each sample:</p>
 <ul class="simple">
 <li><p>sepal length</p></li>
@@ -1064,11 +824,11 @@ y_train: (150,)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/decision_trees_and_random_forests_12_0.svg" src="../_images/decision_trees_and_random_forests_12_0.svg" /></div>
+<img alt="../_images/88898803432a655361acb544147d86cdacb00a00fd3cdb599a48da249ddd60cf.svg" src="../_images/88898803432a655361acb544147d86cdacb00a00fd3cdb599a48da249ddd60cf.svg" /></div>
 </div>
-</div>
-<div class="section" id="tree-nodes">
-<h3>Tree nodes<a class="headerlink" href="#tree-nodes" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="tree-nodes">
+<h3>Tree nodes<a class="headerlink" href="#tree-nodes" title="Permalink to this heading">#</a></h3>
 <p>Each node is a step in the decision process, starting with the <em>root node</em> (depth 0). Leaf nodes represent predictions of the model.</p>
 <p>Node attributes are:</p>
 <ul class="simple">
@@ -1076,18 +836,18 @@ y_train: (150,)
 <li><p><strong>Samples</strong>: number of samples the node applies to.</p></li>
 <li><p><strong>Value</strong>: number of samples of each class the node applies to.</p></li>
 </ul>
-</div>
-<div class="section" id="the-gini-score">
-<h3>The Gini score<a class="headerlink" href="#the-gini-score" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="the-gini-score">
+<h3>The Gini score<a class="headerlink" href="#the-gini-score" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(G_i = 1- \sum_{k=1}^K {p_{i, k}}^2\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(p_{i, k}\)</span>: ratio of class <code class="docutils literal notranslate"><span class="pre">k</span></code> instances in the <span class="math notranslate nohighlight">\(i^{th}\)</span> node.</p></li>
 <li><p><span class="math notranslate nohighlight">\(Gini = 0\)</span>: all samples it applies to belong to the same class (“pure” node).</p></li>
 </ul>
 <p>Other possible measure: <em>entropy</em> (level of disorder).</p>
-</div>
-<div class="section" id="example-gini-scores-for-the-trained-decision-tree">
-<h3>Example: Gini scores for the trained Decision Tree<a class="headerlink" href="#example-gini-scores-for-the-trained-decision-tree" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="example-gini-scores-for-the-trained-decision-tree">
+<h3>Example: Gini scores for the trained Decision Tree<a class="headerlink" href="#example-gini-scores-for-the-trained-decision-tree" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Root node:</p></li>
 </ul>
@@ -1103,9 +863,9 @@ y_train: (150,)
 </ul>
 <div class="math notranslate nohighlight">
 \[G_3 = 1 - ((\frac{0}{54})^2 + (\frac{49}{54})^2 + (\frac{5}{54})^2) \simeq 0.168\]</div>
-</div>
-<div class="section" id="example-decision-boundaries-for-the-trained-decision-tree">
-<h3>Example: decision boundaries for the trained Decision Tree<a class="headerlink" href="#example-decision-boundaries-for-the-trained-decision-tree" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="example-decision-boundaries-for-the-trained-decision-tree">
+<h3>Example: decision boundaries for the trained Decision Tree<a class="headerlink" href="#example-decision-boundaries-for-the-trained-decision-tree" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_iris_decision_boundary</span><span class="p">(</span><span class="n">dt_model</span><span class="p">,</span> <span class="n">x_train_2feat</span><span class="p">,</span> <span class="n">y_train_2feat</span><span class="p">)</span>
@@ -1119,13 +879,13 @@ y_train: (150,)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/decision_trees_and_random_forests_17_0.png" src="../_images/decision_trees_and_random_forests_17_0.png" />
+<img alt="../_images/09be75fa5b9f47c21027031d6768c0ef9a3fd5ab4a0c69071a500c89d8152d2b.png" src="../_images/09be75fa5b9f47c21027031d6768c0ef9a3fd5ab4a0c69071a500c89d8152d2b.png" />
 </div>
 </div>
-</div>
-<div class="section" id="using-a-decision-tree-for-predictions">
-<h3>Using a Decision Tree for predictions<a class="headerlink" href="#using-a-decision-tree-for-predictions" title="Permalink to this headline">¶</a></h3>
-<ol class="simple">
+</section>
+<section id="using-a-decision-tree-for-predictions">
+<h3>Using a Decision Tree for predictions<a class="headerlink" href="#using-a-decision-tree-for-predictions" title="Permalink to this heading">#</a></h3>
+<ol class="arabic simple">
 <li><p>Using the new sample data, the tree is traversed to find the leaf node for that sample.</p></li>
 <li><p>Class probabilities are the ratios of samples of each class for this node.</p></li>
 </ol>
@@ -1150,15 +910,15 @@ y_train: (150,)
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="the-training-process">
-<h3>The training process<a class="headerlink" href="#the-training-process" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="the-training-process">
+<h3>The training process<a class="headerlink" href="#the-training-process" title="Permalink to this heading">#</a></h3>
 <p>The CART (<em>Classification And Regression Tree</em>) algorithm creates binary trees.</p>
 <p>At each depth, it looks for the highest <em>Gini gain</em> by finding the feature and the threshold that produces the <em>purest</em> subsets (weighted by their size). Then, its splits the subsets recursively according to the same logic.</p>
 <p>It stops once no split will further reduce impurity, or when it reaches the maximum depth.</p>
-</div>
-<div class="section" id="example-training-a-decision-tree-on-planar-data">
-<h3>Example: training a Decision Tree on planar data<a class="headerlink" href="#example-training-a-decision-tree-on-planar-data" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="example-training-a-decision-tree-on-planar-data">
+<h3>Example: training a Decision Tree on planar data<a class="headerlink" href="#example-training-a-decision-tree-on-planar-data" title="Permalink to this heading">#</a></h3>
 <p>Three classes with 3 samples each, two features <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span>.</p>
 <p><a class="reference external" href="https://victorzhou.com/blog/intro-to-random-forests/"><img alt="DT CART example" src="../_images/dt_cart_example.png" /></a></p>
 <p><span class="math notranslate nohighlight">\(G_{initial} = 1 - ((\frac{3}{9})^2 + (\frac{3}{9})^2 + (\frac{3}{9})^2) = \frac{2}{3}\)</span></p>
@@ -1172,14 +932,14 @@ y_train: (150,)
 <li><p><span class="math notranslate nohighlight">\(G_{left|x=2} = 1 - ((\frac{3}{6})^2 + (\frac{3}{6})^2 + (\frac{0}{6})^2) = 0,5\;\;G_{right|x=2} = 1 - ((\frac{0}{3})^2 + (\frac{0}{3})^2 + (\frac{3}{3})^2) = 0\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(Gain_{x=2} = G_{initial} - (\frac{6}{9}G_{left|x=2} + \frac{3}{9}G_{right|x=2}) = \frac{2}{3} - \frac{1}{3} = \frac{1}{3}\)</span></p></li>
 </ul>
-</div>
-<div class="section" id="decision-trees-for-regression-problems">
-<h3>Decision Trees for regression problems<a class="headerlink" href="#decision-trees-for-regression-problems" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="decision-trees-for-regression-problems">
+<h3>Decision Trees for regression problems<a class="headerlink" href="#decision-trees-for-regression-problems" title="Permalink to this heading">#</a></h3>
 <p>Decision Tree can also perform regression tasks.</p>
 <p>Instead of predicting a class, it outputs a value which is the average of all training samples associated with the leaf node reached during traversal.</p>
-</div>
-<div class="section" id="example-fitting-a-sine-curve-with-a-decision-tree">
-<h3>Example: fitting a sine curve with a Decision Tree<a class="headerlink" href="#example-fitting-a-sine-curve-with-a-decision-tree" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="example-fitting-a-sine-curve-with-a-decision-tree">
+<h3>Example: fitting a sine curve with a Decision Tree<a class="headerlink" href="#example-fitting-a-sine-curve-with-a-decision-tree" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Taken from https://scikit-learn.org/stable/auto_examples/tree/plot_tree_regression.html</span>
@@ -1223,7 +983,7 @@ y_train: (150,)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/decision_trees_and_random_forests_26_0.svg" src="../_images/decision_trees_and_random_forests_26_0.svg" /></div>
+<img alt="../_images/425013ac23779a6a48d751241b2a6b09f18f1676a6f38da8151ceb31cd1c5278.svg" src="../_images/425013ac23779a6a48d751241b2a6b09f18f1676a6f38da8151ceb31cd1c5278.svg" /></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1249,21 +1009,21 @@ y_train: (150,)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/decision_trees_and_random_forests_27_0.png" src="../_images/decision_trees_and_random_forests_27_0.png" />
+<img alt="../_images/c849a04333a0b0b59940b01dd070a25af4217a3f04b0558634244cf6f6b4f558.png" src="../_images/c849a04333a0b0b59940b01dd070a25af4217a3f04b0558634244cf6f6b4f558.png" />
 </div>
 </div>
-</div>
-<div class="section" id="advantages-of-decision-trees">
-<h3>Advantages of Decision Trees<a class="headerlink" href="#advantages-of-decision-trees" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="advantages-of-decision-trees">
+<h3>Advantages of Decision Trees<a class="headerlink" href="#advantages-of-decision-trees" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Versatility</p></li>
 <li><p>Very fast inference</p></li>
 <li><p>Intuitive and interpretable (<em>white box</em>)</p></li>
 <li><p>No feature scaling or encoding required</p></li>
 </ul>
-</div>
-<div class="section" id="decision-trees-shortcomings">
-<h3>Decision Trees shortcomings<a class="headerlink" href="#decision-trees-shortcomings" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="decision-trees-shortcomings">
+<h3>Decision Trees shortcomings<a class="headerlink" href="#decision-trees-shortcomings" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Main problem: <strong>overfitting</strong>. Regularization is possible through hyperparameters:</p>
 <ul>
@@ -1275,52 +1035,52 @@ y_train: (150,)
 </li>
 <li><p>Sensibility to small variations in the training data.</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="ensemble-learning">
-<h2>Ensemble learning<a class="headerlink" href="#ensemble-learning" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="ensemble-learning">
+<h2>Ensemble learning<a class="headerlink" href="#ensemble-learning" title="Permalink to this heading">#</a></h2>
 <p>(Heavily inspired by Chapter 7 of <a class="reference external" href="https://github.com/ageron/handson-ml2">Hands-On Machine Learning</a> by Aurélien Géron)</p>
-<div class="section" id="general-idea">
-<h3>General idea<a class="headerlink" href="#general-idea" title="Permalink to this headline">¶</a></h3>
+<section id="general-idea">
+<h3>General idea<a class="headerlink" href="#general-idea" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Combining several predictors will lead to better results.</p></li>
 <li><p>A group of predictors is called an <strong>ensemble</strong>.</p></li>
 <li><p>Works best when predictors are diverse.</p></li>
 <li><p>Less interpretable and harder to tune than an individual predictor.</p></li>
 </ul>
-</div>
-<div class="section" id="hard-voting-classifiers">
-<h3>Hard voting classifiers<a class="headerlink" href="#hard-voting-classifiers" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="hard-voting-classifiers">
+<h3>Hard voting classifiers<a class="headerlink" href="#hard-voting-classifiers" title="Permalink to this heading">#</a></h3>
 <p><a class="reference external" href="https://github.com/ageron/handson-ml2"><img alt="Hard voting classifier" src="../_images/hard_voting_classifier.png" /></a></p>
-</div>
-<div class="section" id="soft-voting-classifiers">
-<h3>Soft voting classifiers<a class="headerlink" href="#soft-voting-classifiers" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="soft-voting-classifiers">
+<h3>Soft voting classifiers<a class="headerlink" href="#soft-voting-classifiers" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Use class probabilities rather than class predictions.</p></li>
 <li><p>Often yields better results than hard voting (highly confident predictions have more weight).</p></li>
 </ul>
-</div>
-<div class="section" id="bagging-and-pasting">
-<h3>Bagging and pasting<a class="headerlink" href="#bagging-and-pasting" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="bagging-and-pasting">
+<h3>Bagging and pasting<a class="headerlink" href="#bagging-and-pasting" title="Permalink to this heading">#</a></h3>
 <p>Both methods train several predictors with the same algorithm on different random samples of the training set. The ensemble’s result is computed by aggregating (i.e. most frequent or average) the predictions of individual predictors.</p>
 <p>Only bagging (<em>bootstrap aggregating</em>) allows samples to be repeated for the same predictor.</p>
 <p><a class="reference external" href="https://github.com/ageron/handson-ml2"><img alt="Bagging &amp; pasting" src="../_images/bagging_pasting.png" /></a></p>
-</div>
-<div class="section" id="boosting">
-<h3>Boosting<a class="headerlink" href="#boosting" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="boosting">
+<h3>Boosting<a class="headerlink" href="#boosting" title="Permalink to this heading">#</a></h3>
 <p>Bagging and pasting methods rely on the simultaneous construction of several independent predictors.</p>
 <p>On the contrary, boosting methods train predictors <em>sequentially</em>, each one trying to correct its predecessor.</p>
-<div class="section" id="adaboost">
-<h4>AdaBoost<a class="headerlink" href="#adaboost" title="Permalink to this headline">¶</a></h4>
+<section id="adaboost">
+<h4>AdaBoost<a class="headerlink" href="#adaboost" title="Permalink to this heading">#</a></h4>
 <p>The core principle of AdaBoost (<em>Adaptative Boosting</em>) is to train several predictors on repeatedly modified versions of the dataset. The weights of incorrectly predicted instances are adjusted such that subsequent predictors focus more on difficult cases.</p>
-</div>
-<div class="section" id="gradient-boosting">
-<h4>Gradient boosting<a class="headerlink" href="#gradient-boosting" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="gradient-boosting">
+<h4>Gradient boosting<a class="headerlink" href="#gradient-boosting" title="Permalink to this heading">#</a></h4>
 <p>This methods train subsequent predictors on the <em>residual errors</em> made by the previous ones.</p>
 <p>The ensemble’s prediction is the sum of all individual predictions.</p>
-</div>
-<div class="section" id="example-gradient-boosting-for-regression">
-<h4>Example: gradient boosting for regression<a class="headerlink" href="#example-gradient-boosting-for-regression" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="example-gradient-boosting-for-regression">
+<h4>Example: gradient boosting for regression<a class="headerlink" href="#example-gradient-boosting-for-regression" title="Permalink to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">noisy_quadratic</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
@@ -1332,7 +1092,7 @@ y_train: (150,)
 
 
 <span class="k">def</span> <span class="nf">grow_regression_tree</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Create and train a Decision Tree Regressor&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create and train a Decision Tree Regressor&quot;&quot;&quot;</span>
     <span class="n">dtr_model</span> <span class="o">=</span> <span class="n">DecisionTreeRegressor</span><span class="p">(</span><span class="n">max_depth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
     <span class="n">dtr_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">dtr_model</span>
@@ -1365,11 +1125,11 @@ y_train: (150,)
 
 <span class="c1"># Compute error of first predictor</span>
 <span class="n">y_pred_1</span> <span class="o">=</span> <span class="n">dtr_model_1</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_test</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;First DTR error: </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">y_test</span> <span class="o">-</span> <span class="n">y_pred_1</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;First DTR error: </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">y_test</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">y_pred_1</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># Compute error of boosted ensemble</span>
 <span class="n">y_pred_ens</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">dtr_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_test</span><span class="p">)</span> <span class="k">for</span> <span class="n">dtr_model</span> <span class="ow">in</span> <span class="p">(</span><span class="n">dtr_model_1</span><span class="p">,</span> <span class="n">dtr_model_2</span><span class="p">,</span> <span class="n">dtr_model_3</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Boosted ensemble error: </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">y_test</span> <span class="o">-</span> <span class="n">y_pred_ens</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Boosted ensemble error: </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">y_test</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">y_pred_ens</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1381,11 +1141,16 @@ Boosted ensemble error: [0.04451791]
 </div>
 </div>
 <div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_predictions</span><span class="p">(</span>
     <span class="n">regressors</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">axes</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;r-&quot;</span><span class="p">,</span> <span class="n">data_style</span><span class="o">=</span><span class="s2">&quot;b.&quot;</span><span class="p">,</span> <span class="n">data_label</span><span class="o">=</span><span class="kc">None</span>
 <span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Plot dataset and sum of predictions for one or several regressor(s)&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plot dataset and sum of predictions for one or several regressor(s)&quot;&quot;&quot;</span>
 
     <span class="n">x1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">500</span><span class="p">)</span>
     <span class="n">y_pred</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">regressor</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x1</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span> <span class="k">for</span> <span class="n">regressor</span> <span class="ow">in</span> <span class="n">regressors</span><span class="p">)</span>
@@ -1397,8 +1162,14 @@ Boosted ensemble error: [0.04451791]
 </pre></div>
 </div>
 </div>
+</details>
 </div>
 <div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span><span class="mi">14</span><span class="p">))</span>
 
@@ -1434,17 +1205,18 @@ Boosted ensemble error: [0.04451791]
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
-<img alt="../_images/decision_trees_and_random_forests_43_0.png" src="../_images/decision_trees_and_random_forests_43_0.png" />
+<img alt="../_images/682fe4904d71c8db16e212da93be72327e02a44a37729366c65acecf1767d165.png" src="../_images/682fe4904d71c8db16e212da93be72327e02a44a37729366c65acecf1767d165.png" />
 </div>
 </div>
-</div>
-</div>
-</div>
-<div class="section" id="random-forests">
-<h2>Random Forests<a class="headerlink" href="#random-forests" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="random-forests-in-a-nutshell">
-<h3>Random Forests in a nutshell<a class="headerlink" href="#random-forests-in-a-nutshell" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+</section>
+<section id="random-forests">
+<h2>Random Forests<a class="headerlink" href="#random-forests" title="Permalink to this heading">#</a></h2>
+<section id="random-forests-in-a-nutshell">
+<h3>Random Forests in a nutshell<a class="headerlink" href="#random-forests-in-a-nutshell" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Ensemble of Decision Trees, generally trained via bagging.</p></li>
 <li><p>May be used for classification or regression.</p></li>
@@ -1452,9 +1224,9 @@ Boosted ensemble error: [0.04451791]
 <li><p>Ensembling mitigates the individual shortcomings of Decision Trees (overfitting, sensibility to small changes in the dataset).</p></li>
 <li><p>On the other hand, results are less interpretable.</p></li>
 </ul>
-</div>
-<div class="section" id="example-training-a-random-forest-to-classify-flowers">
-<h3>Example: training a Random Forest to classify flowers<a class="headerlink" href="#example-training-a-random-forest-to-classify-flowers" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="example-training-a-random-forest-to-classify-flowers">
+<h3>Example: training a Random Forest to classify flowers<a class="headerlink" href="#example-training-a-random-forest-to-classify-flowers" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use whole Iris dataset</span>
@@ -1482,9 +1254,9 @@ Boosted ensemble error: [0.04451791]
 </div>
 </div>
 </div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -1498,7 +1270,7 @@ Boosted ensemble error: [0.04451791]
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./algorithms"
         },
         predefinedOutput: true
@@ -1506,44 +1278,139 @@ Boosted ensemble error: [0.04451791]
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="logistic_regression.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Logistic Regression</p>
-        </div>
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="logistic_regression.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Logistic Regression</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="bayesian_methods.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="bayesian_methods.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Bayesian Methods</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
-</div>
-            
-        </div>
-    </div>
-    <footer class="footer">
-  <p>
-    
-      By Baptiste Pesquet<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
-
-
       </div>
-    </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+</div>
 
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup">Environment setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-trees">Decision Trees</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-trees-in-a-nutshell">Decision Trees in a nutshell</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-training-a-decision-tree-to-classify-flowers">Example: training a Decision Tree to classify flowers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tree-nodes">Tree nodes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-gini-score">The Gini score</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-gini-scores-for-the-trained-decision-tree">Example: Gini scores for the trained Decision Tree</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-decision-boundaries-for-the-trained-decision-tree">Example: decision boundaries for the trained Decision Tree</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-a-decision-tree-for-predictions">Using a Decision Tree for predictions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-training-process">The training process</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-training-a-decision-tree-on-planar-data">Example: training a Decision Tree on planar data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-trees-for-regression-problems">Decision Trees for regression problems</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-fitting-a-sine-curve-with-a-decision-tree">Example: fitting a sine curve with a Decision Tree</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#advantages-of-decision-trees">Advantages of Decision Trees</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-trees-shortcomings">Decision Trees shortcomings</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-learning">Ensemble learning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#general-idea">General idea</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hard-voting-classifiers">Hard voting classifiers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#soft-voting-classifiers">Soft voting classifiers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bagging-and-pasting">Bagging and pasting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boosting">Boosting</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#adaboost">AdaBoost</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-boosting">Gradient boosting</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-gradient-boosting-for-regression">Example: gradient boosting for regression</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-forests">Random Forests</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#random-forests-in-a-nutshell">Random Forests in a nutshell</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-training-a-random-forest-to-classify-flowers">Example: training a Random Forest to classify flowers</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Baptiste Pesquet
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2021.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

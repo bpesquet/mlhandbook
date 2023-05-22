@@ -1,697 +1,525 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
     <title>Recurrent Neural Networks &#8212; Machine Learning Handbook</title>
-    
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    
-      
-
-    
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.css?digest=84ace793992934648b4de8eed757e5a2" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.9d8b4a8b9bb19db25eeaddc40d639ba2.js"></script>
-    <script >const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'algorithms/recurrent_neural_networks';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Autoencoders" href="autoencoders.html" />
     <link rel="prev" title="Convolutional Neural Networks" href="convolutional_neural_networks.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
-
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<div class="col-12 col-md-3 bd-sidebar site-navigation " id="site-navigation">
-    
-        <div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../_static/mlhandbook_logo.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">Machine Learning Handbook</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="../_static/mlhandbook_logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/mlhandbook_logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference external" href="https://www.bpesquet.fr/mlkatas">
-   Machine Learning Katas
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference external" href="https://www.bpesquet.fr/mlkatas">Machine Learning Katas</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  overview
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">overview</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../overview/introduction_to_machine_learning.html">
-   Introduction to Machine Learning
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../overview/machine_learning_in_action.html">
-   Machine Learning in action
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../overview/introduction_to_reinforcement_learning.html">
-   Introduction to Reinforcement Learning
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/introduction_to_machine_learning.html">Introduction to Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/machine_learning_in_action.html">Machine Learning in action</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/introduction_to_reinforcement_learning.html">Introduction to Reinforcement Learning</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Fundamentals
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fundamentals</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../fundamentals/handling_data.html">
-   Handling data
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../fundamentals/assessing_results.html">
-   Assessing results
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../fundamentals/training_models.html">
-   Training models
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../fundamentals/handling_data.html">Handling data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fundamentals/assessing_results.html">Assessing results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fundamentals/training_models.html">Training models</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Algorithms
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Algorithms</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="classic_ml.html">
-   Classic Machine Learning
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="k_nearest_neighbors.html">
-     K-Nearest Neighbors
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="linear_regression.html">
-     Linear Regression
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="logistic_regression.html">
-     Logistic Regression
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="decision_trees_and_random_forests.html">
-     Decision Trees &amp; Random Forests
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="bayesian_methods.html">
-     Bayesian Methods
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="support_vector_machines.html">
-     Support Vector Machines
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="k_means.html">
-     K-Means
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 current active has-children">
-  <a class="reference internal" href="nn_deep_learning.html">
-   Neural Networks and Deep Learning
-  </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
-  <label for="toctree-checkbox-2">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul class="current">
-   <li class="toctree-l2">
-    <a class="reference internal" href="artificial_neural_networks.html">
-     Artificial Neural Networks
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="convolutional_neural_networks.html">
-     Convolutional Neural Networks
-    </a>
-   </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
-     Recurrent Neural Networks
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="autoencoders.html">
-     Autoencoders
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="neural_style_transfer.html">
-     Neural Style Transfer
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="generative_adversarial_networks.html">
-     Generative Adversarial Networks
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="transformers.html">
-     Transformers
-    </a>
-   </li>
-  </ul>
- </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="classic_ml.html">Classic Machine Learning</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="k_nearest_neighbors.html">K-Nearest Neighbors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linear_regression.html">Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logistic_regression.html">Logistic Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="decision_trees_and_random_forests.html">Decision Trees &amp; Random Forests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bayesian_methods.html">Bayesian Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="support_vector_machines.html">Support Vector Machines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="k_means.html">K-Means</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Engineering
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../engineering/introduction_to_mlops.html">
-   Introduction to MLOps
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../engineering/machine_learning_issues.html">
-   Machine Learning issues
-  </a>
- </li>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="nn_deep_learning.html">Neural Networks and Deep Learning</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="artificial_neural_networks.html">Artificial Neural Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="convolutional_neural_networks.html">Convolutional Neural Networks</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Recurrent Neural Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="autoencoders.html">Autoencoders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="neural_style_transfer.html">Neural Style Transfer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generative_adversarial_networks.html">Generative Adversarial Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="transformers.html">Transformers</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Tools
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../tools/python.html">
-   Python
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
-  <label for="toctree-checkbox-3">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../tools/python_ecosystem.html">
-     The Python ecosystem
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../tools/python_cheatsheet.html">
-     Python cheatsheet
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../tools/python_good_practices.html">
-     Python good practices
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../tools/numpy.html">
-   NumPy
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../tools/keras.html">
-   Keras
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../tools/pytorch.html">
-   PyTorch
-  </a>
- </li>
+</li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Reference
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Engineering</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../reference/activation_functions.html">
-   Activation functions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../reference/glossary.html">
-   Glossary
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../reference/acknowledgments.html">
-   Acknowledgments
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../engineering/introduction_to_mlops.html">Introduction to MLOps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../engineering/machine_learning_issues.html">Machine Learning issues</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tools</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tools/python.html">Python</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tools/python_ecosystem.html">The Python ecosystem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/python_cheatsheet.html">Python cheatsheet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/python_good_practices.html">Python good practices</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/numpy.html">NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/keras.html">Keras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/pytorch.html">PyTorch</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../reference/activation_functions.html">Activation functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/acknowledgments.html">Acknowledgments</a></li>
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
-          
-<!-- This is an invisible pixel that we watch to see if we've scrolled. -->
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
 <div class="sbt-scroll-pixel-helper"></div>
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            <div class="topbar-left">
-                
-                <label class="nav-toggle-button" for="__navigation">
-                    <div class="visually-hidden">Toggle navigation</div>
-                    <i class="fas fa-bars"></i>
-                </label>
-                
-            </div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/bpesquet/mlhandbook/master?urlpath=tree/algorithms/recurrent_neural_networks.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/bpesquet/mlhandbook/blob/master/algorithms/recurrent_neural_networks.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/bpesquet/mlhandbook" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/bpesquet/mlhandbook/edit/master/algorithms/recurrent_neural_networks.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/bpesquet/mlhandbook/issues/new?title=Issue%20on%20page%20%2Falgorithms/recurrent_neural_networks.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/algorithms/recurrent_neural_networks.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Recurrent Neural Networks</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
             
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/algorithms/recurrent_neural_networks.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/bpesquet/mlhandbook"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/bpesquet/mlhandbook/issues/new?title=Issue%20on%20page%20%2Falgorithms/recurrent_neural_networks.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/bpesquet/mlhandbook/edit/master/algorithms/recurrent_neural_networks.ipynb"><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/bpesquet/mlhandbook/master?urlpath=tree/algorithms/recurrent_neural_networks.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        <a class="colab-button" href="https://colab.research.google.com/github/bpesquet/mlhandbook/blob/master/algorithms/recurrent_neural_networks.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
-                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
-                    src="../_static/images/logo_colab.png"
-                    alt="Interact on Colab">Colab</button></a>
-        
-        
-        
-    </div>
-</div>
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div>
+                <h2> Contents </h2>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
+            <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#summary">
-   Summary
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#rnn-fundamentals">
-   RNN fundamentals
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#recurrent-neural-networks-in-a-nutshell">
-     Recurrent Neural Networks in a nutshell
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#terminology">
-     Terminology
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#rnn-architecture">
-     RNN architecture
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#typology-of-rnns">
-     Typology of RNNs
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#training-a-rnn">
-     Training a RNN
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#sequence-format">
-     Sequence format
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-forecasting-a-univariate-time-series">
-     Example: forecasting a univariate time series
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#environment-setup">
-       Environment setup
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#single-step-naive-forecasting">
-     Single step, naïve forecasting
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#recurrent-neurons">
-     Recurrent neurons
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#recurrent-layers">
-     Recurrent layers
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#multi-step-forecasting">
-     Multi-step forecasting
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#lstm-gru-and-1d-convolutions">
-   LSTM, GRU and 1D convolutions
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-limits-of-recurrent-neurons">
-     The limits of recurrent neurons
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#lstm-cells">
-     LSTM cells
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#gru-cells">
-     GRU cells
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#sequence-processing-with-1d-convolutions">
-     Sequence processing with 1D convolutions
-    </a>
-   </li>
-  </ul>
- </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rnn-fundamentals">RNN fundamentals</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recurrent-neural-networks-in-a-nutshell">Recurrent Neural Networks in a nutshell</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#terminology">Terminology</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rnn-architecture">RNN architecture</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#typology-of-rnns">Typology of RNNs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-a-rnn">Training a RNN</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sequence-format">Sequence format</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-forecasting-a-univariate-time-series">Example: forecasting a univariate time series</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup">Environment setup</a></li>
 </ul>
-
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#single-step-naive-forecasting">Single step, naïve forecasting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recurrent-neurons">Recurrent neurons</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recurrent-layers">Recurrent layers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-step-forecasting">Multi-step forecasting</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lstm-gru-and-1d-convolutions">LSTM, GRU and 1D convolutions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-limits-of-recurrent-neurons">The limits of recurrent neurons</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lstm-cells">LSTM cells</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gru-cells">GRU cells</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sequence-processing-with-1d-convolutions">Sequence processing with 1D convolutions</a></li>
+</ul>
+</li>
+</ul>
             </nav>
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Recurrent Neural Networks</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#summary">
-   Summary
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#rnn-fundamentals">
-   RNN fundamentals
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#recurrent-neural-networks-in-a-nutshell">
-     Recurrent Neural Networks in a nutshell
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#terminology">
-     Terminology
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#rnn-architecture">
-     RNN architecture
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#typology-of-rnns">
-     Typology of RNNs
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#training-a-rnn">
-     Training a RNN
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#sequence-format">
-     Sequence format
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-forecasting-a-univariate-time-series">
-     Example: forecasting a univariate time series
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#environment-setup">
-       Environment setup
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#single-step-naive-forecasting">
-     Single step, naïve forecasting
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#recurrent-neurons">
-     Recurrent neurons
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#recurrent-layers">
-     Recurrent layers
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#multi-step-forecasting">
-     Multi-step forecasting
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#lstm-gru-and-1d-convolutions">
-   LSTM, GRU and 1D convolutions
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-limits-of-recurrent-neurons">
-     The limits of recurrent neurons
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#lstm-cells">
-     LSTM cells
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#gru-cells">
-     GRU cells
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#sequence-processing-with-1d-convolutions">
-     Sequence processing with 1D convolutions
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
 
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            
-              <div>
+              
                 
-  <div class="section" id="recurrent-neural-networks">
-<h1>Recurrent Neural Networks<a class="headerlink" href="#recurrent-neural-networks" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="summary">
-<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="recurrent-neural-networks">
+<h1>Recurrent Neural Networks<a class="headerlink" href="#recurrent-neural-networks" title="Permalink to this heading">#</a></h1>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>RNN fundamentals</p></li>
 <li><p>LSTM, GRU and 1D convolutions</p></li>
 </ul>
-</div>
-<div class="section" id="rnn-fundamentals">
-<h2>RNN fundamentals<a class="headerlink" href="#rnn-fundamentals" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="rnn-fundamentals">
+<h2>RNN fundamentals<a class="headerlink" href="#rnn-fundamentals" title="Permalink to this heading">#</a></h2>
 <p>(Heavily inspired by Chapter 15 of <a class="reference external" href="https://github.com/ageron/handson-ml2">Hands-On Machine Learning</a> by Aurélien Géron)</p>
-<div class="section" id="recurrent-neural-networks-in-a-nutshell">
-<h3>Recurrent Neural Networks in a nutshell<a class="headerlink" href="#recurrent-neural-networks-in-a-nutshell" title="Permalink to this headline">¶</a></h3>
+<section id="recurrent-neural-networks-in-a-nutshell">
+<h3>Recurrent Neural Networks in a nutshell<a class="headerlink" href="#recurrent-neural-networks-in-a-nutshell" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Family of neural networks that maintain some kind of <strong>state</strong>, contrary to feedforward networks like MLP.</p></li>
 <li><p>Able to handle <strong>sequential data</strong> (data for which there is some sort of dependency through time).</p></li>
@@ -705,25 +533,25 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="terminology">
-<h3>Terminology<a class="headerlink" href="#terminology" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="terminology">
+<h3>Terminology<a class="headerlink" href="#terminology" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p><strong>Sequence</strong>: instance of sequential data.</p></li>
 <li><p><strong>Time step</strong> (or <em>frame</em>): incremental change in time used to discretize the sequence.</p></li>
 <li><p><strong>Cell</strong>: recurrent unit in a RNN.</p></li>
 <li><p><strong>Unrolling</strong>: representing the RNN flow against the time axis.</p></li>
 </ul>
-</div>
-<div class="section" id="rnn-architecture">
-<h3>RNN architecture<a class="headerlink" href="#rnn-architecture" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="rnn-architecture">
+<h3>RNN architecture<a class="headerlink" href="#rnn-architecture" title="Permalink to this heading">#</a></h3>
 <p>RNN have <strong>loops</strong> into them, allowing information to persist and be passed from one step of the network to the next.</p>
 <p><a class="reference external" href="https://colah.github.io/posts/2015-08-Understanding-LSTMs/"><img alt="RNN unrolled" src="../_images/RNN-unrolled.png" /></a></p>
 <p>At each time step, the output is a function of all inputs from previous time steps. The network has a form of <strong>memory</strong>, encoding information about the timesteps it has seen so far.</p>
-</div>
-<div class="section" id="typology-of-rnns">
-<h3>Typology of RNNs<a class="headerlink" href="#typology-of-rnns" title="Permalink to this headline">¶</a></h3>
-<table class="colwidths-auto table">
+</section>
+<section id="typology-of-rnns">
+<h3>Typology of RNNs<a class="headerlink" href="#typology-of-rnns" title="Permalink to this heading">#</a></h3>
+<table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>RNN Type</p></th>
 <th class="head"><p>In</p></th>
@@ -750,26 +578,26 @@ const thebe_selector_output = ".output, .cell_output"
 </tbody>
 </table>
 <p><a class="reference external" href="https://github.com/ageron/handson-ml2"><img alt="RNN inputs and outputs" src="../_images/rnn_input_output.png" /></a></p>
-</div>
-<div class="section" id="training-a-rnn">
-<h3>Training a RNN<a class="headerlink" href="#training-a-rnn" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="training-a-rnn">
+<h3>Training a RNN<a class="headerlink" href="#training-a-rnn" title="Permalink to this heading">#</a></h3>
 <p>A RNN is similar to a feedforward neural network that has a layer for each time step. Its weights are shared across time.</p>
 <p>The training process uses <strong>backpropagation through time</strong> (BPTT). After the forward pass, gradients of the cost function are propagated backwards through the unrolled network (<a class="reference external" href="https://stats.stackexchange.com/a/220111/8706">more details</a>).</p>
 <p><a class="reference external" href="https://github.com/ageron/handson-ml2"><img alt="BPTT" src="../_images/bptt.png" /></a></p>
-</div>
-<div class="section" id="sequence-format">
-<h3>Sequence format<a class="headerlink" href="#sequence-format" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="sequence-format">
+<h3>Sequence format<a class="headerlink" href="#sequence-format" title="Permalink to this heading">#</a></h3>
 <p>Input sequences for a RNN are 3D tensors. Axis are: <strong>batch size</strong> (number of sequences in the batch), <strong>time steps</strong> for each sequence, and <strong>features</strong> (values of attributes at a specific time step).</p>
 <ul class="simple">
 <li><p>An <strong>univariate</strong> sequence has only a single feature per time step.</p></li>
 <li><p>A <strong>multivariate</strong> sequence has several features per time step.</p></li>
 </ul>
 <p><img alt="Input sequence format" src="../_images/time_series.png" /></p>
-</div>
-<div class="section" id="example-forecasting-a-univariate-time-series">
-<h3>Example: forecasting a univariate time series<a class="headerlink" href="#example-forecasting-a-univariate-time-series" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="environment-setup">
-<h4>Environment setup<a class="headerlink" href="#environment-setup" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="example-forecasting-a-univariate-time-series">
+<h3>Example: forecasting a univariate time series<a class="headerlink" href="#example-forecasting-a-univariate-time-series" title="Permalink to this heading">#</a></h3>
+<section id="environment-setup">
+<h4>Environment setup<a class="headerlink" href="#environment-setup" title="Permalink to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">platform</span>
@@ -822,6 +650,11 @@ Keras version: 2.2.4-tf
 </div>
 </div>
 <div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Utility functions</span>
 <span class="c1"># First two are adapted from</span>
@@ -829,7 +662,7 @@ Keras version: 2.2.4-tf
 
 
 <span class="k">def</span> <span class="nf">generate_time_series</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">n_steps</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Generate a batch of time series with same length = n_steps</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate a batch of time series with same length = n_steps</span>
 <span class="sd">    Each series is the sum of two sine waves of fixed amplitudes </span>
 <span class="sd">        but random frequencies and phases, with added noise</span>
 <span class="sd">    Return a 3D tensor of shape (batch_size, n_steps, 1)&quot;&quot;&quot;</span>
@@ -843,7 +676,7 @@ Keras version: 2.2.4-tf
 
 
 <span class="k">def</span> <span class="nf">plot_series</span><span class="p">(</span><span class="n">series</span><span class="p">,</span> <span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">x_label</span><span class="o">=</span><span class="s2">&quot;$t$&quot;</span><span class="p">,</span> <span class="n">y_label</span><span class="o">=</span><span class="s2">&quot;$x(t)$&quot;</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Plot a time series with actual and predicted future values</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plot a time series with actual and predicted future values</span>
 <span class="sd">    series: vector of shape (time steps, )</span>
 <span class="sd">    y_true: scalar (if only 1 ahead step) or vector of shape (ahead steps,)</span>
 <span class="sd">    y_pred: scalar (if only 1 ahead step) or vector of shape (ahead steps,)&quot;&quot;&quot;</span>
@@ -879,7 +712,7 @@ Keras version: 2.2.4-tf
 
 
 <span class="k">def</span> <span class="nf">plot_loss</span><span class="p">(</span><span class="n">history</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Plot training loss for a Keras model</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plot training loss for a Keras model</span>
 <span class="sd">    Takes a Keras History object as parameter&quot;&quot;&quot;</span>
 
     <span class="n">loss</span> <span class="o">=</span> <span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s2">&quot;loss&quot;</span><span class="p">]</span>
@@ -900,6 +733,7 @@ Keras version: 2.2.4-tf
 </pre></div>
 </div>
 </div>
+</details>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -946,13 +780,13 @@ x_test: (1000, 50, 1), y_test: (1000, 1)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/recurrent_neural_networks_16_0.png" src="../_images/recurrent_neural_networks_16_0.png" />
+<img alt="../_images/5fa96ce4ab5afc54bbaaa81cdb39215b0d8794a19602009e622ec89681f64087.png" src="../_images/5fa96ce4ab5afc54bbaaa81cdb39215b0d8794a19602009e622ec89681f64087.png" />
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="single-step-naive-forecasting">
-<h3>Single step, naïve forecasting<a class="headerlink" href="#single-step-naive-forecasting" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="single-step-naive-forecasting">
+<h3>Single step, naïve forecasting<a class="headerlink" href="#single-step-naive-forecasting" title="Permalink to this heading">#</a></h3>
 <p>Here, we only try to predict the sequence value one step ahead in the future.</p>
 <p>A baseline solution (always useful at the beginning of any ML project) would be to use the last know value as prediction.</p>
 <div class="cell docutils container">
@@ -961,7 +795,7 @@ x_test: (1000, 50, 1), y_test: (1000, 1)
 <span class="n">y_pred_naive</span> <span class="o">=</span> <span class="n">x_val</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;y_pred_naive: </span><span class="si">{</span><span class="n">y_pred_naive</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Naïve predictor MSE: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_pred_naive</span><span class="p">))</span><span class="si">:</span><span class="s2">0.05f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Naïve predictor MSE: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred_naive</span><span class="p">))</span><span class="si">:</span><span class="s2">0.05f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -981,12 +815,12 @@ Naïve predictor MSE: 0.02044
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/recurrent_neural_networks_19_0.png" src="../_images/recurrent_neural_networks_19_0.png" />
+<img alt="../_images/83dd917448559f6109a71ff4f9021fed775b5efea58f4d421fe982437b90b5c5.png" src="../_images/83dd917448559f6109a71ff4f9021fed775b5efea58f4d421fe982437b90b5c5.png" />
 </div>
 </div>
-</div>
-<div class="section" id="recurrent-neurons">
-<h3>Recurrent neurons<a class="headerlink" href="#recurrent-neurons" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="recurrent-neurons">
+<h3>Recurrent neurons<a class="headerlink" href="#recurrent-neurons" title="Permalink to this heading">#</a></h3>
 <p>The most basic form of RNN cell is a <em>recurrent neuron</em>. It simply sends its output back to itself.</p>
 <p>At each time step <span class="math notranslate nohighlight">\(t\)</span>, it receives the input vector <span class="math notranslate nohighlight">\(\mathbf{x}_{(t)}\)</span> and its own scalar output from the previous time step, <span class="math notranslate nohighlight">\(y_{(t-1)}\)</span>.</p>
 <p><a class="reference external" href="https://github.com/ageron/handson-ml2/"><img alt="Recurrent neuron" src="../_images/recurrent_neuron.png" /></a></p>
@@ -1039,7 +873,7 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/recurrent_neural_networks_22_0.png" src="../_images/recurrent_neural_networks_22_0.png" />
+<img alt="../_images/0dc0f64e6d0499f2347d610f2532607ef82e25e412760164217d03ea7ad9d7b1.png" src="../_images/0dc0f64e6d0499f2347d610f2532607ef82e25e412760164217d03ea7ad9d7b1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1048,7 +882,7 @@ _________________________________________________________________
 
 <span class="n">y_pred_basic</span> <span class="o">=</span> <span class="n">basic_rnn_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_val</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Basic RNN MSE: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_pred_basic</span><span class="p">))</span><span class="si">:</span><span class="s2">0.05f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Basic RNN MSE: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred_basic</span><span class="p">))</span><span class="si">:</span><span class="s2">0.05f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1067,12 +901,12 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/recurrent_neural_networks_24_0.png" src="../_images/recurrent_neural_networks_24_0.png" />
+<img alt="../_images/b9d549f8cc79dfda61c9e585b8b05277f25dc138ce7f6629779a104f0c8c82cd.png" src="../_images/b9d549f8cc79dfda61c9e585b8b05277f25dc138ce7f6629779a104f0c8c82cd.png" />
 </div>
 </div>
-</div>
-<div class="section" id="recurrent-layers">
-<h3>Recurrent layers<a class="headerlink" href="#recurrent-layers" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="recurrent-layers">
+<h3>Recurrent layers<a class="headerlink" href="#recurrent-layers" title="Permalink to this heading">#</a></h3>
 <p>Recurrent neurons can be stacked together to form a <em>recurrent layer</em>.</p>
 <p>At each time step <span class="math notranslate nohighlight">\(t\)</span>, each neuron of the layer receives both the input vector <span class="math notranslate nohighlight">\(\mathbf{x}_{(t)}\)</span> and the output of the layer from the previous time step, <span class="math notranslate nohighlight">\(\mathbf{y}_{(t-1)}\)</span> (which is a vector in that case).</p>
 <p><img alt="Recurrent layer" src="../_images/recurrent_layer.png" /></p>
@@ -1134,7 +968,7 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/recurrent_neural_networks_27_0.png" src="../_images/recurrent_neural_networks_27_0.png" />
+<img alt="../_images/600eb3bb5bfcf14d0fe1ff544f3e8748628eeaba37be0b750d6672eee5e7c234.png" src="../_images/600eb3bb5bfcf14d0fe1ff544f3e8748628eeaba37be0b750d6672eee5e7c234.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1143,7 +977,7 @@ _________________________________________________________________
 
 <span class="n">y_pred_stacked</span> <span class="o">=</span> <span class="n">stacked_rnn_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_val</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Stacked RNN MSE: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_pred_stacked</span><span class="p">))</span><span class="si">:</span><span class="s2">0.05f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Stacked RNN MSE: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred_stacked</span><span class="p">))</span><span class="si">:</span><span class="s2">0.05f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1162,12 +996,12 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/recurrent_neural_networks_29_0.png" src="../_images/recurrent_neural_networks_29_0.png" />
+<img alt="../_images/ebf2a185389718d33fc543c9467897e2db7298fbb100a222a6bd30baf0ab79ca.png" src="../_images/ebf2a185389718d33fc543c9467897e2db7298fbb100a222a6bd30baf0ab79ca.png" />
 </div>
 </div>
-</div>
-<div class="section" id="multi-step-forecasting">
-<h3>Multi-step forecasting<a class="headerlink" href="#multi-step-forecasting" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="multi-step-forecasting">
+<h3>Multi-step forecasting<a class="headerlink" href="#multi-step-forecasting" title="Permalink to this heading">#</a></h3>
 <p>To forecast <span class="math notranslate nohighlight">\(n\)</span> timesteps ahead, we train the network to predict all <span class="math notranslate nohighlight">\(n\)</span> next values at once.</p>
 <p>To do so, we need to turn the targets into vectors containing the next <span class="math notranslate nohighlight">\(n\)</span> values.</p>
 <div class="cell docutils container">
@@ -1245,7 +1079,7 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/recurrent_neural_networks_33_0.png" src="../_images/recurrent_neural_networks_33_0.png" />
+<img alt="../_images/9fdb8b0dbfa746f6302107bf0e7453111ec40bfc35ed5e2f7d8f7d29924efb03.png" src="../_images/9fdb8b0dbfa746f6302107bf0e7453111ec40bfc35ed5e2f7d8f7d29924efb03.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1254,7 +1088,7 @@ _________________________________________________________________
 
 <span class="n">y_pred_multistep</span> <span class="o">=</span> <span class="n">multistep_rnn_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_val</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Multistep RNN MSE: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_pred_multistep</span><span class="p">))</span><span class="si">:</span><span class="s2">0.05f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Multistep RNN MSE: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred_multistep</span><span class="p">))</span><span class="si">:</span><span class="s2">0.05f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1275,20 +1109,20 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/recurrent_neural_networks_35_0.png" src="../_images/recurrent_neural_networks_35_0.png" />
+<img alt="../_images/e8ebaf705707ce057104db2e4459eaa9e029b800b1dee8bd3c0a1a358b5b4f89.png" src="../_images/e8ebaf705707ce057104db2e4459eaa9e029b800b1dee8bd3c0a1a358b5b4f89.png" />
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="lstm-gru-and-1d-convolutions">
-<h2>LSTM, GRU and 1D convolutions<a class="headerlink" href="#lstm-gru-and-1d-convolutions" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="the-limits-of-recurrent-neurons">
-<h3>The limits of recurrent neurons<a class="headerlink" href="#the-limits-of-recurrent-neurons" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="lstm-gru-and-1d-convolutions">
+<h2>LSTM, GRU and 1D convolutions<a class="headerlink" href="#lstm-gru-and-1d-convolutions" title="Permalink to this heading">#</a></h2>
+<section id="the-limits-of-recurrent-neurons">
+<h3>The limits of recurrent neurons<a class="headerlink" href="#the-limits-of-recurrent-neurons" title="Permalink to this heading">#</a></h3>
 <p>Basic RNN architectures suffer from a <em>short-term memory</em> problem. Because of data transformations when traversing the layers, some information is lost at each time step. Thus, they struggle to handle long-term dependencies between sequence elements.</p>
 <p>Newer, more sophisticated RNN cell types like <strong>LSTM</strong> and <strong>GRU</strong> alleviate this limit.</p>
-</div>
-<div class="section" id="lstm-cells">
-<h3>LSTM cells<a class="headerlink" href="#lstm-cells" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="lstm-cells">
+<h3>LSTM cells<a class="headerlink" href="#lstm-cells" title="Permalink to this heading">#</a></h3>
 <p><em>Long Short-Term Memory</em> cells are a special kind of RNN cells, capable of learning long-term dependencies in input data. They were introduced in 1997 (<a class="reference external" href="http://www.bioinf.jku.at/publications/older/2604.pdf">original paper</a>) and have been refined over the years.</p>
 <p>An LSTM cell has a complex internal structure that make it able to:</p>
 <ul class="simple">
@@ -1386,7 +1220,7 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/recurrent_neural_networks_43_0.png" src="../_images/recurrent_neural_networks_43_0.png" />
+<img alt="../_images/6896737bd975b85fa4ef977b3f0fc85f3b7a208d590ad49cfe12a563460e29e1.png" src="../_images/6896737bd975b85fa4ef977b3f0fc85f3b7a208d590ad49cfe12a563460e29e1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1395,7 +1229,7 @@ _________________________________________________________________
 
 <span class="n">y_pred_lstm</span> <span class="o">=</span> <span class="n">lstm_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_val</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Multistep RNN MSE: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_pred_lstm</span><span class="p">))</span><span class="si">:</span><span class="s2">0.05f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Multistep RNN MSE: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred_lstm</span><span class="p">))</span><span class="si">:</span><span class="s2">0.05f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1416,12 +1250,12 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/recurrent_neural_networks_45_0.png" src="../_images/recurrent_neural_networks_45_0.png" />
+<img alt="../_images/466224af8d0c636da65abe0665dd39785e5a58e34a5bdd554fe1858db156fc8f.png" src="../_images/466224af8d0c636da65abe0665dd39785e5a58e34a5bdd554fe1858db156fc8f.png" />
 </div>
 </div>
-</div>
-<div class="section" id="gru-cells">
-<h3>GRU cells<a class="headerlink" href="#gru-cells" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="gru-cells">
+<h3>GRU cells<a class="headerlink" href="#gru-cells" title="Permalink to this heading">#</a></h3>
 <p>The <em>Gated Recurrent Unit</em> cell was introduced in 2014 (<a class="reference external" href="https://arxiv.org/abs/1406.1078">original paper</a>).</p>
 <p>It is a simplification of the LSTM cell that performs similarly well while being faster to train.</p>
 <p><a class="reference external" href="https://github.com/ageron/handson-ml2"><img alt="GRU cell" src="../_images/gru_cell.png" /></a></p>
@@ -1510,7 +1344,7 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/recurrent_neural_networks_51_0.png" src="../_images/recurrent_neural_networks_51_0.png" />
+<img alt="../_images/df6cc2a152400f3b1378d10dbfa0b2224c93d993aaef7a7ca16b625db85ae75c.png" src="../_images/df6cc2a152400f3b1378d10dbfa0b2224c93d993aaef7a7ca16b625db85ae75c.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1519,7 +1353,7 @@ _________________________________________________________________
 
 <span class="n">y_pred_gru</span> <span class="o">=</span> <span class="n">gru_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_val</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Multistep RNN MSE: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_pred_gru</span><span class="p">))</span><span class="si">:</span><span class="s2">0.05f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Multistep RNN MSE: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred_gru</span><span class="p">))</span><span class="si">:</span><span class="s2">0.05f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1540,12 +1374,12 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/recurrent_neural_networks_53_0.png" src="../_images/recurrent_neural_networks_53_0.png" />
+<img alt="../_images/fb96a92c08bc009756dae29d85d1064c3deb26b9556a2eed08523d2a43dc9a45.png" src="../_images/fb96a92c08bc009756dae29d85d1064c3deb26b9556a2eed08523d2a43dc9a45.png" />
 </div>
 </div>
-</div>
-<div class="section" id="sequence-processing-with-1d-convolutions">
-<h3>Sequence processing with 1D convolutions<a class="headerlink" href="#sequence-processing-with-1d-convolutions" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="sequence-processing-with-1d-convolutions">
+<h3>Sequence processing with 1D convolutions<a class="headerlink" href="#sequence-processing-with-1d-convolutions" title="Permalink to this heading">#</a></h3>
 <p>Despite their many qualities, LSTM and GRU cells still have a fairly limited short-term memory. To facilitate long-pattern detection in sequences of 100 time steps or more, a solution is to shorten the sequences by using <strong>1D convolutions</strong>.</p>
 <p><img alt="1D convolution" src="../_images/1D_convolution.png" /></p>
 <p>They work by treating time as a spatial dimension, and sliding several kernels across a sequence. Depending on the kernel size and <em>stride</em> (sliding step), the output sequence is typically shorter than the input one. 1D convolution will also detect higher-level features in the sequence, facilitating the work of subsequent layers.</p>
@@ -1606,7 +1440,7 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/recurrent_neural_networks_56_0.png" src="../_images/recurrent_neural_networks_56_0.png" />
+<img alt="../_images/d6a113c0bc17da1cce296d5e4c452d70009aba969b1c7f14c9bbe54d311f0e87.png" src="../_images/d6a113c0bc17da1cce296d5e4c452d70009aba969b1c7f14c9bbe54d311f0e87.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1615,7 +1449,7 @@ _________________________________________________________________
 
 <span class="n">y_pred_conv1d_gru</span> <span class="o">=</span> <span class="n">conv1d_gru_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_val</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Multistep RNN MSE: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span> <span class="n">y_pred_conv1d_gru</span><span class="p">))</span><span class="si">:</span><span class="s2">0.05f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Multistep RNN MSE: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_val</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred_conv1d_gru</span><span class="p">))</span><span class="si">:</span><span class="s2">0.05f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1636,12 +1470,12 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/recurrent_neural_networks_58_0.png" src="../_images/recurrent_neural_networks_58_0.png" />
+<img alt="../_images/868830535e36f4c954aff99e23c5b2604d2a9c8c303c31b9115f52e0728ba9a1.png" src="../_images/868830535e36f4c954aff99e23c5b2604d2a9c8c303c31b9115f52e0728ba9a1.png" />
 </div>
 </div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -1655,7 +1489,7 @@ _________________________________________________________________
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./algorithms"
         },
         predefinedOutput: true
@@ -1663,44 +1497,129 @@ _________________________________________________________________
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="convolutional_neural_networks.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Convolutional Neural Networks</p>
-        </div>
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="convolutional_neural_networks.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Convolutional Neural Networks</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="autoencoders.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="autoencoders.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Autoencoders</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
-</div>
-            
-        </div>
-    </div>
-    <footer class="footer">
-  <p>
-    
-      By Baptiste Pesquet<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
-
-
       </div>
-    </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+</div>
 
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rnn-fundamentals">RNN fundamentals</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recurrent-neural-networks-in-a-nutshell">Recurrent Neural Networks in a nutshell</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#terminology">Terminology</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rnn-architecture">RNN architecture</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#typology-of-rnns">Typology of RNNs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-a-rnn">Training a RNN</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sequence-format">Sequence format</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-forecasting-a-univariate-time-series">Example: forecasting a univariate time series</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup">Environment setup</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#single-step-naive-forecasting">Single step, naïve forecasting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recurrent-neurons">Recurrent neurons</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recurrent-layers">Recurrent layers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-step-forecasting">Multi-step forecasting</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lstm-gru-and-1d-convolutions">LSTM, GRU and 1D convolutions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-limits-of-recurrent-neurons">The limits of recurrent neurons</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lstm-cells">LSTM cells</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gru-cells">GRU cells</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sequence-processing-with-1d-convolutions">Sequence processing with 1D convolutions</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Baptiste Pesquet
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2021.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

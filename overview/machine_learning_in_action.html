@@ -1,876 +1,538 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
     <title>Machine Learning in action &#8212; Machine Learning Handbook</title>
-    
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    
-      
-
-    
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.css?digest=84ace793992934648b4de8eed757e5a2" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.9d8b4a8b9bb19db25eeaddc40d639ba2.js"></script>
-    <script >const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'overview/machine_learning_in_action';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Introduction to Reinforcement Learning" href="introduction_to_reinforcement_learning.html" />
     <link rel="prev" title="Introduction to Machine Learning" href="introduction_to_machine_learning.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
-
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<div class="col-12 col-md-3 bd-sidebar site-navigation " id="site-navigation">
-    
-        <div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../_static/mlhandbook_logo.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">Machine Learning Handbook</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="../_static/mlhandbook_logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/mlhandbook_logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference external" href="https://www.bpesquet.fr/mlkatas">
-   Machine Learning Katas
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference external" href="https://www.bpesquet.fr/mlkatas">Machine Learning Katas</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  overview
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">overview</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="introduction_to_machine_learning.html">
-   Introduction to Machine Learning
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Machine Learning in action
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="introduction_to_reinforcement_learning.html">
-   Introduction to Reinforcement Learning
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="introduction_to_machine_learning.html">Introduction to Machine Learning</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Machine Learning in action</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction_to_reinforcement_learning.html">Introduction to Reinforcement Learning</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Fundamentals
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fundamentals</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../fundamentals/handling_data.html">
-   Handling data
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../fundamentals/assessing_results.html">
-   Assessing results
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../fundamentals/training_models.html">
-   Training models
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../fundamentals/handling_data.html">Handling data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fundamentals/assessing_results.html">Assessing results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fundamentals/training_models.html">Training models</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Algorithms
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Algorithms</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../algorithms/classic_ml.html">
-   Classic Machine Learning
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../algorithms/k_nearest_neighbors.html">
-     K-Nearest Neighbors
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../algorithms/linear_regression.html">
-     Linear Regression
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../algorithms/logistic_regression.html">
-     Logistic Regression
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../algorithms/decision_trees_and_random_forests.html">
-     Decision Trees &amp; Random Forests
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../algorithms/bayesian_methods.html">
-     Bayesian Methods
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../algorithms/support_vector_machines.html">
-     Support Vector Machines
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../algorithms/k_means.html">
-     K-Means
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../algorithms/nn_deep_learning.html">
-   Neural Networks and Deep Learning
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
-  <label for="toctree-checkbox-2">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../algorithms/artificial_neural_networks.html">
-     Artificial Neural Networks
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../algorithms/convolutional_neural_networks.html">
-     Convolutional Neural Networks
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../algorithms/recurrent_neural_networks.html">
-     Recurrent Neural Networks
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../algorithms/autoencoders.html">
-     Autoencoders
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../algorithms/neural_style_transfer.html">
-     Neural Style Transfer
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../algorithms/generative_adversarial_networks.html">
-     Generative Adversarial Networks
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../algorithms/transformers.html">
-     Transformers
-    </a>
-   </li>
-  </ul>
- </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../algorithms/classic_ml.html">Classic Machine Learning</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/k_nearest_neighbors.html">K-Nearest Neighbors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/linear_regression.html">Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/logistic_regression.html">Logistic Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/decision_trees_and_random_forests.html">Decision Trees &amp; Random Forests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/bayesian_methods.html">Bayesian Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/support_vector_machines.html">Support Vector Machines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/k_means.html">K-Means</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Engineering
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../engineering/introduction_to_mlops.html">
-   Introduction to MLOps
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../engineering/machine_learning_issues.html">
-   Machine Learning issues
-  </a>
- </li>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../algorithms/nn_deep_learning.html">Neural Networks and Deep Learning</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/artificial_neural_networks.html">Artificial Neural Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/convolutional_neural_networks.html">Convolutional Neural Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/recurrent_neural_networks.html">Recurrent Neural Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/autoencoders.html">Autoencoders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/neural_style_transfer.html">Neural Style Transfer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/generative_adversarial_networks.html">Generative Adversarial Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/transformers.html">Transformers</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Tools
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../tools/python.html">
-   Python
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
-  <label for="toctree-checkbox-3">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../tools/python_ecosystem.html">
-     The Python ecosystem
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../tools/python_cheatsheet.html">
-     Python cheatsheet
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../tools/python_good_practices.html">
-     Python good practices
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../tools/numpy.html">
-   NumPy
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../tools/keras.html">
-   Keras
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../tools/pytorch.html">
-   PyTorch
-  </a>
- </li>
+</li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Reference
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Engineering</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../reference/activation_functions.html">
-   Activation functions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../reference/glossary.html">
-   Glossary
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../reference/acknowledgments.html">
-   Acknowledgments
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../engineering/introduction_to_mlops.html">Introduction to MLOps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../engineering/machine_learning_issues.html">Machine Learning issues</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tools</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tools/python.html">Python</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tools/python_ecosystem.html">The Python ecosystem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/python_cheatsheet.html">Python cheatsheet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/python_good_practices.html">Python good practices</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/numpy.html">NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/keras.html">Keras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/pytorch.html">PyTorch</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../reference/activation_functions.html">Activation functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/acknowledgments.html">Acknowledgments</a></li>
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
-          
-<!-- This is an invisible pixel that we watch to see if we've scrolled. -->
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
 <div class="sbt-scroll-pixel-helper"></div>
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            <div class="topbar-left">
-                
-                <label class="nav-toggle-button" for="__navigation">
-                    <div class="visually-hidden">Toggle navigation</div>
-                    <i class="fas fa-bars"></i>
-                </label>
-                
-            </div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/bpesquet/mlhandbook/master?urlpath=tree/overview/machine_learning_in_action.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/bpesquet/mlhandbook/blob/master/overview/machine_learning_in_action.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/bpesquet/mlhandbook" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/bpesquet/mlhandbook/edit/master/overview/machine_learning_in_action.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/bpesquet/mlhandbook/issues/new?title=Issue%20on%20page%20%2Foverview/machine_learning_in_action.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/overview/machine_learning_in_action.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Machine Learning in action</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
             
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/overview/machine_learning_in_action.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/bpesquet/mlhandbook"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/bpesquet/mlhandbook/issues/new?title=Issue%20on%20page%20%2Foverview/machine_learning_in_action.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/bpesquet/mlhandbook/edit/master/overview/machine_learning_in_action.ipynb"><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/bpesquet/mlhandbook/master?urlpath=tree/overview/machine_learning_in_action.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        <a class="colab-button" href="https://colab.research.google.com/github/bpesquet/mlhandbook/blob/master/overview/machine_learning_in_action.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
-                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
-                    src="../_static/images/logo_colab.png"
-                    alt="Interact on Colab">Colab</button></a>
-        
-        
-        
-    </div>
-</div>
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div>
+                <h2> Contents </h2>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
+            <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#environment-setup">
-   Environment setup
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#the-machine-learning-workflow">
-   The Machine Learning workflow
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#step-1-frame-the-problem">
-   Step 1: frame the problem
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#key-questions">
-     Key questions
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#properties-of-ml-friendly-problems">
-     Properties of ML-friendly problems
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-predict-house-prices-in-an-area">
-     Example: predict house prices in an area
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#step-2-collect-analyze-and-prepare-data">
-   Step 2: collect, analyze and prepare data
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#a-crucial-step">
-     A crucial step
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#predefined-datasets-vs-real-data">
-     Predefined datasets Vs real data
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-the-california-housing-dataset">
-     Example: the California housing dataset
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#step-2-1-discover-data">
-     Step 2.1: discover data
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#step-2-2-create-a-test-set">
-     Step 2.2: create a test set
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#step-2-3-analyze-data">
-     Step 2.3: analyze data
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#step-2-4-feature-engineering">
-     Step 2.4: feature engineering
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#step-2-5-data-preprocessing">
-     Step 2.5: data preprocessing
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#handling-missing-values">
-     Handling missing values
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#feature-scaling">
-     Feature scaling
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#one-hot-encoding">
-     One-hot encoding
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#preprocessing-pipelines">
-     Preprocessing pipelines
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#step-3-select-and-train-models">
-   Step 3: select and train models
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#an-iterative-and-empirical-step">
-     An iterative and empirical step
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-optimization-generalization-dilemna">
-     The optimization/generalization dilemna
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#underfitting-and-overfitting">
-     Underfitting and overfitting
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#step-3-1-choose-an-evaluation-metric">
-     Step 3.1: choose an evaluation metric
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#step-3-2-start-with-a-baseline-model">
-     Step 3.2: start with a baseline model
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#step-3-3-try-other-models">
-     Step 3.3: try other models
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#using-a-validation-set">
-     Using a validation set
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#cross-validation">
-     Cross-validation
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#step-4-tune-the-chosen-model">
-   Step 4: tune the chosen model
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#searching-for-the-best-hyperparameters">
-     Searching for the best hyperparameters
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#checking-final-model-performance-on-test-dataset">
-     Checking final model performance on test dataset
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#using-the-model-to-make-predictions-on-new-data">
-     Using the model to make predictions on new data
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#step-5-deploy-to-production-and-maintain-the-system">
-   Step 5: deploy to production and maintain the system
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#step-5-1-saving-the-final-model-and-data-pipeline">
-     Step 5.1: saving the final model and data pipeline
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#step-5-2-deploying-the-model">
-     Step 5.2: deploying the model
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-testing-the-deployed-model">
-     Example: testing the deployed model
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#step-5-3-monitor-and-maintain-the-system">
-     Step 5.3: monitor and maintain the system
-    </a>
-   </li>
-  </ul>
- </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup">Environment setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-machine-learning-workflow">The Machine Learning workflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-frame-the-problem">Step 1: frame the problem</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-questions">Key questions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-ml-friendly-problems">Properties of ML-friendly problems</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-predict-house-prices-in-an-area">Example: predict house prices in an area</a></li>
 </ul>
-
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-collect-analyze-and-prepare-data">Step 2: collect, analyze and prepare data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-crucial-step">A crucial step</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predefined-datasets-vs-real-data">Predefined datasets Vs real data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-the-california-housing-dataset">Example: the California housing dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-1-discover-data">Step 2.1: discover data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-2-create-a-test-set">Step 2.2: create a test set</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-3-analyze-data">Step 2.3: analyze data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-4-feature-engineering">Step 2.4: feature engineering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-5-data-preprocessing">Step 2.5: data preprocessing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#handling-missing-values">Handling missing values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-scaling">Feature scaling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-hot-encoding">One-hot encoding</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing-pipelines">Preprocessing pipelines</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-select-and-train-models">Step 3: select and train models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-iterative-and-empirical-step">An iterative and empirical step</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-optimization-generalization-dilemna">The optimization/generalization dilemna</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#underfitting-and-overfitting">Underfitting and overfitting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-1-choose-an-evaluation-metric">Step 3.1: choose an evaluation metric</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-2-start-with-a-baseline-model">Step 3.2: start with a baseline model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-3-try-other-models">Step 3.3: try other models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-a-validation-set">Using a validation set</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-validation">Cross-validation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-tune-the-chosen-model">Step 4: tune the chosen model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#searching-for-the-best-hyperparameters">Searching for the best hyperparameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#checking-final-model-performance-on-test-dataset">Checking final model performance on test dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-model-to-make-predictions-on-new-data">Using the model to make predictions on new data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-deploy-to-production-and-maintain-the-system">Step 5: deploy to production and maintain the system</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-1-saving-the-final-model-and-data-pipeline">Step 5.1: saving the final model and data pipeline</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-2-deploying-the-model">Step 5.2: deploying the model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-testing-the-deployed-model">Example: testing the deployed model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-3-monitor-and-maintain-the-system">Step 5.3: monitor and maintain the system</a></li>
+</ul>
+</li>
+</ul>
             </nav>
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Machine Learning in action</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#environment-setup">
-   Environment setup
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#the-machine-learning-workflow">
-   The Machine Learning workflow
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#step-1-frame-the-problem">
-   Step 1: frame the problem
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#key-questions">
-     Key questions
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#properties-of-ml-friendly-problems">
-     Properties of ML-friendly problems
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-predict-house-prices-in-an-area">
-     Example: predict house prices in an area
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#step-2-collect-analyze-and-prepare-data">
-   Step 2: collect, analyze and prepare data
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#a-crucial-step">
-     A crucial step
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#predefined-datasets-vs-real-data">
-     Predefined datasets Vs real data
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-the-california-housing-dataset">
-     Example: the California housing dataset
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#step-2-1-discover-data">
-     Step 2.1: discover data
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#step-2-2-create-a-test-set">
-     Step 2.2: create a test set
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#step-2-3-analyze-data">
-     Step 2.3: analyze data
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#step-2-4-feature-engineering">
-     Step 2.4: feature engineering
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#step-2-5-data-preprocessing">
-     Step 2.5: data preprocessing
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#handling-missing-values">
-     Handling missing values
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#feature-scaling">
-     Feature scaling
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#one-hot-encoding">
-     One-hot encoding
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#preprocessing-pipelines">
-     Preprocessing pipelines
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#step-3-select-and-train-models">
-   Step 3: select and train models
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#an-iterative-and-empirical-step">
-     An iterative and empirical step
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-optimization-generalization-dilemna">
-     The optimization/generalization dilemna
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#underfitting-and-overfitting">
-     Underfitting and overfitting
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#step-3-1-choose-an-evaluation-metric">
-     Step 3.1: choose an evaluation metric
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#step-3-2-start-with-a-baseline-model">
-     Step 3.2: start with a baseline model
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#step-3-3-try-other-models">
-     Step 3.3: try other models
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#using-a-validation-set">
-     Using a validation set
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#cross-validation">
-     Cross-validation
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#step-4-tune-the-chosen-model">
-   Step 4: tune the chosen model
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#searching-for-the-best-hyperparameters">
-     Searching for the best hyperparameters
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#checking-final-model-performance-on-test-dataset">
-     Checking final model performance on test dataset
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#using-the-model-to-make-predictions-on-new-data">
-     Using the model to make predictions on new data
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#step-5-deploy-to-production-and-maintain-the-system">
-   Step 5: deploy to production and maintain the system
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#step-5-1-saving-the-final-model-and-data-pipeline">
-     Step 5.1: saving the final model and data pipeline
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#step-5-2-deploying-the-model">
-     Step 5.2: deploying the model
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-testing-the-deployed-model">
-     Example: testing the deployed model
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#step-5-3-monitor-and-maintain-the-system">
-     Step 5.3: monitor and maintain the system
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
 
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            
-              <div>
+              
                 
-  <div class="section" id="machine-learning-in-action">
-<h1>Machine Learning in action<a class="headerlink" href="#machine-learning-in-action" title="Permalink to this headline">¶</a></h1>
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="machine-learning-in-action">
+<h1>Machine Learning in action<a class="headerlink" href="#machine-learning-in-action" title="Permalink to this heading">#</a></h1>
 <p>(Heavily inspired by Chapter 2 of <a class="reference external" href="https://github.com/ageron/handson-ml2">Hands-On Machine Learning</a> by Aurélien Géron)</p>
-<div class="section" id="environment-setup">
-<h2>Environment setup<a class="headerlink" href="#environment-setup" title="Permalink to this headline">¶</a></h2>
+<section id="environment-setup">
+<h2>Environment setup<a class="headerlink" href="#environment-setup" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">platform</span>
@@ -934,15 +596,15 @@ NumPy version: 1.18.1
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="the-machine-learning-workflow">
-<h2>The Machine Learning workflow<a class="headerlink" href="#the-machine-learning-workflow" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="the-machine-learning-workflow">
+<h2>The Machine Learning workflow<a class="headerlink" href="#the-machine-learning-workflow" title="Permalink to this heading">#</a></h2>
 <p><a class="reference external" href="https://www.redhat.com/files/summit/session-assets/2019/T957A0.pdf"><img alt="ML workflow by RedHat" src="../_images/wiidii_ml_workflow1.png" /></a></p>
-</div>
-<div class="section" id="step-1-frame-the-problem">
-<h2>Step 1: frame the problem<a class="headerlink" href="#step-1-frame-the-problem" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="key-questions">
-<h3>Key questions<a class="headerlink" href="#key-questions" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="step-1-frame-the-problem">
+<h2>Step 1: frame the problem<a class="headerlink" href="#step-1-frame-the-problem" title="Permalink to this heading">#</a></h2>
+<section id="key-questions">
+<h3>Key questions<a class="headerlink" href="#key-questions" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>What is the business objective?</p></li>
 <li><p>How good are the current solutions?</p></li>
@@ -951,9 +613,9 @@ NumPy version: 1.18.1
 <li><p>What is the expected learning type (supervised or not, batch/online…)?</p></li>
 <li><p>How will the model’s performance be evaluated?</p></li>
 </ul>
-</div>
-<div class="section" id="properties-of-ml-friendly-problems">
-<h3>Properties of ML-friendly problems<a class="headerlink" href="#properties-of-ml-friendly-problems" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="properties-of-ml-friendly-problems">
+<h3>Properties of ML-friendly problems<a class="headerlink" href="#properties-of-ml-friendly-problems" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Difficulty to express the actions as rules.</p></li>
 <li><p>Data too complex for traditional analytical methods:</p>
@@ -964,38 +626,38 @@ NumPy version: 1.18.1
 </li>
 <li><p>Performance &gt; explicability.</p></li>
 </ul>
-</div>
-<div class="section" id="example-predict-house-prices-in-an-area">
-<h3>Example: predict house prices in an area<a class="headerlink" href="#example-predict-house-prices-in-an-area" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="example-predict-house-prices-in-an-area">
+<h3>Example: predict house prices in an area<a class="headerlink" href="#example-predict-house-prices-in-an-area" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Inputs: housing properties in an area</p></li>
 <li><p>Output: median housing price in the area</p></li>
 </ul>
 <p><a class="reference external" href="https://www.kaggle.com/c/house-prices-advanced-regression-techniques/overview"><img alt="Kaggle houses banner" src="../_images/kaggle_housesbanner.png" /></a></p>
-</div>
-</div>
-<div class="section" id="step-2-collect-analyze-and-prepare-data">
-<h2>Step 2: collect, analyze and prepare data<a class="headerlink" href="#step-2-collect-analyze-and-prepare-data" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="a-crucial-step">
-<h3>A crucial step<a class="headerlink" href="#a-crucial-step" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="step-2-collect-analyze-and-prepare-data">
+<h2>Step 2: collect, analyze and prepare data<a class="headerlink" href="#step-2-collect-analyze-and-prepare-data" title="Permalink to this heading">#</a></h2>
+<section id="a-crucial-step">
+<h3>A crucial step<a class="headerlink" href="#a-crucial-step" title="Permalink to this heading">#</a></h3>
 <p>Data quality is <strong>paramount</strong> for any ML project.</p>
 <p><img alt="Your data, your model" src="../_images/yourdata_yourmodel.png" /></p>
-</div>
-<div class="section" id="predefined-datasets-vs-real-data">
-<h3>Predefined datasets Vs real data<a class="headerlink" href="#predefined-datasets-vs-real-data" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="predefined-datasets-vs-real-data">
+<h3>Predefined datasets Vs real data<a class="headerlink" href="#predefined-datasets-vs-real-data" title="Permalink to this heading">#</a></h3>
 <p>Real data is messy, incomplete and often scattered across many sources.</p>
 <p>Data labeling is a manual and tedious process.</p>
 <p>Predefined datasets offer a convenient way to bypass the data wrangling step. Alas, using one is not always an option.</p>
-</div>
-<div class="section" id="example-the-california-housing-dataset">
-<h3>Example: the California housing dataset<a class="headerlink" href="#example-the-california-housing-dataset" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="example-the-california-housing-dataset">
+<h3>Example: the California housing dataset<a class="headerlink" href="#example-the-california-housing-dataset" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Based on data from the 1990 California census.</p></li>
 <li><p>Slightly modified for teaching purposes by A. Géron (<a class="reference external" href="https://www.dcc.fc.up.pt/%7Eltorgo/Regression/cal_housing.html">original version</a>).</p></li>
 </ul>
-</div>
-<div class="section" id="step-2-1-discover-data">
-<h3>Step 2.1: discover data<a class="headerlink" href="#step-2-1-discover-data" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="step-2-1-discover-data">
+<h3>Step 2.1: discover data<a class="headerlink" href="#step-2-1-discover-data" title="Permalink to this heading">#</a></h3>
 <p>Our first objective is to familiarize ourselves with the dataset.</p>
 <p>Once data is loaded, the <strong>pandas</strong> library  provides many useful functions for making sense of it.</p>
 <div class="cell docutils container">
@@ -1367,12 +1029,12 @@ memory usage: 1.6+ MB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/machine_learning_in_action_20_0.png" src="../_images/machine_learning_in_action_20_0.png" />
+<img alt="../_images/90573c2a8cf34ad5aece2263531842b48b228b343463f4ff8d675f4fc4a2cef1.png" src="../_images/90573c2a8cf34ad5aece2263531842b48b228b343463f4ff8d675f4fc4a2cef1.png" />
 </div>
 </div>
-</div>
-<div class="section" id="step-2-2-create-a-test-set">
-<h3>Step 2.2: create a test set<a class="headerlink" href="#step-2-2-create-a-test-set" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="step-2-2-create-a-test-set">
+<h3>Step 2.2: create a test set<a class="headerlink" href="#step-2-2-create-a-test-set" title="Permalink to this heading">#</a></h3>
 <p>Once deployed, a model must be able to <strong>generalize</strong> (perform well with new, never-seen-before data).</p>
 <p>In order to assert this ability, data is split into 2 or 3 sets:</p>
 <ul class="simple">
@@ -1397,9 +1059,9 @@ Test dataset: (4128, 10)
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="step-2-3-analyze-data">
-<h3>Step 2.3: analyze data<a class="headerlink" href="#step-2-3-analyze-data" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="step-2-3-analyze-data">
+<h3>Step 2.3: analyze data<a class="headerlink" href="#step-2-3-analyze-data" title="Permalink to this heading">#</a></h3>
 <p>The objective here is to gain insights about the data, in order to prepare it optimally for training.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1423,7 +1085,7 @@ Test dataset: (4128, 10)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/machine_learning_in_action_24_0.png" src="../_images/machine_learning_in_action_24_0.png" />
+<img alt="../_images/0fdf2f522a460484ef1c9e58f7e4f9f90a31647a6979277a7eb3c35b7dc11a62.png" src="../_images/0fdf2f522a460484ef1c9e58f7e4f9f90a31647a6979277a7eb3c35b7dc11a62.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1451,6 +1113,11 @@ Name: median_house_value, dtype: float64
 </div>
 </div>
 <div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot correlation matrix</span>
 <span class="k">def</span> <span class="nf">plot_correlation_matrix</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
@@ -1475,6 +1142,7 @@ Name: median_house_value, dtype: float64
 </pre></div>
 </div>
 </div>
+</details>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1483,7 +1151,7 @@ Name: median_house_value, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/machine_learning_in_action_27_0.png" src="../_images/machine_learning_in_action_27_0.png" />
+<img alt="../_images/4bc7889e76c5f6f6f3cde73edd1ff6618eff37af047bc6732e839d601f930f6b.png" src="../_images/4bc7889e76c5f6f6f3cde73edd1ff6618eff37af047bc6732e839d601f930f6b.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1501,7 +1169,7 @@ Name: median_house_value, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/machine_learning_in_action_28_0.png" src="../_images/machine_learning_in_action_28_0.png" />
+<img alt="../_images/acfcb06723396496e57fffdad67c111bf3f6febe6a662e52152854d55b7d331b.png" src="../_images/acfcb06723396496e57fffdad67c111bf3f6febe6a662e52152854d55b7d331b.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1516,12 +1184,12 @@ Name: median_house_value, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/machine_learning_in_action_29_0.png" src="../_images/machine_learning_in_action_29_0.png" />
+<img alt="../_images/1adc32fcd10f4b5f001d2281d8553ad009d7098224640004420523fc45c543bb.png" src="../_images/1adc32fcd10f4b5f001d2281d8553ad009d7098224640004420523fc45c543bb.png" />
 </div>
 </div>
-</div>
-<div class="section" id="step-2-4-feature-engineering">
-<h3>Step 2.4: feature engineering<a class="headerlink" href="#step-2-4-feature-engineering" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="step-2-4-feature-engineering">
+<h3>Step 2.4: feature engineering<a class="headerlink" href="#step-2-4-feature-engineering" title="Permalink to this heading">#</a></h3>
 <p>An optional but often useful step is to create new data attributes (called <strong>features</strong>) by combining or transforming existing ones.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1563,9 +1231,9 @@ Name: median_house_value, dtype: float64
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="step-2-5-data-preprocessing">
-<h3>Step 2.5: data preprocessing<a class="headerlink" href="#step-2-5-data-preprocessing" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="step-2-5-data-preprocessing">
+<h3>Step 2.5: data preprocessing<a class="headerlink" href="#step-2-5-data-preprocessing" title="Permalink to this heading">#</a></h3>
 <p>This task typically involves:</p>
 <ul class="simple">
 <li><p>Removing of superflous features (if any).</p></li>
@@ -1597,9 +1265,9 @@ Training labels: (16512,)
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="handling-missing-values">
-<h3>Handling missing values<a class="headerlink" href="#handling-missing-values" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="handling-missing-values">
+<h3>Handling missing values<a class="headerlink" href="#handling-missing-values" title="Permalink to this heading">#</a></h3>
 <p>Most ML algorithms cannot work with missing values in features.</p>
 <p>Three options exist:</p>
 <ul class="simple">
@@ -1790,9 +1458,9 @@ Training labels: (16512,)
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="feature-scaling">
-<h3>Feature scaling<a class="headerlink" href="#feature-scaling" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="feature-scaling">
+<h3>Feature scaling<a class="headerlink" href="#feature-scaling" title="Permalink to this heading">#</a></h3>
 <p>Most ML models work best when all features have a similar scale.</p>
 <p>One way to achieve this result is to apply <strong>standardization</strong>, the process of centering and reducing features: they are substracted by their mean and divided by their standard deviation.</p>
 <p>The resulting features have a mean of 0 and a standard deviation of 1.</p>
@@ -1836,9 +1504,9 @@ Mean: 0.0. Std: 0.9999999999999999
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="one-hot-encoding">
-<h3>One-hot encoding<a class="headerlink" href="#one-hot-encoding" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="one-hot-encoding">
+<h3>One-hot encoding<a class="headerlink" href="#one-hot-encoding" title="Permalink to this heading">#</a></h3>
 <p>ML models expect data to be exclusively under numerical form.</p>
 <p><strong>One-hot encoding</strong> produces a matrix of binary vectors from a vector of categorical values.</p>
 <p>it is useful to convert categorical features into numerical features without using arbitrary integer values, which could create a proximity relationship between the new values.</p>
@@ -1868,9 +1536,9 @@ Mean: 0.0. Std: 0.9999999999999999
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="preprocessing-pipelines">
-<h3>Preprocessing pipelines<a class="headerlink" href="#preprocessing-pipelines" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="preprocessing-pipelines">
+<h3>Preprocessing pipelines<a class="headerlink" href="#preprocessing-pipelines" title="Permalink to this heading">#</a></h3>
 <p>Data preprocessing is done through a series of sequential operations on data (handling missing values, standardization, one-hot encoding…).</p>
 <p>scikit-learn support the definition of <strong>pipelines</strong> for streamlining these operations.</p>
 <div class="cell docutils container">
@@ -1938,37 +1606,37 @@ Name: ocean_proximity, dtype: int64
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="step-3-select-and-train-models">
-<h2>Step 3: select and train models<a class="headerlink" href="#step-3-select-and-train-models" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="an-iterative-and-empirical-step">
-<h3>An iterative and empirical step<a class="headerlink" href="#an-iterative-and-empirical-step" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="step-3-select-and-train-models">
+<h2>Step 3: select and train models<a class="headerlink" href="#step-3-select-and-train-models" title="Permalink to this heading">#</a></h2>
+<section id="an-iterative-and-empirical-step">
+<h3>An iterative and empirical step<a class="headerlink" href="#an-iterative-and-empirical-step" title="Permalink to this heading">#</a></h3>
 <p>At long last, our data is ready and we can start training models.</p>
 <p>This step is often iterative and can be quite empirical. Depending on data and model complexity, it can also be resource-intensive.</p>
 <p><img alt="Busy training" src="../_images/busy_training.jpg" /></p>
-</div>
-<div class="section" id="the-optimization-generalization-dilemna">
-<h3>The optimization/generalization dilemna<a class="headerlink" href="#the-optimization-generalization-dilemna" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="the-optimization-generalization-dilemna">
+<h3>The optimization/generalization dilemna<a class="headerlink" href="#the-optimization-generalization-dilemna" title="Permalink to this heading">#</a></h3>
 <p><img alt="Underfitting and overfitting" src="../_images/underfitting_overfitting.png" /></p>
-</div>
-<div class="section" id="underfitting-and-overfitting">
-<h3>Underfitting and overfitting<a class="headerlink" href="#underfitting-and-overfitting" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="underfitting-and-overfitting">
+<h3>Underfitting and overfitting<a class="headerlink" href="#underfitting-and-overfitting" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p><strong>Underfitting</strong> (sometimes called <em>bias</em>): insufficient performance on training set.</p></li>
 <li><p><strong>Overfitting</strong> (sometimes called <em>variance</em>): performance gap between training and validation sets.</p></li>
 </ul>
 <p>Ultimately, we look for a tradeoff between underfitting and overfitting.</p>
 <p>The goal of the training step is to find a model powerful enough to <strong>overfit the training set</strong>.</p>
-</div>
-<div class="section" id="step-3-1-choose-an-evaluation-metric">
-<h3>Step 3.1: choose an evaluation metric<a class="headerlink" href="#step-3-1-choose-an-evaluation-metric" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="step-3-1-choose-an-evaluation-metric">
+<h3>Step 3.1: choose an evaluation metric<a class="headerlink" href="#step-3-1-choose-an-evaluation-metric" title="Permalink to this heading">#</a></h3>
 <p>Model performance is assessed through an <strong>evaluation metric</strong>.</p>
 <p>It quantifies the difference (often called <strong>error</strong>) between the expected results (<em>ground truth</em>) and the actual results computed by the model.</p>
 <p>A classic evaluation metric for regression tasks is the <strong>Root Mean Square Error (RMSE)</strong>. It gives an idea of how much error the model typically makes in its predictions.</p>
-</div>
-<div class="section" id="step-3-2-start-with-a-baseline-model">
-<h3>Step 3.2: start with a baseline model<a class="headerlink" href="#step-3-2-start-with-a-baseline-model" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="step-3-2-start-with-a-baseline-model">
+<h3>Step 3.2: start with a baseline model<a class="headerlink" href="#step-3-2-start-with-a-baseline-model" title="Permalink to this heading">#</a></h3>
 <p>For each learning type (supervised, unsupervised…), several models of various complexity exist.</p>
 <p>It is often useful to begin the training step by using a basic model. Its results will serve as a <strong>baseline</strong> when training more complicated models. In some cases, its performance might even be surprisingly good.</p>
 <div class="cell docutils container">
@@ -1998,9 +1666,9 @@ Name: ocean_proximity, dtype: int64
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="step-3-3-try-other-models">
-<h3>Step 3.3: try other models<a class="headerlink" href="#step-3-3-try-other-models" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="step-3-3-try-other-models">
+<h3>Step 3.3: try other models<a class="headerlink" href="#step-3-3-try-other-models" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fit a decision tree model to the training set</span>
@@ -2018,14 +1686,14 @@ Name: ocean_proximity, dtype: int64
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="using-a-validation-set">
-<h3>Using a validation set<a class="headerlink" href="#using-a-validation-set" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="using-a-validation-set">
+<h3>Using a validation set<a class="headerlink" href="#using-a-validation-set" title="Permalink to this heading">#</a></h3>
 <p>The previous result (<em>error = 0</em>) looks too good to be true. It might very well be a case of severe overfitting to the training set, which means the model won’t perform well with unseen data.</p>
 <p>One way to assert overfitting is to split training data between a smaller training set and a <strong>validation set</strong>, used only to evaluate model performance.</p>
-</div>
-<div class="section" id="cross-validation">
-<h3>Cross-validation<a class="headerlink" href="#cross-validation" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="cross-validation">
+<h3>Cross-validation<a class="headerlink" href="#cross-validation" title="Permalink to this heading">#</a></h3>
 <p>A more sophisticated strategy is to apply <strong>K-fold cross validation</strong>. Training data is randomly split into <span class="math notranslate nohighlight">\(K\)</span> subsets called <em>folds</em>. The model is trained and evaluated <span class="math notranslate nohighlight">\(K\)</span> times, using a different fold for validation.</p>
 <p><img alt="K-fold Cross Validation" src="../_images/k-fold-cross-validation1.png" /></p>
 <div class="cell docutils container">
@@ -2073,12 +1741,12 @@ Mean CV error for random forest: 50300.97
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="step-4-tune-the-chosen-model">
-<h2>Step 4: tune the chosen model<a class="headerlink" href="#step-4-tune-the-chosen-model" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="searching-for-the-best-hyperparameters">
-<h3>Searching for the best hyperparameters<a class="headerlink" href="#searching-for-the-best-hyperparameters" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="step-4-tune-the-chosen-model">
+<h2>Step 4: tune the chosen model<a class="headerlink" href="#step-4-tune-the-chosen-model" title="Permalink to this heading">#</a></h2>
+<section id="searching-for-the-best-hyperparameters">
+<h3>Searching for the best hyperparameters<a class="headerlink" href="#searching-for-the-best-hyperparameters" title="Permalink to this heading">#</a></h3>
 <p>Once a model looks promising, it must be <strong>tuned</strong> in order to offer the best compromise between optimization and generalization.</p>
 <p>The goal is to find the set of model properties that gives the best performance. Model properties are often called <strong>hyperparameters</strong> (example: maximum depth for a decision tree).</p>
 <p>This step can be either:</p>
@@ -2118,9 +1786,9 @@ Mean CV error for random forest: 50300.97
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="checking-final-model-performance-on-test-dataset">
-<h3>Checking final model performance on test dataset<a class="headerlink" href="#checking-final-model-performance-on-test-dataset" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="checking-final-model-performance-on-test-dataset">
+<h3>Checking final model performance on test dataset<a class="headerlink" href="#checking-final-model-performance-on-test-dataset" title="Permalink to this heading">#</a></h3>
 <p>Now is the time to evaluate the final model on the test set that we put apart before.</p>
 <p>An important point is that preprocessing operations should be applied to test data using preprocessing values (mean, categories…) previously computed on training data. This prevents <strong>information leakage</strong> from test data (<a class="reference external" href="https://machinelearningmastery.com/data-leakage-machine-learning/">explanation 1</a>, <a class="reference external" href="https://stats.stackexchange.com/questions/174823/how-to-apply-standardization-normalization-to-train-and-testset-if-prediction-i">explanation 2</a>)</p>
 <div class="cell docutils container">
@@ -2149,9 +1817,9 @@ Test error for final model: 47968.38
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="using-the-model-to-make-predictions-on-new-data">
-<h3>Using the model to make predictions on new data<a class="headerlink" href="#using-the-model-to-make-predictions-on-new-data" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="using-the-model-to-make-predictions-on-new-data">
+<h3>Using the model to make predictions on new data<a class="headerlink" href="#using-the-model-to-make-predictions-on-new-data" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a new data sample</span>
@@ -2229,12 +1897,12 @@ Test error for final model: 47968.38
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="step-5-deploy-to-production-and-maintain-the-system">
-<h2>Step 5: deploy to production and maintain the system<a class="headerlink" href="#step-5-deploy-to-production-and-maintain-the-system" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="step-5-1-saving-the-final-model-and-data-pipeline">
-<h3>Step 5.1: saving the final model and data pipeline<a class="headerlink" href="#step-5-1-saving-the-final-model-and-data-pipeline" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="step-5-deploy-to-production-and-maintain-the-system">
+<h2>Step 5: deploy to production and maintain the system<a class="headerlink" href="#step-5-deploy-to-production-and-maintain-the-system" title="Permalink to this heading">#</a></h2>
+<section id="step-5-1-saving-the-final-model-and-data-pipeline">
+<h3>Step 5.1: saving the final model and data pipeline<a class="headerlink" href="#step-5-1-saving-the-final-model-and-data-pipeline" title="Permalink to this heading">#</a></h3>
 <p>A trained model can be saved to several formats. A standard common is to use Python’s built-in persistence model, <a class="reference external" href="https://docs.python.org/3/library/pickle.html">pickle</a>, through the <a class="reference external" href="https://pypi.org/project/joblib/">joblib</a> library for efficiency reasons.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2255,9 +1923,9 @@ Test error for final model: 47968.38
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="step-5-2-deploying-the-model">
-<h3>Step 5.2: deploying the model<a class="headerlink" href="#step-5-2-deploying-the-model" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="step-5-2-deploying-the-model">
+<h3>Step 5.2: deploying the model<a class="headerlink" href="#step-5-2-deploying-the-model" title="Permalink to this heading">#</a></h3>
 <p>This step is highly context-dependent. A deployed model is often a part of a more important system. Some common solutions:</p>
 <ul class="simple">
 <li><p>deploying the model as a web service accessible through an API.</p></li>
@@ -2265,15 +1933,15 @@ Test error for final model: 47968.38
 </ul>
 <p>The <a class="reference external" href="https://flask.palletsprojects.com">Flask</a> web framework is often used to create a web API from a trained Python model.</p>
 <p><a class="reference external" href="https://github.com/ageron/handson-ml2"><img alt="Model deployement on the web" src="../_images/model_deployment_web.png" /></a></p>
-</div>
-<div class="section" id="example-testing-the-deployed-model">
-<h3>Example: testing the deployed model<a class="headerlink" href="#example-testing-the-deployed-model" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="example-testing-the-deployed-model">
+<h3>Example: testing the deployed model<a class="headerlink" href="#example-testing-the-deployed-model" title="Permalink to this heading">#</a></h3>
 <p>The model trained in this notebook has been deployed as a <a class="reference external" href="https://housing-prices-api.herokuapp.com/">Flask web app</a>.</p>
 <p>You may access it using the web app or through a direct HTTP request to its prediction API.</p>
 <p>More details <a class="reference external" href="https://github.com/bpesquet/housing_prices_api">here</a>.</p>
-</div>
-<div class="section" id="step-5-3-monitor-and-maintain-the-system">
-<h3>Step 5.3: monitor and maintain the system<a class="headerlink" href="#step-5-3-monitor-and-maintain-the-system" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="step-5-3-monitor-and-maintain-the-system">
+<h3>Step 5.3: monitor and maintain the system<a class="headerlink" href="#step-5-3-monitor-and-maintain-the-system" title="Permalink to this heading">#</a></h3>
 <p>In order to guarantee an optimal quality of service, the deployed system must be carefully monitored. This may involve:</p>
 <ul class="simple">
 <li><p>Checking the system’s live availability and performance at regular intervals.</p></li>
@@ -2281,9 +1949,9 @@ Test error for final model: 47968.38
 <li><p>Checking input data quality.</p></li>
 <li><p>Retraining the model on fresh data.</p></li>
 </ul>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -2297,7 +1965,7 @@ Test error for final model: 47968.38
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./overview"
         },
         predefinedOutput: true
@@ -2305,44 +1973,151 @@ Test error for final model: 47968.38
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="introduction_to_machine_learning.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Introduction to Machine Learning</p>
-        </div>
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="introduction_to_machine_learning.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Introduction to Machine Learning</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="introduction_to_reinforcement_learning.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="introduction_to_reinforcement_learning.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Introduction to Reinforcement Learning</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
-</div>
-            
-        </div>
-    </div>
-    <footer class="footer">
-  <p>
-    
-      By Baptiste Pesquet<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
-
-
       </div>
-    </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+</div>
 
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup">Environment setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-machine-learning-workflow">The Machine Learning workflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-frame-the-problem">Step 1: frame the problem</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-questions">Key questions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-ml-friendly-problems">Properties of ML-friendly problems</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-predict-house-prices-in-an-area">Example: predict house prices in an area</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-collect-analyze-and-prepare-data">Step 2: collect, analyze and prepare data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-crucial-step">A crucial step</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predefined-datasets-vs-real-data">Predefined datasets Vs real data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-the-california-housing-dataset">Example: the California housing dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-1-discover-data">Step 2.1: discover data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-2-create-a-test-set">Step 2.2: create a test set</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-3-analyze-data">Step 2.3: analyze data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-4-feature-engineering">Step 2.4: feature engineering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-5-data-preprocessing">Step 2.5: data preprocessing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#handling-missing-values">Handling missing values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-scaling">Feature scaling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-hot-encoding">One-hot encoding</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing-pipelines">Preprocessing pipelines</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-select-and-train-models">Step 3: select and train models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-iterative-and-empirical-step">An iterative and empirical step</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-optimization-generalization-dilemna">The optimization/generalization dilemna</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#underfitting-and-overfitting">Underfitting and overfitting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-1-choose-an-evaluation-metric">Step 3.1: choose an evaluation metric</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-2-start-with-a-baseline-model">Step 3.2: start with a baseline model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-3-try-other-models">Step 3.3: try other models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-a-validation-set">Using a validation set</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-validation">Cross-validation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-tune-the-chosen-model">Step 4: tune the chosen model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#searching-for-the-best-hyperparameters">Searching for the best hyperparameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#checking-final-model-performance-on-test-dataset">Checking final model performance on test dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-the-model-to-make-predictions-on-new-data">Using the model to make predictions on new data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-deploy-to-production-and-maintain-the-system">Step 5: deploy to production and maintain the system</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-1-saving-the-final-model-and-data-pipeline">Step 5.1: saving the final model and data pipeline</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-2-deploying-the-model">Step 5.2: deploying the model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-testing-the-deployed-model">Example: testing the deployed model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-3-monitor-and-maintain-the-system">Step 5.3: monitor and maintain the system</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Baptiste Pesquet
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2021.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

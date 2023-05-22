@@ -1,893 +1,542 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
     <title>Convolutional Neural Networks &#8212; Machine Learning Handbook</title>
-    
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    
-      
-
-    
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.css?digest=84ace793992934648b4de8eed757e5a2" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.9d8b4a8b9bb19db25eeaddc40d639ba2.js"></script>
-    <script >const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'algorithms/convolutional_neural_networks';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Recurrent Neural Networks" href="recurrent_neural_networks.html" />
     <link rel="prev" title="Artificial Neural Networks" href="artificial_neural_networks.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
-
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<div class="col-12 col-md-3 bd-sidebar site-navigation " id="site-navigation">
-    
-        <div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../_static/mlhandbook_logo.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">Machine Learning Handbook</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="../_static/mlhandbook_logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/mlhandbook_logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference external" href="https://www.bpesquet.fr/mlkatas">
-   Machine Learning Katas
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference external" href="https://www.bpesquet.fr/mlkatas">Machine Learning Katas</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  overview
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">overview</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../overview/introduction_to_machine_learning.html">
-   Introduction to Machine Learning
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../overview/machine_learning_in_action.html">
-   Machine Learning in action
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../overview/introduction_to_reinforcement_learning.html">
-   Introduction to Reinforcement Learning
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/introduction_to_machine_learning.html">Introduction to Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/machine_learning_in_action.html">Machine Learning in action</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/introduction_to_reinforcement_learning.html">Introduction to Reinforcement Learning</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Fundamentals
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fundamentals</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../fundamentals/handling_data.html">
-   Handling data
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../fundamentals/assessing_results.html">
-   Assessing results
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../fundamentals/training_models.html">
-   Training models
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../fundamentals/handling_data.html">Handling data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fundamentals/assessing_results.html">Assessing results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fundamentals/training_models.html">Training models</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Algorithms
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Algorithms</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="classic_ml.html">
-   Classic Machine Learning
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="k_nearest_neighbors.html">
-     K-Nearest Neighbors
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="linear_regression.html">
-     Linear Regression
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="logistic_regression.html">
-     Logistic Regression
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="decision_trees_and_random_forests.html">
-     Decision Trees &amp; Random Forests
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="bayesian_methods.html">
-     Bayesian Methods
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="support_vector_machines.html">
-     Support Vector Machines
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="k_means.html">
-     K-Means
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 current active has-children">
-  <a class="reference internal" href="nn_deep_learning.html">
-   Neural Networks and Deep Learning
-  </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
-  <label for="toctree-checkbox-2">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul class="current">
-   <li class="toctree-l2">
-    <a class="reference internal" href="artificial_neural_networks.html">
-     Artificial Neural Networks
-    </a>
-   </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
-     Convolutional Neural Networks
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="recurrent_neural_networks.html">
-     Recurrent Neural Networks
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="autoencoders.html">
-     Autoencoders
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="neural_style_transfer.html">
-     Neural Style Transfer
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="generative_adversarial_networks.html">
-     Generative Adversarial Networks
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="transformers.html">
-     Transformers
-    </a>
-   </li>
-  </ul>
- </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="classic_ml.html">Classic Machine Learning</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="k_nearest_neighbors.html">K-Nearest Neighbors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linear_regression.html">Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logistic_regression.html">Logistic Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="decision_trees_and_random_forests.html">Decision Trees &amp; Random Forests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bayesian_methods.html">Bayesian Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="support_vector_machines.html">Support Vector Machines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="k_means.html">K-Means</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Engineering
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../engineering/introduction_to_mlops.html">
-   Introduction to MLOps
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../engineering/machine_learning_issues.html">
-   Machine Learning issues
-  </a>
- </li>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="nn_deep_learning.html">Neural Networks and Deep Learning</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="artificial_neural_networks.html">Artificial Neural Networks</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Convolutional Neural Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recurrent_neural_networks.html">Recurrent Neural Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="autoencoders.html">Autoencoders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="neural_style_transfer.html">Neural Style Transfer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generative_adversarial_networks.html">Generative Adversarial Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="transformers.html">Transformers</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Tools
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../tools/python.html">
-   Python
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
-  <label for="toctree-checkbox-3">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../tools/python_ecosystem.html">
-     The Python ecosystem
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../tools/python_cheatsheet.html">
-     Python cheatsheet
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../tools/python_good_practices.html">
-     Python good practices
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../tools/numpy.html">
-   NumPy
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../tools/keras.html">
-   Keras
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../tools/pytorch.html">
-   PyTorch
-  </a>
- </li>
+</li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Reference
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Engineering</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../reference/activation_functions.html">
-   Activation functions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../reference/glossary.html">
-   Glossary
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../reference/acknowledgments.html">
-   Acknowledgments
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../engineering/introduction_to_mlops.html">Introduction to MLOps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../engineering/machine_learning_issues.html">Machine Learning issues</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tools</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tools/python.html">Python</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tools/python_ecosystem.html">The Python ecosystem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/python_cheatsheet.html">Python cheatsheet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/python_good_practices.html">Python good practices</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/numpy.html">NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/keras.html">Keras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/pytorch.html">PyTorch</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../reference/activation_functions.html">Activation functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/acknowledgments.html">Acknowledgments</a></li>
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
-          
-<!-- This is an invisible pixel that we watch to see if we've scrolled. -->
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
 <div class="sbt-scroll-pixel-helper"></div>
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            <div class="topbar-left">
-                
-                <label class="nav-toggle-button" for="__navigation">
-                    <div class="visually-hidden">Toggle navigation</div>
-                    <i class="fas fa-bars"></i>
-                </label>
-                
-            </div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/bpesquet/mlhandbook/master?urlpath=tree/algorithms/convolutional_neural_networks.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/bpesquet/mlhandbook/blob/master/algorithms/convolutional_neural_networks.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/bpesquet/mlhandbook" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/bpesquet/mlhandbook/edit/master/algorithms/convolutional_neural_networks.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/bpesquet/mlhandbook/issues/new?title=Issue%20on%20page%20%2Falgorithms/convolutional_neural_networks.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/algorithms/convolutional_neural_networks.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Convolutional Neural Networks</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
             
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/algorithms/convolutional_neural_networks.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/bpesquet/mlhandbook"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/bpesquet/mlhandbook/issues/new?title=Issue%20on%20page%20%2Falgorithms/convolutional_neural_networks.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/bpesquet/mlhandbook/edit/master/algorithms/convolutional_neural_networks.ipynb"><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/bpesquet/mlhandbook/master?urlpath=tree/algorithms/convolutional_neural_networks.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        <a class="colab-button" href="https://colab.research.google.com/github/bpesquet/mlhandbook/blob/master/algorithms/convolutional_neural_networks.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
-                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
-                    src="../_static/images/logo_colab.png"
-                    alt="Interact on Colab">Colab</button></a>
-        
-        
-        
-    </div>
-</div>
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div>
+                <h2> Contents </h2>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
+            <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#environment-setup">
-   Environment setup
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#architecture">
-   Architecture
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#justification">
-     Justification
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#topological-structure-of-objects">
-     Topological structure of objects
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#general-cnn-design">
-     General CNN design
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-convolution-operation">
-     The convolution operation
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#convolution-parameters">
-     Convolution parameters
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#preserving-output-dimensions-with-padding">
-     Preserving output dimensions with padding
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#valid-padding">
-       Valid padding
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#full-padding">
-       Full padding
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#same-padding">
-       Same padding
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#convolutions-inputs-and-outputs-tensors">
-     Convolutions inputs and outputs: tensors
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#d-convolutions-on-3d-tensors">
-     2D convolutions on 3D tensors
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#activation-function">
-     Activation function
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-pooling-operation">
-     The pooling operation
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#pooling-result">
-       Pooling result
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#pooling-output">
-       Pooling output
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#interpretation">
-     Interpretation
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#history">
-   History
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#humble-beginnings-lenet5-1988">
-     Humble beginnings: LeNet5 (1988)
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-breakthrough-ilsvrc">
-     The breakthrough: ILSVRC
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#alexnet-2012">
-     AlexNet (2012)
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#vgg-2014">
-     VGG (2014)
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#googlenet-inception-2014">
-     GoogLeNet/Inception (2014)
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#microsoft-resnet-2015">
-     Microsoft ResNet (2015)
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#depth-challenges-and-solutions">
-     Depth: challenges and solutions
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#training-a-convnet">
-   Training a convnet
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#general-principle">
-     General principle
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#data-augmentation">
-     Data augmentation
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-training-a-cnn-to-recognize-fashion-items">
-     Example: training a CNN to recognize fashion items
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#data-preprocessing">
-       Data preprocessing
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#expected-convnet-architecture">
-       Expected convnet architecture
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#convnet-training">
-       Convnet training
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#using-a-pretrained-convnet">
-   Using a pretrained convnet
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#an-efficient-strategy">
-     An efficient strategy
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#feature-extraction">
-     Feature extraction
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#fine-tuning">
-     Fine-tuning
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-using-a-pretrained-convnet-to-recognize-common-objects">
-     Example: using a pretrained convnet to recognize common objects
-    </a>
-   </li>
-  </ul>
- </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup">Environment setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#architecture">Architecture</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#justification">Justification</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topological-structure-of-objects">Topological structure of objects</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#general-cnn-design">General CNN design</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-convolution-operation">The convolution operation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convolution-parameters">Convolution parameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preserving-output-dimensions-with-padding">Preserving output dimensions with padding</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#valid-padding">Valid padding</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#full-padding">Full padding</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#same-padding">Same padding</a></li>
 </ul>
-
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convolutions-inputs-and-outputs-tensors">Convolutions inputs and outputs: tensors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-convolutions-on-3d-tensors">2D convolutions on 3D tensors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#activation-function">Activation function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-pooling-operation">The pooling operation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pooling-result">Pooling result</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pooling-output">Pooling output</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation">Interpretation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#history">History</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#humble-beginnings-lenet5-1988">Humble beginnings: LeNet5 (1988)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-breakthrough-ilsvrc">The breakthrough: ILSVRC</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alexnet-2012">AlexNet (2012)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vgg-2014">VGG (2014)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#googlenet-inception-2014">GoogLeNet/Inception (2014)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#microsoft-resnet-2015">Microsoft ResNet (2015)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#depth-challenges-and-solutions">Depth: challenges and solutions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-a-convnet">Training a convnet</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#general-principle">General principle</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-augmentation">Data augmentation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-training-a-cnn-to-recognize-fashion-items">Example: training a CNN to recognize fashion items</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing">Data preprocessing</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-convnet-architecture">Expected convnet architecture</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#convnet-training">Convnet training</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-a-pretrained-convnet">Using a pretrained convnet</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-efficient-strategy">An efficient strategy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-extraction">Feature extraction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fine-tuning">Fine-tuning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-using-a-pretrained-convnet-to-recognize-common-objects">Example: using a pretrained convnet to recognize common objects</a></li>
+</ul>
+</li>
+</ul>
             </nav>
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Convolutional Neural Networks</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#environment-setup">
-   Environment setup
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#architecture">
-   Architecture
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#justification">
-     Justification
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#topological-structure-of-objects">
-     Topological structure of objects
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#general-cnn-design">
-     General CNN design
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-convolution-operation">
-     The convolution operation
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#convolution-parameters">
-     Convolution parameters
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#preserving-output-dimensions-with-padding">
-     Preserving output dimensions with padding
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#valid-padding">
-       Valid padding
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#full-padding">
-       Full padding
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#same-padding">
-       Same padding
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#convolutions-inputs-and-outputs-tensors">
-     Convolutions inputs and outputs: tensors
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#d-convolutions-on-3d-tensors">
-     2D convolutions on 3D tensors
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#activation-function">
-     Activation function
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-pooling-operation">
-     The pooling operation
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#pooling-result">
-       Pooling result
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#pooling-output">
-       Pooling output
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#interpretation">
-     Interpretation
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#history">
-   History
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#humble-beginnings-lenet5-1988">
-     Humble beginnings: LeNet5 (1988)
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-breakthrough-ilsvrc">
-     The breakthrough: ILSVRC
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#alexnet-2012">
-     AlexNet (2012)
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#vgg-2014">
-     VGG (2014)
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#googlenet-inception-2014">
-     GoogLeNet/Inception (2014)
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#microsoft-resnet-2015">
-     Microsoft ResNet (2015)
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#depth-challenges-and-solutions">
-     Depth: challenges and solutions
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#training-a-convnet">
-   Training a convnet
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#general-principle">
-     General principle
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#data-augmentation">
-     Data augmentation
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-training-a-cnn-to-recognize-fashion-items">
-     Example: training a CNN to recognize fashion items
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#data-preprocessing">
-       Data preprocessing
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#expected-convnet-architecture">
-       Expected convnet architecture
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#convnet-training">
-       Convnet training
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#using-a-pretrained-convnet">
-   Using a pretrained convnet
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#an-efficient-strategy">
-     An efficient strategy
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#feature-extraction">
-     Feature extraction
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#fine-tuning">
-     Fine-tuning
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-using-a-pretrained-convnet-to-recognize-common-objects">
-     Example: using a pretrained convnet to recognize common objects
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
 
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            
-              <div>
+              
                 
-  <div class="section" id="convolutional-neural-networks">
-<h1>Convolutional Neural Networks<a class="headerlink" href="#convolutional-neural-networks" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="environment-setup">
-<h2>Environment setup<a class="headerlink" href="#environment-setup" title="Permalink to this headline">¶</a></h2>
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="convolutional-neural-networks">
+<h1>Convolutional Neural Networks<a class="headerlink" href="#convolutional-neural-networks" title="Permalink to this heading">#</a></h1>
+<section id="environment-setup">
+<h2>Environment setup<a class="headerlink" href="#environment-setup" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">platform</span>
@@ -944,9 +593,14 @@ No GPU :(
 </div>
 </div>
 <div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_loss_acc</span><span class="p">(</span><span class="n">history</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Plot training and (optionally) validation loss and accuracy</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plot training and (optionally) validation loss and accuracy</span>
 <span class="sd">    Takes a Keras History object as parameter&quot;&quot;&quot;</span>
 
     <span class="n">loss</span> <span class="o">=</span> <span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s2">&quot;loss&quot;</span><span class="p">]</span>
@@ -985,12 +639,13 @@ No GPU :(
 </pre></div>
 </div>
 </div>
+</details>
 </div>
-</div>
-<div class="section" id="architecture">
-<h2>Architecture<a class="headerlink" href="#architecture" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="justification">
-<h3>Justification<a class="headerlink" href="#justification" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="architecture">
+<h2>Architecture<a class="headerlink" href="#architecture" title="Permalink to this heading">#</a></h2>
+<section id="justification">
+<h3>Justification<a class="headerlink" href="#justification" title="Permalink to this heading">#</a></h3>
 <p>The visual world has the following properties:</p>
 <ul class="simple">
 <li><p>Translation invariance.</p></li>
@@ -999,24 +654,24 @@ No GPU :(
 </ul>
 <p>Classical models are not designed to detect local patterns in images.</p>
 <p><a class="reference external" href="https://youtu.be/shVKhOmT0HE"><img alt="Visual world" src="../_images/visual_world.png" /></a></p>
-</div>
-<div class="section" id="topological-structure-of-objects">
-<h3>Topological structure of objects<a class="headerlink" href="#topological-structure-of-objects" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="topological-structure-of-objects">
+<h3>Topological structure of objects<a class="headerlink" href="#topological-structure-of-objects" title="Permalink to this heading">#</a></h3>
 <p><a class="reference external" href="https://youtu.be/shVKhOmT0HE"><img alt="Topological structure" src="../_images/topological_structure.png" /></a></p>
 <p><a class="reference external" href="https://youtu.be/shVKhOmT0HE"><img alt="From edges to objects" src="../_images/edges_to_objects.png" /></a></p>
-</div>
-<div class="section" id="general-cnn-design">
-<h3>General CNN design<a class="headerlink" href="#general-cnn-design" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="general-cnn-design">
+<h3>General CNN design<a class="headerlink" href="#general-cnn-design" title="Permalink to this heading">#</a></h3>
 <p><a class="reference external" href="https://developers.google.com/machine-learning/practica/image-classification/convolutional-neural-networks"><img alt="General CNN architecture" src="../_images/cnn_architecture.png" /></a></p>
-</div>
-<div class="section" id="the-convolution-operation">
-<h3>The convolution operation<a class="headerlink" href="#the-convolution-operation" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="the-convolution-operation">
+<h3>The convolution operation<a class="headerlink" href="#the-convolution-operation" title="Permalink to this heading">#</a></h3>
 <p>Apply a <strong>kernel</strong> to data. Result is called a <strong>feature map</strong>.</p>
 <p><a class="reference external" href="https://developers.google.com/machine-learning/practica/image-classification/convolutional-neural-networks"><img alt="Convolution with a 3x3 filter of depth 1 applied on 5x5 data" src="../_images/convolution_overview.gif" /></a></p>
 <p><img alt="Convolution example" src="../_images/convolution_example.jpeg" /></p>
-</div>
-<div class="section" id="convolution-parameters">
-<h3>Convolution parameters<a class="headerlink" href="#convolution-parameters" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="convolution-parameters">
+<h3>Convolution parameters<a class="headerlink" href="#convolution-parameters" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p><strong>Filter dimensions</strong>: 2D for images.</p></li>
 <li><p><strong>Filter size</strong>: generally 3x3 or 5x5.</p></li>
@@ -1024,32 +679,32 @@ No GPU :(
 <li><p><strong>Stride</strong>: step for sliding the convolution window. Generally equal to 1.</p></li>
 <li><p><strong>Padding</strong>: blank rows/columns with all-zero values added on sides of the input feature map.</p></li>
 </ul>
-</div>
-<div class="section" id="preserving-output-dimensions-with-padding">
-<h3>Preserving output dimensions with padding<a class="headerlink" href="#preserving-output-dimensions-with-padding" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="preserving-output-dimensions-with-padding">
+<h3>Preserving output dimensions with padding<a class="headerlink" href="#preserving-output-dimensions-with-padding" title="Permalink to this heading">#</a></h3>
 <p><a class="reference external" href="https://towardsdatascience.com/types-of-convolutions-in-deep-learning-717013397f4d"><img alt="Preserving output dimensions with padding" src="../_images/2d_convol.gif" /></a></p>
-<div class="section" id="valid-padding">
-<h4>Valid padding<a class="headerlink" href="#valid-padding" title="Permalink to this headline">¶</a></h4>
+<section id="valid-padding">
+<h4>Valid padding<a class="headerlink" href="#valid-padding" title="Permalink to this heading">#</a></h4>
 <p>Output size = input size - kernel size + 1</p>
 <p><a class="reference external" href="https://youtu.be/shVKhOmT0HE"><img alt="Valid padding" src="../_images/padding_valid.png" /></a></p>
-</div>
-<div class="section" id="full-padding">
-<h4>Full padding<a class="headerlink" href="#full-padding" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="full-padding">
+<h4>Full padding<a class="headerlink" href="#full-padding" title="Permalink to this heading">#</a></h4>
 <p>Output size = input size + kernel size - 1</p>
 <p><a class="reference external" href="https://youtu.be/shVKhOmT0HE"><img alt="Valid padding" src="../_images/padding_full.png" /></a></p>
-</div>
-<div class="section" id="same-padding">
-<h4>Same padding<a class="headerlink" href="#same-padding" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="same-padding">
+<h4>Same padding<a class="headerlink" href="#same-padding" title="Permalink to this heading">#</a></h4>
 <p>Output size = input size</p>
 <p><a class="reference external" href="https://youtu.be/shVKhOmT0HE"><img alt="Valid padding" src="../_images/padding_same.png" /></a></p>
-</div>
-</div>
-<div class="section" id="convolutions-inputs-and-outputs-tensors">
-<h3>Convolutions inputs and outputs: tensors<a class="headerlink" href="#convolutions-inputs-and-outputs-tensors" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="convolutions-inputs-and-outputs-tensors">
+<h3>Convolutions inputs and outputs: tensors<a class="headerlink" href="#convolutions-inputs-and-outputs-tensors" title="Permalink to this heading">#</a></h3>
 <p><a class="reference external" href="https://youtu.be/shVKhOmT0HE"><img alt="Convolution inputs and outputs" src="../_images/conv_inputs_outputs.png" /></a></p>
-</div>
-<div class="section" id="d-convolutions-on-3d-tensors">
-<h3>2D convolutions on 3D tensors<a class="headerlink" href="#d-convolutions-on-3d-tensors" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="d-convolutions-on-3d-tensors">
+<h3>2D convolutions on 3D tensors<a class="headerlink" href="#d-convolutions-on-3d-tensors" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Convolution input data is 3-dimensional: images with height, width and color channels, or features maps produced by previous layers.</p></li>
 <li><p>Each convolution filter is a collection of <em>kernels</em> with distinct weights, one for every input channel.</p></li>
@@ -1058,33 +713,33 @@ No GPU :(
 </ul>
 <p><a class="reference external" href="https://towardsdatascience.com/applied-deep-learning-part-4-convolutional-neural-networks-584bc134c1e2"><img alt="2D convolution on a 32x32x3 image with 10 filters" src="../_images/conv_image.png" /></a></p>
 <p><a class="reference external" href="https://stackoverflow.com/a/44628011/2380880"><img alt="2D convolution over RGB image" src="../_images/2D_conv_over_rgb_image.png" /></a></p>
-</div>
-<div class="section" id="activation-function">
-<h3>Activation function<a class="headerlink" href="#activation-function" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="activation-function">
+<h3>Activation function<a class="headerlink" href="#activation-function" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Applied to the (scalar) convolution result.</p></li>
 <li><p>Introduces non-linearity in the model.</p></li>
 <li><p>Standard choice: <span class="math notranslate nohighlight">\(ReLU(z) = max(0,z)\)</span></p></li>
 </ul>
-</div>
-<div class="section" id="the-pooling-operation">
-<h3>The pooling operation<a class="headerlink" href="#the-pooling-operation" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="the-pooling-operation">
+<h3>The pooling operation<a class="headerlink" href="#the-pooling-operation" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Reduces the dimensionality of feature maps.</p></li>
 <li><p>Often done by selecting maximum values (<em>max pooling</em>).</p></li>
 </ul>
 <p><a class="reference external" href="https://developers.google.com/machine-learning/practica/image-classification/convolutional-neural-networks"><img alt="Max pooling with 2x2 filter and stride of 2" src="../_images/maxpool_animation.gif" /></a></p>
-<div class="section" id="pooling-result">
-<h4>Pooling result<a class="headerlink" href="#pooling-result" title="Permalink to this headline">¶</a></h4>
+<section id="pooling-result">
+<h4>Pooling result<a class="headerlink" href="#pooling-result" title="Permalink to this heading">#</a></h4>
 <p><a class="reference external" href="https://youtu.be/shVKhOmT0HE"><img alt="Pooling result" src="../_images/pooling_result.png" /></a></p>
-</div>
-<div class="section" id="pooling-output">
-<h4>Pooling output<a class="headerlink" href="#pooling-output" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="pooling-output">
+<h4>Pooling output<a class="headerlink" href="#pooling-output" title="Permalink to this heading">#</a></h4>
 <p><a class="reference external" href="https://towardsdatascience.com/applied-deep-learning-part-4-convolutional-neural-networks-584bc134c1e2"><img alt="Pooling with a 2x2 filter and stride of 2 on 10 32x32 feature maps" src="../_images/maxpooling_image.png" /></a></p>
-</div>
-</div>
-<div class="section" id="interpretation">
-<h3>Interpretation<a class="headerlink" href="#interpretation" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="interpretation">
+<h3>Interpretation<a class="headerlink" href="#interpretation" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Convolution layers act as <strong>feature extractors</strong>.</p></li>
 <li><p>Dense layers use the extracted features to classify data.</p></li>
@@ -1093,14 +748,19 @@ No GPU :(
 <p><a class="reference external" href="https://harishnarayanan.org/writing/artistic-style-transfer/"><img alt="Feature extraction with a CNN" src="../_images/representation_learning.png" /></a></p>
 <p><a class="reference external" href="https://transcranial.github.io/keras-js/#/mnist-cnn"><img alt="Visualizing convnet layers on MNIST" src="../_images/keras_js_layers.png" /></a></p>
 <p><a class="reference external" href="http://scs.ryerson.ca/~aharley/vis/conv/flat.html"><img alt="Another visualization of intermediate layers on MNIST" src="../_images/conv_all_mnist.png" /></a></p>
-</div>
-</div>
-<div class="section" id="history">
-<h2>History<a class="headerlink" href="#history" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="humble-beginnings-lenet5-1988">
-<h3>Humble beginnings: LeNet5 (1988)<a class="headerlink" href="#humble-beginnings-lenet5-1988" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="history">
+<h2>History<a class="headerlink" href="#history" title="Permalink to this heading">#</a></h2>
+<section id="humble-beginnings-lenet5-1988">
+<h3>Humble beginnings: LeNet5 (1988)<a class="headerlink" href="#humble-beginnings-lenet5-1988" title="Permalink to this heading">#</a></h3>
 <p><img alt="LeNet5" src="../_images/lenet5.jpg" /></p>
 <div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">YouTubeVideo</span>
 
@@ -1108,54 +768,55 @@ No GPU :(
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
 <div class="output text_html">
-<iframe
-    width="400"
-    height="300"
-    src="https://www.youtube.com/embed/FwFduRA_L6Q"
-    frameborder="0"
-    allowfullscreen
-></iframe>
-</div></div>
+        <iframe
+            width="400"
+            height="300"
+            src="https://www.youtube.com/embed/FwFduRA_L6Q"
+            frameborder="0"
+            allowfullscreen
+        ></iframe>
+        </div></div>
 </div>
-</div>
-<div class="section" id="the-breakthrough-ilsvrc">
-<h3>The breakthrough: ILSVRC<a class="headerlink" href="#the-breakthrough-ilsvrc" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="the-breakthrough-ilsvrc">
+<h3>The breakthrough: ILSVRC<a class="headerlink" href="#the-breakthrough-ilsvrc" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p><a class="reference external" href="http://image-net.org/challenges/LSVRC/"><em>ImageNet Large Scale Visual Recognition Challenge</em></a></p></li>
 <li><p>Worldwide image classification challenge based on the <a class="reference external" href="http://www.image-net.org/">ImageNet</a> dataset.</p></li>
 </ul>
 <p><img alt="ILSVRC results" src="../_images/ILSVRC_results.jpg" /></p>
-</div>
-<div class="section" id="alexnet-2012">
-<h3>AlexNet (2012)<a class="headerlink" href="#alexnet-2012" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="alexnet-2012">
+<h3>AlexNet (2012)<a class="headerlink" href="#alexnet-2012" title="Permalink to this heading">#</a></h3>
 <p>Trained on 2 GPU for 5 to 6 days.</p>
 <p><img alt="AlexNet" src="../_images/alexnet2.png" /></p>
-</div>
-<div class="section" id="vgg-2014">
-<h3>VGG (2014)<a class="headerlink" href="#vgg-2014" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="vgg-2014">
+<h3>VGG (2014)<a class="headerlink" href="#vgg-2014" title="Permalink to this heading">#</a></h3>
 <p><img alt="VGG16" src="../_images/vgg16.png" /></p>
-</div>
-<div class="section" id="googlenet-inception-2014">
-<h3>GoogLeNet/Inception (2014)<a class="headerlink" href="#googlenet-inception-2014" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="googlenet-inception-2014">
+<h3>GoogLeNet/Inception (2014)<a class="headerlink" href="#googlenet-inception-2014" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>9 Inception modules, more than 100 layers.</p></li>
 <li><p>Trained on several GPU for about a week.</p></li>
 </ul>
 <p><img alt="Inception" src="../_images/google_inception.jpg" /></p>
-</div>
-<div class="section" id="microsoft-resnet-2015">
-<h3>Microsoft ResNet (2015)<a class="headerlink" href="#microsoft-resnet-2015" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="microsoft-resnet-2015">
+<h3>Microsoft ResNet (2015)<a class="headerlink" href="#microsoft-resnet-2015" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>152 layers, trained on 8 GPU for 2 to 3 weeks.</p></li>
 <li><p>Smaller error rate than a average human.</p></li>
 </ul>
 <p><img alt="ResNet" src="../_images/resnet_archi.png" /></p>
 <p><img alt="Deeper model" src="../_images/deeper_model.jpg" /></p>
-</div>
-<div class="section" id="depth-challenges-and-solutions">
-<h3>Depth: challenges and solutions<a class="headerlink" href="#depth-challenges-and-solutions" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="depth-challenges-and-solutions">
+<h3>Depth: challenges and solutions<a class="headerlink" href="#depth-challenges-and-solutions" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Challenges</p>
 <ul>
@@ -1172,23 +833,23 @@ No GPU :(
 </ul>
 </li>
 </ul>
-</div>
-</div>
-<div class="section" id="training-a-convnet">
-<h2>Training a convnet<a class="headerlink" href="#training-a-convnet" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="general-principle">
-<h3>General principle<a class="headerlink" href="#general-principle" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="training-a-convnet">
+<h2>Training a convnet<a class="headerlink" href="#training-a-convnet" title="Permalink to this heading">#</a></h2>
+<section id="general-principle">
+<h3>General principle<a class="headerlink" href="#general-principle" title="Permalink to this heading">#</a></h3>
 <p>Same principle as a dense neural network: <strong>backpropagation</strong> + <strong>gradient descent</strong>.</p>
 <p><a class="reference external" href="https://www.jefkine.com/general/2016/09/05/backpropagation-in-convolutional-neural-networks/">Backpropagation In Convolutional Neural Networks</a></p>
-</div>
-<div class="section" id="data-augmentation">
-<h3>Data augmentation<a class="headerlink" href="#data-augmentation" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="data-augmentation">
+<h3>Data augmentation<a class="headerlink" href="#data-augmentation" title="Permalink to this heading">#</a></h3>
 <p>By design, convnets are only robust against translation. <strong>Data augmentation</strong> can make them robust against rotation and scaling.</p>
 <p>Principle: the dataset is enriched with new samples created by applying operations on existing ones.</p>
 <p><img alt="Data Augmentation" src="../_images/data_augmentation.png" /></p>
-</div>
-<div class="section" id="example-training-a-cnn-to-recognize-fashion-items">
-<h3>Example: training a CNN to recognize fashion items<a class="headerlink" href="#example-training-a-cnn-to-recognize-fashion-items" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="example-training-a-cnn-to-recognize-fashion-items">
+<h3>Example: training a CNN to recognize fashion items<a class="headerlink" href="#example-training-a-cnn-to-recognize-fashion-items" title="Permalink to this heading">#</a></h3>
 <p>The <a class="reference external" href="https://github.com/zalandoresearch/fashion-mnist">Fashion-MNIST</a> dataset contains 70,000 28x28 grayscale images of fashion items.</p>
 <p>It is slightly more challenging than the ubiquitous MNIST handwritten digits dataset.</p>
 <div class="cell docutils container">
@@ -1221,7 +882,7 @@ Test images: (10000, 28, 28). Test labels: (10000,)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/convolutional_neural_networks_44_0.png" src="../_images/convolutional_neural_networks_44_0.png" />
+<img alt="../_images/410082353330327e495417279e2ae5260bec15e749ec8ff15613026e0ab06c52.png" src="../_images/410082353330327e495417279e2ae5260bec15e749ec8ff15613026e0ab06c52.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1292,8 +953,8 @@ Test images: (10000, 28, 28). Test labels: (10000,)
 </table>
 </div></div></div>
 </div>
-<div class="section" id="data-preprocessing">
-<h4>Data preprocessing<a class="headerlink" href="#data-preprocessing" title="Permalink to this headline">¶</a></h4>
+<section id="data-preprocessing">
+<h4>Data preprocessing<a class="headerlink" href="#data-preprocessing" title="Permalink to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Change pixel values from (0, 255) to (0, 1)</span>
@@ -1320,9 +981,9 @@ x_test: (10000, 28, 28, 1). y_test: (10000, 10)
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="expected-convnet-architecture">
-<h4>Expected convnet architecture<a class="headerlink" href="#expected-convnet-architecture" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="expected-convnet-architecture">
+<h4>Expected convnet architecture<a class="headerlink" href="#expected-convnet-architecture" title="Permalink to this heading">#</a></h4>
 <p><img alt="Example CNN architecture" src="../_images/example_cnn_architecture.png" /></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1391,9 +1052,9 @@ _________________________________________________________________
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="convnet-training">
-<h4>Convnet training<a class="headerlink" href="#convnet-training" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="convnet-training">
+<h4>Convnet training<a class="headerlink" href="#convnet-training" title="Permalink to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Preparing the model for training</span>
@@ -1442,7 +1103,7 @@ Epoch 10/10
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/convolutional_neural_networks_53_0.png" src="../_images/convolutional_neural_networks_53_0.png" />
+<img alt="../_images/54494e77054377f5fdc5bd528d6aa2c86b671700df691ff744a8cfd2039d82f1.png" src="../_images/54494e77054377f5fdc5bd528d6aa2c86b671700df691ff744a8cfd2039d82f1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1460,30 +1121,30 @@ Epoch 10/10
 </div>
 </div>
 </div>
-</div>
-</div>
-</div>
-<div class="section" id="using-a-pretrained-convnet">
-<h2>Using a pretrained convnet<a class="headerlink" href="#using-a-pretrained-convnet" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="an-efficient-strategy">
-<h3>An efficient strategy<a class="headerlink" href="#an-efficient-strategy" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+</section>
+<section id="using-a-pretrained-convnet">
+<h2>Using a pretrained convnet<a class="headerlink" href="#using-a-pretrained-convnet" title="Permalink to this heading">#</a></h2>
+<section id="an-efficient-strategy">
+<h3>An efficient strategy<a class="headerlink" href="#an-efficient-strategy" title="Permalink to this heading">#</a></h3>
 <p>A <em>pretrained convnet</em> is a saved network that was previously trained on a large dataset (typically on a large-scale image classification task). If the training set was general enough, it can act as a generic model and its learned features can be useful for many problems.</p>
 <p>It is an example of <em>transfer learning</em>.</p>
 <p>There are two ways to use a pretrained model: <em>feature extraction</em> and <em>fine-tuning</em>.</p>
-</div>
-<div class="section" id="feature-extraction">
-<h3>Feature extraction<a class="headerlink" href="#feature-extraction" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="feature-extraction">
+<h3>Feature extraction<a class="headerlink" href="#feature-extraction" title="Permalink to this heading">#</a></h3>
 <p>Reuse the convolution base of a pretrained model, and add a custom classifier trained from scratch on top ot if.</p>
 <p>State-of-the-art models (VGG, ResNet, Inception…) are regularly published by top AI institutions.</p>
-</div>
-<div class="section" id="fine-tuning">
-<h3>Fine-tuning<a class="headerlink" href="#fine-tuning" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="fine-tuning">
+<h3>Fine-tuning<a class="headerlink" href="#fine-tuning" title="Permalink to this heading">#</a></h3>
 <p>Slightly adjusts the top feature extraction layers of the model being reused, in order to make it more relevant for the new context.</p>
 <p>These top layers and the custom classification layers on top of them are jointly trained.</p>
 <p><img alt="Fine-tuning" src="../_images/fine_tuning.png" /></p>
-</div>
-<div class="section" id="example-using-a-pretrained-convnet-to-recognize-common-objects">
-<h3>Example: using a pretrained convnet to recognize common objects<a class="headerlink" href="#example-using-a-pretrained-convnet-to-recognize-common-objects" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="example-using-a-pretrained-convnet-to-recognize-common-objects">
+<h3>Example: using a pretrained convnet to recognize common objects<a class="headerlink" href="#example-using-a-pretrained-convnet-to-recognize-common-objects" title="Permalink to this heading">#</a></h3>
 <p>The <a class="reference external" href="https://www.cs.toronto.edu/~kriz/cifar.html">CIFAR10</a> dataset consists of 60,000 32x32 colour images in 10 classes, with 6,000 images per class. The classes are completely mutually exclusive.</p>
 <p>There are 50,000 training images and 10,000 test images.</p>
 <div class="cell docutils container">
@@ -1516,7 +1177,7 @@ Test images: (10000, 32, 32, 3). Test labels: (10000, 1)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/convolutional_neural_networks_61_0.png" src="../_images/convolutional_neural_networks_61_0.png" />
+<img alt="../_images/4bbd72818b151c2a6e2ce3fef73f8598d2e9157f65fdf313c15c1da0f0b2a2e7.png" src="../_images/4bbd72818b151c2a6e2ce3fef73f8598d2e9157f65fdf313c15c1da0f0b2a2e7.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1712,7 +1373,7 @@ Epoch 20/20
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/convolutional_neural_networks_66_0.png" src="../_images/convolutional_neural_networks_66_0.png" />
+<img alt="../_images/883b5765808128f095a658b5f3eb935a852ea73419d7321be044422d4b343c12.png" src="../_images/883b5765808128f095a658b5f3eb935a852ea73419d7321be044422d4b343c12.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1730,9 +1391,9 @@ Epoch 20/20
 </div>
 </div>
 </div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -1746,7 +1407,7 @@ Epoch 20/20
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./algorithms"
         },
         predefinedOutput: true
@@ -1754,44 +1415,156 @@ Epoch 20/20
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="artificial_neural_networks.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Artificial Neural Networks</p>
-        </div>
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="artificial_neural_networks.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Artificial Neural Networks</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="recurrent_neural_networks.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="recurrent_neural_networks.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Recurrent Neural Networks</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
-</div>
-            
-        </div>
-    </div>
-    <footer class="footer">
-  <p>
-    
-      By Baptiste Pesquet<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
-
-
       </div>
-    </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+</div>
 
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup">Environment setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#architecture">Architecture</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#justification">Justification</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topological-structure-of-objects">Topological structure of objects</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#general-cnn-design">General CNN design</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-convolution-operation">The convolution operation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convolution-parameters">Convolution parameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preserving-output-dimensions-with-padding">Preserving output dimensions with padding</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#valid-padding">Valid padding</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#full-padding">Full padding</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#same-padding">Same padding</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convolutions-inputs-and-outputs-tensors">Convolutions inputs and outputs: tensors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-convolutions-on-3d-tensors">2D convolutions on 3D tensors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#activation-function">Activation function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-pooling-operation">The pooling operation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pooling-result">Pooling result</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pooling-output">Pooling output</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation">Interpretation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#history">History</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#humble-beginnings-lenet5-1988">Humble beginnings: LeNet5 (1988)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-breakthrough-ilsvrc">The breakthrough: ILSVRC</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alexnet-2012">AlexNet (2012)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vgg-2014">VGG (2014)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#googlenet-inception-2014">GoogLeNet/Inception (2014)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#microsoft-resnet-2015">Microsoft ResNet (2015)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#depth-challenges-and-solutions">Depth: challenges and solutions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-a-convnet">Training a convnet</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#general-principle">General principle</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-augmentation">Data augmentation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-training-a-cnn-to-recognize-fashion-items">Example: training a CNN to recognize fashion items</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing">Data preprocessing</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-convnet-architecture">Expected convnet architecture</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#convnet-training">Convnet training</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-a-pretrained-convnet">Using a pretrained convnet</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-efficient-strategy">An efficient strategy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-extraction">Feature extraction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fine-tuning">Fine-tuning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-using-a-pretrained-convnet-to-recognize-common-objects">Example: using a pretrained convnet to recognize common objects</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Baptiste Pesquet
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2021.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

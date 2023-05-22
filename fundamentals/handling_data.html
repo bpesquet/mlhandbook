@@ -1,753 +1,528 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
     <title>Handling data &#8212; Machine Learning Handbook</title>
-    
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    
-      
-
-    
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.css?digest=84ace793992934648b4de8eed757e5a2" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.9d8b4a8b9bb19db25eeaddc40d639ba2.js"></script>
-    <script >const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'fundamentals/handling_data';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Assessing results" href="assessing_results.html" />
     <link rel="prev" title="Introduction to Reinforcement Learning" href="../overview/introduction_to_reinforcement_learning.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
-
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<div class="col-12 col-md-3 bd-sidebar site-navigation " id="site-navigation">
-    
-        <div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../_static/mlhandbook_logo.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">Machine Learning Handbook</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="../_static/mlhandbook_logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/mlhandbook_logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference external" href="https://www.bpesquet.fr/mlkatas">
-   Machine Learning Katas
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference external" href="https://www.bpesquet.fr/mlkatas">Machine Learning Katas</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  overview
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">overview</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../overview/introduction_to_machine_learning.html">
-   Introduction to Machine Learning
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../overview/machine_learning_in_action.html">
-   Machine Learning in action
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../overview/introduction_to_reinforcement_learning.html">
-   Introduction to Reinforcement Learning
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/introduction_to_machine_learning.html">Introduction to Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/machine_learning_in_action.html">Machine Learning in action</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/introduction_to_reinforcement_learning.html">Introduction to Reinforcement Learning</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Fundamentals
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fundamentals</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Handling data
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="assessing_results.html">
-   Assessing results
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="training_models.html">
-   Training models
-  </a>
- </li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Handling data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="assessing_results.html">Assessing results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="training_models.html">Training models</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Algorithms
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Algorithms</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../algorithms/classic_ml.html">
-   Classic Machine Learning
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../algorithms/k_nearest_neighbors.html">
-     K-Nearest Neighbors
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../algorithms/linear_regression.html">
-     Linear Regression
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../algorithms/logistic_regression.html">
-     Logistic Regression
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../algorithms/decision_trees_and_random_forests.html">
-     Decision Trees &amp; Random Forests
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../algorithms/bayesian_methods.html">
-     Bayesian Methods
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../algorithms/support_vector_machines.html">
-     Support Vector Machines
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../algorithms/k_means.html">
-     K-Means
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../algorithms/nn_deep_learning.html">
-   Neural Networks and Deep Learning
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
-  <label for="toctree-checkbox-2">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../algorithms/artificial_neural_networks.html">
-     Artificial Neural Networks
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../algorithms/convolutional_neural_networks.html">
-     Convolutional Neural Networks
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../algorithms/recurrent_neural_networks.html">
-     Recurrent Neural Networks
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../algorithms/autoencoders.html">
-     Autoencoders
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../algorithms/neural_style_transfer.html">
-     Neural Style Transfer
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../algorithms/generative_adversarial_networks.html">
-     Generative Adversarial Networks
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../algorithms/transformers.html">
-     Transformers
-    </a>
-   </li>
-  </ul>
- </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../algorithms/classic_ml.html">Classic Machine Learning</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/k_nearest_neighbors.html">K-Nearest Neighbors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/linear_regression.html">Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/logistic_regression.html">Logistic Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/decision_trees_and_random_forests.html">Decision Trees &amp; Random Forests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/bayesian_methods.html">Bayesian Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/support_vector_machines.html">Support Vector Machines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/k_means.html">K-Means</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Engineering
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../engineering/introduction_to_mlops.html">
-   Introduction to MLOps
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../engineering/machine_learning_issues.html">
-   Machine Learning issues
-  </a>
- </li>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../algorithms/nn_deep_learning.html">Neural Networks and Deep Learning</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/artificial_neural_networks.html">Artificial Neural Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/convolutional_neural_networks.html">Convolutional Neural Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/recurrent_neural_networks.html">Recurrent Neural Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/autoencoders.html">Autoencoders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/neural_style_transfer.html">Neural Style Transfer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/generative_adversarial_networks.html">Generative Adversarial Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/transformers.html">Transformers</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Tools
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../tools/python.html">
-   Python
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
-  <label for="toctree-checkbox-3">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../tools/python_ecosystem.html">
-     The Python ecosystem
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../tools/python_cheatsheet.html">
-     Python cheatsheet
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../tools/python_good_practices.html">
-     Python good practices
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../tools/numpy.html">
-   NumPy
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../tools/keras.html">
-   Keras
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../tools/pytorch.html">
-   PyTorch
-  </a>
- </li>
+</li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Reference
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Engineering</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../reference/activation_functions.html">
-   Activation functions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../reference/glossary.html">
-   Glossary
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../reference/acknowledgments.html">
-   Acknowledgments
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../engineering/introduction_to_mlops.html">Introduction to MLOps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../engineering/machine_learning_issues.html">Machine Learning issues</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tools</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tools/python.html">Python</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tools/python_ecosystem.html">The Python ecosystem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/python_cheatsheet.html">Python cheatsheet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/python_good_practices.html">Python good practices</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/numpy.html">NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/keras.html">Keras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/pytorch.html">PyTorch</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../reference/activation_functions.html">Activation functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/acknowledgments.html">Acknowledgments</a></li>
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
-          
-<!-- This is an invisible pixel that we watch to see if we've scrolled. -->
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
 <div class="sbt-scroll-pixel-helper"></div>
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            <div class="topbar-left">
-                
-                <label class="nav-toggle-button" for="__navigation">
-                    <div class="visually-hidden">Toggle navigation</div>
-                    <i class="fas fa-bars"></i>
-                </label>
-                
-            </div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/bpesquet/mlhandbook/master?urlpath=tree/fundamentals/handling_data.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/bpesquet/mlhandbook/blob/master/fundamentals/handling_data.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/bpesquet/mlhandbook" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/bpesquet/mlhandbook/edit/master/fundamentals/handling_data.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/bpesquet/mlhandbook/issues/new?title=Issue%20on%20page%20%2Ffundamentals/handling_data.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/fundamentals/handling_data.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Handling data</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
             
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/fundamentals/handling_data.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/bpesquet/mlhandbook"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/bpesquet/mlhandbook/issues/new?title=Issue%20on%20page%20%2Ffundamentals/handling_data.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/bpesquet/mlhandbook/edit/master/fundamentals/handling_data.ipynb"><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/bpesquet/mlhandbook/master?urlpath=tree/fundamentals/handling_data.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        <a class="colab-button" href="https://colab.research.google.com/github/bpesquet/mlhandbook/blob/master/fundamentals/handling_data.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
-                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
-                    src="../_static/images/logo_colab.png"
-                    alt="Interact on Colab">Colab</button></a>
-        
-        
-        
-    </div>
-</div>
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div>
+                <h2> Contents </h2>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
+            <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#environment-setup">
-   Environment setup
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#problem-formulation">
-   Problem formulation
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#inputs">
-     Inputs
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#design-matrix">
-     Design matrix
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#targets">
-     Targets
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#tensors">
-   Tensors
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#definition">
-     Definition
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#tensor-properties">
-     Tensor properties
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#manipulating-tensors-in-python">
-     Manipulating tensors in Python
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#creating-tensors-with-numpy">
-       Creating tensors with NumPy
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#tensor-shape-management">
-     Tensor shape management
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#reshaping-images-and-videos">
-       Reshaping images and videos
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#tensor-indexing-and-slicing">
-     Tensor indexing and slicing
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#tensor-axes">
-     Tensor axes
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#broadcasting">
-     Broadcasting
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#common-operations">
-   Common operations
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#dataset-splitting">
-     Dataset splitting
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#feature-scaling">
-     Feature scaling
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#scaling-images-and-videos">
-       Scaling images and videos
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#encoding-categorical-features">
-     Encoding categorical features
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#one-hot-encoding-and-training-test-sets">
-       One-hot encoding and training/test sets
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#handling-missing-values">
-     Handling missing values
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#data-augmentation">
-     Data augmentation
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#feature-engineering">
-     Feature engineering
-    </a>
-   </li>
-  </ul>
- </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup">Environment setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-formulation">Problem formulation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inputs">Inputs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#design-matrix">Design matrix</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#targets">Targets</a></li>
 </ul>
-
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tensors">Tensors</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definition">Definition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tensor-properties">Tensor properties</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#manipulating-tensors-in-python">Manipulating tensors in Python</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-tensors-with-numpy">Creating tensors with NumPy</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tensor-shape-management">Tensor shape management</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#reshaping-images-and-videos">Reshaping images and videos</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tensor-indexing-and-slicing">Tensor indexing and slicing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tensor-axes">Tensor axes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#broadcasting">Broadcasting</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-operations">Common operations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-splitting">Dataset splitting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-scaling">Feature scaling</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#scaling-images-and-videos">Scaling images and videos</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#encoding-categorical-features">Encoding categorical features</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#one-hot-encoding-and-training-test-sets">One-hot encoding and training/test sets</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#handling-missing-values">Handling missing values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-augmentation">Data augmentation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-engineering">Feature engineering</a></li>
+</ul>
+</li>
+</ul>
             </nav>
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Handling data</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#environment-setup">
-   Environment setup
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#problem-formulation">
-   Problem formulation
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#inputs">
-     Inputs
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#design-matrix">
-     Design matrix
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#targets">
-     Targets
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#tensors">
-   Tensors
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#definition">
-     Definition
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#tensor-properties">
-     Tensor properties
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#manipulating-tensors-in-python">
-     Manipulating tensors in Python
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#creating-tensors-with-numpy">
-       Creating tensors with NumPy
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#tensor-shape-management">
-     Tensor shape management
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#reshaping-images-and-videos">
-       Reshaping images and videos
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#tensor-indexing-and-slicing">
-     Tensor indexing and slicing
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#tensor-axes">
-     Tensor axes
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#broadcasting">
-     Broadcasting
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#common-operations">
-   Common operations
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#dataset-splitting">
-     Dataset splitting
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#feature-scaling">
-     Feature scaling
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#scaling-images-and-videos">
-       Scaling images and videos
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#encoding-categorical-features">
-     Encoding categorical features
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#one-hot-encoding-and-training-test-sets">
-       One-hot encoding and training/test sets
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#handling-missing-values">
-     Handling missing values
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#data-augmentation">
-     Data augmentation
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#feature-engineering">
-     Feature engineering
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
 
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            
-              <div>
+              
                 
-  <div class="section" id="handling-data">
-<h1>Handling data<a class="headerlink" href="#handling-data" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="environment-setup">
-<h2>Environment setup<a class="headerlink" href="#environment-setup" title="Permalink to this headline">¶</a></h2>
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="handling-data">
+<h1>Handling data<a class="headerlink" href="#handling-data" title="Permalink to this heading">#</a></h1>
+<section id="environment-setup">
+<h2>Environment setup<a class="headerlink" href="#environment-setup" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">platform</span>
@@ -799,11 +574,11 @@ NumPy version: 1.18.1
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="problem-formulation">
-<h2>Problem formulation<a class="headerlink" href="#problem-formulation" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="inputs">
-<h3>Inputs<a class="headerlink" href="#inputs" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="problem-formulation">
+<h2>Problem formulation<a class="headerlink" href="#problem-formulation" title="Permalink to this heading">#</a></h2>
+<section id="inputs">
+<h3>Inputs<a class="headerlink" href="#inputs" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(m\)</span>: number of samples and associated results in the dataset.</p></li>
 <li><p><span class="math notranslate nohighlight">\(n\)</span>: number of features. A <strong>feature</strong> is an attribute (a property) of the data samples.</p></li>
@@ -817,9 +592,9 @@ NumPy version: 1.18.1
        \ \vdots \\
        \ x^{(i)}_n
      \end{pmatrix} \in \pmb{R}^n\end{split}\]</div>
-</div>
-<div class="section" id="design-matrix">
-<h3>Design matrix<a class="headerlink" href="#design-matrix" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="design-matrix">
+<h3>Design matrix<a class="headerlink" href="#design-matrix" title="Permalink to this heading">#</a></h3>
 <p><span class="math notranslate nohighlight">\(\pmb{X}\)</span>: matrix of shape (<em>samples, features</em>) expected by most ML algorithms, often called <strong>design matrix</strong>.</p>
 <ul class="simple">
 <li><p>First dimension is for the <span class="math notranslate nohighlight">\(m\)</span> samples.</p></li>
@@ -838,9 +613,9 @@ NumPy version: 1.18.1
        \ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
        \ x^{(m)}_1 &amp; x^{(m)}_2 &amp; \cdots &amp; x^{(m)}_n
      \end{bmatrix} \in \pmb{R}^{m \times n}\end{split}\]</div>
-</div>
-<div class="section" id="targets">
-<h3>Targets<a class="headerlink" href="#targets" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="targets">
+<h3>Targets<a class="headerlink" href="#targets" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(y^{(i)}\)</span>: <strong>target</strong> or <strong>label</strong> (expected result) for the <em>i</em>th data sample.</p></li>
 <li><p><span class="math notranslate nohighlight">\(\pmb{y}\)</span>: vector of labels for all <span class="math notranslate nohighlight">\(m\)</span> samples in a dataset.</p></li>
@@ -852,31 +627,31 @@ NumPy version: 1.18.1
        \ \vdots \\
        \ y^{(m)}
      \end{pmatrix} \in \pmb{R}^m\end{split}\]</div>
-</div>
-</div>
-<div class="section" id="tensors">
-<h2>Tensors<a class="headerlink" href="#tensors" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="definition">
-<h3>Definition<a class="headerlink" href="#definition" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="tensors">
+<h2>Tensors<a class="headerlink" href="#tensors" title="Permalink to this heading">#</a></h2>
+<section id="definition">
+<h3>Definition<a class="headerlink" href="#definition" title="Permalink to this heading">#</a></h3>
 <p>In the context of Data Science, a <strong>tensor</strong> is a set of primitive values (almost always numbers) shaped into an array of any number of dimensions. It is a fancy name for a multidimensional numerical array.</p>
 <p>Tensors are the core data structures of Machine Learning.</p>
-</div>
-<div class="section" id="tensor-properties">
-<h3>Tensor properties<a class="headerlink" href="#tensor-properties" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="tensor-properties">
+<h3>Tensor properties<a class="headerlink" href="#tensor-properties" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>A tensor’s <strong>rank</strong> is its number of dimensions.</p></li>
 <li><p>A dimension is often called an <strong>axis</strong>.</p></li>
 <li><p>The tensor’s <strong>shape</strong> describes the number of values along each axis.</p></li>
 </ul>
 <p>The number of entries along a specific axis is also called <strong>dimension</strong>, which can be somewhat confusing. A 3 dimensions <em>vector</em> is not the same as a 3 dimensions <em>tensor</em>.</p>
-</div>
-<div class="section" id="manipulating-tensors-in-python">
-<h3>Manipulating tensors in Python<a class="headerlink" href="#manipulating-tensors-in-python" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="manipulating-tensors-in-python">
+<h3>Manipulating tensors in Python<a class="headerlink" href="#manipulating-tensors-in-python" title="Permalink to this heading">#</a></h3>
 <p><a class="reference external" href="https://numpy.org/">NumPy</a> supports tensors in the form of <code class="docutils literal notranslate"><span class="pre">ndarray</span></code> objects. It offers a comprehensive set of operations on them, including creating, sorting, selecting, linear algebra and statistical operations. See <a class="reference internal" href="../tools/numpy.html"><span class="doc std std-doc">API reference</span></a> for more details.</p>
 <p><a class="reference external" href="https://pytorch.org">PyTorch</a> provides a NumPy-like API for manipulating tensors. Contrary to NumPy’s, PyTorch tensors can be located on a GPU (if available) for faster computations. See <a class="reference internal" href="../tools/pytorch.html"><span class="doc std std-doc">API reference</span></a> for more details.</p>
 <p><a class="reference external" href="https://www.tensorflow.org/">TensorFlow</a> also has support for tensors, but its API is somewhat more cumbersome.</p>
-<div class="section" id="creating-tensors-with-numpy">
-<h4>Creating tensors with NumPy<a class="headerlink" href="#creating-tensors-with-numpy" title="Permalink to this headline">¶</a></h4>
+<section id="creating-tensors-with-numpy">
+<h4>Creating tensors with NumPy<a class="headerlink" href="#creating-tensors-with-numpy" title="Permalink to this heading">#</a></h4>
 <p>The <code class="docutils literal notranslate"><span class="pre">np.array()</span></code> function creates and returns a new tensor.</p>
 <p><a class="reference external" href="https://numpy.org/doc/stable/user/absolute_beginners.html#how-to-create-a-basic-array"><img alt="NumPy array creation" src="../_images/numpy_array.png" /></a></p>
 <div class="cell docutils container">
@@ -972,10 +747,10 @@ Shape: (3, 2, 5)
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="tensor-shape-management">
-<h3>Tensor shape management<a class="headerlink" href="#tensor-shape-management" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="tensor-shape-management">
+<h3>Tensor shape management<a class="headerlink" href="#tensor-shape-management" title="Permalink to this heading">#</a></h3>
 <p>A common operation on tensors is <strong>reshaping</strong>: giving it a new shape without changing its data.</p>
 <p>The new shape must be compatible with the current one: the new tensor needs to have the same number of elements as the original one.</p>
 <p><a class="reference external" href="https://numpy.org/doc/stable/user/absolute_beginners.html#transposing-and-reshaping-a-matrix"><img alt="NumPy reshaping" src="../_images/numpy_reshaping.png" /></a></p>
@@ -1031,8 +806,8 @@ Shape: (6,)
 </div>
 </div>
 </div>
-<div class="section" id="reshaping-images-and-videos">
-<h4>Reshaping images and videos<a class="headerlink" href="#reshaping-images-and-videos" title="Permalink to this headline">¶</a></h4>
+<section id="reshaping-images-and-videos">
+<h4>Reshaping images and videos<a class="headerlink" href="#reshaping-images-and-videos" title="Permalink to this heading">#</a></h4>
 <p>A bitmap image can be represented as a 3D multidimensional array (<em>height, width, color_channels</em>).</p>
 <p>A video can be represented as a 4D multidimensional array (<em>frames, height, width, color_channels</em>).</p>
 <p>They have to be <strong>reshaped</strong> (<em>flattened</em> in that case) into a vector before being fed to most ML algorithms.</p>
@@ -1053,7 +828,7 @@ Shape: (6,)
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sample image: (427, 640, 3)
 </pre></div>
 </div>
-<img alt="../_images/handling_data_25_1.png" src="../_images/handling_data_25_1.png" />
+<img alt="../_images/387044dd392282af53a5761bb0286267b7a5e1bbedff6daa5fec7765f99a4299.png" src="../_images/387044dd392282af53a5761bb0286267b7a5e1bbedff6daa5fec7765f99a4299.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1082,10 +857,10 @@ Shape: (6,)
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="tensor-indexing-and-slicing">
-<h3>Tensor indexing and slicing<a class="headerlink" href="#tensor-indexing-and-slicing" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="tensor-indexing-and-slicing">
+<h3>Tensor indexing and slicing<a class="headerlink" href="#tensor-indexing-and-slicing" title="Permalink to this heading">#</a></h3>
 <p>Tensors can be indexed and sliced just like regular Python lists.</p>
 <p><a class="reference external" href="https://numpy.org/doc/stable/user/absolute_beginners.html#indexing-and-slicing"><img alt="NumPy indexing" src="../_images/numpy_indexing.png" /></a></p>
 <div class="cell docutils container">
@@ -1113,9 +888,9 @@ Shape: (6,)
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="tensor-axes">
-<h3>Tensor axes<a class="headerlink" href="#tensor-axes" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="tensor-axes">
+<h3>Tensor axes<a class="headerlink" href="#tensor-axes" title="Permalink to this heading">#</a></h3>
 <p>Many tensor operations can be applied along one or several <strong>axes</strong>. They are indexed starting at 0.</p>
 <p><a class="reference external" href="https://www.sharpsightlabs.com/blog/numpy-axes-explained/"><img alt="NumPy axes" src="../_images/numpy_axes.png" /></a></p>
 <div class="cell docutils container">
@@ -1138,9 +913,9 @@ Shape: (6,)
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="broadcasting">
-<h3>Broadcasting<a class="headerlink" href="#broadcasting" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="broadcasting">
+<h3>Broadcasting<a class="headerlink" href="#broadcasting" title="Permalink to this heading">#</a></h3>
 <p><strong>Broadcasting</strong> is a mechanism that allows operations to be performed on tensors of different shapes. Subject to <a class="reference external" href="https://numpy.org/doc/stable/user/basics.broadcasting.html#general-broadcasting-rules">certain constraints</a>, the smaller tensor may be “broadcast” across the larger one so that they have compatible shapes.</p>
 <p><a class="reference external" href="https://numpy.org/doc/stable/user/absolute_beginners.html#broadcasting"><img alt="NumPy broadcasting" src="../_images/numpy_broadcasting.png" /></a></p>
 <p>Broadcasting provides a efficient means of vectorizing tensor operations.</p>
@@ -1157,12 +932,12 @@ Shape: (6,)
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="common-operations">
-<h2>Common operations<a class="headerlink" href="#common-operations" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="dataset-splitting">
-<h3>Dataset splitting<a class="headerlink" href="#dataset-splitting" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="common-operations">
+<h2>Common operations<a class="headerlink" href="#common-operations" title="Permalink to this heading">#</a></h2>
+<section id="dataset-splitting">
+<h3>Dataset splitting<a class="headerlink" href="#dataset-splitting" title="Permalink to this heading">#</a></h3>
 <p>In order to estimate performance in production context, available data is always split into two sets:</p>
 <ul class="simple">
 <li><p><strong>Training set</strong> (typically 80% or more): used during training.</p></li>
@@ -1193,9 +968,9 @@ x_test: (8, 4). y_test: (8,)
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="feature-scaling">
-<h3>Feature scaling<a class="headerlink" href="#feature-scaling" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="feature-scaling">
+<h3>Feature scaling<a class="headerlink" href="#feature-scaling" title="Permalink to this heading">#</a></h3>
 <p>Most ML algorithms work best when all features have a <strong>similar scale</strong>. Several solutions exist:</p>
 <ul class="simple">
 <li><p><strong>Min-Max scaling</strong>: features are shifted and rescaled to the <span class="math notranslate nohighlight">\([0,1]\)</span> range by substracting the <code class="docutils literal notranslate"><span class="pre">min</span></code> value and dividing by <code class="docutils literal notranslate"><span class="pre">(max-min)</span></code> on the first axis.</p></li>
@@ -1293,8 +1068,8 @@ Test std: [1.04356636 0.80795965 0.86251091 0.62746467]
 </div>
 </div>
 </div>
-<div class="section" id="scaling-images-and-videos">
-<h4>Scaling images and videos<a class="headerlink" href="#scaling-images-and-videos" title="Permalink to this headline">¶</a></h4>
+<section id="scaling-images-and-videos">
+<h4>Scaling images and videos<a class="headerlink" href="#scaling-images-and-videos" title="Permalink to this heading">#</a></h4>
 <p>Individual pixel values for images and videos are typically integers in the <span class="math notranslate nohighlight">\([0,255]\)</span> range. This is not ideal for most ML algorithms.</p>
 <p>Dividing them by 255.0 to obtain floats into the <span class="math notranslate nohighlight">\([0,1]\)</span> range is a common practice.</p>
 <div class="cell docutils container">
@@ -1309,10 +1084,10 @@ Test std: [1.04356636 0.80795965 0.86251091 0.62746467]
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="encoding-categorical-features">
-<h3>Encoding categorical features<a class="headerlink" href="#encoding-categorical-features" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="encoding-categorical-features">
+<h3>Encoding categorical features<a class="headerlink" href="#encoding-categorical-features" title="Permalink to this heading">#</a></h3>
 <p>Some features or targets may come as discrete rather than continuous values. Moreover, these discrete values might be strings. ML models are only able to manage numerical-only data.</p>
 <p>A solution is to apply one-of-K encoding, also named dummy encoding or <strong>one-hot encoding</strong>. Each categorical feature with <code class="docutils literal notranslate"><span class="pre">K</span></code> possible values is transformed into a vector of <code class="docutils literal notranslate"><span class="pre">K</span></code> binary features, with one of them 1 and all others 0.</p>
 <div class="cell docutils container">
@@ -1370,8 +1145,8 @@ Test std: [1.04356636 0.80795965 0.86251091 0.62746467]
 </div>
 </div>
 </div>
-<div class="section" id="one-hot-encoding-and-training-test-sets">
-<h4>One-hot encoding and training/test sets<a class="headerlink" href="#one-hot-encoding-and-training-test-sets" title="Permalink to this headline">¶</a></h4>
+<section id="one-hot-encoding-and-training-test-sets">
+<h4>One-hot encoding and training/test sets<a class="headerlink" href="#one-hot-encoding-and-training-test-sets" title="Permalink to this heading">#</a></h4>
 <p>Depending on value distribution between training and test sets, some categories might appear only in one set.</p>
 <p>The best solution is to one-hot encode based on the training set categories, ignoring test-only categories.</p>
 <div class="cell docutils container">
@@ -1402,10 +1177,10 @@ Test std: [1.04356636 0.80795965 0.86251091 0.62746467]
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="handling-missing-values">
-<h3>Handling missing values<a class="headerlink" href="#handling-missing-values" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="handling-missing-values">
+<h3>Handling missing values<a class="headerlink" href="#handling-missing-values" title="Permalink to this heading">#</a></h3>
 <p>Most ML algorithms cannot work with missing values in features.</p>
 <p>Depending on the percentage of missing data, three options exist:</p>
 <ul class="simple">
@@ -1456,21 +1231,21 @@ Test std: [1.04356636 0.80795965 0.86251091 0.62746467]
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="data-augmentation">
-<h3>Data augmentation<a class="headerlink" href="#data-augmentation" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="data-augmentation">
+<h3>Data augmentation<a class="headerlink" href="#data-augmentation" title="Permalink to this heading">#</a></h3>
 <p><strong>Data augmentation</strong> is the process of enriching a dataset by adding new samples, slightly modified copies of existing data or newly created synthetic data.</p>
 <p><a class="reference external" href="https://towardsdatascience.com/machinex-image-data-augmentation-using-keras-b459ef87cd22"><img alt="Image augmentation example" src="../_images/image_augmentation.png" /></a></p>
-</div>
-<div class="section" id="feature-engineering">
-<h3>Feature engineering<a class="headerlink" href="#feature-engineering" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="feature-engineering">
+<h3>Feature engineering<a class="headerlink" href="#feature-engineering" title="Permalink to this heading">#</a></h3>
 <p><strong>Feature engineering</strong> is the process of preparing the proper input features, in order to facilitate the learning task. The problem is made easier by expressing it in a simpler way. This usually requires a good domain knowledge.</p>
 <p>The ability of deep neural networks to discover useful features by themselves has somewhat reduced the criticality of feature engineering. Nevertheless, it remains important in order to solve problems more elegantly and with fewer data.</p>
 <p>Example: the task of learning the time of day from a clock is far easier with engineered features rather than raw clock images.</p>
 <p><a class="reference external" href="https://www.manning.com/books/deep-learning-with-python"><img alt="Feature engineering" src="../_images/feature_engineering.png" /></a></p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -1484,7 +1259,7 @@ Test std: [1.04356636 0.80795965 0.86251091 0.62746467]
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./fundamentals"
         },
         predefinedOutput: true
@@ -1492,44 +1267,142 @@ Test std: [1.04356636 0.80795965 0.86251091 0.62746467]
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="../overview/introduction_to_reinforcement_learning.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Introduction to Reinforcement Learning</p>
-        </div>
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../overview/introduction_to_reinforcement_learning.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Introduction to Reinforcement Learning</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="assessing_results.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="assessing_results.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Assessing results</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
-</div>
-            
-        </div>
-    </div>
-    <footer class="footer">
-  <p>
-    
-      By Baptiste Pesquet<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
-
-
       </div>
-    </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+</div>
 
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup">Environment setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-formulation">Problem formulation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inputs">Inputs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#design-matrix">Design matrix</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#targets">Targets</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tensors">Tensors</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definition">Definition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tensor-properties">Tensor properties</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#manipulating-tensors-in-python">Manipulating tensors in Python</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-tensors-with-numpy">Creating tensors with NumPy</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tensor-shape-management">Tensor shape management</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#reshaping-images-and-videos">Reshaping images and videos</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tensor-indexing-and-slicing">Tensor indexing and slicing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tensor-axes">Tensor axes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#broadcasting">Broadcasting</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-operations">Common operations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-splitting">Dataset splitting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-scaling">Feature scaling</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#scaling-images-and-videos">Scaling images and videos</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#encoding-categorical-features">Encoding categorical features</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#one-hot-encoding-and-training-test-sets">One-hot encoding and training/test sets</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#handling-missing-values">Handling missing values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-augmentation">Data augmentation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-engineering">Feature engineering</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Baptiste Pesquet
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2021.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

@@ -1,981 +1,554 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
     <title>Artificial Neural Networks &#8212; Machine Learning Handbook</title>
-    
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    
-      
-
-    
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.css?digest=84ace793992934648b4de8eed757e5a2" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.9d8b4a8b9bb19db25eeaddc40d639ba2.js"></script>
-    <script >const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'algorithms/artificial_neural_networks';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Convolutional Neural Networks" href="convolutional_neural_networks.html" />
     <link rel="prev" title="Neural Networks and Deep Learning" href="nn_deep_learning.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
-
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<div class="col-12 col-md-3 bd-sidebar site-navigation " id="site-navigation">
-    
-        <div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../_static/mlhandbook_logo.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">Machine Learning Handbook</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="../_static/mlhandbook_logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/mlhandbook_logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference external" href="https://www.bpesquet.fr/mlkatas">
-   Machine Learning Katas
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference external" href="https://www.bpesquet.fr/mlkatas">Machine Learning Katas</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  overview
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">overview</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../overview/introduction_to_machine_learning.html">
-   Introduction to Machine Learning
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../overview/machine_learning_in_action.html">
-   Machine Learning in action
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../overview/introduction_to_reinforcement_learning.html">
-   Introduction to Reinforcement Learning
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/introduction_to_machine_learning.html">Introduction to Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/machine_learning_in_action.html">Machine Learning in action</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/introduction_to_reinforcement_learning.html">Introduction to Reinforcement Learning</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Fundamentals
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fundamentals</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../fundamentals/handling_data.html">
-   Handling data
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../fundamentals/assessing_results.html">
-   Assessing results
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../fundamentals/training_models.html">
-   Training models
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../fundamentals/handling_data.html">Handling data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fundamentals/assessing_results.html">Assessing results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fundamentals/training_models.html">Training models</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Algorithms
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Algorithms</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="classic_ml.html">
-   Classic Machine Learning
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="k_nearest_neighbors.html">
-     K-Nearest Neighbors
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="linear_regression.html">
-     Linear Regression
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="logistic_regression.html">
-     Logistic Regression
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="decision_trees_and_random_forests.html">
-     Decision Trees &amp; Random Forests
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="bayesian_methods.html">
-     Bayesian Methods
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="support_vector_machines.html">
-     Support Vector Machines
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="k_means.html">
-     K-Means
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 current active has-children">
-  <a class="reference internal" href="nn_deep_learning.html">
-   Neural Networks and Deep Learning
-  </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
-  <label for="toctree-checkbox-2">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul class="current">
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
-     Artificial Neural Networks
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="convolutional_neural_networks.html">
-     Convolutional Neural Networks
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="recurrent_neural_networks.html">
-     Recurrent Neural Networks
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="autoencoders.html">
-     Autoencoders
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="neural_style_transfer.html">
-     Neural Style Transfer
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="generative_adversarial_networks.html">
-     Generative Adversarial Networks
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="transformers.html">
-     Transformers
-    </a>
-   </li>
-  </ul>
- </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="classic_ml.html">Classic Machine Learning</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="k_nearest_neighbors.html">K-Nearest Neighbors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linear_regression.html">Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logistic_regression.html">Logistic Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="decision_trees_and_random_forests.html">Decision Trees &amp; Random Forests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bayesian_methods.html">Bayesian Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="support_vector_machines.html">Support Vector Machines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="k_means.html">K-Means</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Engineering
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../engineering/introduction_to_mlops.html">
-   Introduction to MLOps
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../engineering/machine_learning_issues.html">
-   Machine Learning issues
-  </a>
- </li>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="nn_deep_learning.html">Neural Networks and Deep Learning</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Artificial Neural Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="convolutional_neural_networks.html">Convolutional Neural Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recurrent_neural_networks.html">Recurrent Neural Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="autoencoders.html">Autoencoders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="neural_style_transfer.html">Neural Style Transfer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generative_adversarial_networks.html">Generative Adversarial Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="transformers.html">Transformers</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Tools
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../tools/python.html">
-   Python
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
-  <label for="toctree-checkbox-3">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../tools/python_ecosystem.html">
-     The Python ecosystem
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../tools/python_cheatsheet.html">
-     Python cheatsheet
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../tools/python_good_practices.html">
-     Python good practices
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../tools/numpy.html">
-   NumPy
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../tools/keras.html">
-   Keras
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../tools/pytorch.html">
-   PyTorch
-  </a>
- </li>
+</li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Reference
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Engineering</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../reference/activation_functions.html">
-   Activation functions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../reference/glossary.html">
-   Glossary
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../reference/acknowledgments.html">
-   Acknowledgments
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../engineering/introduction_to_mlops.html">Introduction to MLOps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../engineering/machine_learning_issues.html">Machine Learning issues</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tools</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tools/python.html">Python</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tools/python_ecosystem.html">The Python ecosystem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/python_cheatsheet.html">Python cheatsheet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/python_good_practices.html">Python good practices</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/numpy.html">NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/keras.html">Keras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/pytorch.html">PyTorch</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../reference/activation_functions.html">Activation functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/acknowledgments.html">Acknowledgments</a></li>
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
-          
-<!-- This is an invisible pixel that we watch to see if we've scrolled. -->
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
 <div class="sbt-scroll-pixel-helper"></div>
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            <div class="topbar-left">
-                
-                <label class="nav-toggle-button" for="__navigation">
-                    <div class="visually-hidden">Toggle navigation</div>
-                    <i class="fas fa-bars"></i>
-                </label>
-                
-            </div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/bpesquet/mlhandbook/master?urlpath=tree/algorithms/artificial_neural_networks.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/bpesquet/mlhandbook/blob/master/algorithms/artificial_neural_networks.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/bpesquet/mlhandbook" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/bpesquet/mlhandbook/edit/master/algorithms/artificial_neural_networks.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/bpesquet/mlhandbook/issues/new?title=Issue%20on%20page%20%2Falgorithms/artificial_neural_networks.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/algorithms/artificial_neural_networks.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Artificial Neural Networks</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
             
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/algorithms/artificial_neural_networks.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/bpesquet/mlhandbook"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/bpesquet/mlhandbook/issues/new?title=Issue%20on%20page%20%2Falgorithms/artificial_neural_networks.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/bpesquet/mlhandbook/edit/master/algorithms/artificial_neural_networks.ipynb"><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/bpesquet/mlhandbook/master?urlpath=tree/algorithms/artificial_neural_networks.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        <a class="colab-button" href="https://colab.research.google.com/github/bpesquet/mlhandbook/blob/master/algorithms/artificial_neural_networks.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
-                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
-                    src="../_static/images/logo_colab.png"
-                    alt="Interact on Colab">Colab</button></a>
-        
-        
-        
-    </div>
-</div>
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div>
+                <h2> Contents </h2>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
+            <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#environment-setup">
-   Environment setup
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#history">
-   History
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#a-biological-inspiration">
-     A biological inspiration
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#mcculloch-pitts-formal-neuron-1943">
-     McCulloch &amp; Pitts’ formal neuron (1943)
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#hebb-s-rule-1949">
-     Hebb’s rule (1949)
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#franck-rosenblatt-s-perceptron-1958">
-     Franck Rosenblatt’s perceptron (1958)
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-perceptron-learning-algorithm">
-     The perceptron learning algorithm
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-multilayer-perceptron-mlp">
-     The MultiLayer Perceptron (MLP)
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#minsky-s-critic-1969">
-     Minsky’s critic (1969)
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#decisive-breakthroughs-1970s-1990s">
-     Decisive breakthroughs (1970s-1990s)
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#neural-networks-fundamentals">
-   Neural networks fundamentals
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#anatomy-of-a-network">
-     Anatomy of a network
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#neuron-output">
-     Neuron output
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#activation-functions">
-     Activation functions
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#single-neuron-classifier">
-     Single neuron classifier
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#single-layer-multiclass-classifier">
-     Single layer multiclass classifier
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#universal-approximation-theorem-1991">
-     Universal approximation theorem (1991)
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#training-neural-networks">
-   Training neural networks
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#training-and-inference">
-     Training and inference
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#learning-algorithm">
-     Learning algorithm
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#weights-initialization">
-     Weights initialization
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#vectorization-of-computations">
-     Vectorization of computations
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#hidden-layer-1-output">
-       Hidden layer 1 output
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#hidden-layer-2-output">
-       Hidden layer 2 output
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#output-layer-result">
-       Output layer result
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#weights-update">
-     Weights update
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#neural-networks-as-computational-graphs">
-     Neural networks as computational graphs
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#backpropagation">
-     Backpropagation
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#visual-demo-of-backpropagation">
-     Visual demo of backpropagation
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#interactive-recap">
-     Interactive recap
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#neural-networks-in-action">
-   Neural networks in action
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-training-a-multiclass-classifier-to-recognize-handwritten-digits">
-     Example: training a multiclass classifier to recognize handwritten digits
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#data-preprocessing">
-       Data preprocessing
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#network-architecture-for-mnist">
-       Network architecture for MNIST
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#tuning-neural-networks">
-   Tuning neural networks
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#hyperparameters-choice">
-     Hyperparameters choice
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-optimization-generalization-dilemna">
-     The optimization/generalization dilemna
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#observing-underfitting-and-overfitting">
-     Observing underfitting and overfitting
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#tackling-overfitting">
-     Tackling overfitting
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#regularization">
-       Regularization
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#dropout">
-       Dropout
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id1">
-     Interactive recap
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#overfitting-on-a-real-world-example">
-     Overfitting on a real-world example
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#reducing-network-size">
-       Reducing network size
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id2">
-       Regularization
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id3">
-       Dropout
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup">Environment setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#history">History</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-biological-inspiration">A biological inspiration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mcculloch-pitts-formal-neuron-1943">McCulloch &amp; Pitts’ formal neuron (1943)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hebb-s-rule-1949">Hebb’s rule (1949)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#franck-rosenblatt-s-perceptron-1958">Franck Rosenblatt’s perceptron (1958)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-perceptron-learning-algorithm">The perceptron learning algorithm</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-multilayer-perceptron-mlp">The MultiLayer Perceptron (MLP)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minsky-s-critic-1969">Minsky’s critic (1969)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decisive-breakthroughs-1970s-1990s">Decisive breakthroughs (1970s-1990s)</a></li>
 </ul>
-
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neural-networks-fundamentals">Neural networks fundamentals</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#anatomy-of-a-network">Anatomy of a network</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#neuron-output">Neuron output</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#activation-functions">Activation functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#single-neuron-classifier">Single neuron classifier</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#single-layer-multiclass-classifier">Single layer multiclass classifier</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#universal-approximation-theorem-1991">Universal approximation theorem (1991)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-neural-networks">Training neural networks</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-and-inference">Training and inference</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-algorithm">Learning algorithm</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#weights-initialization">Weights initialization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vectorization-of-computations">Vectorization of computations</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#hidden-layer-1-output">Hidden layer 1 output</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#hidden-layer-2-output">Hidden layer 2 output</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#output-layer-result">Output layer result</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#weights-update">Weights update</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#neural-networks-as-computational-graphs">Neural networks as computational graphs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#backpropagation">Backpropagation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visual-demo-of-backpropagation">Visual demo of backpropagation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-recap">Interactive recap</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neural-networks-in-action">Neural networks in action</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-training-a-multiclass-classifier-to-recognize-handwritten-digits">Example: training a multiclass classifier to recognize handwritten digits</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing">Data preprocessing</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#network-architecture-for-mnist">Network architecture for MNIST</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tuning-neural-networks">Tuning neural networks</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperparameters-choice">Hyperparameters choice</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-optimization-generalization-dilemna">The optimization/generalization dilemna</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#observing-underfitting-and-overfitting">Observing underfitting and overfitting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tackling-overfitting">Tackling overfitting</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#regularization">Regularization</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dropout">Dropout</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Interactive recap</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overfitting-on-a-real-world-example">Overfitting on a real-world example</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#reducing-network-size">Reducing network size</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Regularization</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Dropout</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
             </nav>
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Artificial Neural Networks</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#environment-setup">
-   Environment setup
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#history">
-   History
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#a-biological-inspiration">
-     A biological inspiration
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#mcculloch-pitts-formal-neuron-1943">
-     McCulloch &amp; Pitts’ formal neuron (1943)
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#hebb-s-rule-1949">
-     Hebb’s rule (1949)
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#franck-rosenblatt-s-perceptron-1958">
-     Franck Rosenblatt’s perceptron (1958)
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-perceptron-learning-algorithm">
-     The perceptron learning algorithm
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-multilayer-perceptron-mlp">
-     The MultiLayer Perceptron (MLP)
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#minsky-s-critic-1969">
-     Minsky’s critic (1969)
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#decisive-breakthroughs-1970s-1990s">
-     Decisive breakthroughs (1970s-1990s)
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#neural-networks-fundamentals">
-   Neural networks fundamentals
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#anatomy-of-a-network">
-     Anatomy of a network
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#neuron-output">
-     Neuron output
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#activation-functions">
-     Activation functions
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#single-neuron-classifier">
-     Single neuron classifier
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#single-layer-multiclass-classifier">
-     Single layer multiclass classifier
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#universal-approximation-theorem-1991">
-     Universal approximation theorem (1991)
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#training-neural-networks">
-   Training neural networks
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#training-and-inference">
-     Training and inference
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#learning-algorithm">
-     Learning algorithm
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#weights-initialization">
-     Weights initialization
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#vectorization-of-computations">
-     Vectorization of computations
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#hidden-layer-1-output">
-       Hidden layer 1 output
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#hidden-layer-2-output">
-       Hidden layer 2 output
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#output-layer-result">
-       Output layer result
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#weights-update">
-     Weights update
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#neural-networks-as-computational-graphs">
-     Neural networks as computational graphs
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#backpropagation">
-     Backpropagation
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#visual-demo-of-backpropagation">
-     Visual demo of backpropagation
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#interactive-recap">
-     Interactive recap
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#neural-networks-in-action">
-   Neural networks in action
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-training-a-multiclass-classifier-to-recognize-handwritten-digits">
-     Example: training a multiclass classifier to recognize handwritten digits
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#data-preprocessing">
-       Data preprocessing
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#network-architecture-for-mnist">
-       Network architecture for MNIST
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#tuning-neural-networks">
-   Tuning neural networks
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#hyperparameters-choice">
-     Hyperparameters choice
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-optimization-generalization-dilemna">
-     The optimization/generalization dilemna
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#observing-underfitting-and-overfitting">
-     Observing underfitting and overfitting
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#tackling-overfitting">
-     Tackling overfitting
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#regularization">
-       Regularization
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#dropout">
-       Dropout
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id1">
-     Interactive recap
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#overfitting-on-a-real-world-example">
-     Overfitting on a real-world example
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#reducing-network-size">
-       Reducing network size
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id2">
-       Regularization
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id3">
-       Dropout
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
-</ul>
 
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            
-              <div>
+              
                 
-  <div class="section" id="artificial-neural-networks">
-<h1>Artificial Neural Networks<a class="headerlink" href="#artificial-neural-networks" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="environment-setup">
-<h2>Environment setup<a class="headerlink" href="#environment-setup" title="Permalink to this headline">¶</a></h2>
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="artificial-neural-networks">
+<h1>Artificial Neural Networks<a class="headerlink" href="#artificial-neural-networks" title="Permalink to this heading">#</a></h1>
+<section id="environment-setup">
+<h2>Environment setup<a class="headerlink" href="#environment-setup" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">platform</span>
@@ -1043,11 +616,16 @@ Keras version: 2.4.0
 </div>
 </div>
 <div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Utility functions</span>
 
 <span class="k">def</span> <span class="nf">plot_planar_data</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Plot some 2D data&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plot some 2D data&quot;&quot;&quot;</span>
 
     <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">y</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="n">y</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;or&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
@@ -1056,7 +634,7 @@ Keras version: 2.4.0
 
 
 <span class="k">def</span> <span class="nf">plot_decision_boundary</span><span class="p">(</span><span class="n">pred_func</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">figure</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Plot a decision boundary&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plot a decision boundary&quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="n">figure</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># If no figure is given, create a new one</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
@@ -1076,7 +654,7 @@ Keras version: 2.4.0
 
 
 <span class="k">def</span> <span class="nf">plot_loss_acc</span><span class="p">(</span><span class="n">history</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Plot training and (optionally) validation loss and accuracy</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plot training and (optionally) validation loss and accuracy</span>
 <span class="sd">    Takes a Keras History object as parameter&quot;&quot;&quot;</span>
 
     <span class="n">loss</span> <span class="o">=</span> <span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s2">&quot;loss&quot;</span><span class="p">]</span>
@@ -1115,73 +693,74 @@ Keras version: 2.4.0
 </pre></div>
 </div>
 </div>
+</details>
 </div>
-</div>
-<div class="section" id="history">
-<h2>History<a class="headerlink" href="#history" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="a-biological-inspiration">
-<h3>A biological inspiration<a class="headerlink" href="#a-biological-inspiration" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="history">
+<h2>History<a class="headerlink" href="#history" title="Permalink to this heading">#</a></h2>
+<section id="a-biological-inspiration">
+<h3>A biological inspiration<a class="headerlink" href="#a-biological-inspiration" title="Permalink to this heading">#</a></h3>
 <p><img alt="Neuron" src="../_images/neuron.png" /></p>
-</div>
-<div class="section" id="mcculloch-pitts-formal-neuron-1943">
-<h3>McCulloch &amp; Pitts’ formal neuron (1943)<a class="headerlink" href="#mcculloch-pitts-formal-neuron-1943" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="mcculloch-pitts-formal-neuron-1943">
+<h3>McCulloch &amp; Pitts’ formal neuron (1943)<a class="headerlink" href="#mcculloch-pitts-formal-neuron-1943" title="Permalink to this heading">#</a></h3>
 <p><img alt="Formal neuron model" src="../_images/neuron_model.jpeg" /></p>
-</div>
-<div class="section" id="hebb-s-rule-1949">
-<h3>Hebb’s rule (1949)<a class="headerlink" href="#hebb-s-rule-1949" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="hebb-s-rule-1949">
+<h3>Hebb’s rule (1949)<a class="headerlink" href="#hebb-s-rule-1949" title="Permalink to this heading">#</a></h3>
 <p>Attempt to explain synaptic plasticity, the adaptation of brain neurons during the learning process.</p>
 <blockquote>
 <div><p>“The general idea is an old one, that any two cells or systems of cells that are repeatedly active at the same time will tend to become ‘associated’ so that activity in one facilitates activity in the other.”</p>
 </div></blockquote>
-</div>
-<div class="section" id="franck-rosenblatt-s-perceptron-1958">
-<h3>Franck Rosenblatt’s perceptron (1958)<a class="headerlink" href="#franck-rosenblatt-s-perceptron-1958" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="franck-rosenblatt-s-perceptron-1958">
+<h3>Franck Rosenblatt’s perceptron (1958)<a class="headerlink" href="#franck-rosenblatt-s-perceptron-1958" title="Permalink to this heading">#</a></h3>
 <p><img alt="The Perceptron" src="../_images/Perceptron.jpg" /></p>
-</div>
-<div class="section" id="the-perceptron-learning-algorithm">
-<h3>The perceptron learning algorithm<a class="headerlink" href="#the-perceptron-learning-algorithm" title="Permalink to this headline">¶</a></h3>
-<ol class="simple">
+</section>
+<section id="the-perceptron-learning-algorithm">
+<h3>The perceptron learning algorithm<a class="headerlink" href="#the-perceptron-learning-algorithm" title="Permalink to this heading">#</a></h3>
+<ol class="arabic simple">
 <li><p>Init randomly the <span class="math notranslate nohighlight">\(\theta\)</span> connection weights.</p></li>
 <li><p>For each training sample <span class="math notranslate nohighlight">\(x^{(i)}\)</span>:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>Compute the perceptron output <span class="math notranslate nohighlight">\(y'^{(i)}\)</span></p></li>
 <li><p>Adjust weights : <span class="math notranslate nohighlight">\(\theta_{next} = \theta + \eta (y^{(i)} - y'^{(i)}) x^{(i)}\)</span></p></li>
 </ol>
 </li>
 </ol>
-</div>
-<div class="section" id="the-multilayer-perceptron-mlp">
-<h3>The MultiLayer Perceptron (MLP)<a class="headerlink" href="#the-multilayer-perceptron-mlp" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="the-multilayer-perceptron-mlp">
+<h3>The MultiLayer Perceptron (MLP)<a class="headerlink" href="#the-multilayer-perceptron-mlp" title="Permalink to this heading">#</a></h3>
 <p><img alt="MultiLayer Perceptron" src="../_images/neural_net2.jpeg" /></p>
-</div>
-<div class="section" id="minsky-s-critic-1969">
-<h3>Minsky’s critic (1969)<a class="headerlink" href="#minsky-s-critic-1969" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="minsky-s-critic-1969">
+<h3>Minsky’s critic (1969)<a class="headerlink" href="#minsky-s-critic-1969" title="Permalink to this heading">#</a></h3>
 <p>One perceptron cannot learn non-linearly separable functions.</p>
 <p><img alt="XOR problem" src="../_images/xor.png" /></p>
 <p>At the time, no learning algorithm existed for training the hidden layers of a MLP.</p>
-</div>
-<div class="section" id="decisive-breakthroughs-1970s-1990s">
-<h3>Decisive breakthroughs (1970s-1990s)<a class="headerlink" href="#decisive-breakthroughs-1970s-1990s" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="decisive-breakthroughs-1970s-1990s">
+<h3>Decisive breakthroughs (1970s-1990s)<a class="headerlink" href="#decisive-breakthroughs-1970s-1990s" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>1974: backpropagation theory (P. Werbos).</p></li>
 <li><p>1986: learning through backpropagation (Rumelhart, Hinton, Williams).</p></li>
 <li><p>1991: universal approximation theorem (Hornik, Stinchcombe, White).</p></li>
 <li><p>1989: first researchs on deep neural nets (LeCun, Bengio).</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="neural-networks-fundamentals">
-<h2>Neural networks fundamentals<a class="headerlink" href="#neural-networks-fundamentals" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="anatomy-of-a-network">
-<h3>Anatomy of a network<a class="headerlink" href="#anatomy-of-a-network" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="neural-networks-fundamentals">
+<h2>Neural networks fundamentals<a class="headerlink" href="#neural-networks-fundamentals" title="Permalink to this heading">#</a></h2>
+<section id="anatomy-of-a-network">
+<h3>Anatomy of a network<a class="headerlink" href="#anatomy-of-a-network" title="Permalink to this heading">#</a></h3>
 <p><img alt="A neural network" src="../_images/nn_weights.png" /></p>
-</div>
-<div class="section" id="neuron-output">
-<h3>Neuron output<a class="headerlink" href="#neuron-output" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="neuron-output">
+<h3>Neuron output<a class="headerlink" href="#neuron-output" title="Permalink to this heading">#</a></h3>
 <p><img alt="Neuron output" src="../_images/neuron_output.png" /></p>
-</div>
-<div class="section" id="activation-functions">
-<h3>Activation functions<a class="headerlink" href="#activation-functions" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="activation-functions">
+<h3>Activation functions<a class="headerlink" href="#activation-functions" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Applied to the weighted sum of neuron inputs to produce its output.</p></li>
 <li><p>Always non-linear. If not, the whole network could only apply a linear transformation to its inputs and couldn’t solve complex problems.</p></li>
@@ -1194,44 +773,44 @@ Keras version: 2.4.0
 </li>
 <li><p>See <a class="reference internal" href="../reference/activation_functions.html"><span class="doc std std-doc">Activation functions</span></a> for details.</p></li>
 </ul>
-</div>
-<div class="section" id="single-neuron-classifier">
-<h3>Single neuron classifier<a class="headerlink" href="#single-neuron-classifier" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="single-neuron-classifier">
+<h3>Single neuron classifier<a class="headerlink" href="#single-neuron-classifier" title="Permalink to this heading">#</a></h3>
 <p>Equivalent to <a class="reference internal" href="logistic_regression.html"><span class="doc std std-doc">logistic regression</span></a>.</p>
 <div class="math notranslate nohighlight">
 \[\mathcal{L}(\boldsymbol{\pmb{\theta}}) = -\frac{1}{m}\sum_{i=1}^m \left(y^{(i)} \log_e(y'^{(i)}) + (1-y^{(i)}) \log_e(1-y'^{(i)})\right)\]</div>
 <p><a class="reference external" href="https://youtu.be/FBggC-XVF4M"><img alt="Neural classifier" src="../_images/neural_classifier.png" /></a></p>
-</div>
-<div class="section" id="single-layer-multiclass-classifier">
-<h3>Single layer multiclass classifier<a class="headerlink" href="#single-layer-multiclass-classifier" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="single-layer-multiclass-classifier">
+<h3>Single layer multiclass classifier<a class="headerlink" href="#single-layer-multiclass-classifier" title="Permalink to this heading">#</a></h3>
 <p>Equivalent to softmax regression.</p>
 <div class="math notranslate nohighlight">
 \[\sigma(z_j) = \frac{e^{z_j}}{\sum_{k=1}^K {e^{z_k}}}\;\;\;\;
 \mathcal{L}(\boldsymbol{\pmb{\theta}}) = -\frac{1}{m}\sum_{i=1}^m\sum_{k=1}^K y^{(i)}_k \log_e(y'^{(i)}_k)\]</div>
 <p><a class="reference external" href="https://youtu.be/FBggC-XVF4M"><img alt="Multiclass neural classifier" src="../_images/multiclass_neural_classifier.png" /></a></p>
-</div>
-<div class="section" id="universal-approximation-theorem-1991">
-<h3>Universal approximation theorem (1991)<a class="headerlink" href="#universal-approximation-theorem-1991" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="universal-approximation-theorem-1991">
+<h3>Universal approximation theorem (1991)<a class="headerlink" href="#universal-approximation-theorem-1991" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>The hidden layers of a neural network transform their input space.</p></li>
 <li><p>A network can be seen as a series of non-linear compositions applied to the input data.</p></li>
 <li><p>Given appropriate complexity and appropriate learning, a network can theorically approximate any continuous function.</p></li>
 <li><p>One of the most important theoretical results for neural networks.</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="training-neural-networks">
-<h2>Training neural networks<a class="headerlink" href="#training-neural-networks" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="training-and-inference">
-<h3>Training and inference<a class="headerlink" href="#training-and-inference" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="training-neural-networks">
+<h2>Training neural networks<a class="headerlink" href="#training-neural-networks" title="Permalink to this heading">#</a></h2>
+<section id="training-and-inference">
+<h3>Training and inference<a class="headerlink" href="#training-and-inference" title="Permalink to this heading">#</a></h3>
 <p><img alt="Training and inference" src="../_images/training_inference1.png" /></p>
-</div>
-<div class="section" id="learning-algorithm">
-<h3>Learning algorithm<a class="headerlink" href="#learning-algorithm" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="learning-algorithm">
+<h3>Learning algorithm<a class="headerlink" href="#learning-algorithm" title="Permalink to this heading">#</a></h3>
 <p><a class="reference external" href="https://www.manning.com/books/deep-learning-with-python"><img alt="Extract from the book Deep Learning with Python" src="../_images/nn_learning.jpg" /></a></p>
-</div>
-<div class="section" id="weights-initialization">
-<h3>Weights initialization<a class="headerlink" href="#weights-initialization" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="weights-initialization">
+<h3>Weights initialization<a class="headerlink" href="#weights-initialization" title="Permalink to this heading">#</a></h3>
 <p>To facilitate training, initial weights must be:</p>
 <ul class="simple">
 <li><p>non-zero</p></li>
@@ -1239,54 +818,54 @@ Keras version: 2.4.0
 <li><p>have small values</p></li>
 </ul>
 <p><a class="reference external" href="https://towardsdatascience.com/weight-initialization-in-neural-networks-a-journey-from-the-basics-to-kaiming-954fb9b47c79">Several techniques exist</a>. A commonly used one is <a class="reference external" href="http://jmlr.org/proceedings/papers/v9/glorot10a/glorot10a.pdf">Xavier initialization</a>.</p>
-</div>
-<div class="section" id="vectorization-of-computations">
-<h3>Vectorization of computations<a class="headerlink" href="#vectorization-of-computations" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="vectorization-of-computations">
+<h3>Vectorization of computations<a class="headerlink" href="#vectorization-of-computations" title="Permalink to this heading">#</a></h3>
 <p><img alt="NN matrixes" src="../_images/nn_matrixes.png" /></p>
-<div class="section" id="hidden-layer-1-output">
-<h4>Hidden layer 1 output<a class="headerlink" href="#hidden-layer-1-output" title="Permalink to this headline">¶</a></h4>
+<section id="hidden-layer-1-output">
+<h4>Hidden layer 1 output<a class="headerlink" href="#hidden-layer-1-output" title="Permalink to this heading">#</a></h4>
 <p><img alt="Layer 1 output" src="../_images/output_layer1.png" /></p>
-</div>
-<div class="section" id="hidden-layer-2-output">
-<h4>Hidden layer 2 output<a class="headerlink" href="#hidden-layer-2-output" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="hidden-layer-2-output">
+<h4>Hidden layer 2 output<a class="headerlink" href="#hidden-layer-2-output" title="Permalink to this heading">#</a></h4>
 <p><img alt="Layer 2 output" src="../_images/output_layer2.png" /></p>
-</div>
-<div class="section" id="output-layer-result">
-<h4>Output layer result<a class="headerlink" href="#output-layer-result" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="output-layer-result">
+<h4>Output layer result<a class="headerlink" href="#output-layer-result" title="Permalink to this heading">#</a></h4>
 <p><img alt="Layer 3 output" src="../_images/output_layer3.png" /></p>
-</div>
-</div>
-<div class="section" id="weights-update">
-<h3>Weights update<a class="headerlink" href="#weights-update" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="weights-update">
+<h3>Weights update<a class="headerlink" href="#weights-update" title="Permalink to this heading">#</a></h3>
 <p>Objective: minimize the loss function that computes the distance between expected and actual results.</p>
 <p>Method : gradient descent.</p>
 <div class="math notranslate nohighlight">
 \[\pmb{\theta_{k+1}} = \pmb{\theta_k} - \eta_k\nabla_{\boldsymbol{\theta}}\mathcal{L}(\boldsymbol{\theta_k})\]</div>
-</div>
-<div class="section" id="neural-networks-as-computational-graphs">
-<h3>Neural networks as computational graphs<a class="headerlink" href="#neural-networks-as-computational-graphs" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="neural-networks-as-computational-graphs">
+<h3>Neural networks as computational graphs<a class="headerlink" href="#neural-networks-as-computational-graphs" title="Permalink to this heading">#</a></h3>
 <p><a class="reference external" href="https://youtu.be/FBggC-XVF4M"><img alt="Neural networks as computational graphs" src="../_images/nn_computational_graph.png" /></a></p>
-</div>
-<div class="section" id="backpropagation">
-<h3>Backpropagation<a class="headerlink" href="#backpropagation" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="backpropagation">
+<h3>Backpropagation<a class="headerlink" href="#backpropagation" title="Permalink to this heading">#</a></h3>
 <p>Objective: compute <span class="math notranslate nohighlight">\(\nabla_{\boldsymbol{\theta}}\mathcal{L}(\boldsymbol{\theta})\)</span>, the loss function gradient w.r.t. all the network weights.</p>
 <p>Method: apply the <a class="reference external" href="https://en.wikipedia.org/wiki/Chain_rule">chain rule</a> to compute partial derivatives backwards, starting from the current output.</p>
 <div class="math notranslate nohighlight">
 \[y = f(g(x)) \;\;\;\; \frac{\partial y}{\partial x} = \frac{\partial f}{\partial g} \frac{\partial g}{\partial x}\;\;\;\; \frac{\partial y}{\partial x} = \sum_{i=1}^n \frac{\partial f}{\partial g^{(i)}} \frac{\partial g^{(i)}}{\partial x}\]</div>
-</div>
-<div class="section" id="visual-demo-of-backpropagation">
-<h3>Visual demo of backpropagation<a class="headerlink" href="#visual-demo-of-backpropagation" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="visual-demo-of-backpropagation">
+<h3>Visual demo of backpropagation<a class="headerlink" href="#visual-demo-of-backpropagation" title="Permalink to this heading">#</a></h3>
 <p><a class="reference external" href="https://developers-dot-devsite-v2-prod.appspot.com/machine-learning/crash-course/backprop-scroll"><img alt="Backprop explained visually" src="../_images/visual_backprop_demo.png" /></a></p>
-</div>
-<div class="section" id="interactive-recap">
-<h3>Interactive recap<a class="headerlink" href="#interactive-recap" title="Permalink to this headline">¶</a></h3>
-<p><a class="reference external" href="https://playground.tensorflow.org/#activation=sigmoid&amp;batchSize=10&amp;dataset=gauss%C2%AEDataset=reg-plane&amp;learningRate=0.1%C2%AEularizationRate=0&amp;noise=0&amp;networkShape=2&amp;seed=0.73591&amp;showTestData=false&amp;discretize=false&amp;percTrainData=80&amp;x=true&amp;y=true&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=classification&amp;initZero=false&amp;hideText=false&amp;showTestData_hide=true&amp;discretize_hide=true%C2%AEularization_hide=true&amp;dataset_hide=false&amp;batchSize_hide=true%C2%AEularizationRate_hide=true&amp;percTrainData_hide=true&amp;numHiddenLayers_hide=false&amp;problem_hide=true&amp;noise_hide=false"><img alt="Neural networks playground" src="../_images/nn_playground.png" /></a></p>
-</div>
-</div>
-<div class="section" id="neural-networks-in-action">
-<h2>Neural networks in action<a class="headerlink" href="#neural-networks-in-action" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="example-training-a-multiclass-classifier-to-recognize-handwritten-digits">
-<h3>Example: training a multiclass classifier to recognize handwritten digits<a class="headerlink" href="#example-training-a-multiclass-classifier-to-recognize-handwritten-digits" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="interactive-recap">
+<h3>Interactive recap<a class="headerlink" href="#interactive-recap" title="Permalink to this heading">#</a></h3>
+<p><a class="reference external" href="https://playground.tensorflow.org/#activation=sigmoid&amp;batchSize=10&amp;dataset=gauss&amp;regDataset=reg-plane&amp;learningRate=0.1&amp;regularizationRate=0&amp;noise=0&amp;networkShape=2&amp;seed=0.73591&amp;showTestData=false&amp;discretize=false&amp;percTrainData=80&amp;x=true&amp;y=true&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=classification&amp;initZero=false&amp;hideText=false&amp;showTestData_hide=true&amp;discretize_hide=true&amp;regularization_hide=true&amp;dataset_hide=false&amp;batchSize_hide=true&amp;regularizationRate_hide=true&amp;percTrainData_hide=true&amp;numHiddenLayers_hide=false&amp;problem_hide=true&amp;noise_hide=false"><img alt="Neural networks playground" src="../_images/nn_playground.png" /></a></p>
+</section>
+</section>
+<section id="neural-networks-in-action">
+<h2>Neural networks in action<a class="headerlink" href="#neural-networks-in-action" title="Permalink to this heading">#</a></h2>
+<section id="example-training-a-multiclass-classifier-to-recognize-handwritten-digits">
+<h3>Example: training a multiclass classifier to recognize handwritten digits<a class="headerlink" href="#example-training-a-multiclass-classifier-to-recognize-handwritten-digits" title="Permalink to this heading">#</a></h3>
 <p>The MNIST digits dataset contains 70,000 handwritten digits, stored as 28x28 grayscale images.</p>
 <p>Once challenging for ML model, it’s now the “Hello World” of Computer Vision.</p>
 <div class="cell docutils container">
@@ -1319,7 +898,7 @@ Test images: (10000, 28, 28). Test labels: (10000,)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/artificial_neural_networks_38_0.png" src="../_images/artificial_neural_networks_38_0.png" />
+<img alt="../_images/d12ba3e36db1939146588065a50af8f6eeaad95b4f3be21d55e5d5ec06f11472.png" src="../_images/d12ba3e36db1939146588065a50af8f6eeaad95b4f3be21d55e5d5ec06f11472.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1390,8 +969,8 @@ Test images: (10000, 28, 28). Test labels: (10000,)
 </table>
 </div></div></div>
 </div>
-<div class="section" id="data-preprocessing">
-<h4>Data preprocessing<a class="headerlink" href="#data-preprocessing" title="Permalink to this headline">¶</a></h4>
+<section id="data-preprocessing">
+<h4>Data preprocessing<a class="headerlink" href="#data-preprocessing" title="Permalink to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Change pixel values from (0, 255) to (0, 1)</span>
@@ -1560,9 +1139,9 @@ y_test: (10000, 10)
 </table>
 </div></div></div>
 </div>
-</div>
-<div class="section" id="network-architecture-for-mnist">
-<h4>Network architecture for MNIST<a class="headerlink" href="#network-architecture-for-mnist" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="network-architecture-for-mnist">
+<h4>Network architecture for MNIST<a class="headerlink" href="#network-architecture-for-mnist" title="Permalink to this heading">#</a></h4>
 <p><a class="reference external" href="http://neuralnetworksanddeeplearning.com/chap1.html"><img alt="Extract from the book Neural Networks and Deep Learning by M. Nielsen" src="../_images/mnist_nn.png" /></a></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1611,7 +1190,7 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/artificial_neural_networks_45_0.png" src="../_images/artificial_neural_networks_45_0.png" />
+<img alt="../_images/df2fd6a334d566b79b17e2d243012904b57b865be114edafe064a73812f41819.png" src="../_images/df2fd6a334d566b79b17e2d243012904b57b865be114edafe064a73812f41819.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1646,7 +1225,7 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/artificial_neural_networks_47_0.png" src="../_images/artificial_neural_networks_47_0.png" />
+<img alt="../_images/c349fadf5917c16389eae8a1cdf957299364c132b9f7752701e26d4eafcbd16a.png" src="../_images/c349fadf5917c16389eae8a1cdf957299364c132b9f7752701e26d4eafcbd16a.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1662,13 +1241,13 @@ _________________________________________________________________
 </div>
 </div>
 </div>
-</div>
-</div>
-</div>
-<div class="section" id="tuning-neural-networks">
-<h2>Tuning neural networks<a class="headerlink" href="#tuning-neural-networks" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="hyperparameters-choice">
-<h3>Hyperparameters choice<a class="headerlink" href="#hyperparameters-choice" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+</section>
+<section id="tuning-neural-networks">
+<h2>Tuning neural networks<a class="headerlink" href="#tuning-neural-networks" title="Permalink to this heading">#</a></h2>
+<section id="hyperparameters-choice">
+<h3>Hyperparameters choice<a class="headerlink" href="#hyperparameters-choice" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Number of layers</p></li>
 <li><p>Number of neurons on hidden layers</p></li>
@@ -1677,9 +1256,9 @@ _________________________________________________________________
 <li><p>Mini-batch size</p></li>
 <li><p>…</p></li>
 </ul>
-</div>
-<div class="section" id="the-optimization-generalization-dilemna">
-<h3>The optimization/generalization dilemna<a class="headerlink" href="#the-optimization-generalization-dilemna" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="the-optimization-generalization-dilemna">
+<h3>The optimization/generalization dilemna<a class="headerlink" href="#the-optimization-generalization-dilemna" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Tackle underfitting:</p>
 <ul>
@@ -1696,9 +1275,9 @@ _________________________________________________________________
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="observing-underfitting-and-overfitting">
-<h3>Observing underfitting and overfitting<a class="headerlink" href="#observing-underfitting-and-overfitting" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="observing-underfitting-and-overfitting">
+<h3>Observing underfitting and overfitting<a class="headerlink" href="#observing-underfitting-and-overfitting" title="Permalink to this heading">#</a></h3>
 <p>(Inspired by the article <a class="reference external" href="http://www.wildml.com/2015/09/implementing-a-neural-network-from-scratch/">Implementing a Neural Network from Scratch</a>)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1710,7 +1289,7 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/artificial_neural_networks_53_0.png" src="../_images/artificial_neural_networks_53_0.png" />
+<img alt="../_images/1372134acca8a762636fb52f0b89dc9b926cd74ceb87e7e305c0894a32539855.png" src="../_images/1372134acca8a762636fb52f0b89dc9b926cd74ceb87e7e305c0894a32539855.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1740,14 +1319,14 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/artificial_neural_networks_54_0.png" src="../_images/artificial_neural_networks_54_0.png" />
+<img alt="../_images/0b585c0d40756b8c921979cae580157f811a77d7e6b856cb7f6af5697bd4e1bc.png" src="../_images/0b585c0d40756b8c921979cae580157f811a77d7e6b856cb7f6af5697bd4e1bc.png" />
 </div>
 </div>
-</div>
-<div class="section" id="tackling-overfitting">
-<h3>Tackling overfitting<a class="headerlink" href="#tackling-overfitting" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="regularization">
-<h4>Regularization<a class="headerlink" href="#regularization" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="tackling-overfitting">
+<h3>Tackling overfitting<a class="headerlink" href="#tackling-overfitting" title="Permalink to this heading">#</a></h3>
+<section id="regularization">
+<h4>Regularization<a class="headerlink" href="#regularization" title="Permalink to this heading">#</a></h4>
 <p>Limit weights values by adding a penalty to the loss function.</p>
 <div class="math notranslate nohighlight">
 \[\mathcal{l1} = \frac{\lambda}{m} {\sum |{\mathbf{\theta}_{ij}}|}\;\;\;\;
@@ -1779,12 +1358,12 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/artificial_neural_networks_57_0.png" src="../_images/artificial_neural_networks_57_0.png" />
+<img alt="../_images/35cb638e48935a0d32445a9782826d3a7ae605738abd4f4fb4bcab642e2a8ae9.png" src="../_images/35cb638e48935a0d32445a9782826d3a7ae605738abd4f4fb4bcab642e2a8ae9.png" />
 </div>
 </div>
-</div>
-<div class="section" id="dropout">
-<h4>Dropout<a class="headerlink" href="#dropout" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="dropout">
+<h4>Dropout<a class="headerlink" href="#dropout" title="Permalink to this heading">#</a></h4>
 <p>During training, some input units are randomly set to 0. The network must adapt and become more generic. The more units dropped out, the stronger the regularization.</p>
 <p><img alt="Dropout" src="../_images/dropout.png" /></p>
 <div class="cell docutils container">
@@ -1807,17 +1386,17 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/artificial_neural_networks_59_0.png" src="../_images/artificial_neural_networks_59_0.png" />
+<img alt="../_images/5377d2107e3c0025341fa8f9c1e2c561e091e456a9fe54801b9ec6a061e7d931.png" src="../_images/5377d2107e3c0025341fa8f9c1e2c561e091e456a9fe54801b9ec6a061e7d931.png" />
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="id1">
-<h3>Interactive recap<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
-<p><a class="reference external" href="https://playground.tensorflow.org/#activation=tanh&amp;batchSize=10&amp;dataset=spiral%C2%AEDataset=reg-plane&amp;learningRate=0.03%C2%AEularizationRate=0&amp;noise=0&amp;networkShape=4,2&amp;seed=0.22058&amp;showTestData=false&amp;discretize=false&amp;percTrainData=50&amp;x=true&amp;y=true&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=classification&amp;initZero=false&amp;hideText=false"><img alt="Neural networks playground (complete)" src="../_images/nn_playground_complete.png" /></a></p>
-</div>
-<div class="section" id="overfitting-on-a-real-world-example">
-<h3>Overfitting on a real-world example<a class="headerlink" href="#overfitting-on-a-real-world-example" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="id1">
+<h3>Interactive recap<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<p><a class="reference external" href="https://playground.tensorflow.org/#activation=tanh&amp;batchSize=10&amp;dataset=spiral&amp;regDataset=reg-plane&amp;learningRate=0.03&amp;regularizationRate=0&amp;noise=0&amp;networkShape=4,2&amp;seed=0.22058&amp;showTestData=false&amp;discretize=false&amp;percTrainData=50&amp;x=true&amp;y=true&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=classification&amp;initZero=false&amp;hideText=false"><img alt="Neural networks playground (complete)" src="../_images/nn_playground_complete.png" /></a></p>
+</section>
+<section id="overfitting-on-a-real-world-example">
+<h3>Overfitting on a real-world example<a class="headerlink" href="#overfitting-on-a-real-world-example" title="Permalink to this heading">#</a></h3>
 <p>(Heavily inspired by a use case in François Chollet’s book <a class="reference external" href="https://www.manning.com/books/deep-learning-with-python">Deep Learning With Python</a>)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1871,7 +1450,7 @@ First label: 1
 
 
 <span class="k">def</span> <span class="nf">vectorize_sequences</span><span class="p">(</span><span class="n">sequences</span><span class="p">,</span> <span class="n">dimension</span><span class="o">=</span><span class="mi">10000</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;One-hot encode a vector of sequences into a binary matrix (number of sequences, dimension)&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;One-hot encode a vector of sequences into a binary matrix (number of sequences, dimension)&quot;&quot;&quot;</span>
 
     <span class="c1"># Example : [[3, 5]] -&gt; [[0. 0. 0. 1. 0. 1. 0...]]</span>
 
@@ -2243,7 +1822,7 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/artificial_neural_networks_67_0.png" src="../_images/artificial_neural_networks_67_0.png" />
+<img alt="../_images/b968a8c6d12ea86deca6f2483de9f32d6cedaae5f94b6c53e48815eadaa2bd5a.png" src="../_images/b968a8c6d12ea86deca6f2483de9f32d6cedaae5f94b6c53e48815eadaa2bd5a.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2261,8 +1840,8 @@ _________________________________________________________________
 </div>
 </div>
 </div>
-<div class="section" id="reducing-network-size">
-<h4>Reducing network size<a class="headerlink" href="#reducing-network-size" title="Permalink to this headline">¶</a></h4>
+<section id="reducing-network-size">
+<h4>Reducing network size<a class="headerlink" href="#reducing-network-size" title="Permalink to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Build and train a smaller network</span>
@@ -2300,12 +1879,12 @@ Non-trainable params: 0
 _________________________________________________________________
 </pre></div>
 </div>
-<img alt="../_images/artificial_neural_networks_70_1.png" src="../_images/artificial_neural_networks_70_1.png" />
+<img alt="../_images/ec99faa93d20735a750015c0aa5e5e2a020def7f179d00b2f66ee0cdedadb9c3.png" src="../_images/ec99faa93d20735a750015c0aa5e5e2a020def7f179d00b2f66ee0cdedadb9c3.png" />
 </div>
 </div>
-</div>
-<div class="section" id="id2">
-<h4>Regularization<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="id2">
+<h4>Regularization<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create the same model as before but now using L2 regularization</span>
@@ -2350,12 +1929,12 @@ Non-trainable params: 0
 _________________________________________________________________
 </pre></div>
 </div>
-<img alt="../_images/artificial_neural_networks_72_1.png" src="../_images/artificial_neural_networks_72_1.png" />
+<img alt="../_images/d6fcfea1fa5feb4f4e711a92ce55c8557f15deda53635a587a13d57ad1aa34d2.png" src="../_images/d6fcfea1fa5feb4f4e711a92ce55c8557f15deda53635a587a13d57ad1aa34d2.png" />
 </div>
 </div>
-</div>
-<div class="section" id="id3">
-<h4>Dropout<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="id3">
+<h4>Dropout<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add 50% dropout to the two hidden layers</span>
@@ -2406,7 +1985,7 @@ Non-trainable params: 0
 _________________________________________________________________
 </pre></div>
 </div>
-<img alt="../_images/artificial_neural_networks_74_1.png" src="../_images/artificial_neural_networks_74_1.png" />
+<img alt="../_images/0ba52c669bb469656a92074345567cccfb1f3963a1abfeb7e032e3fe60b61ade.png" src="../_images/0ba52c669bb469656a92074345567cccfb1f3963a1abfeb7e032e3fe60b61ade.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2424,10 +2003,10 @@ _________________________________________________________________
 </div>
 </div>
 </div>
-</div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -2441,7 +2020,7 @@ _________________________________________________________________
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./algorithms"
         },
         predefinedOutput: true
@@ -2449,44 +2028,168 @@ _________________________________________________________________
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="nn_deep_learning.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Neural Networks and Deep Learning</p>
-        </div>
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="nn_deep_learning.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Neural Networks and Deep Learning</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="convolutional_neural_networks.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="convolutional_neural_networks.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Convolutional Neural Networks</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
-</div>
-            
-        </div>
-    </div>
-    <footer class="footer">
-  <p>
-    
-      By Baptiste Pesquet<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
-
-
       </div>
-    </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+</div>
 
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup">Environment setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#history">History</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-biological-inspiration">A biological inspiration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mcculloch-pitts-formal-neuron-1943">McCulloch &amp; Pitts’ formal neuron (1943)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hebb-s-rule-1949">Hebb’s rule (1949)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#franck-rosenblatt-s-perceptron-1958">Franck Rosenblatt’s perceptron (1958)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-perceptron-learning-algorithm">The perceptron learning algorithm</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-multilayer-perceptron-mlp">The MultiLayer Perceptron (MLP)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minsky-s-critic-1969">Minsky’s critic (1969)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decisive-breakthroughs-1970s-1990s">Decisive breakthroughs (1970s-1990s)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neural-networks-fundamentals">Neural networks fundamentals</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#anatomy-of-a-network">Anatomy of a network</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#neuron-output">Neuron output</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#activation-functions">Activation functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#single-neuron-classifier">Single neuron classifier</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#single-layer-multiclass-classifier">Single layer multiclass classifier</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#universal-approximation-theorem-1991">Universal approximation theorem (1991)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-neural-networks">Training neural networks</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-and-inference">Training and inference</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-algorithm">Learning algorithm</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#weights-initialization">Weights initialization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vectorization-of-computations">Vectorization of computations</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#hidden-layer-1-output">Hidden layer 1 output</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#hidden-layer-2-output">Hidden layer 2 output</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#output-layer-result">Output layer result</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#weights-update">Weights update</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#neural-networks-as-computational-graphs">Neural networks as computational graphs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#backpropagation">Backpropagation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visual-demo-of-backpropagation">Visual demo of backpropagation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-recap">Interactive recap</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neural-networks-in-action">Neural networks in action</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-training-a-multiclass-classifier-to-recognize-handwritten-digits">Example: training a multiclass classifier to recognize handwritten digits</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing">Data preprocessing</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#network-architecture-for-mnist">Network architecture for MNIST</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tuning-neural-networks">Tuning neural networks</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperparameters-choice">Hyperparameters choice</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-optimization-generalization-dilemna">The optimization/generalization dilemna</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#observing-underfitting-and-overfitting">Observing underfitting and overfitting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tackling-overfitting">Tackling overfitting</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#regularization">Regularization</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dropout">Dropout</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Interactive recap</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overfitting-on-a-real-world-example">Overfitting on a real-world example</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#reducing-network-size">Reducing network size</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Regularization</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Dropout</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Baptiste Pesquet
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2021.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

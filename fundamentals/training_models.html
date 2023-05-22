@@ -1,923 +1,549 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
     <title>Training models &#8212; Machine Learning Handbook</title>
-    
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    
-      
-
-    
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.css?digest=84ace793992934648b4de8eed757e5a2" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.9d8b4a8b9bb19db25eeaddc40d639ba2.js"></script>
-    <script >const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'fundamentals/training_models';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Classic Machine Learning" href="../algorithms/classic_ml.html" />
     <link rel="prev" title="Assessing results" href="assessing_results.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
-
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<div class="col-12 col-md-3 bd-sidebar site-navigation " id="site-navigation">
-    
-        <div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../_static/mlhandbook_logo.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">Machine Learning Handbook</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="../_static/mlhandbook_logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/mlhandbook_logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference external" href="https://www.bpesquet.fr/mlkatas">
-   Machine Learning Katas
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference external" href="https://www.bpesquet.fr/mlkatas">Machine Learning Katas</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  overview
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">overview</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../overview/introduction_to_machine_learning.html">
-   Introduction to Machine Learning
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../overview/machine_learning_in_action.html">
-   Machine Learning in action
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../overview/introduction_to_reinforcement_learning.html">
-   Introduction to Reinforcement Learning
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/introduction_to_machine_learning.html">Introduction to Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/machine_learning_in_action.html">Machine Learning in action</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/introduction_to_reinforcement_learning.html">Introduction to Reinforcement Learning</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Fundamentals
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fundamentals</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="handling_data.html">
-   Handling data
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="assessing_results.html">
-   Assessing results
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Training models
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="handling_data.html">Handling data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="assessing_results.html">Assessing results</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Training models</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Algorithms
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Algorithms</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../algorithms/classic_ml.html">
-   Classic Machine Learning
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../algorithms/k_nearest_neighbors.html">
-     K-Nearest Neighbors
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../algorithms/linear_regression.html">
-     Linear Regression
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../algorithms/logistic_regression.html">
-     Logistic Regression
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../algorithms/decision_trees_and_random_forests.html">
-     Decision Trees &amp; Random Forests
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../algorithms/bayesian_methods.html">
-     Bayesian Methods
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../algorithms/support_vector_machines.html">
-     Support Vector Machines
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../algorithms/k_means.html">
-     K-Means
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../algorithms/nn_deep_learning.html">
-   Neural Networks and Deep Learning
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
-  <label for="toctree-checkbox-2">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../algorithms/artificial_neural_networks.html">
-     Artificial Neural Networks
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../algorithms/convolutional_neural_networks.html">
-     Convolutional Neural Networks
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../algorithms/recurrent_neural_networks.html">
-     Recurrent Neural Networks
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../algorithms/autoencoders.html">
-     Autoencoders
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../algorithms/neural_style_transfer.html">
-     Neural Style Transfer
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../algorithms/generative_adversarial_networks.html">
-     Generative Adversarial Networks
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../algorithms/transformers.html">
-     Transformers
-    </a>
-   </li>
-  </ul>
- </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../algorithms/classic_ml.html">Classic Machine Learning</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/k_nearest_neighbors.html">K-Nearest Neighbors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/linear_regression.html">Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/logistic_regression.html">Logistic Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/decision_trees_and_random_forests.html">Decision Trees &amp; Random Forests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/bayesian_methods.html">Bayesian Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/support_vector_machines.html">Support Vector Machines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/k_means.html">K-Means</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Engineering
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../engineering/introduction_to_mlops.html">
-   Introduction to MLOps
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../engineering/machine_learning_issues.html">
-   Machine Learning issues
-  </a>
- </li>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../algorithms/nn_deep_learning.html">Neural Networks and Deep Learning</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/artificial_neural_networks.html">Artificial Neural Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/convolutional_neural_networks.html">Convolutional Neural Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/recurrent_neural_networks.html">Recurrent Neural Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/autoencoders.html">Autoencoders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/neural_style_transfer.html">Neural Style Transfer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/generative_adversarial_networks.html">Generative Adversarial Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/transformers.html">Transformers</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Tools
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../tools/python.html">
-   Python
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
-  <label for="toctree-checkbox-3">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../tools/python_ecosystem.html">
-     The Python ecosystem
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../tools/python_cheatsheet.html">
-     Python cheatsheet
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../tools/python_good_practices.html">
-     Python good practices
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../tools/numpy.html">
-   NumPy
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../tools/keras.html">
-   Keras
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../tools/pytorch.html">
-   PyTorch
-  </a>
- </li>
+</li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Reference
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Engineering</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../reference/activation_functions.html">
-   Activation functions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../reference/glossary.html">
-   Glossary
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../reference/acknowledgments.html">
-   Acknowledgments
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../engineering/introduction_to_mlops.html">Introduction to MLOps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../engineering/machine_learning_issues.html">Machine Learning issues</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tools</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tools/python.html">Python</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tools/python_ecosystem.html">The Python ecosystem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/python_cheatsheet.html">Python cheatsheet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/python_good_practices.html">Python good practices</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/numpy.html">NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/keras.html">Keras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/pytorch.html">PyTorch</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../reference/activation_functions.html">Activation functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/acknowledgments.html">Acknowledgments</a></li>
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
-          
-<!-- This is an invisible pixel that we watch to see if we've scrolled. -->
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
 <div class="sbt-scroll-pixel-helper"></div>
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            <div class="topbar-left">
-                
-                <label class="nav-toggle-button" for="__navigation">
-                    <div class="visually-hidden">Toggle navigation</div>
-                    <i class="fas fa-bars"></i>
-                </label>
-                
-            </div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/bpesquet/mlhandbook/master?urlpath=tree/fundamentals/training_models.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/bpesquet/mlhandbook/blob/master/fundamentals/training_models.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/bpesquet/mlhandbook" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/bpesquet/mlhandbook/edit/master/fundamentals/training_models.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/bpesquet/mlhandbook/issues/new?title=Issue%20on%20page%20%2Ffundamentals/training_models.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/fundamentals/training_models.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Training models</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
             
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/fundamentals/training_models.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/bpesquet/mlhandbook"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/bpesquet/mlhandbook/issues/new?title=Issue%20on%20page%20%2Ffundamentals/training_models.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/bpesquet/mlhandbook/edit/master/fundamentals/training_models.ipynb"><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/bpesquet/mlhandbook/master?urlpath=tree/fundamentals/training_models.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        <a class="colab-button" href="https://colab.research.google.com/github/bpesquet/mlhandbook/blob/master/fundamentals/training_models.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
-                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
-                    src="../_static/images/logo_colab.png"
-                    alt="Interact on Colab">Colab</button></a>
-        
-        
-        
-    </div>
-</div>
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div>
+                <h2> Contents </h2>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
+            <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#environment-setup">
-   Environment setup
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#problem-formulation">
-   Problem formulation
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#model-lifecycle">
-     Model lifecycle
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#parameters-vs-hyperparameters">
-     Parameters Vs hyperparameters
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#optimization-algorithm">
-     Optimization algorithm
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#gradient-descent">
-   Gradient descent
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#an-iterative-approach">
-     An iterative approach
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-gradient-descent-algorithm">
-     The gradient descent algorithm
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-notion-of-gradient">
-     The notion of gradient
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#d-gradient-descent-one-parameter">
-       1D gradient descent (one parameter)
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#d-gradient-two-parameters">
-       2D gradient (two parameters)
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#d-gradient-descent">
-       2D gradient descent
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#gradient-descent-types">
-     Gradient descent types
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#batch-gradient-descent">
-       Batch Gradient Descent
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#stochastic-gradient-descent-sgd">
-       Stochastic Gradient Descent (SGD)
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#mini-batch-sgd">
-       Mini-Batch SGD
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#model-parameters-update">
-     Model parameters update
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#learning-rate">
-       Learning rate
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#importance-of-learning-rate">
-       Importance of learning rate
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#the-local-minima-problem">
-       The local minima problem
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#optimization-algorithms">
-     Optimization algorithms
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#gradient-descent-evolution-map">
-       Gradient descent evolution map
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#momentum">
-       Momentum
-      </a>
-      <ul class="nav section-nav flex-column">
-       <li class="toc-h5 nav-item toc-entry">
-        <a class="reference internal nav-link" href="#momentum-equations">
-         Momentum equations
-        </a>
-       </li>
-       <li class="toc-h5 nav-item toc-entry">
-        <a class="reference internal nav-link" href="#momentum-vs-plain-gd">
-         Momentum Vs plain GD
-        </a>
-       </li>
-      </ul>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#rmsprop">
-       RMSprop
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#adam-and-other-techniques">
-       Adam and other techniques
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#gradients-computation">
-   Gradients computation
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#numerical-differentiation">
-     Numerical differentiation
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#symbolic-differentiation">
-     Symbolic differentiation
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#automatic-differentiation-autodiff">
-     Automatic differentiation (
-     <em>
-      autodiff
-     </em>
-     )
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#autodiff-and-its-main-modes">
-     Autodiff and its main modes
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#forward-mode-autodiff">
-     Forward mode autodiff
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#reverse-mode-autodiff">
-     Reverse mode autodiff
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#example-reverse-mode-autodiff-in-action">
-       Example: reverse mode autodiff in action
-      </a>
-      <ul class="nav section-nav flex-column">
-       <li class="toc-h5 nav-item toc-entry">
-        <a class="reference internal nav-link" href="#step-1-forward-pass">
-         Step 1: forward pass
-        </a>
-       </li>
-       <li class="toc-h5 nav-item toc-entry">
-        <a class="reference internal nav-link" href="#step-2-backward-pass">
-         Step 2: backward pass
-        </a>
-       </li>
-      </ul>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#autodifferention-with-pytorch">
-     Autodifferention with PyTorch
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#differentiable-programming">
-     Differentiable programming
-    </a>
-   </li>
-  </ul>
- </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup">Environment setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-formulation">Problem formulation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-lifecycle">Model lifecycle</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters-vs-hyperparameters">Parameters Vs hyperparameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-algorithm">Optimization algorithm</a></li>
 </ul>
-
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-descent">Gradient descent</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-iterative-approach">An iterative approach</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-gradient-descent-algorithm">The gradient descent algorithm</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-notion-of-gradient">The notion of gradient</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#d-gradient-descent-one-parameter">1D gradient descent (one parameter)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#d-gradient-two-parameters">2D gradient (two parameters)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#d-gradient-descent">2D gradient descent</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-descent-types">Gradient descent types</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#batch-gradient-descent">Batch Gradient Descent</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#stochastic-gradient-descent-sgd">Stochastic Gradient Descent (SGD)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#mini-batch-sgd">Mini-Batch SGD</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-parameters-update">Model parameters update</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-rate">Learning rate</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#importance-of-learning-rate">Importance of learning rate</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-local-minima-problem">The local minima problem</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-algorithms">Optimization algorithms</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-descent-evolution-map">Gradient descent evolution map</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#momentum">Momentum</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#momentum-equations">Momentum equations</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#momentum-vs-plain-gd">Momentum Vs plain GD</a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#rmsprop">RMSprop</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#adam-and-other-techniques">Adam and other techniques</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gradients-computation">Gradients computation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-differentiation">Numerical differentiation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#symbolic-differentiation">Symbolic differentiation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#automatic-differentiation-autodiff">Automatic differentiation (<em>autodiff</em>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#autodiff-and-its-main-modes">Autodiff and its main modes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forward-mode-autodiff">Forward mode autodiff</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reverse-mode-autodiff">Reverse mode autodiff</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-reverse-mode-autodiff-in-action">Example: reverse mode autodiff in action</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-forward-pass">Step 1: forward pass</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-backward-pass">Step 2: backward pass</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#autodifferention-with-pytorch">Autodifferention with PyTorch</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#differentiable-programming">Differentiable programming</a></li>
+</ul>
+</li>
+</ul>
             </nav>
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Training models</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#environment-setup">
-   Environment setup
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#problem-formulation">
-   Problem formulation
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#model-lifecycle">
-     Model lifecycle
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#parameters-vs-hyperparameters">
-     Parameters Vs hyperparameters
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#optimization-algorithm">
-     Optimization algorithm
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#gradient-descent">
-   Gradient descent
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#an-iterative-approach">
-     An iterative approach
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-gradient-descent-algorithm">
-     The gradient descent algorithm
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-notion-of-gradient">
-     The notion of gradient
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#d-gradient-descent-one-parameter">
-       1D gradient descent (one parameter)
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#d-gradient-two-parameters">
-       2D gradient (two parameters)
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#d-gradient-descent">
-       2D gradient descent
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#gradient-descent-types">
-     Gradient descent types
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#batch-gradient-descent">
-       Batch Gradient Descent
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#stochastic-gradient-descent-sgd">
-       Stochastic Gradient Descent (SGD)
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#mini-batch-sgd">
-       Mini-Batch SGD
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#model-parameters-update">
-     Model parameters update
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#learning-rate">
-       Learning rate
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#importance-of-learning-rate">
-       Importance of learning rate
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#the-local-minima-problem">
-       The local minima problem
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#optimization-algorithms">
-     Optimization algorithms
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#gradient-descent-evolution-map">
-       Gradient descent evolution map
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#momentum">
-       Momentum
-      </a>
-      <ul class="nav section-nav flex-column">
-       <li class="toc-h5 nav-item toc-entry">
-        <a class="reference internal nav-link" href="#momentum-equations">
-         Momentum equations
-        </a>
-       </li>
-       <li class="toc-h5 nav-item toc-entry">
-        <a class="reference internal nav-link" href="#momentum-vs-plain-gd">
-         Momentum Vs plain GD
-        </a>
-       </li>
-      </ul>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#rmsprop">
-       RMSprop
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#adam-and-other-techniques">
-       Adam and other techniques
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#gradients-computation">
-   Gradients computation
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#numerical-differentiation">
-     Numerical differentiation
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#symbolic-differentiation">
-     Symbolic differentiation
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#automatic-differentiation-autodiff">
-     Automatic differentiation (
-     <em>
-      autodiff
-     </em>
-     )
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#autodiff-and-its-main-modes">
-     Autodiff and its main modes
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#forward-mode-autodiff">
-     Forward mode autodiff
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#reverse-mode-autodiff">
-     Reverse mode autodiff
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#example-reverse-mode-autodiff-in-action">
-       Example: reverse mode autodiff in action
-      </a>
-      <ul class="nav section-nav flex-column">
-       <li class="toc-h5 nav-item toc-entry">
-        <a class="reference internal nav-link" href="#step-1-forward-pass">
-         Step 1: forward pass
-        </a>
-       </li>
-       <li class="toc-h5 nav-item toc-entry">
-        <a class="reference internal nav-link" href="#step-2-backward-pass">
-         Step 2: backward pass
-        </a>
-       </li>
-      </ul>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#autodifferention-with-pytorch">
-     Autodifferention with PyTorch
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#differentiable-programming">
-     Differentiable programming
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
 
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            
-              <div>
+              
                 
-  <div class="section" id="training-models">
-<h1>Training models<a class="headerlink" href="#training-models" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="environment-setup">
-<h2>Environment setup<a class="headerlink" href="#environment-setup" title="Permalink to this headline">¶</a></h2>
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="training-models">
+<h1>Training models<a class="headerlink" href="#training-models" title="Permalink to this heading">#</a></h1>
+<section id="environment-setup">
+<h2>Environment setup<a class="headerlink" href="#environment-setup" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">platform</span>
@@ -947,19 +573,19 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="problem-formulation">
-<h2>Problem formulation<a class="headerlink" href="#problem-formulation" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="model-lifecycle">
-<h3>Model lifecycle<a class="headerlink" href="#model-lifecycle" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="problem-formulation">
+<h2>Problem formulation<a class="headerlink" href="#problem-formulation" title="Permalink to this heading">#</a></h2>
+<section id="model-lifecycle">
+<h3>Model lifecycle<a class="headerlink" href="#model-lifecycle" title="Permalink to this heading">#</a></h3>
 <p>There are two (repeatable) phases:</p>
 <ul class="simple">
 <li><p><strong>Training</strong>: using training input samples, the model learns to find a relationship between inputs and labels.</p></li>
 <li><p><strong>Inference</strong>: the trained model is used to make predictions.</p></li>
 </ul>
-</div>
-<div class="section" id="parameters-vs-hyperparameters">
-<h3>Parameters Vs hyperparameters<a class="headerlink" href="#parameters-vs-hyperparameters" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="parameters-vs-hyperparameters">
+<h3>Parameters Vs hyperparameters<a class="headerlink" href="#parameters-vs-hyperparameters" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\pmb{\theta}\)</span> (sometime noted <span class="math notranslate nohighlight">\(\pmb{\omega}\)</span>): set of model’s internal parameters, updated during training.</p></li>
 <li><p>Many models also have user-defined properties called <strong>hyperparameters</strong>:</p>
@@ -972,33 +598,33 @@ const thebe_selector_output = ".output, .cell_output"
 <li><p>Contrary to internal parameters, they are not automatically updated during training.</p></li>
 <li><p>The hyperparameters directly affect the model’s performance and must be tweaked during the tuning step.</p></li>
 </ul>
-</div>
-<div class="section" id="optimization-algorithm">
-<h3>Optimization algorithm<a class="headerlink" href="#optimization-algorithm" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="optimization-algorithm">
+<h3>Optimization algorithm<a class="headerlink" href="#optimization-algorithm" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Used during the training phase.</p></li>
 <li><p>Objective: find the set of model parameters <span class="math notranslate nohighlight">\(\pmb{\theta}^{*}\)</span> that minimizes the loss.</p></li>
 <li><p>For each learning type, several algorithms of various complexity exist.</p></li>
 </ul>
 <p><a class="reference external" href="https://developers.google.com/machine-learning/crash-course/reducing-loss/an-iterative-approach"><img alt="Optimization: linear regression" src="../_images/LossSideBySide.png" /></a></p>
-</div>
-</div>
-<div class="section" id="gradient-descent">
-<h2>Gradient descent<a class="headerlink" href="#gradient-descent" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="an-iterative-approach">
-<h3>An iterative approach<a class="headerlink" href="#an-iterative-approach" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="gradient-descent">
+<h2>Gradient descent<a class="headerlink" href="#gradient-descent" title="Permalink to this heading">#</a></h2>
+<section id="an-iterative-approach">
+<h3>An iterative approach<a class="headerlink" href="#an-iterative-approach" title="Permalink to this heading">#</a></h3>
 <p>The model’s parameters are iteratively updated until an optimum is reached.</p>
 <p><a class="reference external" href="https://developers.google.com/machine-learning/crash-course/descending-into-ml/training-and-loss"><img alt="Iterative approach" src="../_images/GradientDescentDiagram.png" /></a></p>
-</div>
-<div class="section" id="the-gradient-descent-algorithm">
-<h3>The gradient descent algorithm<a class="headerlink" href="#the-gradient-descent-algorithm" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="the-gradient-descent-algorithm">
+<h3>The gradient descent algorithm<a class="headerlink" href="#the-gradient-descent-algorithm" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Used in several ML models, including neural networks.</p></li>
 <li><p>General idea: converging to a loss function’s minimum by updating model parameters in small steps, in the <strong>opposite direction</strong> of the loss function <strong>gradient</strong>.</p></li>
 </ul>
-</div>
-<div class="section" id="the-notion-of-gradient">
-<h3>The notion of gradient<a class="headerlink" href="#the-notion-of-gradient" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="the-notion-of-gradient">
+<h3>The notion of gradient<a class="headerlink" href="#the-notion-of-gradient" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Expresses the variation of a function relative to the variation of its parameters.</p></li>
 <li><p>Vector containing partial derivatives of the function <em>w.r.t.</em> each of its <span class="math notranslate nohighlight">\(P\)</span> parameters.</p></li>
@@ -1010,31 +636,31 @@ const thebe_selector_output = ".output, .cell_output"
        \ \vdots \\
        \ \frac{\partial}{\partial \theta_P} \mathcal{L}(\boldsymbol{\theta})
      \end{pmatrix}\end{split}\]</div>
-<div class="section" id="d-gradient-descent-one-parameter">
-<h4>1D gradient descent (one parameter)<a class="headerlink" href="#d-gradient-descent-one-parameter" title="Permalink to this headline">¶</a></h4>
+<section id="d-gradient-descent-one-parameter">
+<h4>1D gradient descent (one parameter)<a class="headerlink" href="#d-gradient-descent-one-parameter" title="Permalink to this heading">#</a></h4>
 <p><img alt="Gradient Descent" src="../_images/gradient_descent_1parameter.png" /></p>
-</div>
-<div class="section" id="d-gradient-two-parameters">
-<h4>2D gradient (two parameters)<a class="headerlink" href="#d-gradient-two-parameters" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="d-gradient-two-parameters">
+<h4>2D gradient (two parameters)<a class="headerlink" href="#d-gradient-two-parameters" title="Permalink to this heading">#</a></h4>
 <p><img alt="Tangent Space" src="../_images/tangent_space.png" /></p>
-</div>
-<div class="section" id="d-gradient-descent">
-<h4>2D gradient descent<a class="headerlink" href="#d-gradient-descent" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="d-gradient-descent">
+<h4>2D gradient descent<a class="headerlink" href="#d-gradient-descent" title="Permalink to this heading">#</a></h4>
 <p><img alt="Gradient Descent" src="../_images/gradient_descent_2parameters.gif" /></p>
-</div>
-</div>
-<div class="section" id="gradient-descent-types">
-<h3>Gradient descent types<a class="headerlink" href="#gradient-descent-types" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="batch-gradient-descent">
-<h4>Batch Gradient Descent<a class="headerlink" href="#batch-gradient-descent" title="Permalink to this headline">¶</a></h4>
+</section>
+</section>
+<section id="gradient-descent-types">
+<h3>Gradient descent types<a class="headerlink" href="#gradient-descent-types" title="Permalink to this heading">#</a></h3>
+<section id="batch-gradient-descent">
+<h4>Batch Gradient Descent<a class="headerlink" href="#batch-gradient-descent" title="Permalink to this heading">#</a></h4>
 <p>The gradient is computed on the whole dataset before model parameters are updated.</p>
 <ul class="simple">
 <li><p>Advantages: simple and safe (always converges in the right direction).</p></li>
 <li><p>Drawback: can become slow and even untractable with a big dataset.</p></li>
 </ul>
-</div>
-<div class="section" id="stochastic-gradient-descent-sgd">
-<h4>Stochastic Gradient Descent (SGD)<a class="headerlink" href="#stochastic-gradient-descent-sgd" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="stochastic-gradient-descent-sgd">
+<h4>Stochastic Gradient Descent (SGD)<a class="headerlink" href="#stochastic-gradient-descent-sgd" title="Permalink to this heading">#</a></h4>
 <p>The gradient is computed on only one randomly chosen sample whole dataset before parameters are updated.</p>
 <ul class="simple">
 <li><p>Advantages:</p>
@@ -1050,80 +676,80 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="mini-batch-sgd">
-<h4>Mini-Batch SGD<a class="headerlink" href="#mini-batch-sgd" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="mini-batch-sgd">
+<h4>Mini-Batch SGD<a class="headerlink" href="#mini-batch-sgd" title="Permalink to this heading">#</a></h4>
 <p>The gradient is computed on a small set of samples, called a <em>batch</em>, before parameters are updated.</p>
 <ul class="simple">
 <li><p>Combines the advantages of batch and stochastic GD.</p></li>
 <li><p>Default method for many ML libraries.</p></li>
 <li><p>The mini-batch size varies between 10 and 1000 samples, depending of the dataset size.</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="model-parameters-update">
-<h3>Model parameters update<a class="headerlink" href="#model-parameters-update" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="learning-rate">
-<h4>Learning rate<a class="headerlink" href="#learning-rate" title="Permalink to this headline">¶</a></h4>
+</section>
+</section>
+<section id="model-parameters-update">
+<h3>Model parameters update<a class="headerlink" href="#model-parameters-update" title="Permalink to this heading">#</a></h3>
+<section id="learning-rate">
+<h4>Learning rate<a class="headerlink" href="#learning-rate" title="Permalink to this heading">#</a></h4>
 <p><span class="math notranslate nohighlight">\(\eta\)</span> is the update factor for parameters once gradient is computed, called the <strong><em>learning rate</em></strong>.</p>
 <p>It has a direct impact on the “speed” of the gradient descent.</p>
 <div class="math notranslate nohighlight">
 \[\pmb{\theta_{next}} = \pmb{\theta} - \eta\nabla_{\boldsymbol{\theta}}\mathcal{L}(\boldsymbol{\theta})\]</div>
-</div>
-<div class="section" id="importance-of-learning-rate">
-<h4>Importance of learning rate<a class="headerlink" href="#importance-of-learning-rate" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="importance-of-learning-rate">
+<h4>Importance of learning rate<a class="headerlink" href="#importance-of-learning-rate" title="Permalink to this heading">#</a></h4>
 <p><img alt="Learning rate" src="../_images/learning_rate1.png" /></p>
 <p><a class="reference external" href="https://developers.google.com/machine-learning/crash-course/fitter/graph">Interactive exercise</a></p>
-</div>
-<div class="section" id="the-local-minima-problem">
-<h4>The local minima problem<a class="headerlink" href="#the-local-minima-problem" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="the-local-minima-problem">
+<h4>The local minima problem<a class="headerlink" href="#the-local-minima-problem" title="Permalink to this heading">#</a></h4>
 <p><img alt="Local minima" src="../_images/local_minima.jpg" /></p>
 <p><img alt="Gradient Descent" src="../_images/gd_ng.jpg" /></p>
-</div>
-</div>
-<div class="section" id="optimization-algorithms">
-<h3>Optimization algorithms<a class="headerlink" href="#optimization-algorithms" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="gradient-descent-evolution-map">
-<h4>Gradient descent evolution map<a class="headerlink" href="#gradient-descent-evolution-map" title="Permalink to this headline">¶</a></h4>
+</section>
+</section>
+<section id="optimization-algorithms">
+<h3>Optimization algorithms<a class="headerlink" href="#optimization-algorithms" title="Permalink to this heading">#</a></h3>
+<section id="gradient-descent-evolution-map">
+<h4>Gradient descent evolution map<a class="headerlink" href="#gradient-descent-evolution-map" title="Permalink to this heading">#</a></h4>
 <p><a class="reference external" href="https://towardsdatascience.com/10-gradient-descent-optimisation-algorithms-86989510b5e9"><img alt="Gradient Descent evolution map" src="../_images/gradient_descent_evolution_map.png" /></a></p>
-</div>
-<div class="section" id="momentum">
-<h4>Momentum<a class="headerlink" href="#momentum" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="momentum">
+<h4>Momentum<a class="headerlink" href="#momentum" title="Permalink to this heading">#</a></h4>
 <p>Momentum optimization accelerates the descent speed in the direction of the minimum by accumulating previous gradients. It can also escape plateaux faster then plain GD.</p>
 <p><a class="reference external" href="https://youtu.be/qPKKtvkVAjY"><img alt="Momemtum demo" src="../_images/gd_momentum_demo.gif" /></a></p>
-<div class="section" id="momentum-equations">
-<h5>Momentum equations<a class="headerlink" href="#momentum-equations" title="Permalink to this headline">¶</a></h5>
+<section id="momentum-equations">
+<h5>Momentum equations<a class="headerlink" href="#momentum-equations" title="Permalink to this heading">#</a></h5>
 <div class="math notranslate nohighlight">
 \[\pmb{m_{k+1}} = \beta_k \pmb{m_k} - \nabla_{\boldsymbol{\theta}}\mathcal{L}(\boldsymbol{\theta_k})\]</div>
 <div class="math notranslate nohighlight">
 \[\pmb{\theta_{k+1}} = \pmb{\theta_k} + \eta_k\pmb{m_{k+1}}\]</div>
 <p><span class="math notranslate nohighlight">\(\beta_k \in [0,1]\)</span> is a friction factor that prevents gradients updates from growing too large. A typical value is 0.9.</p>
-</div>
-<div class="section" id="momentum-vs-plain-gd">
-<h5>Momentum Vs plain GD<a class="headerlink" href="#momentum-vs-plain-gd" title="Permalink to this headline">¶</a></h5>
+</section>
+<section id="momentum-vs-plain-gd">
+<h5>Momentum Vs plain GD<a class="headerlink" href="#momentum-vs-plain-gd" title="Permalink to this heading">#</a></h5>
 <p><a class="reference external" href="https://youtu.be/kVU8zTI-Od0"><img alt="Momentum Vs plain GD" src="../_images/gd_momentum.png" /></a></p>
-</div>
-</div>
-<div class="section" id="rmsprop">
-<h4>RMSprop<a class="headerlink" href="#rmsprop" title="Permalink to this headline">¶</a></h4>
+</section>
+</section>
+<section id="rmsprop">
+<h4>RMSprop<a class="headerlink" href="#rmsprop" title="Permalink to this heading">#</a></h4>
 <p><em>RMSprop</em> decays the learning rate differently for each parameter, scaling down the gradient vector along the steepest dimensions. The underlying idea is to adjust the descent direction a bit more towards the global minimum.</p>
 <div class="math notranslate nohighlight">
 \[\pmb{v_{k+1}} = \beta_k \pmb{v_k} + (1-\beta_k) \left(\nabla_{\boldsymbol{\theta}}\mathcal{L}(\boldsymbol{\theta_k})\right)^2\]</div>
 <div class="math notranslate nohighlight">
 \[\pmb{\theta_{k+1}} = \pmb{\theta_k} - \frac{\eta_k}{\sqrt{\pmb{v_{k}}+\epsilon}}\nabla_{\boldsymbol{\theta}}\mathcal{L}(\boldsymbol{\theta_k})\]</div>
 <p><span class="math notranslate nohighlight">\(\epsilon\)</span> is a smoothing term to avoid divisions by zero. A typical value is <span class="math notranslate nohighlight">\(10^{-10}\)</span>.</p>
-</div>
-<div class="section" id="adam-and-other-techniques">
-<h4>Adam and other techniques<a class="headerlink" href="#adam-and-other-techniques" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="adam-and-other-techniques">
+<h4>Adam and other techniques<a class="headerlink" href="#adam-and-other-techniques" title="Permalink to this heading">#</a></h4>
 <p><em>Adam</em> (<em>Adaptive Moment Estimation</em>) combines the ideas of momentum and RMSprop. It is the <em>de facto</em> choice nowadays.</p>
 <p>Gradient descent optimization is a rich subfield of Machine Learning. Read more in <a class="reference external" href="http://ruder.io/optimizing-gradient-descent/">this article</a>.</p>
-</div>
-</div>
-</div>
-<div class="section" id="gradients-computation">
-<h2>Gradients computation<a class="headerlink" href="#gradients-computation" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="numerical-differentiation">
-<h3>Numerical differentiation<a class="headerlink" href="#numerical-differentiation" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+</section>
+<section id="gradients-computation">
+<h2>Gradients computation<a class="headerlink" href="#gradients-computation" title="Permalink to this heading">#</a></h2>
+<section id="numerical-differentiation">
+<h3>Numerical differentiation<a class="headerlink" href="#numerical-differentiation" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Finite difference approximation of derivatives.</p></li>
 <li><p>Interpretations: instantaneous rate of change, slope of the tangent.</p></li>
@@ -1133,9 +759,9 @@ const thebe_selector_output = ".output, .cell_output"
 \[g'(a) = \frac{\partial g(a)}{\partial a} = \lim_{h \to 0} \frac{g(a + h) - g(a)}{h}\]</div>
 <div class="math notranslate nohighlight">
 \[\frac{\partial f(\pmb{x})}{\partial x_i} = \lim_{h \to 0} \frac{f(\pmb{x} + h\pmb{e}_i) - f(\pmb{x})}{h}\]</div>
-</div>
-<div class="section" id="symbolic-differentiation">
-<h3>Symbolic differentiation<a class="headerlink" href="#symbolic-differentiation" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="symbolic-differentiation">
+<h3>Symbolic differentiation<a class="headerlink" href="#symbolic-differentiation" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Automatic manipulation of expressions for obtaining derivative expressions.</p></li>
 <li><p>Used in modern mathematical software (Mathematica, Maple…).</p></li>
@@ -1146,16 +772,16 @@ symbolic expressions.</p></li>
 \[\frac{\mathrm{d}}{\mathrm{d}x}\left(f(x)+g(x)\right) = \frac{\mathrm{d}}{\mathrm{d}x}f(x)+\frac{\mathrm{d}}{\mathrm{d}x}g(x)\]</div>
 <div class="math notranslate nohighlight">
 \[\frac{\mathrm{d}}{\mathrm{d}x}\left(f(x)g(x)\right) = \left(\frac{\mathrm{d}}{\mathrm{d}x}f(x)\right)g(x)+f(x)\left(\frac{\mathrm{d}}{\mathrm{d}x}g(x)\right)\]</div>
-</div>
-<div class="section" id="automatic-differentiation-autodiff">
-<h3>Automatic differentiation (<em>autodiff</em>)<a class="headerlink" href="#automatic-differentiation-autodiff" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="automatic-differentiation-autodiff">
+<h3>Automatic differentiation (<em>autodiff</em>)<a class="headerlink" href="#automatic-differentiation-autodiff" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Family of techniques for efficiently computing derivatives of numeric functions.</p></li>
 <li><p>Can differentiate closed-form math expressions, but also algorithms using branching, loops or recursion.</p></li>
 </ul>
-</div>
-<div class="section" id="autodiff-and-its-main-modes">
-<h3>Autodiff and its main modes<a class="headerlink" href="#autodiff-and-its-main-modes" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="autodiff-and-its-main-modes">
+<h3>Autodiff and its main modes<a class="headerlink" href="#autodiff-and-its-main-modes" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>AD combines numerical and symbolic differentiation.</p></li>
 <li><p>General idea: apply symbolic differentiation at the elementary operation level and keep intermediate numerical results.</p></li>
@@ -1163,35 +789,35 @@ symbolic expressions.</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[\frac{\mathrm{d}y}{\mathrm{d}x} = \frac{\mathrm{d}y}{\mathrm{d}w_2} \frac{\mathrm{d}w_2}{\mathrm{d}w_1} \frac{\mathrm{d}w_1}{\mathrm{d}x}\]</div>
-</div>
-<div class="section" id="forward-mode-autodiff">
-<h3>Forward mode autodiff<a class="headerlink" href="#forward-mode-autodiff" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="forward-mode-autodiff">
+<h3>Forward mode autodiff<a class="headerlink" href="#forward-mode-autodiff" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Computes gradients w.r.t. one parameter along with the function output.</p></li>
 <li><p>Relies on <a class="reference external" href="https://en.wikipedia.org/wiki/Automatic_differentiation#Automatic_differentiation_using_dual_numbers">dual numbers</a>.</p></li>
 <li><p>Efficient when output dimension &gt;&gt; number of parameters.</p></li>
 </ul>
-</div>
-<div class="section" id="reverse-mode-autodiff">
-<h3>Reverse mode autodiff<a class="headerlink" href="#reverse-mode-autodiff" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="reverse-mode-autodiff">
+<h3>Reverse mode autodiff<a class="headerlink" href="#reverse-mode-autodiff" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Computes function output, then do a backward pass to compute gradients w.r.t. all parameters for the output.</p></li>
 <li><p>Efficient when number of parameters &gt;&gt; output dimension.</p></li>
 </ul>
-<div class="section" id="example-reverse-mode-autodiff-in-action">
-<h4>Example: reverse mode autodiff in action<a class="headerlink" href="#example-reverse-mode-autodiff-in-action" title="Permalink to this headline">¶</a></h4>
+<section id="example-reverse-mode-autodiff-in-action">
+<h4>Example: reverse mode autodiff in action<a class="headerlink" href="#example-reverse-mode-autodiff-in-action" title="Permalink to this heading">#</a></h4>
 <p>Let’s define the function <span class="math notranslate nohighlight">\(f\)</span> of two variables <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2\)</span> like so:</p>
 <div class="math notranslate nohighlight">
 \[f(x_1,x_2) = log_e(x_1) + x_1x_2 - sin(x_2)\]</div>
 <p>It can be represented as a <em>computational graph</em>:</p>
 <p><img alt="Computational graph" src="../_images/computational_graph.png" /></p>
-<div class="section" id="step-1-forward-pass">
-<h5>Step 1: forward pass<a class="headerlink" href="#step-1-forward-pass" title="Permalink to this headline">¶</a></h5>
+<section id="step-1-forward-pass">
+<h5>Step 1: forward pass<a class="headerlink" href="#step-1-forward-pass" title="Permalink to this heading">#</a></h5>
 <p>Intermediate values are calculated and tensor operations are memorized for future gradient computations.</p>
 <p><img alt="The forward pass" src="../_images/autodiff_forward_pass.png" /></p>
-</div>
-<div class="section" id="step-2-backward-pass">
-<h5>Step 2: backward pass<a class="headerlink" href="#step-2-backward-pass" title="Permalink to this headline">¶</a></h5>
+</section>
+<section id="step-2-backward-pass">
+<h5>Step 2: backward pass<a class="headerlink" href="#step-2-backward-pass" title="Permalink to this heading">#</a></h5>
 <p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Chain_rule">chain rule</a> is applied to compute every intermediate gradient, starting from output.</p>
 <div class="math notranslate nohighlight">
 \[y = f(g(x)) \;\;\;\; \frac{\partial y}{\partial x} = \frac{\partial f}{\partial g} \frac{\partial g}{\partial x}\;\;\;\; \frac{\partial y}{\partial x} = \sum_{i=1}^n \frac{\partial f}{\partial g^{(i)}} \frac{\partial g^{(i)}}{\partial x}\]</div>
@@ -1212,11 +838,11 @@ symbolic expressions.</p></li>
 \[\frac{\partial y}{\partial x_1}=\frac{\partial y}{\partial v_1}\frac{\partial v_1}{\partial x_1}+\frac{\partial y}{\partial v_2}\frac{\partial v_2}{\partial x_1}=\frac{1}{x_1}+x_2\]</div>
 <div class="math notranslate nohighlight">
 \[\frac{\partial y}{\partial x_2}=\frac{\partial y}{\partial v_2}\frac{\partial v_2}{\partial x_2}+\frac{\partial y}{\partial v_3}\frac{\partial v_3}{\partial x_2}=x_1-cos(x_2)\]</div>
-</div>
-</div>
-</div>
-<div class="section" id="autodifferention-with-pytorch">
-<h3>Autodifferention with PyTorch<a class="headerlink" href="#autodifferention-with-pytorch" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+</section>
+<section id="autodifferention-with-pytorch">
+<h3>Autodifferention with PyTorch<a class="headerlink" href="#autodifferention-with-pytorch" title="Permalink to this heading">#</a></h3>
 <p><em>Autograd</em> is the name of PyTorch’s autodifferentiation engine.</p>
 <p>If its <code class="docutils literal notranslate"><span class="pre">requires_grad</span></code> attribute is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, PyTorch will track all operations on a tensor and provide <em>reverse mode automatic differentiation</em>: partial derivatives are automatically computed backward w.r.t. all involved parameters.</p>
 <p>The gradient for a tensor will be accumulated into its <code class="docutils literal notranslate"><span class="pre">.grad</span></code> attribute.</p>
@@ -1270,16 +896,16 @@ tensor([1.7163])
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="differentiable-programming">
-<h3>Differentiable programming<a class="headerlink" href="#differentiable-programming" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="differentiable-programming">
+<h3>Differentiable programming<a class="headerlink" href="#differentiable-programming" title="Permalink to this heading">#</a></h3>
 <p>Aka <a class="reference external" href="https://medium.com/&#64;karpathy/software-2-0-a64152b37c35">software 2.0</a>.</p>
 <blockquote>
 <div><p>“People are now building a new kind of software by assembling networks of parameterized functional blocks and by training them from examples using some form of gradient-based optimization…. It’s really very much like a regular program, except it’s parameterized, automatically differentiated, and trainable/optimizable” (Y. LeCun).</p>
 </div></blockquote>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -1293,7 +919,7 @@ tensor([1.7163])
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./fundamentals"
         },
         predefinedOutput: true
@@ -1301,44 +927,163 @@ tensor([1.7163])
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="assessing_results.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Assessing results</p>
-        </div>
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="assessing_results.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Assessing results</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="../algorithms/classic_ml.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="../algorithms/classic_ml.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Classic Machine Learning</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
-</div>
-            
-        </div>
-    </div>
-    <footer class="footer">
-  <p>
-    
-      By Baptiste Pesquet<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
-
-
       </div>
-    </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+</div>
 
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup">Environment setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-formulation">Problem formulation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-lifecycle">Model lifecycle</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters-vs-hyperparameters">Parameters Vs hyperparameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-algorithm">Optimization algorithm</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-descent">Gradient descent</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-iterative-approach">An iterative approach</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-gradient-descent-algorithm">The gradient descent algorithm</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-notion-of-gradient">The notion of gradient</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#d-gradient-descent-one-parameter">1D gradient descent (one parameter)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#d-gradient-two-parameters">2D gradient (two parameters)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#d-gradient-descent">2D gradient descent</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-descent-types">Gradient descent types</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#batch-gradient-descent">Batch Gradient Descent</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#stochastic-gradient-descent-sgd">Stochastic Gradient Descent (SGD)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#mini-batch-sgd">Mini-Batch SGD</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-parameters-update">Model parameters update</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-rate">Learning rate</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#importance-of-learning-rate">Importance of learning rate</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-local-minima-problem">The local minima problem</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-algorithms">Optimization algorithms</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-descent-evolution-map">Gradient descent evolution map</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#momentum">Momentum</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#momentum-equations">Momentum equations</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#momentum-vs-plain-gd">Momentum Vs plain GD</a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#rmsprop">RMSprop</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#adam-and-other-techniques">Adam and other techniques</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gradients-computation">Gradients computation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-differentiation">Numerical differentiation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#symbolic-differentiation">Symbolic differentiation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#automatic-differentiation-autodiff">Automatic differentiation (<em>autodiff</em>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#autodiff-and-its-main-modes">Autodiff and its main modes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forward-mode-autodiff">Forward mode autodiff</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reverse-mode-autodiff">Reverse mode autodiff</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-reverse-mode-autodiff-in-action">Example: reverse mode autodiff in action</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-forward-pass">Step 1: forward pass</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-backward-pass">Step 2: backward pass</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#autodifferention-with-pytorch">Autodifferention with PyTorch</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#differentiable-programming">Differentiable programming</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Baptiste Pesquet
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2021.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

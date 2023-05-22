@@ -1,830 +1,562 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
     <title>Autoencoders &#8212; Machine Learning Handbook</title>
-    
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    
-      
-
-    
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.css?digest=84ace793992934648b4de8eed757e5a2" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.9d8b4a8b9bb19db25eeaddc40d639ba2.js"></script>
-    <script >const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'algorithms/autoencoders';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Neural Style Transfer" href="neural_style_transfer.html" />
     <link rel="prev" title="Recurrent Neural Networks" href="recurrent_neural_networks.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
-
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<div class="col-12 col-md-3 bd-sidebar site-navigation " id="site-navigation">
-    
-        <div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../_static/mlhandbook_logo.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">Machine Learning Handbook</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="../_static/mlhandbook_logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/mlhandbook_logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference external" href="https://www.bpesquet.fr/mlkatas">
-   Machine Learning Katas
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference external" href="https://www.bpesquet.fr/mlkatas">Machine Learning Katas</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  overview
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">overview</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../overview/introduction_to_machine_learning.html">
-   Introduction to Machine Learning
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../overview/machine_learning_in_action.html">
-   Machine Learning in action
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../overview/introduction_to_reinforcement_learning.html">
-   Introduction to Reinforcement Learning
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/introduction_to_machine_learning.html">Introduction to Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/machine_learning_in_action.html">Machine Learning in action</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/introduction_to_reinforcement_learning.html">Introduction to Reinforcement Learning</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Fundamentals
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fundamentals</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../fundamentals/handling_data.html">
-   Handling data
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../fundamentals/assessing_results.html">
-   Assessing results
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../fundamentals/training_models.html">
-   Training models
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../fundamentals/handling_data.html">Handling data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fundamentals/assessing_results.html">Assessing results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fundamentals/training_models.html">Training models</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Algorithms
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Algorithms</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="classic_ml.html">
-   Classic Machine Learning
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="k_nearest_neighbors.html">
-     K-Nearest Neighbors
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="linear_regression.html">
-     Linear Regression
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="logistic_regression.html">
-     Logistic Regression
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="decision_trees_and_random_forests.html">
-     Decision Trees &amp; Random Forests
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="bayesian_methods.html">
-     Bayesian Methods
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="support_vector_machines.html">
-     Support Vector Machines
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="k_means.html">
-     K-Means
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 current active has-children">
-  <a class="reference internal" href="nn_deep_learning.html">
-   Neural Networks and Deep Learning
-  </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
-  <label for="toctree-checkbox-2">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul class="current">
-   <li class="toctree-l2">
-    <a class="reference internal" href="artificial_neural_networks.html">
-     Artificial Neural Networks
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="convolutional_neural_networks.html">
-     Convolutional Neural Networks
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="recurrent_neural_networks.html">
-     Recurrent Neural Networks
-    </a>
-   </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
-     Autoencoders
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="neural_style_transfer.html">
-     Neural Style Transfer
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="generative_adversarial_networks.html">
-     Generative Adversarial Networks
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="transformers.html">
-     Transformers
-    </a>
-   </li>
-  </ul>
- </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="classic_ml.html">Classic Machine Learning</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="k_nearest_neighbors.html">K-Nearest Neighbors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linear_regression.html">Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logistic_regression.html">Logistic Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="decision_trees_and_random_forests.html">Decision Trees &amp; Random Forests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bayesian_methods.html">Bayesian Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="support_vector_machines.html">Support Vector Machines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="k_means.html">K-Means</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Engineering
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../engineering/introduction_to_mlops.html">
-   Introduction to MLOps
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../engineering/machine_learning_issues.html">
-   Machine Learning issues
-  </a>
- </li>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="nn_deep_learning.html">Neural Networks and Deep Learning</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="artificial_neural_networks.html">Artificial Neural Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="convolutional_neural_networks.html">Convolutional Neural Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recurrent_neural_networks.html">Recurrent Neural Networks</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Autoencoders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="neural_style_transfer.html">Neural Style Transfer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generative_adversarial_networks.html">Generative Adversarial Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="transformers.html">Transformers</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Tools
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../tools/python.html">
-   Python
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
-  <label for="toctree-checkbox-3">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../tools/python_ecosystem.html">
-     The Python ecosystem
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../tools/python_cheatsheet.html">
-     Python cheatsheet
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../tools/python_good_practices.html">
-     Python good practices
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../tools/numpy.html">
-   NumPy
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../tools/keras.html">
-   Keras
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../tools/pytorch.html">
-   PyTorch
-  </a>
- </li>
+</li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Reference
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Engineering</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../reference/activation_functions.html">
-   Activation functions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../reference/glossary.html">
-   Glossary
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../reference/acknowledgments.html">
-   Acknowledgments
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../engineering/introduction_to_mlops.html">Introduction to MLOps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../engineering/machine_learning_issues.html">Machine Learning issues</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tools</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tools/python.html">Python</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tools/python_ecosystem.html">The Python ecosystem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/python_cheatsheet.html">Python cheatsheet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/python_good_practices.html">Python good practices</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/numpy.html">NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/keras.html">Keras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/pytorch.html">PyTorch</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../reference/activation_functions.html">Activation functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/acknowledgments.html">Acknowledgments</a></li>
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
-          
-<!-- This is an invisible pixel that we watch to see if we've scrolled. -->
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
 <div class="sbt-scroll-pixel-helper"></div>
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            <div class="topbar-left">
-                
-                <label class="nav-toggle-button" for="__navigation">
-                    <div class="visually-hidden">Toggle navigation</div>
-                    <i class="fas fa-bars"></i>
-                </label>
-                
-            </div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/bpesquet/mlhandbook/master?urlpath=tree/algorithms/autoencoders.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/bpesquet/mlhandbook/blob/master/algorithms/autoencoders.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/bpesquet/mlhandbook" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/bpesquet/mlhandbook/edit/master/algorithms/autoencoders.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/bpesquet/mlhandbook/issues/new?title=Issue%20on%20page%20%2Falgorithms/autoencoders.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/algorithms/autoencoders.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Autoencoders</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
             
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/algorithms/autoencoders.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/bpesquet/mlhandbook"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/bpesquet/mlhandbook/issues/new?title=Issue%20on%20page%20%2Falgorithms/autoencoders.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/bpesquet/mlhandbook/edit/master/algorithms/autoencoders.ipynb"><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/bpesquet/mlhandbook/master?urlpath=tree/algorithms/autoencoders.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        <a class="colab-button" href="https://colab.research.google.com/github/bpesquet/mlhandbook/blob/master/algorithms/autoencoders.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
-                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
-                    src="../_static/images/logo_colab.png"
-                    alt="Interact on Colab">Colab</button></a>
-        
-        
-        
-    </div>
-</div>
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div>
+                <h2> Contents </h2>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
+            <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#summary">
-   Summary
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#introduction">
-   Introduction
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#autoencoders-in-a-nutshell">
-     Autoencoders in a nutshell
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#autoencoder-architecture">
-     Autoencoder architecture
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#what-s-the-point">
-     What’s the point?
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#latent-space-properties">
-     Latent space properties
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#autoencoders-applications">
-     Autoencoders applications
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-performing-dimensionality-reduction-with-a-linear-autoencoder">
-     Example: performing dimensionality reduction with a linear autoencoder
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#environment-setup">
-       Environment setup
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#d-data-generation">
-       3D data generation
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#model-definition">
-       Model definition
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#model-training">
-       Model training
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#encoded-data-representation">
-       Encoded data representation
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#stacked-autoencoders">
-   Stacked autoencoders
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#architecture">
-     Architecture
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-reconstructing-fashion-images-with-a-stacked-autoencoder">
-     Example: reconstructing fashion images with a stacked autoencoder
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#data-loading-and-preprocessing">
-       Data loading and preprocessing
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#the-selu-activation-function">
-       The SELU activation function
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id1">
-       Model definition
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id2">
-       Model training
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#reconstructions-visualization">
-       Reconstructions visualization
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#variational-autoencoders">
-   Variational autoencoders
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#principle">
-     Principle
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#vae-losses">
-     VAE losses
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-generating-fashion-images-with-a-vae">
-     Example: generating fashion images with a VAE
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id3">
-       Model definition
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id4">
-       Model training
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id5">
-       Reconstructions visualization
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#generating-new-images">
-       Generating new images
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#autoencoders-in-a-nutshell">Autoencoders in a nutshell</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#autoencoder-architecture">Autoencoder architecture</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-the-point">What’s the point?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#latent-space-properties">Latent space properties</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#autoencoders-applications">Autoencoders applications</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-performing-dimensionality-reduction-with-a-linear-autoencoder">Example: performing dimensionality reduction with a linear autoencoder</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup">Environment setup</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#d-data-generation">3D data generation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#model-definition">Model definition</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#model-training">Model training</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#encoded-data-representation">Encoded data representation</a></li>
 </ul>
-
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacked-autoencoders">Stacked autoencoders</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#architecture">Architecture</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-reconstructing-fashion-images-with-a-stacked-autoencoder">Example: reconstructing fashion images with a stacked autoencoder</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#data-loading-and-preprocessing">Data loading and preprocessing</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-selu-activation-function">The SELU activation function</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Model definition</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Model training</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#reconstructions-visualization">Reconstructions visualization</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variational-autoencoders">Variational autoencoders</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#principle">Principle</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vae-losses">VAE losses</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-generating-fashion-images-with-a-vae">Example: generating fashion images with a VAE</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Model definition</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Model training</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Reconstructions visualization</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-new-images">Generating new images</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
             </nav>
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Autoencoders</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#summary">
-   Summary
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#introduction">
-   Introduction
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#autoencoders-in-a-nutshell">
-     Autoencoders in a nutshell
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#autoencoder-architecture">
-     Autoencoder architecture
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#what-s-the-point">
-     What’s the point?
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#latent-space-properties">
-     Latent space properties
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#autoencoders-applications">
-     Autoencoders applications
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-performing-dimensionality-reduction-with-a-linear-autoencoder">
-     Example: performing dimensionality reduction with a linear autoencoder
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#environment-setup">
-       Environment setup
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#d-data-generation">
-       3D data generation
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#model-definition">
-       Model definition
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#model-training">
-       Model training
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#encoded-data-representation">
-       Encoded data representation
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#stacked-autoencoders">
-   Stacked autoencoders
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#architecture">
-     Architecture
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-reconstructing-fashion-images-with-a-stacked-autoencoder">
-     Example: reconstructing fashion images with a stacked autoencoder
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#data-loading-and-preprocessing">
-       Data loading and preprocessing
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#the-selu-activation-function">
-       The SELU activation function
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id1">
-       Model definition
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id2">
-       Model training
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#reconstructions-visualization">
-       Reconstructions visualization
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#variational-autoencoders">
-   Variational autoencoders
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#principle">
-     Principle
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#vae-losses">
-     VAE losses
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-generating-fashion-images-with-a-vae">
-     Example: generating fashion images with a VAE
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id3">
-       Model definition
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id4">
-       Model training
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id5">
-       Reconstructions visualization
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#generating-new-images">
-       Generating new images
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
-</ul>
 
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            
-              <div>
+              
                 
-  <div class="section" id="autoencoders">
-<h1>Autoencoders<a class="headerlink" href="#autoencoders" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="summary">
-<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="autoencoders">
+<h1>Autoencoders<a class="headerlink" href="#autoencoders" title="Permalink to this heading">#</a></h1>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Introduction</p></li>
 <li><p>Stacked autoencoders</p></li>
 <li><p>Variational autoencoders</p></li>
 </ul>
-</div>
-<div class="section" id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="autoencoders-in-a-nutshell">
-<h3>Autoencoders in a nutshell<a class="headerlink" href="#autoencoders-in-a-nutshell" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
+<section id="autoencoders-in-a-nutshell">
+<h3>Autoencoders in a nutshell<a class="headerlink" href="#autoencoders-in-a-nutshell" title="Permalink to this heading">#</a></h3>
 <p>Autoencoders are a type of network that aims to <strong>encode</strong> an input in a <em>latent space</em> and then <strong>decode</strong> it back.</p>
 <p><a class="reference external" href="https://towardsdatascience.com/deep-autoencoders-using-tensorflow-c68f075fd1a3"><img alt="Autoencoder principle" src="../_images/keras_autoencoders_applications.png" /></a></p>
-</div>
-<div class="section" id="autoencoder-architecture">
-<h3>Autoencoder architecture<a class="headerlink" href="#autoencoder-architecture" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="autoencoder-architecture">
+<h3>Autoencoder architecture<a class="headerlink" href="#autoencoder-architecture" title="Permalink to this heading">#</a></h3>
 <p>An autoencoder is composed of an encoding function <span class="math notranslate nohighlight">\(E(x)\)</span> outputting a latent representation <span class="math notranslate nohighlight">\(s\)</span>, a decoding function <span class="math notranslate nohighlight">\(D(s)\)</span> computing the reconstructed output <span class="math notranslate nohighlight">\(o\)</span> and a loss function <span class="math notranslate nohighlight">\(\mathcal{L}\)</span> measuring the distance between original and reconstructed data.</p>
 <p><a class="reference external" href="https://www.pyimagesearch.com/2020/02/17/autoencoders-with-keras-tensorflow-and-deep-learning/"><img alt="Autoencoder architecture" src="../_images/keras_autoencoder_arch_flow.png" /></a></p>
-</div>
-<div class="section" id="what-s-the-point">
-<h3>What’s the point?<a class="headerlink" href="#what-s-the-point" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="what-s-the-point">
+<h3>What’s the point?<a class="headerlink" href="#what-s-the-point" title="Permalink to this heading">#</a></h3>
 <p>An autoencoder learns to copy its inputs to its outputs under some constraints: for example, limiting the dimensionality of the latent space, or adding noise to the inputs.</p>
 <p>To do its job, it must find efficient ways of representing the data: for example, learning the most relevant features and dropping the others.</p>
-</div>
-<div class="section" id="latent-space-properties">
-<h3>Latent space properties<a class="headerlink" href="#latent-space-properties" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="latent-space-properties">
+<h3>Latent space properties<a class="headerlink" href="#latent-space-properties" title="Permalink to this heading">#</a></h3>
 <p>The latent space learned by an autoencoder may have interesting properties.</p>
 <p>For example, in a latent space of images of faces, there may be a <em>smile vector</em> <span class="math notranslate nohighlight">\(s\)</span>, such that if latent point <span class="math notranslate nohighlight">\(z\)</span> is the representation of a certain face, then latent point <span class="math notranslate nohighlight">\(z + s\)</span> is the representation of the same face, smiling. It becomes possible to add a smile to existing images.</p>
 <p><a class="reference external" href="https://www.google.com/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=&amp;ved=2ahUKEwjppNaU9b3sAhWXA2MBHVvmCksQFjABegQIBhAC&amp;url=https%3A%2F%2Farxiv.org%2Fpdf%2F1609.04468&amp;usg=AOvVaw2tyR7sXaBPhviw4wg0Jgrf"><img alt="Smile vector" src="../_images/smile_vector.jpg" /></a></p>
-</div>
-<div class="section" id="autoencoders-applications">
-<h3>Autoencoders applications<a class="headerlink" href="#autoencoders-applications" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="autoencoders-applications">
+<h3>Autoencoders applications<a class="headerlink" href="#autoencoders-applications" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Dimensionality reduction</p></li>
 <li><p>Denoising</p></li>
@@ -836,12 +568,12 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="example-performing-dimensionality-reduction-with-a-linear-autoencoder">
-<h3>Example: performing dimensionality reduction with a linear autoencoder<a class="headerlink" href="#example-performing-dimensionality-reduction-with-a-linear-autoencoder" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="example-performing-dimensionality-reduction-with-a-linear-autoencoder">
+<h3>Example: performing dimensionality reduction with a linear autoencoder<a class="headerlink" href="#example-performing-dimensionality-reduction-with-a-linear-autoencoder" title="Permalink to this heading">#</a></h3>
 <p>(Heavily inspired by Chapter 17 of <a class="reference external" href="https://github.com/ageron/handson-ml2">Hands-On Machine Learning</a> by Aurélien Géron)</p>
-<div class="section" id="environment-setup">
-<h4>Environment setup<a class="headerlink" href="#environment-setup" title="Permalink to this headline">¶</a></h4>
+<section id="environment-setup">
+<h4>Environment setup<a class="headerlink" href="#environment-setup" title="Permalink to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">platform</span>
@@ -900,9 +632,14 @@ Keras version: 2.4.0
 </div>
 </div>
 <div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_loss</span><span class="p">(</span><span class="n">history</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Plot training loss</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plot training loss</span>
 <span class="sd">    Takes a Keras History object as parameter&quot;&quot;&quot;</span>
 
     <span class="n">loss</span> <span class="o">=</span> <span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s2">&quot;loss&quot;</span><span class="p">]</span>
@@ -925,10 +662,11 @@ Keras version: 2.4.0
 </pre></div>
 </div>
 </div>
+</details>
 </div>
-</div>
-<div class="section" id="d-data-generation">
-<h4>3D data generation<a class="headerlink" href="#d-data-generation" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="d-data-generation">
+<h4>3D data generation<a class="headerlink" href="#d-data-generation" title="Permalink to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
@@ -1035,8 +773,8 @@ var n,a=t("./lib/build-log"),i=t("./lib/epsilon"),o=t("./lib/intersecter"),s=t("
         });
         }
         </script>
-</div><div class="output text_html"><div>                            <div id="77466f01-6108-4a9c-a899-6f6d0f6110c8" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("77466f01-6108-4a9c-a899-6f6d0f6110c8")) {                    Plotly.newPlot(                        "77466f01-6108-4a9c-a899-6f6d0f6110c8",                        [{"hovertemplate": "x1=%{x}<br>x2=%{y}<br>x3=%{z}<extra></extra>", "legendgroup": "", "marker": {"color": "#636efa", "symbol": "circle"}, "mode": "markers", "name": "", "scene": "scene", "showlegend": false, "type": "scatter3d", "x": [-1.0397677147468611, -0.03178419392900826, -0.977238797022062, -0.9441904854015208, -0.7871648312307278, 1.0940937787859177, -1.0466562293353936, 0.6494523976914736, 0.992128131935685, 0.5255097848715613, -1.0136718790176444, 1.1084136185807705, -1.0174445674276993, -0.9717042369219455, 1.0768896475430094, -0.37011335126084155, 0.6669587622822064, 0.6589615699581791, 0.8533356533373504, -1.0849687172628317, 0.49929899399276195, -0.9682614780407905, -0.9956962478806952, -1.1296740525845874, 1.1508019557281524, 0.8893037838392742, -0.3109557362463757, 1.078405181275842, -0.95988338577177, 0.6376542558008294, 0.07489424480372747, -1.1050990232735107, 0.005975164475437413, 0.9543988193317479, 0.9485070650721616, -0.09331005466406252, -0.007165754267285742, -0.4295122781687373, 0.6175608227494024, -0.6641879969579282, 0.708572753291198, -0.4740647922699333, -1.0086780995720699, 1.095324775249991, 0.760343211331235, 0.14229753149501012, -0.6977849196563121, 1.090229179403642, -0.13788340420620257, -0.47878469931443385, -1.1819722226493414, 0.8108735919040345, -0.49347042635009286, 1.124392060938885, 0.2163317620732552, 1.081609541719854, -1.0355875332416555, 0.5011266679614381, -1.1198245844740897, 0.5628569857223774], "y": [-0.7602384600995039, 0.3902605695387692, -0.6738620601249483, 0.0007707792277192038, -0.05106414865585829, 0.11576205592482533, -0.8531657908607474, -0.48275034195800925, 0.3061409312663751, 0.4679550073891542, -0.20045897634158144, 0.07297451889391945, -0.4776533886133959, -0.7089100473999674, -0.03867705250356529, 0.24401898465767116, -0.4827027632117965, 0.4948933057716177, -0.3770761586344792, -0.691462363690674, 0.4565333016102169, -0.8243467251160764, -0.20190046675114526, -0.5283582253031925, -0.05214300981849193, -0.3701400535196344, 0.3544126247257312, 0.0009227051170496992, -0.06499088325167846, 0.5257417445882998, 0.39686946343012464, -0.7561863248050489, 0.396090229930361, -0.2576594797544452, -0.05367613353000844, 0.36096646479785044, 0.43724030342032805, 0.18294080885167371, 0.47551714210937834, 0.20646383900037177, 0.5467227693296786, 0.32020383507626127, -0.18588356726328595, 0.03697322448870566, 0.43379721015671946, 0.5102584238245053, 0.14356015086714016, 0.20949956827454116, 0.4280641523448041, 0.22336647432102283, -0.6005352252679278, 0.45479736551714356, 0.18706541626679743, 0.1094213016564746, 0.3895792656434739, 0.002335610341604649, -0.6588091499170595, 0.43798306163553913, -0.37839423090028973, 0.4109424172969627], "z": [-0.33288048212771554, -0.03647666589733993, -0.32075710110546324, -0.04973041442903267, 0.11997074448961105, 0.24555149801542037, -0.20524116885674076, -0.07943257314410566, 0.39627874698708104, 0.1624616836511027, -0.19307456121654273, -0.0018244949627919532, -0.22916522833850578, -0.21083332718512499, 0.026350104989308176, -0.007215788389092662, -0.13081937945572517, 0.17486896355420123, -0.09317755055560942, -0.4572894828993707, 0.3186367732023845, -0.547655402642712, -0.25919791393620134, -0.24345065748855638, 0.19424353714620718, -0.04932164870600489, 0.040553655036940195, 0.1067150542971856, -0.1479667374506844, 0.30281226750774604, 0.07191246523815094, -0.4422575755374975, 0.06580837420950024, 0.02141890273615575, 0.1953192762960031, 0.2525967557244792, 0.0841641583086254, -0.14083727097102755, 0.05967466726240704, 0.2017026376222999, 0.1882371983596034, 0.08809536329304164, 0.02874567549414979, 0.04626289115212763, 0.1803661551936651, 0.10289783347438348, -0.14265197670136193, 0.2454984124352143, 0.21485095256528636, -0.17459230104548745, -0.2065366532481137, 0.18757992753770142, 0.018785284456181217, 0.15870256707623998, 0.001503159004418872, 0.07142461605151722, -0.40664275004433764, 0.3666828128999935, -0.01326584230091045, 0.18162183336772186]}],                        {"legend": {"tracegroupgap": 0}, "margin": {"t": 60}, "scene": {"domain": {"x": [0.0, 1.0], "y": [0.0, 1.0]}, "xaxis": {"title": {"text": "x1"}}, "yaxis": {"title": {"text": "x2"}}, "zaxis": {"title": {"text": "x3"}}}, "template": {"data": {"bar": [{"error_x": {"color": "#2a3f5f"}, "error_y": {"color": "#2a3f5f"}, "marker": {"line": {"color": "#E5ECF6", "width": 0.5}}, "type": "bar"}], "barpolar": [{"marker": {"line": {"color": "#E5ECF6", "width": 0.5}}, "type": "barpolar"}], "carpet": [{"aaxis": {"endlinecolor": "#2a3f5f", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "#2a3f5f"}, "baxis": {"endlinecolor": "#2a3f5f", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "#2a3f5f"}, "type": "carpet"}], "choropleth": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "choropleth"}], "contour": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "contour"}], "contourcarpet": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "contourcarpet"}], "heatmap": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "heatmap"}], "heatmapgl": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "heatmapgl"}], "histogram": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "histogram"}], "histogram2d": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "histogram2d"}], "histogram2dcontour": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "histogram2dcontour"}], "mesh3d": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "mesh3d"}], "parcoords": [{"line": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "parcoords"}], "pie": [{"automargin": true, "type": "pie"}], "scatter": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatter"}], "scatter3d": [{"line": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatter3d"}], "scattercarpet": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattercarpet"}], "scattergeo": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattergeo"}], "scattergl": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattergl"}], "scattermapbox": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattermapbox"}], "scatterpolar": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterpolar"}], "scatterpolargl": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterpolargl"}], "scatterternary": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterternary"}], "surface": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "surface"}], "table": [{"cells": {"fill": {"color": "#EBF0F8"}, "line": {"color": "white"}}, "header": {"fill": {"color": "#C8D4E3"}, "line": {"color": "white"}}, "type": "table"}]}, "layout": {"annotationdefaults": {"arrowcolor": "#2a3f5f", "arrowhead": 0, "arrowwidth": 1}, "coloraxis": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "colorscale": {"diverging": [[0, "#8e0152"], [0.1, "#c51b7d"], [0.2, "#de77ae"], [0.3, "#f1b6da"], [0.4, "#fde0ef"], [0.5, "#f7f7f7"], [0.6, "#e6f5d0"], [0.7, "#b8e186"], [0.8, "#7fbc41"], [0.9, "#4d9221"], [1, "#276419"]], "sequential": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "sequentialminus": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]]}, "colorway": ["#636efa", "#EF553B", "#00cc96", "#ab63fa", "#FFA15A", "#19d3f3", "#FF6692", "#B6E880", "#FF97FF", "#FECB52"], "font": {"color": "#2a3f5f"}, "geo": {"bgcolor": "white", "lakecolor": "white", "landcolor": "#E5ECF6", "showlakes": true, "showland": true, "subunitcolor": "white"}, "hoverlabel": {"align": "left"}, "hovermode": "closest", "mapbox": {"style": "light"}, "paper_bgcolor": "white", "plot_bgcolor": "#E5ECF6", "polar": {"angularaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "bgcolor": "#E5ECF6", "radialaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}}, "scene": {"xaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}, "yaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}, "zaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}}, "shapedefaults": {"line": {"color": "#2a3f5f"}}, "ternary": {"aaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "baxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "bgcolor": "#E5ECF6", "caxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}}, "title": {"x": 0.05}, "xaxis": {"automargin": true, "gridcolor": "white", "linecolor": "white", "ticks": "", "title": {"standoff": 15}, "zerolinecolor": "white", "zerolinewidth": 2}, "yaxis": {"automargin": true, "gridcolor": "white", "linecolor": "white", "ticks": "", "title": {"standoff": 15}, "zerolinecolor": "white", "zerolinewidth": 2}}}},                        {"responsive": true}                    ).then(function(){
-
+        </div><div class="output text_html"><div>                            <div id="77466f01-6108-4a9c-a899-6f6d0f6110c8" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("77466f01-6108-4a9c-a899-6f6d0f6110c8")) {                    Plotly.newPlot(                        "77466f01-6108-4a9c-a899-6f6d0f6110c8",                        [{"hovertemplate": "x1=%{x}<br>x2=%{y}<br>x3=%{z}<extra></extra>", "legendgroup": "", "marker": {"color": "#636efa", "symbol": "circle"}, "mode": "markers", "name": "", "scene": "scene", "showlegend": false, "type": "scatter3d", "x": [-1.0397677147468611, -0.03178419392900826, -0.977238797022062, -0.9441904854015208, -0.7871648312307278, 1.0940937787859177, -1.0466562293353936, 0.6494523976914736, 0.992128131935685, 0.5255097848715613, -1.0136718790176444, 1.1084136185807705, -1.0174445674276993, -0.9717042369219455, 1.0768896475430094, -0.37011335126084155, 0.6669587622822064, 0.6589615699581791, 0.8533356533373504, -1.0849687172628317, 0.49929899399276195, -0.9682614780407905, -0.9956962478806952, -1.1296740525845874, 1.1508019557281524, 0.8893037838392742, -0.3109557362463757, 1.078405181275842, -0.95988338577177, 0.6376542558008294, 0.07489424480372747, -1.1050990232735107, 0.005975164475437413, 0.9543988193317479, 0.9485070650721616, -0.09331005466406252, -0.007165754267285742, -0.4295122781687373, 0.6175608227494024, -0.6641879969579282, 0.708572753291198, -0.4740647922699333, -1.0086780995720699, 1.095324775249991, 0.760343211331235, 0.14229753149501012, -0.6977849196563121, 1.090229179403642, -0.13788340420620257, -0.47878469931443385, -1.1819722226493414, 0.8108735919040345, -0.49347042635009286, 1.124392060938885, 0.2163317620732552, 1.081609541719854, -1.0355875332416555, 0.5011266679614381, -1.1198245844740897, 0.5628569857223774], "y": [-0.7602384600995039, 0.3902605695387692, -0.6738620601249483, 0.0007707792277192038, -0.05106414865585829, 0.11576205592482533, -0.8531657908607474, -0.48275034195800925, 0.3061409312663751, 0.4679550073891542, -0.20045897634158144, 0.07297451889391945, -0.4776533886133959, -0.7089100473999674, -0.03867705250356529, 0.24401898465767116, -0.4827027632117965, 0.4948933057716177, -0.3770761586344792, -0.691462363690674, 0.4565333016102169, -0.8243467251160764, -0.20190046675114526, -0.5283582253031925, -0.05214300981849193, -0.3701400535196344, 0.3544126247257312, 0.0009227051170496992, -0.06499088325167846, 0.5257417445882998, 0.39686946343012464, -0.7561863248050489, 0.396090229930361, -0.2576594797544452, -0.05367613353000844, 0.36096646479785044, 0.43724030342032805, 0.18294080885167371, 0.47551714210937834, 0.20646383900037177, 0.5467227693296786, 0.32020383507626127, -0.18588356726328595, 0.03697322448870566, 0.43379721015671946, 0.5102584238245053, 0.14356015086714016, 0.20949956827454116, 0.4280641523448041, 0.22336647432102283, -0.6005352252679278, 0.45479736551714356, 0.18706541626679743, 0.1094213016564746, 0.3895792656434739, 0.002335610341604649, -0.6588091499170595, 0.43798306163553913, -0.37839423090028973, 0.4109424172969627], "z": [-0.33288048212771554, -0.03647666589733993, -0.32075710110546324, -0.04973041442903267, 0.11997074448961105, 0.24555149801542037, -0.20524116885674076, -0.07943257314410566, 0.39627874698708104, 0.1624616836511027, -0.19307456121654273, -0.0018244949627919532, -0.22916522833850578, -0.21083332718512499, 0.026350104989308176, -0.007215788389092662, -0.13081937945572517, 0.17486896355420123, -0.09317755055560942, -0.4572894828993707, 0.3186367732023845, -0.547655402642712, -0.25919791393620134, -0.24345065748855638, 0.19424353714620718, -0.04932164870600489, 0.040553655036940195, 0.1067150542971856, -0.1479667374506844, 0.30281226750774604, 0.07191246523815094, -0.4422575755374975, 0.06580837420950024, 0.02141890273615575, 0.1953192762960031, 0.2525967557244792, 0.0841641583086254, -0.14083727097102755, 0.05967466726240704, 0.2017026376222999, 0.1882371983596034, 0.08809536329304164, 0.02874567549414979, 0.04626289115212763, 0.1803661551936651, 0.10289783347438348, -0.14265197670136193, 0.2454984124352143, 0.21485095256528636, -0.17459230104548745, -0.2065366532481137, 0.18757992753770142, 0.018785284456181217, 0.15870256707623998, 0.001503159004418872, 0.07142461605151722, -0.40664275004433764, 0.3666828128999935, -0.01326584230091045, 0.18162183336772186]}],                        {"legend": {"tracegroupgap": 0}, "margin": {"t": 60}, "scene": {"domain": {"x": [0.0, 1.0], "y": [0.0, 1.0]}, "xaxis": {"title": {"text": "x1"}}, "yaxis": {"title": {"text": "x2"}}, "zaxis": {"title": {"text": "x3"}}}, "template": {"data": {"bar": [{"error_x": {"color": "#2a3f5f"}, "error_y": {"color": "#2a3f5f"}, "marker": {"line": {"color": "#E5ECF6", "width": 0.5}}, "type": "bar"}], "barpolar": [{"marker": {"line": {"color": "#E5ECF6", "width": 0.5}}, "type": "barpolar"}], "carpet": [{"aaxis": {"endlinecolor": "#2a3f5f", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "#2a3f5f"}, "baxis": {"endlinecolor": "#2a3f5f", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "#2a3f5f"}, "type": "carpet"}], "choropleth": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "choropleth"}], "contour": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "contour"}], "contourcarpet": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "contourcarpet"}], "heatmap": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "heatmap"}], "heatmapgl": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "heatmapgl"}], "histogram": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "histogram"}], "histogram2d": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "histogram2d"}], "histogram2dcontour": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "histogram2dcontour"}], "mesh3d": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "mesh3d"}], "parcoords": [{"line": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "parcoords"}], "pie": [{"automargin": true, "type": "pie"}], "scatter": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatter"}], "scatter3d": [{"line": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatter3d"}], "scattercarpet": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattercarpet"}], "scattergeo": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattergeo"}], "scattergl": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattergl"}], "scattermapbox": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattermapbox"}], "scatterpolar": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterpolar"}], "scatterpolargl": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterpolargl"}], "scatterternary": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterternary"}], "surface": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "surface"}], "table": [{"cells": {"fill": {"color": "#EBF0F8"}, "line": {"color": "white"}}, "header": {"fill": {"color": "#C8D4E3"}, "line": {"color": "white"}}, "type": "table"}]}, "layout": {"annotationdefaults": {"arrowcolor": "#2a3f5f", "arrowhead": 0, "arrowwidth": 1}, "coloraxis": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "colorscale": {"diverging": [[0, "#8e0152"], [0.1, "#c51b7d"], [0.2, "#de77ae"], [0.3, "#f1b6da"], [0.4, "#fde0ef"], [0.5, "#f7f7f7"], [0.6, "#e6f5d0"], [0.7, "#b8e186"], [0.8, "#7fbc41"], [0.9, "#4d9221"], [1, "#276419"]], "sequential": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "sequentialminus": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]]}, "colorway": ["#636efa", "#EF553B", "#00cc96", "#ab63fa", "#FFA15A", "#19d3f3", "#FF6692", "#B6E880", "#FF97FF", "#FECB52"], "font": {"color": "#2a3f5f"}, "geo": {"bgcolor": "white", "lakecolor": "white", "landcolor": "#E5ECF6", "showlakes": true, "showland": true, "subunitcolor": "white"}, "hoverlabel": {"align": "left"}, "hovermode": "closest", "mapbox": {"style": "light"}, "paper_bgcolor": "white", "plot_bgcolor": "#E5ECF6", "polar": {"angularaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "bgcolor": "#E5ECF6", "radialaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}}, "scene": {"xaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}, "yaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}, "zaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}}, "shapedefaults": {"line": {"color": "#2a3f5f"}}, "ternary": {"aaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "baxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "bgcolor": "#E5ECF6", "caxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}}, "title": {"x": 0.05}, "xaxis": {"automargin": true, "gridcolor": "white", "linecolor": "white", "ticks": "", "title": {"standoff": 15}, "zerolinecolor": "white", "zerolinewidth": 2}, "yaxis": {"automargin": true, "gridcolor": "white", "linecolor": "white", "ticks": "", "title": {"standoff": 15}, "zerolinecolor": "white", "zerolinewidth": 2}}}},                        {"responsive": true}                    ).then(function(){
+                            
 var gd = document.getElementById('77466f01-6108-4a9c-a899-6f6d0f6110c8');
 var x = new MutationObserver(function (mutations, observer) {{
         var display = window.getComputedStyle(gd).display;
@@ -1061,9 +799,9 @@ if (outputEl) {{
 
                         })                };                });            </script>        </div></div></div>
 </div>
-</div>
-<div class="section" id="model-definition">
-<h4>Model definition<a class="headerlink" href="#model-definition" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="model-definition">
+<h4>Model definition<a class="headerlink" href="#model-definition" title="Permalink to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dimred_encoder</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">([</span><span class="n">Dense</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,))])</span>
@@ -1091,9 +829,9 @@ _________________________________________________________________
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="model-training">
-<h4>Model training<a class="headerlink" href="#model-training" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="model-training">
+<h4>Model training<a class="headerlink" href="#model-training" title="Permalink to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dimred_ae</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s2">&quot;mse&quot;</span><span class="p">,</span> <span class="n">optimizer</span><span class="o">=</span><span class="n">SGD</span><span class="p">(</span><span class="n">lr</span><span class="o">=</span><span class="mf">1.5</span><span class="p">))</span>
@@ -1106,12 +844,12 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/autoencoders_20_0.png" src="../_images/autoencoders_20_0.png" />
+<img alt="../_images/bfeb7b26665535be147ce75ca2b270ff4e709c97dd10f474a62358d3865f2d7f.png" src="../_images/bfeb7b26665535be147ce75ca2b270ff4e709c97dd10f474a62358d3865f2d7f.png" />
 </div>
 </div>
-</div>
-<div class="section" id="encoded-data-representation">
-<h4>Encoded data representation<a class="headerlink" href="#encoded-data-representation" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="encoded-data-representation">
+<h4>Encoded data representation<a class="headerlink" href="#encoded-data-representation" title="Permalink to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot encoded representation (2D projection) of training data</span>
@@ -1126,24 +864,24 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/autoencoders_22_0.png" src="../_images/autoencoders_22_0.png" />
+<img alt="../_images/be214024f9fefd4dcea4bb41e7edbe3ec8eb33aa0e296a690a72a49b2e15db6a.png" src="../_images/be214024f9fefd4dcea4bb41e7edbe3ec8eb33aa0e296a690a72a49b2e15db6a.png" />
 </div>
 </div>
-</div>
-</div>
-</div>
-<div class="section" id="stacked-autoencoders">
-<h2>Stacked autoencoders<a class="headerlink" href="#stacked-autoencoders" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="architecture">
-<h3>Architecture<a class="headerlink" href="#architecture" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+</section>
+<section id="stacked-autoencoders">
+<h2>Stacked autoencoders<a class="headerlink" href="#stacked-autoencoders" title="Permalink to this heading">#</a></h2>
+<section id="architecture">
+<h3>Architecture<a class="headerlink" href="#architecture" title="Permalink to this heading">#</a></h3>
 <p>Stacked autoencoders have multiple hidden layers and are typically <em>symmetrical</em>. Adding more layers helps them learn more complex codings.</p>
 <p><a class="reference external" href="https://github.com/ageron/handson-ml2"><img alt="Stacked AE architecture" src="../_images/stacked_ae_ageron.png" /></a></p>
-</div>
-<div class="section" id="example-reconstructing-fashion-images-with-a-stacked-autoencoder">
-<h3>Example: reconstructing fashion images with a stacked autoencoder<a class="headerlink" href="#example-reconstructing-fashion-images-with-a-stacked-autoencoder" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="example-reconstructing-fashion-images-with-a-stacked-autoencoder">
+<h3>Example: reconstructing fashion images with a stacked autoencoder<a class="headerlink" href="#example-reconstructing-fashion-images-with-a-stacked-autoencoder" title="Permalink to this heading">#</a></h3>
 <p>(Heavily inspired by Chapter 17 of <a class="reference external" href="https://github.com/ageron/handson-ml2">Hands-On Machine Learning</a> by Aurélien Géron)</p>
-<div class="section" id="data-loading-and-preprocessing">
-<h4>Data loading and preprocessing<a class="headerlink" href="#data-loading-and-preprocessing" title="Permalink to this headline">¶</a></h4>
+<section id="data-loading-and-preprocessing">
+<h4>Data loading and preprocessing<a class="headerlink" href="#data-loading-and-preprocessing" title="Permalink to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load the Keras MNIST digits dataset</span>
@@ -1165,17 +903,17 @@ _________________________________________________________________
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="the-selu-activation-function">
-<h4>The SELU activation function<a class="headerlink" href="#the-selu-activation-function" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="the-selu-activation-function">
+<h4>The SELU activation function<a class="headerlink" href="#the-selu-activation-function" title="Permalink to this heading">#</a></h4>
 <ul class="simple">
 <li><p><em>Self-normalizing Exponential Linear Unit</em>.</p></li>
 <li><p>Introduced in a <a class="reference external" href="https://arxiv.org/abs/1706.02515">2017 paper</a> by Klambauer et al.</p></li>
 <li><p>Can solve the vanishing/exploding gradients problems for deep feedforward networks.</p></li>
 </ul>
-</div>
-<div class="section" id="id1">
-<h4>Model definition<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="id1">
+<h4>Model definition<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># For each input image, the encoder outputs a vector of size 30</span>
@@ -1216,13 +954,13 @@ _________________________________________________________________
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="id2">
-<h4>Model training<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="id2">
+<h4>Model training<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">rounded_accuracy</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Define a custom accuracy metric by round predictions&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Define a custom accuracy metric by round predictions&quot;&quot;&quot;</span>
     
     <span class="k">return</span> <span class="n">binary_accuracy</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">y_true</span><span class="p">),</span> <span class="n">tf</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">y_pred</span><span class="p">))</span>
 </pre></div>
@@ -1254,20 +992,25 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/autoencoders_34_0.png" src="../_images/autoencoders_34_0.png" />
+<img alt="../_images/dbd6c876ebdb1b7ca7c9549e0064b69c98b25fa3ee73bd73bd2fb91b4f711341.png" src="../_images/dbd6c876ebdb1b7ca7c9549e0064b69c98b25fa3ee73bd73bd2fb91b4f711341.png" />
 </div>
 </div>
-</div>
-<div class="section" id="reconstructions-visualization">
-<h4>Reconstructions visualization<a class="headerlink" href="#reconstructions-visualization" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="reconstructions-visualization">
+<h4>Reconstructions visualization<a class="headerlink" href="#reconstructions-visualization" title="Permalink to this heading">#</a></h4>
 <div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_image</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;binary&quot;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">show_reconstructions</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">images</span><span class="o">=</span><span class="n">x_val_fashion</span><span class="p">,</span> <span class="n">n_images</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Show original and reconstructed images side-by-side&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Show original and reconstructed images side-by-side&quot;&quot;&quot;</span>
     
     <span class="n">reconstructions</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">images</span><span class="p">[:</span><span class="n">n_images</span><span class="p">])</span>
     <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="n">n_images</span> <span class="o">*</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
@@ -1279,6 +1022,7 @@ _________________________________________________________________
 </pre></div>
 </div>
 </div>
+</details>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1288,22 +1032,22 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/autoencoders_37_0.png" src="../_images/autoencoders_37_0.png" />
+<img alt="../_images/5e1da0694e5ecab118560c20f1d3496d1e3f279a63ecd18226be61904afa1a36.png" src="../_images/5e1da0694e5ecab118560c20f1d3496d1e3f279a63ecd18226be61904afa1a36.png" />
 </div>
 </div>
-</div>
-</div>
-</div>
-<div class="section" id="variational-autoencoders">
-<h2>Variational autoencoders<a class="headerlink" href="#variational-autoencoders" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="principle">
-<h3>Principle<a class="headerlink" href="#principle" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+</section>
+<section id="variational-autoencoders">
+<h2>Variational autoencoders<a class="headerlink" href="#variational-autoencoders" title="Permalink to this heading">#</a></h2>
+<section id="principle">
+<h3>Principle<a class="headerlink" href="#principle" title="Permalink to this heading">#</a></h3>
 <p>VAE were introduced simultaneously in late 2013 by two research teams (<a class="reference external" href="https://arxiv.org/abs/1312.6114">Kingma et al</a>, <a class="reference external" href="https://arxiv.org/abs/1401.4082">Rezende et al</a>).</p>
 <p>Instead of encoding it into a fixed representation in the latent space, a VAE turns its input into the parameters of a <em>statistical distribution</em> modeling the data: a mean <span class="math notranslate nohighlight">\(\mu\)</span> and a standard deviation <span class="math notranslate nohighlight">\(\sigma\)</span>. By sampling points from this distribution, one can generate new input data samples: a VAE is a <em>generative model</em>.</p>
 <p><img alt="VAE principle" src="../_images/vae_fchollet.jpg" /></p>
-</div>
-<div class="section" id="vae-losses">
-<h3>VAE losses<a class="headerlink" href="#vae-losses" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="vae-losses">
+<h3>VAE losses<a class="headerlink" href="#vae-losses" title="Permalink to this heading">#</a></h3>
 <p>The parameters of a VAE are trained via two loss functions:</p>
 <ul class="simple">
 <li><p>a <strong>reconstruction loss</strong> forcing the decoded samples to match the initial inputs ;</p></li>
@@ -1317,16 +1061,16 @@ _________________________________________________________________
 <li><p><span class="math notranslate nohighlight">\(\mu_i\)</span> and <span class="math notranslate nohighlight">\(\sigma_i\)</span>: mean and standard deviation of the <span class="math notranslate nohighlight">\(ith\)</span> components of the codings.</p></li>
 <li><p><span class="math notranslate nohighlight">\(\gamma_i = log_e({\sigma_i}^2)\)</span> is a term introduced for numerical stability.</p></li>
 </ul>
-</div>
-<div class="section" id="example-generating-fashion-images-with-a-vae">
-<h3>Example: generating fashion images with a VAE<a class="headerlink" href="#example-generating-fashion-images-with-a-vae" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="example-generating-fashion-images-with-a-vae">
+<h3>Example: generating fashion images with a VAE<a class="headerlink" href="#example-generating-fashion-images-with-a-vae" title="Permalink to this heading">#</a></h3>
 <p>(Heavily inspired by Chapter 17 of <a class="reference external" href="https://github.com/ageron/handson-ml2">Hands-On Machine Learning</a> by Aurélien Géron)</p>
-<div class="section" id="id3">
-<h4>Model definition<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
+<section id="id3">
+<h4>Model definition<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Sampling</span><span class="p">(</span><span class="n">Layer</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Custom Keras layer to sample the codings (the vector encoding a digit)&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Custom Keras layer to sample the codings (the vector encoding a digit)&quot;&quot;&quot;</span>
     
     <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">):</span>
         <span class="c1"># Takes mean and log_var (gamma) as parameters</span>
@@ -1364,7 +1108,7 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/autoencoders_47_0.png" src="../_images/autoencoders_47_0.png" />
+<img alt="../_images/77f5ce90a7e99a99b00dc185fba38ae3f75c740763c3f8ea7adb8870b55e8ea6.png" src="../_images/77f5ce90a7e99a99b00dc185fba38ae3f75c740763c3f8ea7adb8870b55e8ea6.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1421,9 +1165,9 @@ _________________________________________________________________
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="id4">
-<h4>Model training<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="id4">
+<h4>Model training<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Train the VAE</span>
@@ -1448,12 +1192,12 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/autoencoders_52_0.png" src="../_images/autoencoders_52_0.png" />
+<img alt="../_images/892473a4e532ab5f0444bbe3b48b2c6386db56421c393661e5dd5413f407ca9a.png" src="../_images/892473a4e532ab5f0444bbe3b48b2c6386db56421c393661e5dd5413f407ca9a.png" />
 </div>
 </div>
-</div>
-<div class="section" id="id5">
-<h4>Reconstructions visualization<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="id5">
+<h4>Reconstructions visualization<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_reconstructions</span><span class="p">(</span><span class="n">vae</span><span class="p">)</span>
@@ -1462,13 +1206,18 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/autoencoders_54_0.png" src="../_images/autoencoders_54_0.png" />
+<img alt="../_images/138e04de7ad70c98903047bf2b9704526e8d2cb4e679be478f96454c9137a3d2.png" src="../_images/138e04de7ad70c98903047bf2b9704526e8d2cb4e679be478f96454c9137a3d2.png" />
 </div>
 </div>
-</div>
-<div class="section" id="generating-new-images">
-<h4>Generating new images<a class="headerlink" href="#generating-new-images" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="generating-new-images">
+<h4>Generating new images<a class="headerlink" href="#generating-new-images" title="Permalink to this heading">#</a></h4>
 <div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_multiple_images</span><span class="p">(</span><span class="n">images</span><span class="p">,</span> <span class="n">n_cols</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="n">n_cols</span> <span class="o">=</span> <span class="n">n_cols</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">images</span><span class="p">)</span>
@@ -1483,6 +1232,7 @@ _________________________________________________________________
 </pre></div>
 </div>
 </div>
+</details>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1495,13 +1245,13 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/autoencoders_57_0.png" src="../_images/autoencoders_57_0.png" />
+<img alt="../_images/c8a366373d3be591b6fa992e0b69f02d27584ccd6b0e9b9716d5480a2e2edbc1.png" src="../_images/c8a366373d3be591b6fa992e0b69f02d27584ccd6b0e9b9716d5480a2e2edbc1.png" />
 </div>
 </div>
-</div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -1515,7 +1265,7 @@ _________________________________________________________________
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./algorithms"
         },
         predefinedOutput: true
@@ -1523,44 +1273,145 @@ _________________________________________________________________
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="recurrent_neural_networks.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Recurrent Neural Networks</p>
-        </div>
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="recurrent_neural_networks.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Recurrent Neural Networks</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="neural_style_transfer.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="neural_style_transfer.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Neural Style Transfer</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
-</div>
-            
-        </div>
-    </div>
-    <footer class="footer">
-  <p>
-    
-      By Baptiste Pesquet<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
-
-
       </div>
-    </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+</div>
 
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#autoencoders-in-a-nutshell">Autoencoders in a nutshell</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#autoencoder-architecture">Autoencoder architecture</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-the-point">What’s the point?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#latent-space-properties">Latent space properties</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#autoencoders-applications">Autoencoders applications</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-performing-dimensionality-reduction-with-a-linear-autoencoder">Example: performing dimensionality reduction with a linear autoencoder</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup">Environment setup</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#d-data-generation">3D data generation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#model-definition">Model definition</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#model-training">Model training</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#encoded-data-representation">Encoded data representation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stacked-autoencoders">Stacked autoencoders</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#architecture">Architecture</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-reconstructing-fashion-images-with-a-stacked-autoencoder">Example: reconstructing fashion images with a stacked autoencoder</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#data-loading-and-preprocessing">Data loading and preprocessing</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-selu-activation-function">The SELU activation function</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Model definition</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Model training</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#reconstructions-visualization">Reconstructions visualization</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variational-autoencoders">Variational autoencoders</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#principle">Principle</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vae-losses">VAE losses</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-generating-fashion-images-with-a-vae">Example: generating fashion images with a VAE</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Model definition</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Model training</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Reconstructions visualization</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-new-images">Generating new images</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Baptiste Pesquet
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2021.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

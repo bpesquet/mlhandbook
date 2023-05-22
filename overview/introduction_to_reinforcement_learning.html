@@ -1,801 +1,528 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
     <title>Introduction to Reinforcement Learning &#8212; Machine Learning Handbook</title>
-    
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    
-      
-
-    
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.css?digest=84ace793992934648b4de8eed757e5a2" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.9d8b4a8b9bb19db25eeaddc40d639ba2.js"></script>
-    <script >const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'overview/introduction_to_reinforcement_learning';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Handling data" href="../fundamentals/handling_data.html" />
     <link rel="prev" title="Machine Learning in action" href="machine_learning_in_action.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
-
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<div class="col-12 col-md-3 bd-sidebar site-navigation " id="site-navigation">
-    
-        <div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../_static/mlhandbook_logo.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">Machine Learning Handbook</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="../_static/mlhandbook_logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/mlhandbook_logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference external" href="https://www.bpesquet.fr/mlkatas">
-   Machine Learning Katas
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference external" href="https://www.bpesquet.fr/mlkatas">Machine Learning Katas</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  overview
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">overview</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="introduction_to_machine_learning.html">
-   Introduction to Machine Learning
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="machine_learning_in_action.html">
-   Machine Learning in action
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Introduction to Reinforcement Learning
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="introduction_to_machine_learning.html">Introduction to Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="machine_learning_in_action.html">Machine Learning in action</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Introduction to Reinforcement Learning</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Fundamentals
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fundamentals</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../fundamentals/handling_data.html">
-   Handling data
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../fundamentals/assessing_results.html">
-   Assessing results
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../fundamentals/training_models.html">
-   Training models
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../fundamentals/handling_data.html">Handling data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fundamentals/assessing_results.html">Assessing results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fundamentals/training_models.html">Training models</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Algorithms
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Algorithms</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../algorithms/classic_ml.html">
-   Classic Machine Learning
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../algorithms/k_nearest_neighbors.html">
-     K-Nearest Neighbors
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../algorithms/linear_regression.html">
-     Linear Regression
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../algorithms/logistic_regression.html">
-     Logistic Regression
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../algorithms/decision_trees_and_random_forests.html">
-     Decision Trees &amp; Random Forests
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../algorithms/bayesian_methods.html">
-     Bayesian Methods
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../algorithms/support_vector_machines.html">
-     Support Vector Machines
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../algorithms/k_means.html">
-     K-Means
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../algorithms/nn_deep_learning.html">
-   Neural Networks and Deep Learning
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
-  <label for="toctree-checkbox-2">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../algorithms/artificial_neural_networks.html">
-     Artificial Neural Networks
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../algorithms/convolutional_neural_networks.html">
-     Convolutional Neural Networks
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../algorithms/recurrent_neural_networks.html">
-     Recurrent Neural Networks
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../algorithms/autoencoders.html">
-     Autoencoders
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../algorithms/neural_style_transfer.html">
-     Neural Style Transfer
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../algorithms/generative_adversarial_networks.html">
-     Generative Adversarial Networks
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../algorithms/transformers.html">
-     Transformers
-    </a>
-   </li>
-  </ul>
- </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../algorithms/classic_ml.html">Classic Machine Learning</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/k_nearest_neighbors.html">K-Nearest Neighbors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/linear_regression.html">Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/logistic_regression.html">Logistic Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/decision_trees_and_random_forests.html">Decision Trees &amp; Random Forests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/bayesian_methods.html">Bayesian Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/support_vector_machines.html">Support Vector Machines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/k_means.html">K-Means</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Engineering
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../engineering/introduction_to_mlops.html">
-   Introduction to MLOps
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../engineering/machine_learning_issues.html">
-   Machine Learning issues
-  </a>
- </li>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../algorithms/nn_deep_learning.html">Neural Networks and Deep Learning</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/artificial_neural_networks.html">Artificial Neural Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/convolutional_neural_networks.html">Convolutional Neural Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/recurrent_neural_networks.html">Recurrent Neural Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/autoencoders.html">Autoencoders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/neural_style_transfer.html">Neural Style Transfer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/generative_adversarial_networks.html">Generative Adversarial Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms/transformers.html">Transformers</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Tools
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../tools/python.html">
-   Python
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
-  <label for="toctree-checkbox-3">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../tools/python_ecosystem.html">
-     The Python ecosystem
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../tools/python_cheatsheet.html">
-     Python cheatsheet
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../tools/python_good_practices.html">
-     Python good practices
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../tools/numpy.html">
-   NumPy
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../tools/keras.html">
-   Keras
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../tools/pytorch.html">
-   PyTorch
-  </a>
- </li>
+</li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Reference
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Engineering</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../reference/activation_functions.html">
-   Activation functions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../reference/glossary.html">
-   Glossary
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../reference/acknowledgments.html">
-   Acknowledgments
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../engineering/introduction_to_mlops.html">Introduction to MLOps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../engineering/machine_learning_issues.html">Machine Learning issues</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tools</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tools/python.html">Python</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tools/python_ecosystem.html">The Python ecosystem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/python_cheatsheet.html">Python cheatsheet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/python_good_practices.html">Python good practices</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/numpy.html">NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/keras.html">Keras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/pytorch.html">PyTorch</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../reference/activation_functions.html">Activation functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/acknowledgments.html">Acknowledgments</a></li>
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
-          
-<!-- This is an invisible pixel that we watch to see if we've scrolled. -->
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
 <div class="sbt-scroll-pixel-helper"></div>
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            <div class="topbar-left">
-                
-                <label class="nav-toggle-button" for="__navigation">
-                    <div class="visually-hidden">Toggle navigation</div>
-                    <i class="fas fa-bars"></i>
-                </label>
-                
-            </div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/bpesquet/mlhandbook/master?urlpath=tree/overview/introduction_to_reinforcement_learning.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/bpesquet/mlhandbook/blob/master/overview/introduction_to_reinforcement_learning.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/bpesquet/mlhandbook" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/bpesquet/mlhandbook/edit/master/overview/introduction_to_reinforcement_learning.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/bpesquet/mlhandbook/issues/new?title=Issue%20on%20page%20%2Foverview/introduction_to_reinforcement_learning.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/overview/introduction_to_reinforcement_learning.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Introduction to Reinforcement Learning</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
             
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/overview/introduction_to_reinforcement_learning.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/bpesquet/mlhandbook"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/bpesquet/mlhandbook/issues/new?title=Issue%20on%20page%20%2Foverview/introduction_to_reinforcement_learning.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/bpesquet/mlhandbook/edit/master/overview/introduction_to_reinforcement_learning.ipynb"><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/bpesquet/mlhandbook/master?urlpath=tree/overview/introduction_to_reinforcement_learning.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        <a class="colab-button" href="https://colab.research.google.com/github/bpesquet/mlhandbook/blob/master/overview/introduction_to_reinforcement_learning.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
-                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
-                    src="../_static/images/logo_colab.png"
-                    alt="Interact on Colab">Colab</button></a>
-        
-        
-        
-    </div>
-</div>
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div>
+                <h2> Contents </h2>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
+            <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#environnement-setup">
-   Environnement setup
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#what-is-reinforcement-learning">
-   What is Reinforcement Learning?
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#rl-in-a-nutshell">
-     RL in a nutshell
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#a-specific-subfield-of-ml">
-     A specific subfield of ML
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#reinforcement-learning-examples">
-     Reinforcement Learning examples
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#recent-breakthroughs">
-     Recent breakthroughs
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#problem-formulation">
-   Problem formulation
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-exploration-vs-exploitation-dilemna">
-     The exploration vs. exploitation dilemna
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#general-abstraction">
-     General abstraction
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#policy">
-     Policy
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#reward">
-     Reward
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#return">
-     Return
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#markov-decision-processes">
-     Markov Decision Processes
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#value-function">
-     Value function
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#state-value-function">
-     State value function
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#action-state-value-function">
-     Action-state value function
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#optimality">
-     Optimality
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#tabular-methods">
-   Tabular methods
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#context">
-     Context
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#value-iteration">
-     Value Iteration
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#q-value-iteration">
-     Q-Value Iteration
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#td-learning">
-     TD Learning
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#q-learning">
-     Q-Learning
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#approximate-methods">
-   Approximate methods
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id1">
-   Context
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#policy-gradients">
-     Policy gradients
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#dqn">
-     DQN
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#actor-critic-methods">
-     Actor-Critic methods
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#a3c">
-     A3C
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#ppo">
-     PPO
-    </a>
-   </li>
-  </ul>
- </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environnement-setup">Environnement setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-reinforcement-learning">What is Reinforcement Learning?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rl-in-a-nutshell">RL in a nutshell</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-specific-subfield-of-ml">A specific subfield of ML</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reinforcement-learning-examples">Reinforcement Learning examples</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recent-breakthroughs">Recent breakthroughs</a></li>
 </ul>
-
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-formulation">Problem formulation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-exploration-vs-exploitation-dilemna">The exploration vs. exploitation dilemna</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#general-abstraction">General abstraction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#policy">Policy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reward">Reward</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#return">Return</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#markov-decision-processes">Markov Decision Processes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#value-function">Value function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#state-value-function">State value function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#action-state-value-function">Action-state value function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimality">Optimality</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabular-methods">Tabular methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#context">Context</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#value-iteration">Value Iteration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q-value-iteration">Q-Value Iteration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#td-learning">TD Learning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q-learning">Q-Learning</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#approximate-methods">Approximate methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Context</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#policy-gradients">Policy gradients</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dqn">DQN</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#actor-critic-methods">Actor-Critic methods</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a3c">A3C</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppo">PPO</a></li>
+</ul>
+</li>
+</ul>
             </nav>
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Introduction to Reinforcement Learning</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#environnement-setup">
-   Environnement setup
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#what-is-reinforcement-learning">
-   What is Reinforcement Learning?
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#rl-in-a-nutshell">
-     RL in a nutshell
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#a-specific-subfield-of-ml">
-     A specific subfield of ML
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#reinforcement-learning-examples">
-     Reinforcement Learning examples
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#recent-breakthroughs">
-     Recent breakthroughs
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#problem-formulation">
-   Problem formulation
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-exploration-vs-exploitation-dilemna">
-     The exploration vs. exploitation dilemna
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#general-abstraction">
-     General abstraction
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#policy">
-     Policy
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#reward">
-     Reward
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#return">
-     Return
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#markov-decision-processes">
-     Markov Decision Processes
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#value-function">
-     Value function
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#state-value-function">
-     State value function
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#action-state-value-function">
-     Action-state value function
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#optimality">
-     Optimality
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#tabular-methods">
-   Tabular methods
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#context">
-     Context
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#value-iteration">
-     Value Iteration
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#q-value-iteration">
-     Q-Value Iteration
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#td-learning">
-     TD Learning
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#q-learning">
-     Q-Learning
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#approximate-methods">
-   Approximate methods
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id1">
-   Context
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#policy-gradients">
-     Policy gradients
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#dqn">
-     DQN
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#actor-critic-methods">
-     Actor-Critic methods
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#a3c">
-     A3C
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#ppo">
-     PPO
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
 
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            
-              <div>
+              
                 
-  <div class="section" id="introduction-to-reinforcement-learning">
-<h1>Introduction to Reinforcement Learning<a class="headerlink" href="#introduction-to-reinforcement-learning" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="environnement-setup">
-<h2>Environnement setup<a class="headerlink" href="#environnement-setup" title="Permalink to this headline">¶</a></h2>
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-reinforcement-learning">
+<h1>Introduction to Reinforcement Learning<a class="headerlink" href="#introduction-to-reinforcement-learning" title="Permalink to this heading">#</a></h1>
+<section id="environnement-setup">
+<h2>Environnement setup<a class="headerlink" href="#environnement-setup" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">platform</span>
@@ -829,24 +556,24 @@ NumPy version: 1.18.1
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="what-is-reinforcement-learning">
-<h2>What is Reinforcement Learning?<a class="headerlink" href="#what-is-reinforcement-learning" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="rl-in-a-nutshell">
-<h3>RL in a nutshell<a class="headerlink" href="#rl-in-a-nutshell" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="what-is-reinforcement-learning">
+<h2>What is Reinforcement Learning?<a class="headerlink" href="#what-is-reinforcement-learning" title="Permalink to this heading">#</a></h2>
+<section id="rl-in-a-nutshell">
+<h3>RL in a nutshell<a class="headerlink" href="#rl-in-a-nutshell" title="Permalink to this heading">#</a></h3>
 <p>Reinforcement Learning (RL) is about <strong>learning to control dynamic systems</strong>.</p>
 <p>The learner (often called an <em>agent</em>) is not told explicitly which <strong>actions</strong> to take, but instead must discover which actions yield the most <strong>reward</strong> over time by trying them.</p>
 <p>Actions may affect not only the immediate reward but also the next situation and, through that, all subsequent rewards.</p>
 <p><img alt="Learning to ride a bike!" src="../_images/prosper_bike.gif" /></p>
-</div>
-<div class="section" id="a-specific-subfield-of-ml">
-<h3>A specific subfield of ML<a class="headerlink" href="#a-specific-subfield-of-ml" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="a-specific-subfield-of-ml">
+<h3>A specific subfield of ML<a class="headerlink" href="#a-specific-subfield-of-ml" title="Permalink to this heading">#</a></h3>
 <p>RL is different from <strong>supervised learning</strong>, where correct answers (desired behaviour) are given to the learner during training. A RL learner must be able to learn from its own experience.</p>
 <p>RL is also different from <strong>unsupervised learning</strong>: finding structure in unlabeled data could help, but does not solve the reward maximisation problem which is at the heart of RL.</p>
 <p>Lastly, RL is different from <strong>evolutionary methods</strong>, which only consider the final outcome and ignore the intermediate steps RL is concerned with.</p>
-</div>
-<div class="section" id="reinforcement-learning-examples">
-<h3>Reinforcement Learning examples<a class="headerlink" href="#reinforcement-learning-examples" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="reinforcement-learning-examples">
+<h3>Reinforcement Learning examples<a class="headerlink" href="#reinforcement-learning-examples" title="Permalink to this heading">#</a></h3>
 <p>RL can be applied to a wide variety of contexts. To name a few:</p>
 <ul class="simple">
 <li><p>controlling a robot;</p></li>
@@ -854,9 +581,9 @@ NumPy version: 1.18.1
 <li><p>steering a ship;</p></li>
 <li><p>playing a game.</p></li>
 </ul>
-</div>
-<div class="section" id="recent-breakthroughs">
-<h3>Recent breakthroughs<a class="headerlink" href="#recent-breakthroughs" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="recent-breakthroughs">
+<h3>Recent breakthroughs<a class="headerlink" href="#recent-breakthroughs" title="Permalink to this heading">#</a></h3>
 <p>RL is not a new field but went mainstream in recent years, mostly due to game-related feats:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://deepmind.com/research/case-studies/alphago-the-story-so-far">AlphaGo</a> beat Go champion Lee Sedol in 2016;</p></li>
@@ -874,54 +601,54 @@ NumPy version: 1.18.1
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html">
-<iframe
-    width="400"
-    height="300"
-    src="https://www.youtube.com/embed/WXuK6gekU1Y"
-    frameborder="0"
-    allowfullscreen
-></iframe>
-</div></div>
+        <iframe
+            width="400"
+            height="300"
+            src="https://www.youtube.com/embed/WXuK6gekU1Y"
+            frameborder="0"
+            allowfullscreen
+        ></iframe>
+        </div></div>
 </div>
-</div>
-</div>
-<div class="section" id="problem-formulation">
-<h2>Problem formulation<a class="headerlink" href="#problem-formulation" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="the-exploration-vs-exploitation-dilemna">
-<h3>The exploration vs. exploitation dilemna<a class="headerlink" href="#the-exploration-vs-exploitation-dilemna" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="problem-formulation">
+<h2>Problem formulation<a class="headerlink" href="#problem-formulation" title="Permalink to this heading">#</a></h2>
+<section id="the-exploration-vs-exploitation-dilemna">
+<h3>The exploration vs. exploitation dilemna<a class="headerlink" href="#the-exploration-vs-exploitation-dilemna" title="Permalink to this heading">#</a></h3>
 <p>The learner has to exploit what it has already experienced, but it also has to explore in order to discover better actions. Neither exploration nor exploitation can be pursued exclusively without failing at the task at hand.</p>
 <p><img alt="" src="../_images/exploration_exploitation.png" /></p>
-</div>
-<div class="section" id="general-abstraction">
-<h3>General abstraction<a class="headerlink" href="#general-abstraction" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="general-abstraction">
+<h3>General abstraction<a class="headerlink" href="#general-abstraction" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(s_t\)</span>: observed state of the dynamic system at step <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
 <li><p><span class="math notranslate nohighlight">\(a_t\)</span>: action taken by the agent at step <span class="math notranslate nohighlight">\(t\)</span> in order to (try to) control the system.</p></li>
 <li><p><span class="math notranslate nohighlight">\(r_t\)</span>: reward received by the agent at step <span class="math notranslate nohighlight">\(t\)</span> (result of <span class="math notranslate nohighlight">\(a_{t-1}\)</span>).</p></li>
 </ul>
 <p><img alt="" src="../_images/rl_schema.png" /></p>
-</div>
-<div class="section" id="policy">
-<h3>Policy<a class="headerlink" href="#policy" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="policy">
+<h3>Policy<a class="headerlink" href="#policy" title="Permalink to this heading">#</a></h3>
 <p>The algorithm used by the learner to determine its actions is called its <strong>policy</strong>. Policies may be <em>deterministic</em> or <em>stochastic</em> (involving some randomness).</p>
 <p>Formally, a policy <span class="math notranslate nohighlight">\(\pi\)</span> is a mapping from states to probabilities of selecting each possible action.</p>
 <p><span class="math notranslate nohighlight">\(\pi(a|s)\)</span>: probability that the agent will choose the action <span class="math notranslate nohighlight">\(a\)</span> when in state <span class="math notranslate nohighlight">\(s\)</span>.</p>
-</div>
-<div class="section" id="reward">
-<h3>Reward<a class="headerlink" href="#reward" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="reward">
+<h3>Reward<a class="headerlink" href="#reward" title="Permalink to this heading">#</a></h3>
 <p>A <strong>reward signal</strong> defines the goal in a RL problem. The learner’s sole objective is to maximize the total reward it receives in the long run. Rewards are its only guidance it gets.</p>
 <p><span class="math notranslate nohighlight">\(R_t=r(s,a,s')\)</span>: reward received at step <span class="math notranslate nohighlight">\(t\)</span> when system goes from state <span class="math notranslate nohighlight">\(s\)</span> to state <span class="math notranslate nohighlight">\(s'\)</span>, given a chosen action <span class="math notranslate nohighlight">\(a\)</span>.</p>
-</div>
-<div class="section" id="return">
-<h3>Return<a class="headerlink" href="#return" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="return">
+<h3>Return<a class="headerlink" href="#return" title="Permalink to this heading">#</a></h3>
 <p>It is common to evaluate actions based on the sum of all the rewards that came after them, usually applying a <em>discount factor</em> <span class="math notranslate nohighlight">\(\gamma \in [0,1]\)</span>.</p>
 <p><span class="math notranslate nohighlight">\(G_t\)</span>: sum of discounted rewards, called <strong>return</strong>.</p>
 <div class="math notranslate nohighlight">
 \[G_t = R_{t+1} + \gamma R_{t+2} +\gamma^2 R_{t+3} + · · · = \sum\limits_{k=0}^\infty \gamma^k R_{t+k+1} = R_{t+1} + \gamma G_{t+1}\]</div>
 <p>Usually <span class="math notranslate nohighlight">\(0.9&lt;\gamma&lt;0.99\)</span>.</p>
-</div>
-<div class="section" id="markov-decision-processes">
-<h3>Markov Decision Processes<a class="headerlink" href="#markov-decision-processes" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="markov-decision-processes">
+<h3>Markov Decision Processes<a class="headerlink" href="#markov-decision-processes" title="Permalink to this heading">#</a></h3>
 <p><strong>Markov Decision Processes</strong> (MDP) provide a mathematical framework for modeling decision making in discrete-time situations where outcomes are partly under the control of a decision maker. They were first described in the 1950s by Richard Bellman as an extension of (Andrey) <strong>Markov chains</strong>.</p>
 <p>The dynamics of a MDP is defined as the transition probability <span class="math notranslate nohighlight">\(p(s',r | s,a)\)</span> of getting state <span class="math notranslate nohighlight">\(s'\)</span> and reward <span class="math notranslate nohighlight">\(r\)</span> after having selected action <span class="math notranslate nohighlight">\(a\)</span> in state <span class="math notranslate nohighlight">\(s\)</span>.</p>
 <p>Many RL problems with discrete actions can be modeled as Markov Decision Processes.</p>
@@ -943,32 +670,32 @@ NumPy version: 1.18.1
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="value-function">
-<h3>Value function<a class="headerlink" href="#value-function" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="value-function">
+<h3>Value function<a class="headerlink" href="#value-function" title="Permalink to this heading">#</a></h3>
 <p>Whereas the reward signal indicates what is good in an immediate sense, a <strong>value function</strong> specifies what is good in the long run.</p>
 <p>Action choices should be made based on value judgments, seeking actions that bring about states of highest value, not highest reward.</p>
 <p>Unfortunately, rewards are basically given directly by the environment, whereas values must be <strong>estimated</strong> and re-estimated from the sequences of observations an agent makes over its entire lifetime.</p>
-</div>
-<div class="section" id="state-value-function">
-<h3>State value function<a class="headerlink" href="#state-value-function" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="state-value-function">
+<h3>State value function<a class="headerlink" href="#state-value-function" title="Permalink to this heading">#</a></h3>
 <p><span class="math notranslate nohighlight">\(G^\pi(s)\)</span>: long-term gain obtained by applying the actions from policy <span class="math notranslate nohighlight">\(\pi\)</span>, starting in state <span class="math notranslate nohighlight">\(s\)</span>.</p>
 <div class="math notranslate nohighlight">
 \[G^\pi(s) = \sum\limits_{k = 0}^\infty \gamma^k R_{t+k+1}\]</div>
 <p><span class="math notranslate nohighlight">\(V^\pi(s)\)</span>: averaged sum of the returns <span class="math notranslate nohighlight">\(G^\pi(s)\)</span> that the agent will get by starting from state <span class="math notranslate nohighlight">\(s\)</span> and following <span class="math notranslate nohighlight">\(\pi\)</span> thereafter.</p>
 <div class="math notranslate nohighlight">
 \[V^\pi(s) = \mathbb{E} \left[ G^\pi(s) \right] = \mathbb{E}\left( \sum\limits_{t = 0}^\infty \gamma^t R_t \bigg| S_0 = s, \pi \right) = \sum\limits_{a} \pi(a|s) \sum\limits_{s', r}p(s',r | s,a)\left[r + \gamma V^{\pi}(s')\right]\]</div>
-</div>
-<div class="section" id="action-state-value-function">
-<h3>Action-state value function<a class="headerlink" href="#action-state-value-function" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="action-state-value-function">
+<h3>Action-state value function<a class="headerlink" href="#action-state-value-function" title="Permalink to this heading">#</a></h3>
 <p><span class="math notranslate nohighlight">\(Q^\pi(s,a)\)</span> (also called <strong>Q-Value</strong>): expected return starting from state <span class="math notranslate nohighlight">\(s\)</span>, taking the action <span class="math notranslate nohighlight">\(a\)</span>, and thereafter following policy <span class="math notranslate nohighlight">\(\pi\)</span>.</p>
 <div class="math notranslate nohighlight">
 \[Q^\pi(s,a) = \mathbb{E}\left( \sum\limits_{t=0}^\infty \gamma^t R_t \bigg| S_0 = s, A_0=a, \pi \right)\]</div>
 <div class="math notranslate nohighlight">
 \[Q^\pi(s,a) = \sum\limits_{s', r} p(s',r | s,a) \left[r + \gamma V^{\pi}(s')\right]\]</div>
-</div>
-<div class="section" id="optimality">
-<h3>Optimality<a class="headerlink" href="#optimality" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="optimality">
+<h3>Optimality<a class="headerlink" href="#optimality" title="Permalink to this heading">#</a></h3>
 <p>The optimal policy <span class="math notranslate nohighlight">\(\pi^*\)</span> is the one that achieves the biggest reward over the long run.</p>
 <div class="math notranslate nohighlight">
 \[V^{\pi^*}(s) = V^*(s) = \underset{a}{max} \sum\limits_{s', r}p(s',r | s,a)\left[r + \gamma V^*(s')\right]= \underset{a}{max}\;Q^*(s,a)\]</div>
@@ -977,18 +704,18 @@ NumPy version: 1.18.1
 <p>When the agent is in state <span class="math notranslate nohighlight">\(s\)</span>, it should choose the action with the highest Q-value for that state.</p>
 <div class="math notranslate nohighlight">
 \[\pi^*(s) = \underset{a}{argmax} \;Q^*(s,a)\]</div>
-</div>
-</div>
-<div class="section" id="tabular-methods">
-<h2>Tabular methods<a class="headerlink" href="#tabular-methods" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="context">
-<h3>Context<a class="headerlink" href="#context" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="tabular-methods">
+<h2>Tabular methods<a class="headerlink" href="#tabular-methods" title="Permalink to this heading">#</a></h2>
+<section id="context">
+<h3>Context<a class="headerlink" href="#context" title="Permalink to this heading">#</a></h3>
 <p>When the number of states and actions is limited, approximate value functions can be represented as arrays (<em>tables</em>) and stored in memory.</p>
 <p>In this case, basic algorithms can often find exact solutions, i.e. the optimal value function and the optimal policy.</p>
 <p>These <strong>tabular methods</strong> implement the core ideas of RL and form the building blocks of more powerful ones, used when the state and action spaces are too large.</p>
-</div>
-<div class="section" id="value-iteration">
-<h3>Value Iteration<a class="headerlink" href="#value-iteration" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="value-iteration">
+<h3>Value Iteration<a class="headerlink" href="#value-iteration" title="Permalink to this heading">#</a></h3>
 <p>Method for finding the optimal state value for each state.</p>
 <ul class="simple">
 <li><p>init all state value estimates to zero;</p></li>
@@ -997,9 +724,9 @@ NumPy version: 1.18.1
 <div class="math notranslate nohighlight">
 \[V_{k+1}(s) \leftarrow \underset{a}{max} \sum\limits_{s', r}p(s',r | s,a)\left[r + \gamma V_k(s')\right] = \underset{a}{max}\; Q_k(s,a)\]</div>
 <p>Given enough iterations, these estimates will converge to the optimal state values.</p>
-</div>
-<div class="section" id="q-value-iteration">
-<h3>Q-Value Iteration<a class="headerlink" href="#q-value-iteration" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="q-value-iteration">
+<h3>Q-Value Iteration<a class="headerlink" href="#q-value-iteration" title="Permalink to this heading">#</a></h3>
 <p>Like the Value iteration algorithm, iteratively compute <span class="math notranslate nohighlight">\(Q_{k+1}(s,a)\)</span> for all <span class="math notranslate nohighlight">\((s,a)\)</span> until convergence.</p>
 <div class="math notranslate nohighlight">
 \[Q_{k+1}(s,a) \leftarrow \sum\limits_{s',r} p(s',r | s,a) \left[r + \gamma \cdot \underset{a'}{max} \;Q_k(s',a')\right]\]</div>
@@ -1089,9 +816,9 @@ Optimal action for state 2 is a1
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="td-learning">
-<h3>TD Learning<a class="headerlink" href="#td-learning" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="td-learning">
+<h3>TD Learning<a class="headerlink" href="#td-learning" title="Permalink to this heading">#</a></h3>
 <p>When the transition probabilities and rewards are not known in advance, the agent has to experience each state and each transition: once to know the rewards, several times to estimate the probabilities. It must use an <strong>exploration policy</strong> (for example, a purely random one) to traverse the MDP.</p>
 <p>As it progresses, the <strong>Temporal Difference (TD) Learning</strong> algorithm updates the estimates of the state values based on the transition and rewards that are actually observed.</p>
 <div class="math notranslate nohighlight">
@@ -1104,9 +831,9 @@ Optimal action for state 2 is a1
 <li><p><span class="math notranslate nohighlight">\(\alpha\)</span>: learning rate, usually small (example: <span class="math notranslate nohighlight">\(0.001\)</span>).</p></li>
 <li><p><span class="math notranslate nohighlight">\(\delta_k(s, a, s') = r + \gamma V_k(s') - V_k(s)\)</span>: TD error.</p></li>
 </ul>
-</div>
-<div class="section" id="q-learning">
-<h3>Q-Learning<a class="headerlink" href="#q-learning" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="q-learning">
+<h3>Q-Learning<a class="headerlink" href="#q-learning" title="Permalink to this heading">#</a></h3>
 <p>Adapted from the Q-Value Iteration algorithm for situations in which transitions and rewards are initially unknown, <strong>Q-Learning</strong> watches the agent play and gradually improves its estimations of the Q-values. Once it has accurate Q-Value estimates (or close enough), then the optimal policy is choosing the action that has the highest Q-Value (i.e. the <em>greedy</em> policy).</p>
 <div class="math notranslate nohighlight">
 \[Q(s) \underset{\alpha}\leftarrow r + \gamma \cdot \underset{a}{max} \;Q(s',a')\]</div>
@@ -1197,50 +924,50 @@ Optimal action for state 2 is a1
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/introduction_to_reinforcement_learning_36_0.png" src="../_images/introduction_to_reinforcement_learning_36_0.png" />
+<img alt="../_images/9997f030ad4f7a0087a08e5103ed29ea982853fe01b30df28ab8aa00458847f4.png" src="../_images/9997f030ad4f7a0087a08e5103ed29ea982853fe01b30df28ab8aa00458847f4.png" />
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="approximate-methods">
-<h2>Approximate methods<a class="headerlink" href="#approximate-methods" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="id1">
-<h2>Context<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="approximate-methods">
+<h2>Approximate methods<a class="headerlink" href="#approximate-methods" title="Permalink to this heading">#</a></h2>
+</section>
+<section id="id1">
+<h2>Context<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
 <p>The previous methods become intractable for problems with arbitrarily large state spaces. In such cases, it is hopeless to find an optimal policy or the optimal value function, even in the limit of infinite time and data. The goal instead is to discover a good approximate solution, using functions with a manageable number of parameters.</p>
 <p>When dealing with large state spaces, <strong>generalization</strong> (the ability to make sensible decisions based on previous similar encounters) becomes a key issue. Generalization from examples is what <strong>supervised learning</strong> is all about, and many supervized methods have been applied to supplement RL algorithms.</p>
 <p>For years, linear combinations of handcrafted features were necessary to estimate value functions through supervised models. Recently, reseachers have started to harness the power of <strong>Deep Learning</strong> for this task, eliminating the need for manual feature engineering.</p>
-<div class="section" id="policy-gradients">
-<h3>Policy gradients<a class="headerlink" href="#policy-gradients" title="Permalink to this headline">¶</a></h3>
+<section id="policy-gradients">
+<h3>Policy gradients<a class="headerlink" href="#policy-gradients" title="Permalink to this heading">#</a></h3>
 <p>Instead of trying to evaluate actions, <strong>Policy Gradients (PG)</strong> methods learn a parameterized policy that can select actions without consulting a value function. Policy parameters are optimized by following the <em>gradients</em> towards higher rewards.</p>
 <p>One popular class of PG algorithms, called REINFORCE algorithms, was <a class="reference external" href="https://homl.info/132">introduced</a> back in 1992.</p>
-</div>
-<div class="section" id="dqn">
-<h3>DQN<a class="headerlink" href="#dqn" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="dqn">
+<h3>DQN<a class="headerlink" href="#dqn" title="Permalink to this heading">#</a></h3>
 <p><strong>Deep Q-Network (DQN)</strong> was the first RL algorithm to feature a DL model. Introduced in 2014, it was used to learn to play old-school Atari games like Breakout.</p>
 <p>DQN runs a deep neural network for approximating Q-Values. The network takes a state s (i.e. the last 4 screenshots of the game) as input, and outputs an estimation of the Q-Values of all actions in that state.</p>
 <p><img alt="" src="../_images/dqn.png" /></p>
-</div>
-<div class="section" id="actor-critic-methods">
-<h3>Actor-Critic methods<a class="headerlink" href="#actor-critic-methods" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="actor-critic-methods">
+<h3>Actor-Critic methods<a class="headerlink" href="#actor-critic-methods" title="Permalink to this heading">#</a></h3>
 <p>This family of algorithms combines Policy Gradients with Deep Q-Networks. An Actor-Critic agent contains two neural networks: a policy net and a DQN.</p>
 <ul class="simple">
 <li><p>the DQN (critic) is trained normally, learning from the agent’s experiences;</p></li>
 <li><p>the policy net (actor) relies on the action values estimated by the DQN, a bit like an athlete learning with the help of a coach. After each action selection, the critic evaluates the new state to determine whether things have gone better or worse than expected.</p></li>
 </ul>
-</div>
-<div class="section" id="a3c">
-<h3>A3C<a class="headerlink" href="#a3c" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="a3c">
+<h3>A3C<a class="headerlink" href="#a3c" title="Permalink to this heading">#</a></h3>
 <p>Introduced by DeepMind researchers in 2016, <strong>Asynchronous Advantage Actor-Critic (A3C)</strong> is an Actor-Critic variant where multiple agents learn in parallel, exploring different copies of the environment. At regular intervals, but asynchronously (hence the name), each agent pushes some weight updates to a master network, then it pulls the latest weights from that network. Each agent thus contributes to improving the master network and benefits from what the other agents have learned.</p>
 <p><img alt="" src="../_images/A3C.png" /></p>
-</div>
-<div class="section" id="ppo">
-<h3>PPO<a class="headerlink" href="#ppo" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="ppo">
+<h3>PPO<a class="headerlink" href="#ppo" title="Permalink to this heading">#</a></h3>
 <p><strong>Proximal Policy Optimization (PPO)</strong> is an algorithm based on Advantage Actor-Critic (A2C). In a nutshell, it makes RL less sensitive to step size without the tradeoffs incurred by other approaches.</p>
 <p>In 2019, OpenAI Five, based on the PPO algorithm, defeated the world champions at the multiplayer game Dota 2.</p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -1254,7 +981,7 @@ Optimal action for state 2 is a1
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./overview"
         },
         predefinedOutput: true
@@ -1262,44 +989,142 @@ Optimal action for state 2 is a1
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="machine_learning_in_action.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Machine Learning in action</p>
-        </div>
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="machine_learning_in_action.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Machine Learning in action</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="../fundamentals/handling_data.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="../fundamentals/handling_data.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Handling data</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
-</div>
-            
-        </div>
-    </div>
-    <footer class="footer">
-  <p>
-    
-      By Baptiste Pesquet<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
-
-
       </div>
-    </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+</div>
 
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environnement-setup">Environnement setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-reinforcement-learning">What is Reinforcement Learning?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rl-in-a-nutshell">RL in a nutshell</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-specific-subfield-of-ml">A specific subfield of ML</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reinforcement-learning-examples">Reinforcement Learning examples</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recent-breakthroughs">Recent breakthroughs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-formulation">Problem formulation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-exploration-vs-exploitation-dilemna">The exploration vs. exploitation dilemna</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#general-abstraction">General abstraction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#policy">Policy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reward">Reward</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#return">Return</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#markov-decision-processes">Markov Decision Processes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#value-function">Value function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#state-value-function">State value function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#action-state-value-function">Action-state value function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimality">Optimality</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabular-methods">Tabular methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#context">Context</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#value-iteration">Value Iteration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q-value-iteration">Q-Value Iteration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#td-learning">TD Learning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q-learning">Q-Learning</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#approximate-methods">Approximate methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Context</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#policy-gradients">Policy gradients</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dqn">DQN</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#actor-critic-methods">Actor-Critic methods</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a3c">A3C</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ppo">PPO</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Baptiste Pesquet
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2021.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

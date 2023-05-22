@@ -1,889 +1,540 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
     <title>Linear Regression &#8212; Machine Learning Handbook</title>
-    
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    
-      
-
-    
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.css?digest=84ace793992934648b4de8eed757e5a2" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.9d8b4a8b9bb19db25eeaddc40d639ba2.js"></script>
-    <script >const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'algorithms/linear_regression';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Logistic Regression" href="logistic_regression.html" />
     <link rel="prev" title="K-Nearest Neighbors" href="k_nearest_neighbors.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
-
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<div class="col-12 col-md-3 bd-sidebar site-navigation " id="site-navigation">
-    
-        <div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../_static/mlhandbook_logo.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">Machine Learning Handbook</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="../_static/mlhandbook_logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/mlhandbook_logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference external" href="https://www.bpesquet.fr/mlkatas">
-   Machine Learning Katas
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference external" href="https://www.bpesquet.fr/mlkatas">Machine Learning Katas</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  overview
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">overview</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../overview/introduction_to_machine_learning.html">
-   Introduction to Machine Learning
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../overview/machine_learning_in_action.html">
-   Machine Learning in action
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../overview/introduction_to_reinforcement_learning.html">
-   Introduction to Reinforcement Learning
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/introduction_to_machine_learning.html">Introduction to Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/machine_learning_in_action.html">Machine Learning in action</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/introduction_to_reinforcement_learning.html">Introduction to Reinforcement Learning</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Fundamentals
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Fundamentals</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../fundamentals/handling_data.html">
-   Handling data
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../fundamentals/assessing_results.html">
-   Assessing results
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../fundamentals/training_models.html">
-   Training models
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../fundamentals/handling_data.html">Handling data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fundamentals/assessing_results.html">Assessing results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fundamentals/training_models.html">Training models</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Algorithms
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Algorithms</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active has-children">
-  <a class="reference internal" href="classic_ml.html">
-   Classic Machine Learning
-  </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul class="current">
-   <li class="toctree-l2">
-    <a class="reference internal" href="k_nearest_neighbors.html">
-     K-Nearest Neighbors
-    </a>
-   </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
-     Linear Regression
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="logistic_regression.html">
-     Logistic Regression
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="decision_trees_and_random_forests.html">
-     Decision Trees &amp; Random Forests
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="bayesian_methods.html">
-     Bayesian Methods
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="support_vector_machines.html">
-     Support Vector Machines
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="k_means.html">
-     K-Means
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="nn_deep_learning.html">
-   Neural Networks and Deep Learning
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
-  <label for="toctree-checkbox-2">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="artificial_neural_networks.html">
-     Artificial Neural Networks
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="convolutional_neural_networks.html">
-     Convolutional Neural Networks
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="recurrent_neural_networks.html">
-     Recurrent Neural Networks
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="autoencoders.html">
-     Autoencoders
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="neural_style_transfer.html">
-     Neural Style Transfer
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="generative_adversarial_networks.html">
-     Generative Adversarial Networks
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="transformers.html">
-     Transformers
-    </a>
-   </li>
-  </ul>
- </li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="classic_ml.html">Classic Machine Learning</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="k_nearest_neighbors.html">K-Nearest Neighbors</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logistic_regression.html">Logistic Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="decision_trees_and_random_forests.html">Decision Trees &amp; Random Forests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bayesian_methods.html">Bayesian Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="support_vector_machines.html">Support Vector Machines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="k_means.html">K-Means</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Engineering
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../engineering/introduction_to_mlops.html">
-   Introduction to MLOps
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../engineering/machine_learning_issues.html">
-   Machine Learning issues
-  </a>
- </li>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="nn_deep_learning.html">Neural Networks and Deep Learning</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="artificial_neural_networks.html">Artificial Neural Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="convolutional_neural_networks.html">Convolutional Neural Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="recurrent_neural_networks.html">Recurrent Neural Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="autoencoders.html">Autoencoders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="neural_style_transfer.html">Neural Style Transfer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generative_adversarial_networks.html">Generative Adversarial Networks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="transformers.html">Transformers</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Tools
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../tools/python.html">
-   Python
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
-  <label for="toctree-checkbox-3">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../tools/python_ecosystem.html">
-     The Python ecosystem
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../tools/python_cheatsheet.html">
-     Python cheatsheet
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../tools/python_good_practices.html">
-     Python good practices
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../tools/numpy.html">
-   NumPy
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../tools/keras.html">
-   Keras
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../tools/pytorch.html">
-   PyTorch
-  </a>
- </li>
+</li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Reference
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Engineering</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../reference/activation_functions.html">
-   Activation functions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../reference/glossary.html">
-   Glossary
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../reference/acknowledgments.html">
-   Acknowledgments
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../engineering/introduction_to_mlops.html">Introduction to MLOps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../engineering/machine_learning_issues.html">Machine Learning issues</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tools</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tools/python.html">Python</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tools/python_ecosystem.html">The Python ecosystem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/python_cheatsheet.html">Python cheatsheet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/python_good_practices.html">Python good practices</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/numpy.html">NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/keras.html">Keras</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/pytorch.html">PyTorch</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../reference/activation_functions.html">Activation functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/acknowledgments.html">Acknowledgments</a></li>
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
-          
-<!-- This is an invisible pixel that we watch to see if we've scrolled. -->
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
 <div class="sbt-scroll-pixel-helper"></div>
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            <div class="topbar-left">
-                
-                <label class="nav-toggle-button" for="__navigation">
-                    <div class="visually-hidden">Toggle navigation</div>
-                    <i class="fas fa-bars"></i>
-                </label>
-                
-            </div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/bpesquet/mlhandbook/master?urlpath=tree/algorithms/linear_regression.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/bpesquet/mlhandbook/blob/master/algorithms/linear_regression.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/bpesquet/mlhandbook" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/bpesquet/mlhandbook/edit/master/algorithms/linear_regression.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/bpesquet/mlhandbook/issues/new?title=Issue%20on%20page%20%2Falgorithms/linear_regression.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/algorithms/linear_regression.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Linear Regression</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
             
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/algorithms/linear_regression.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/bpesquet/mlhandbook"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/bpesquet/mlhandbook/issues/new?title=Issue%20on%20page%20%2Falgorithms/linear_regression.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/bpesquet/mlhandbook/edit/master/algorithms/linear_regression.ipynb"><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/bpesquet/mlhandbook/master?urlpath=tree/algorithms/linear_regression.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        <a class="colab-button" href="https://colab.research.google.com/github/bpesquet/mlhandbook/blob/master/algorithms/linear_regression.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
-                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
-                    src="../_static/images/logo_colab.png"
-                    alt="Interact on Colab">Colab</button></a>
-        
-        
-        
-    </div>
-</div>
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div>
+                <h2> Contents </h2>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
+            <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#environment-setup">
-   Environment setup
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#introduction">
-   Introduction
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#linear-regression-in-a-nutshell">
-     Linear regression in a nutshell
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#problem-formulation">
-     Problem formulation
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-using-a-linear-model-to-predict-country-happiness">
-     Example: using a linear model to predict country happiness
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#data-loading-and-analysis">
-     Data loading and analysis
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#univariate-regression">
-     Univariate regression
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-predict-country-happiness-using-only-gdp">
-     Example: predict country happiness using only GDP
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#data-splitting">
-     Data splitting
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#data-plotting">
-     Data plotting
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#analytical-approach-normal-equation">
-   Analytical approach: normal equation
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id1">
-     Problem formulation
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#loss-function">
-     Loss function
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#analytical-solution">
-     Analytical solution
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#math-proof-optional">
-     Math proof (optional)
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#vectorized-notation">
-       Vectorized notation
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#vectorized-loss">
-       Vectorized loss
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#loss-gradient">
-       Loss gradient
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#computation-of-loss-gradient-terms">
-       Computation of loss gradient terms
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#final-gradient-expression">
-       Final gradient expression
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#loss-minimization">
-       Loss minimization
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-applying-normal-equation-to-predict-country-happiness">
-     Example: applying Normal Equation to predict country happiness
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#multivariate-regression">
-     Multivariate regression
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#pros-cons-of-analytical-approach">
-     Pros/cons of analytical approach
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#iterative-approach-gradient-descent">
-   Iterative approach: gradient descent
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#method-description">
-     Method description
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#computation-of-gradients">
-     Computation of gradients
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#parameters-update">
-     Parameters update
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#interactive-example">
-     Interactive example
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#gradient-descent-types">
-     Gradient descent types
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-applying-stochastic-gradient-descent-to-predict-country-happiness">
-     Example: applying stochastic gradient descent to predict country happiness
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#pros-cons-of-iterative-approach">
-     Pros/cons of iterative approach
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#polynomial-regression">
-   Polynomial Regression
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#general-idea">
-     General idea
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-fitting-a-quadratic-curve-with-polynomial-regression">
-     Example: fitting a quadratic curve with polynomial regression
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#regularization">
-   Regularization
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id2">
-     General idea
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-observing-the-effects-of-regularization-rate">
-     Example: observing the effects of regularization rate
-    </a>
-   </li>
-  </ul>
- </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup">Environment setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression-in-a-nutshell">Linear regression in a nutshell</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-formulation">Problem formulation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-using-a-linear-model-to-predict-country-happiness">Example: using a linear model to predict country happiness</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-loading-and-analysis">Data loading and analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#univariate-regression">Univariate regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-predict-country-happiness-using-only-gdp">Example: predict country happiness using only GDP</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-splitting">Data splitting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-plotting">Data plotting</a></li>
 </ul>
-
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analytical-approach-normal-equation">Analytical approach: normal equation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Problem formulation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-function">Loss function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analytical-solution">Analytical solution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#math-proof-optional">Math proof (optional)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#vectorized-notation">Vectorized notation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#vectorized-loss">Vectorized loss</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-gradient">Loss gradient</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#computation-of-loss-gradient-terms">Computation of loss gradient terms</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#final-gradient-expression">Final gradient expression</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-minimization">Loss minimization</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-applying-normal-equation-to-predict-country-happiness">Example: applying Normal Equation to predict country happiness</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multivariate-regression">Multivariate regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pros-cons-of-analytical-approach">Pros/cons of analytical approach</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iterative-approach-gradient-descent">Iterative approach: gradient descent</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-description">Method description</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computation-of-gradients">Computation of gradients</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters-update">Parameters update</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-example">Interactive example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-descent-types">Gradient descent types</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-applying-stochastic-gradient-descent-to-predict-country-happiness">Example: applying stochastic gradient descent to predict country happiness</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pros-cons-of-iterative-approach">Pros/cons of iterative approach</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polynomial-regression">Polynomial Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#general-idea">General idea</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-fitting-a-quadratic-curve-with-polynomial-regression">Example: fitting a quadratic curve with polynomial regression</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regularization">Regularization</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">General idea</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-observing-the-effects-of-regularization-rate">Example: observing the effects of regularization rate</a></li>
+</ul>
+</li>
+</ul>
             </nav>
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Linear Regression</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#environment-setup">
-   Environment setup
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#introduction">
-   Introduction
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#linear-regression-in-a-nutshell">
-     Linear regression in a nutshell
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#problem-formulation">
-     Problem formulation
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-using-a-linear-model-to-predict-country-happiness">
-     Example: using a linear model to predict country happiness
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#data-loading-and-analysis">
-     Data loading and analysis
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#univariate-regression">
-     Univariate regression
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-predict-country-happiness-using-only-gdp">
-     Example: predict country happiness using only GDP
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#data-splitting">
-     Data splitting
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#data-plotting">
-     Data plotting
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#analytical-approach-normal-equation">
-   Analytical approach: normal equation
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id1">
-     Problem formulation
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#loss-function">
-     Loss function
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#analytical-solution">
-     Analytical solution
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#math-proof-optional">
-     Math proof (optional)
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#vectorized-notation">
-       Vectorized notation
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#vectorized-loss">
-       Vectorized loss
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#loss-gradient">
-       Loss gradient
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#computation-of-loss-gradient-terms">
-       Computation of loss gradient terms
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#final-gradient-expression">
-       Final gradient expression
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#loss-minimization">
-       Loss minimization
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-applying-normal-equation-to-predict-country-happiness">
-     Example: applying Normal Equation to predict country happiness
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#multivariate-regression">
-     Multivariate regression
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#pros-cons-of-analytical-approach">
-     Pros/cons of analytical approach
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#iterative-approach-gradient-descent">
-   Iterative approach: gradient descent
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#method-description">
-     Method description
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#computation-of-gradients">
-     Computation of gradients
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#parameters-update">
-     Parameters update
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#interactive-example">
-     Interactive example
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#gradient-descent-types">
-     Gradient descent types
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-applying-stochastic-gradient-descent-to-predict-country-happiness">
-     Example: applying stochastic gradient descent to predict country happiness
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#pros-cons-of-iterative-approach">
-     Pros/cons of iterative approach
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#polynomial-regression">
-   Polynomial Regression
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#general-idea">
-     General idea
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-fitting-a-quadratic-curve-with-polynomial-regression">
-     Example: fitting a quadratic curve with polynomial regression
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#regularization">
-   Regularization
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id2">
-     General idea
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-observing-the-effects-of-regularization-rate">
-     Example: observing the effects of regularization rate
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
 
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            
-              <div>
+              
                 
-  <div class="section" id="linear-regression">
-<h1>Linear Regression<a class="headerlink" href="#linear-regression" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="environment-setup">
-<h2>Environment setup<a class="headerlink" href="#environment-setup" title="Permalink to this headline">¶</a></h2>
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="linear-regression">
+<h1>Linear Regression<a class="headerlink" href="#linear-regression" title="Permalink to this heading">#</a></h1>
+<section id="environment-setup">
+<h2>Environment setup<a class="headerlink" href="#environment-setup" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">platform</span>
@@ -996,7 +647,7 @@ var n,a=t("./lib/build-log"),i=t("./lib/epsilon"),o=t("./lib/intersecter"),s=t("
         });
         }
         </script>
-</div></div>
+        </div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1019,16 +670,16 @@ var n,a=t("./lib/build-log"),i=t("./lib/epsilon"),o=t("./lib/intersecter"),s=t("
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="linear-regression-in-a-nutshell">
-<h3>Linear regression in a nutshell<a class="headerlink" href="#linear-regression-in-a-nutshell" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
+<section id="linear-regression-in-a-nutshell">
+<h3>Linear regression in a nutshell<a class="headerlink" href="#linear-regression-in-a-nutshell" title="Permalink to this heading">#</a></h3>
 <p>A linear regression model searches for a linear relationship between inputs (features) and output (target).</p>
 <p><a class="reference external" href="https://en.wikipedia.org/wiki/Linear_regression"><img alt="Linear Regression example" src="../_images/linear_regression.png" /></a></p>
-</div>
-<div class="section" id="problem-formulation">
-<h3>Problem formulation<a class="headerlink" href="#problem-formulation" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="problem-formulation">
+<h3>Problem formulation<a class="headerlink" href="#problem-formulation" title="Permalink to this heading">#</a></h3>
 <p>A linear model makes a prediction by computing a weighted sum of the input features, plus a constant term called <em>bias</em> (or sometimes <em>intercept</em>).</p>
 <div class="math notranslate nohighlight">
 \[y' = \theta_0 + \theta_1x_1 + \dotsc + \theta_nx_n\]</div>
@@ -1039,15 +690,15 @@ var n,a=t("./lib/build-log"),i=t("./lib/epsilon"),o=t("./lib/intersecter"),s=t("
 <li><p><span class="math notranslate nohighlight">\(\theta_i, i \in [0..n]\)</span> is <span class="math notranslate nohighlight">\(i\)</span>th model parameter. <span class="math notranslate nohighlight">\(\theta_0\)</span> is the bias term.</p></li>
 </ul>
 <p>The goal is to find the best set of parameters.</p>
-</div>
-<div class="section" id="example-using-a-linear-model-to-predict-country-happiness">
-<h3>Example: using a linear model to predict country happiness<a class="headerlink" href="#example-using-a-linear-model-to-predict-country-happiness" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="example-using-a-linear-model-to-predict-country-happiness">
+<h3>Example: using a linear model to predict country happiness<a class="headerlink" href="#example-using-a-linear-model-to-predict-country-happiness" title="Permalink to this heading">#</a></h3>
 <p>(Inspired by <a class="reference external" href="https://github.com/trekhleb/homemade-machine-learning">Homemade Machine Learning</a> by Oleksii Trekhleb)</p>
 <p>The <a class="reference external" href="https://www.kaggle.com/unsdsn/world-happiness#2017.csv">World Happiness Report</a> ranks 155 countries by their happiness levels. Several economic and social indicators (GDP, degree of freedom, level of corruption…) are recorded for each country.</p>
 <p>Can a linear model accurately predict country happiness based on these indicators ?</p>
-</div>
-<div class="section" id="data-loading-and-analysis">
-<h3>Data loading and analysis<a class="headerlink" href="#data-loading-and-analysis" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="data-loading-and-analysis">
+<h3>Data loading and analysis<a class="headerlink" href="#data-loading-and-analysis" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load World Happiness Report for 2017</span>
@@ -1300,22 +951,22 @@ memory usage: 14.7+ KB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/linear_regression_13_0.png" src="../_images/linear_regression_13_0.png" />
+<img alt="../_images/bc5c9216a7e2b82de4cc1ca203901e585c864959bbd2a476befde48df1c08213.png" src="../_images/bc5c9216a7e2b82de4cc1ca203901e585c864959bbd2a476befde48df1c08213.png" />
 </div>
 </div>
-</div>
-<div class="section" id="univariate-regression">
-<h3>Univariate regression<a class="headerlink" href="#univariate-regression" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="univariate-regression">
+<h3>Univariate regression<a class="headerlink" href="#univariate-regression" title="Permalink to this heading">#</a></h3>
 <p>Only one feature is used by the model, which has two parameters.</p>
 <div class="math notranslate nohighlight">
 \[y' = \theta_0 + \theta_1x\]</div>
-</div>
-<div class="section" id="example-predict-country-happiness-using-only-gdp">
-<h3>Example: predict country happiness using only GDP<a class="headerlink" href="#example-predict-country-happiness-using-only-gdp" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="example-predict-country-happiness-using-only-gdp">
+<h3>Example: predict country happiness using only GDP<a class="headerlink" href="#example-predict-country-happiness-using-only-gdp" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">filter_dataset</span><span class="p">(</span><span class="n">df_data</span><span class="p">,</span> <span class="n">input_features</span><span class="p">,</span> <span class="n">target_feature</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return a dataset containing only the selected input and output features&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a dataset containing only the selected input and output features&quot;&quot;&quot;</span>
     
     <span class="n">feature_list</span> <span class="o">=</span> <span class="n">input_features</span> <span class="o">+</span> <span class="p">[</span><span class="n">target_feature</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">df_data</span><span class="p">[</span><span class="n">feature_list</span><span class="p">]</span>
@@ -1420,13 +1071,13 @@ memory usage: 14.7+ KB
 </table>
 </div></div></div>
 </div>
-</div>
-<div class="section" id="data-splitting">
-<h3>Data splitting<a class="headerlink" href="#data-splitting" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="data-splitting">
+<h3>Data splitting<a class="headerlink" href="#data-splitting" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">split_dataset</span><span class="p">(</span><span class="n">df_data</span><span class="p">,</span> <span class="n">input_features</span><span class="p">,</span> <span class="n">target_feature</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Split dataset between training and test sets, keeping only selected features&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Split dataset between training and test sets, keeping only selected features&quot;&quot;&quot;</span>
     
     <span class="n">df_train</span><span class="p">,</span> <span class="n">df_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">df_data</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
 
@@ -1464,13 +1115,18 @@ Test data: (31, 1), labels: (31,)
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="data-plotting">
-<h3>Data plotting<a class="headerlink" href="#data-plotting" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="data-plotting">
+<h3>Data plotting<a class="headerlink" href="#data-plotting" title="Permalink to this heading">#</a></h3>
 <div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_univariate</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">input_features</span><span class="p">,</span> <span class="n">target_features</span><span class="p">,</span> <span class="n">model_list</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;2D plot of features and target, including model prediction if defined&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;2D plot of features and target, including model prediction if defined&quot;&quot;&quot;</span>
 
     <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Actual&quot;</span><span class="p">)</span>
 
@@ -1490,6 +1146,7 @@ Test data: (31, 1), labels: (31,)
 </pre></div>
 </div>
 </div>
+</details>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1499,15 +1156,15 @@ Test data: (31, 1), labels: (31,)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/linear_regression_24_0.png" src="../_images/linear_regression_24_0.png" />
+<img alt="../_images/4a93933ed69f7ca135885a66b8586180a388bf440bc5b5bdb39234fba9e23014.png" src="../_images/4a93933ed69f7ca135885a66b8586180a388bf440bc5b5bdb39234fba9e23014.png" />
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="analytical-approach-normal-equation">
-<h2>Analytical approach: normal equation<a class="headerlink" href="#analytical-approach-normal-equation" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id1">
-<h3>Problem formulation<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="analytical-approach-normal-equation">
+<h2>Analytical approach: normal equation<a class="headerlink" href="#analytical-approach-normal-equation" title="Permalink to this heading">#</a></h2>
+<section id="id1">
+<h3>Problem formulation<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\pmb{x}^{(i)}\)</span>: <span class="math notranslate nohighlight">\(i\)</span>th data sample, vector of <span class="math notranslate nohighlight">\(n+1\)</span> features <span class="math notranslate nohighlight">\(x^{(i)}_j\)</span> with <span class="math notranslate nohighlight">\(x^{(i)}_0 = 1\)</span>.</p></li>
 <li><p><span class="math notranslate nohighlight">\(\pmb{\theta}\)</span>: parameters of the linear model, vector of <span class="math notranslate nohighlight">\(n+1\)</span> values <span class="math notranslate nohighlight">\(\theta_j\)</span>.</p></li>
@@ -1530,15 +1187,15 @@ Test data: (31, 1), labels: (31,)
      \end{pmatrix} \in \pmb{R}^{n+1}\end{split}\]</div>
 <div class="math notranslate nohighlight">
 \[y'^{(i)} = \mathcal{h}_\theta(x^{(i)}) = \theta_0 + \theta_1x^{(i)}_1 + \dotsc + \theta_nx^{(i)}_n = \pmb{\theta}^T\pmb{x}^{(i)}\]</div>
-</div>
-<div class="section" id="loss-function">
-<h3>Loss function<a class="headerlink" href="#loss-function" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="loss-function">
+<h3>Loss function<a class="headerlink" href="#loss-function" title="Permalink to this heading">#</a></h3>
 <p>We use the <em>Mean Squared Error</em> (MSE). RMSE is also a possible choice.</p>
 <div class="math notranslate nohighlight">
 \[\mathcal{L}(\pmb{\theta}) = \frac{1}{m}\sum_{i=1}^m (y'^{(i)} - y^{(i)})^2 = \frac{1}{m}\sum_{i=1}^m (\mathcal{h}_\theta(x^{(i)}) - y^{(i)})^2\]</div>
-</div>
-<div class="section" id="analytical-solution">
-<h3>Analytical solution<a class="headerlink" href="#analytical-solution" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="analytical-solution">
+<h3>Analytical solution<a class="headerlink" href="#analytical-solution" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Technique for computing the regression coefficients <span class="math notranslate nohighlight">\(\theta_i\)</span> analytically (by calculus).</p></li>
 <li><p>One-step learning algorithm (no iterations).</p></li>
@@ -1550,12 +1207,12 @@ Test data: (31, 1), labels: (31,)
 <li><p><span class="math notranslate nohighlight">\(\pmb{\theta^*}\)</span> is the parameter vector that minimizes the loss function <span class="math notranslate nohighlight">\(\mathcal{L}(\theta)\)</span>.</p></li>
 <li><p>This result is called the <strong>Normal Equation</strong>.</p></li>
 </ul>
-</div>
-<div class="section" id="math-proof-optional">
-<h3>Math proof (optional)<a class="headerlink" href="#math-proof-optional" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="math-proof-optional">
+<h3>Math proof (optional)<a class="headerlink" href="#math-proof-optional" title="Permalink to this heading">#</a></h3>
 <p>(Inspired by <a class="reference external" href="https://eli.thegreenplace.net/2014/derivation-of-the-normal-equation-for-linear-regression/">Derivation of the Normal Equation for linear regression</a> and <a class="reference external" href="http://www.oranlooney.com/post/ml-from-scratch-part-1-linear-regression/">ML From Scratch, Part 1: Linear Regression</a>)</p>
-<div class="section" id="vectorized-notation">
-<h4>Vectorized notation<a class="headerlink" href="#vectorized-notation" title="Permalink to this headline">¶</a></h4>
+<section id="vectorized-notation">
+<h4>Vectorized notation<a class="headerlink" href="#vectorized-notation" title="Permalink to this heading">#</a></h4>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\pmb{X}\)</span>: matrix of input data (<em>design matrix</em>). Each line corresponds to a sample.</p></li>
 <li><p><span class="math notranslate nohighlight">\(\pmb{y}\)</span>: vector of target values.</p></li>
@@ -1593,9 +1250,9 @@ Test data: (31, 1), labels: (31,)
        \ \vdots \\
        \ \mathcal{h}_\theta(x^{(m)})
      \end{pmatrix}\end{split}\]</div>
-</div>
-<div class="section" id="vectorized-loss">
-<h4>Vectorized loss<a class="headerlink" href="#vectorized-loss" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="vectorized-loss">
+<h4>Vectorized loss<a class="headerlink" href="#vectorized-loss" title="Permalink to this heading">#</a></h4>
 <p>The loss can also be expressed using a vectorized notation.</p>
 <div class="math notranslate nohighlight">
 \[\mathcal{L}(\theta) = \frac{1}{m}\sum_{i=1}^m (\mathcal{h}_\theta(x^{(i)}) - y^{(i)})^2 = \frac{1}{m}{{\lVert{\pmb{X}\pmb{\theta} - \pmb{y}}\rVert}_2}^2\]</div>
@@ -1608,9 +1265,9 @@ Test data: (31, 1), labels: (31,)
 <p>Since <span class="math notranslate nohighlight">\(\pmb{X}\pmb{\theta}\)</span> and <span class="math notranslate nohighlight">\(\pmb{y}\)</span> are vectors, <span class="math notranslate nohighlight">\((\pmb{X}\pmb{\theta})^T\pmb{y} = \pmb{y}^T(\pmb{X}\pmb{\theta})\)</span>.</p>
 <div class="math notranslate nohighlight">
 \[\mathcal{L}(\theta) = \frac{1}{m}\left(\pmb{\theta}^T\pmb{X}^T\pmb{X}\pmb{\theta} - 2(\pmb{X}\pmb{\theta})^T\pmb{y} + \pmb{y}^T\pmb{y}\right)\]</div>
-</div>
-<div class="section" id="loss-gradient">
-<h4>Loss gradient<a class="headerlink" href="#loss-gradient" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="loss-gradient">
+<h4>Loss gradient<a class="headerlink" href="#loss-gradient" title="Permalink to this heading">#</a></h4>
 <p>We must find the <span class="math notranslate nohighlight">\(\pmb{\theta^*}\)</span> vector that minimizes the loss function <span class="math notranslate nohighlight">\(\mathcal{L}(\theta)\)</span>.</p>
 <div class="math notranslate nohighlight">
 \[\pmb{\theta^*} = \underset{\theta}{\mathrm{argmin}}\;\mathcal{L}(\theta)\]</div>
@@ -1622,9 +1279,9 @@ Test data: (31, 1), labels: (31,)
        \ \vdots \\
        \ \frac{\partial}{\partial \theta_n} \mathcal{L}(\boldsymbol{\theta})
      \end{pmatrix} = \nabla_{\theta}\left(\frac{1}{m}(\pmb{\theta}^T\pmb{X}^T\pmb{X}\pmb{\theta} - 2(\pmb{X}\pmb{\theta})^T\pmb{y} + \pmb{y}^T\pmb{y})\right)\end{split}\]</div>
-</div>
-<div class="section" id="computation-of-loss-gradient-terms">
-<h4>Computation of loss gradient terms<a class="headerlink" href="#computation-of-loss-gradient-terms" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="computation-of-loss-gradient-terms">
+<h4>Computation of loss gradient terms<a class="headerlink" href="#computation-of-loss-gradient-terms" title="Permalink to this heading">#</a></h4>
 <p>Since <span class="math notranslate nohighlight">\(\pmb{y}^T\pmb{y}\)</span> is constant w.r.t. <span class="math notranslate nohighlight">\(\pmb{\theta}\)</span>, <span class="math notranslate nohighlight">\(\nabla_{\theta}(\pmb{y}^T\pmb{y}) = \vec{0}\)</span>.</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}2(\pmb{X}\pmb{\theta})^T\pmb{y} = 2\;\begin{pmatrix}
@@ -1725,17 +1382,17 @@ Test data: (31, 1), labels: (31,)
        \ \sum_{j=0}^n a_{nj}\theta_j
      \end{pmatrix}=
      2\pmb{A}\pmb{\theta} = 2\pmb{X}^T\pmb{X}\pmb{\theta}\end{split}\]</div>
-</div>
-<div class="section" id="final-gradient-expression">
-<h4>Final gradient expression<a class="headerlink" href="#final-gradient-expression" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="final-gradient-expression">
+<h4>Final gradient expression<a class="headerlink" href="#final-gradient-expression" title="Permalink to this heading">#</a></h4>
 <p>We can finally express the gradient of the loss function w.r.t. the model parameters:</p>
 <div class="math notranslate nohighlight">
 \[\nabla_{\theta}\mathcal{L}(\pmb{\theta}) = \nabla_{\theta}\left(\frac{1}{m}(\pmb{\theta}^T\pmb{X}^T\pmb{X}\pmb{\theta} - 2(\pmb{X}\pmb{\theta})^T\pmb{y} + \pmb{y}^T\pmb{y})\right) = \frac{1}{m}\left(2\pmb{X}^T\pmb{X}\pmb{\theta} - 2\pmb{X}^T\pmb{y}\right)\]</div>
 <div class="math notranslate nohighlight">
 \[\nabla_{\theta}\mathcal{L}(\pmb{\theta}) = \frac{2}{m}\pmb{X}^T\left(\pmb{X}\pmb{\theta} - \pmb{y}\right)\]</div>
-</div>
-<div class="section" id="loss-minimization">
-<h4>Loss minimization<a class="headerlink" href="#loss-minimization" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="loss-minimization">
+<h4>Loss minimization<a class="headerlink" href="#loss-minimization" title="Permalink to this heading">#</a></h4>
 <p>The <span class="math notranslate nohighlight">\(\pmb{\theta^*}\)</span> vector that minimizes the loss is such as the gradient is equal to <span class="math notranslate nohighlight">\(\vec{0}\)</span>. In other terms:</p>
 <div class="math notranslate nohighlight">
 \[\pmb{X}^T\pmb{X}\pmb{\theta^{*}} - \pmb{X}^T\pmb{y} = \vec{0}\]</div>
@@ -1745,10 +1402,10 @@ Test data: (31, 1), labels: (31,)
 <div class="math notranslate nohighlight">
 \[\pmb{\theta^{*}} = (\pmb{X}^T\pmb{X})^{-1}\pmb{X}^T\pmb{y}\]</div>
 <p>Which is exactly the Normal Equation we were expecting to see!</p>
-</div>
-</div>
-<div class="section" id="example-applying-normal-equation-to-predict-country-happiness">
-<h3>Example: applying Normal Equation to predict country happiness<a class="headerlink" href="#example-applying-normal-equation-to-predict-country-happiness" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="example-applying-normal-equation-to-predict-country-happiness">
+<h3>Example: applying Normal Equation to predict country happiness<a class="headerlink" href="#example-applying-normal-equation-to-predict-country-happiness" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">train_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
@@ -1799,12 +1456,12 @@ Test error: 0.38455
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/linear_regression_44_0.png" src="../_images/linear_regression_44_0.png" />
+<img alt="../_images/af8609a88120bcefcfd427d3a1a467ca5cf7191198410cba97f3e76eef9d4ff0.png" src="../_images/af8609a88120bcefcfd427d3a1a467ca5cf7191198410cba97f3e76eef9d4ff0.png" />
 </div>
 </div>
-</div>
-<div class="section" id="multivariate-regression">
-<h3>Multivariate regression<a class="headerlink" href="#multivariate-regression" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="multivariate-regression">
+<h3>Multivariate regression<a class="headerlink" href="#multivariate-regression" title="Permalink to this heading">#</a></h3>
 <p>General case: several features are used by the model.</p>
 <div class="math notranslate nohighlight">
 \[y' = \theta_0 + \theta_1x_1 + \dotsc + \theta_nx_n\]</div>
@@ -1829,9 +1486,14 @@ Test data: (31, 2), labels: (31,)
 </div>
 </div>
 <div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_multivariate</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">input_features</span><span class="p">,</span> <span class="n">target_features</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;3D plot of features and target, including model prediction if defined&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;3D plot of features and target, including model prediction if defined&quot;&quot;&quot;</span>
     
     <span class="c1"># Configure the plot with training dataset</span>
     <span class="n">plot_training_trace</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Scatter3d</span><span class="p">(</span>
@@ -1914,6 +1576,7 @@ Test data: (31, 2), labels: (31,)
 </pre></div>
 </div>
 </div>
+</details>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1924,7 +1587,7 @@ Test data: (31, 2), labels: (31,)
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><div>                            <div id="8b96cf0c-0dbb-4975-9b5c-948718549e5d" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("8b96cf0c-0dbb-4975-9b5c-948718549e5d")) {                    Plotly.newPlot(                        "8b96cf0c-0dbb-4975-9b5c-948718549e5d",                        [{"marker": {"line": {"color": "rgb(255, 255, 255)", "width": 1}, "opacity": 1, "size": 10}, "mode": "markers", "name": "Actual", "type": "scatter3d", "x": [1.6263433694839498, 0.23430564999580397, 0.479309022426605, 1.35268235206604, 1.3151752948761002, 0.233442038297653, 0.521021246910095, 1.47920441627502, 0.9910123944282528, 1.07937383651733, 0.511135876178741, 0.85769921541214, 0.11904179304838199, 0.667224824428558, 0.35022771358490007, 0.39724862575531, 1.4844149351120002, 1.05469870567322, 0.476180493831635, 1.06931757926941, 0.368745893239975, 1.12112903594971, 1.1536017656326298, 1.1614590883255, 1.00082039833069, 0.995538592338562, 0.36711055040359497, 0.989701807498932, 1.1893955469131499, 0.368610262870789, 0.305808693170547, 1.480633020401, 0.401477217674255, 0.907975316047668, 1.1982102394104, 0.951484382152557, 1.07498753070831, 0.9097844958305359, 0.833756566047668, 1.48792338371277, 1.0272358655929599, 1.54625928401947, 1.44357192516327, 0.982409417629242, 1.55167484283447, 1.4884122610092199, 1.4336265325546298, 1.2860119342803997, 0.6030489206314089, 0.0, 0.786441087722778, 1.40167844295502, 0.6364067792892459, 1.38439786434174, 0.6595166921615601, 0.89465194940567, 1.08116579055786, 1.44163393974304, 0.8089642524719242, 1.15687310695648, 1.3950666189193701, 1.10970628261566, 1.49438726902008, 0.730573117733002, 0.8584281802177429, 1.63295245170593, 1.4870972633361799, 0.783756256103516, 0.560479462146759, 0.8781145811080929, 1.29178786277771, 1.2175596952438401, 1.43092346191406, 1.69227766990662, 0.36842092871666, 0.24454993009567302, 1.12786877155304, 0.0921023488044739, 0.996192753314972, 0.6017650961875921, 1.15655755996704, 0.737299203872681, 0.524713635444641, 1.1982743740081798, 1.00985014438629, 0.872001945972443, 1.21768391132355, 1.12209415435791, 0.885416388511658, 1.3412059545516999, 0.16192533075809498, 0.7885475754737851, 1.06457793712616, 0.43108540773391707, 0.932537317276001, 1.1018030643463101, 1.36135590076447, 0.950612664222717, 0.7268835306167599, 1.3753824234008798, 1.5649795532226598, 0.777153134346008, 0.479820191860199, 1.53062355518341, 1.1027104854583702, 0.7288706302642819, 1.28177809715271, 1.00726580619812, 1.29121541976929, 1.4637807607650801, 0.5916834473609921, 0.43801298737525896, 1.3469113111496, 0.964434325695038, 0.37584653496742204, 1.1073532104492199, 0.564305365085602, 1.18529546260834, 1.23374843597412, 1.8707656860351598, 1.6164631843566901, 0.7922212481498722, 1.3208793401718102, 1.1531838178634601], "y": [0.60834527015686, 0.48079109191894503, 0.37792226672172496, 0.49094617366790794, 0.498465299606323, 0.466914653778076, 0.390661299228668, 0.611100912094116, 0.418421149253845, 0.55258983373642, 0.390017777681351, 0.585214674472809, 0.33288118243217496, 0.423026293516159, 0.32436785101890603, 0.147062435746193, 0.601607382297516, 0.479246735572815, 0.306613743305206, 0.20871552824974102, 0.5818438529968261, 0.194989055395126, 0.39815583825111406, 0.28923171758651695, 0.4551981985569, 0.443323463201523, 0.514492034912109, 0.28211015462875394, 0.491247326135635, 0.0303698573261499, 0.18919676542282102, 0.6271626353263849, 0.106179520487785, 0.5475093722343439, 0.31232857704162603, 0.260287940502167, 0.28851598501205394, 0.432452529668808, 0.5587329268455511, 0.562511384487152, 0.39414396882057207, 0.505740523338318, 0.6179508566856379, 0.204403176903725, 0.490968644618988, 0.536746919155121, 0.361466586589813, 0.17586351931095098, 0.4477061927318571, 0.270842045545578, 0.6582486629486078, 0.257921665906906, 0.461603492498398, 0.408781230449677, 0.0149958552792668, 0.12297477573156401, 0.47278770804405196, 0.508190035820007, 0.4350258708000179, 0.24932260811328896, 0.256450712680817, 0.580131649971008, 0.612924098968506, 0.348079860210419, 0.0, 0.49633759260177596, 0.567766189575195, 0.394952565431595, 0.45276376605033897, 0.408158332109451, 0.520342111587524, 0.5793922543525699, 0.470222115516663, 0.549840569496155, 0.318697690963745, 0.348587512969971, 0.580200731754303, 0.235961347818375, 0.381498634815216, 0.633375823497772, 0.295400261878967, 0.447551846504211, 0.47156670689582797, 0.300740599632263, 0.561213254928589, 0.5313106179237371, 0.457003742456436, 0.505196332931519, 0.5015376806259161, 0.572575807571411, 0.36365869641304, 0.571055591106415, 0.325905978679657, 0.42596277594566295, 0.473507791757584, 0.465733230113983, 0.518630743026733, 0.309410035610199, 0.23521526157856, 0.40598860383033797, 0.620070576667786, 0.0815394446253777, 0.44030594825744607, 0.449750572443008, 0.288555532693863, 0.24072904884815197, 0.373783111572266, 0.289680689573288, 0.40226498246192893, 0.5397707223892211, 0.24946372210979503, 0.16234202682972002, 0.47120362520217896, 0.520303547382355, 0.336384207010269, 0.437453746795654, 0.430388748645782, 0.49451920390129106, 0.550026834011078, 0.604130983352661, 0.635422587394714, 0.469987004995346, 0.479131430387497, 0.412730008363724], "z": [6.6479997634887695, 4.550000190734861, 4.53499984741211, 6.60900020599365, 5.19500017166138, 3.97000002861023, 3.80800008773804, 7.31599998474121, 5.33599996566772, 5.230000019073491, 3.34899997711182, 5.42999982833862, 3.5329999923706095, 4.11999988555908, 4.03200006484985, 3.5910000801086404, 7.28399991989136, 4.8289999961853, 4.19000005722046, 5.39499998092651, 3.47099995613098, 5.23699998855591, 5.234000205993651, 4.71400022506714, 6.00799989700317, 5.26200008392334, 4.54500007629395, 4.7350001335144, 5.62900018692017, 3.6029999256133998, 3.64400005340576, 7.50400018692017, 3.7939999103546103, 5.955999851226809, 4.46500015258789, 5.27899980545044, 5.22499990463257, 6.002999782562259, 5.82299995422363, 6.9510002136230495, 4.95499992370605, 6.993000030517581, 7.468999862670901, 5.18200016021729, 5.47200012207031, 6.08699989318848, 6.42199993133545, 5.32399988174438, 4.17999982833862, 2.69300007820129, 5.97100019454956, 5.837999820709231, 4.513999938964839, 6.40299987792969, 4.138999938964839, 4.09600019454956, 5.2729997634887695, 6.71400022506714, 4.29099988937378, 4.69199991226196, 5.96400022506714, 7.0789999961853, 7.28399991989136, 5.1810002326965305, 3.79500007629395, 6.10500001907349, 7.00600004196167, 5.07399988174438, 4.55299997329712, 5.2350001335144, 5.97300004959106, 6.4539999961853, 6.44199991226196, 6.57200002670288, 4.70900011062622, 3.50699996948242, 6.4239997863769505, 4.2800002098083505, 4.64400005340576, 4.1680002212524405, 5.5689997673034695, 6.07100009918213, 5.04099988937378, 5.5, 4.44000005722046, 6.4539999961853, 5.824999809265139, 3.7660000324249303, 5.01100015640259, 5.75799989700317, 4.02799987792969, 5.07399988174438, 5.175000190734861, 3.65700006484985, 5.493000030517581, 5.525000095367429, 6.1680002212524405, 4.28599977493286, 5.26900005340576, 7.212999820709231, 7.49399995803833, 3.46199989318848, 4.961999893188481, 6.343999862670901, 4.49700021743774, 5.837999820709231, 5.962999820709231, 4.80499982833862, 6.08400011062622, 6.89099979400635, 3.59299993515015, 3.9360001087188703, 5.80999994277954, 4.57399988174438, 3.875, 6.6350002288818395, 4.69500017166138, 6.59899997711182, 6.4520001411438, 6.375, 7.537000179290769, 4.31500005722046, 5.61100006103516, 6.57800006866455]}],                        {"margin": {"b": 0, "l": 0, "r": 0, "t": 0}, "scene": {"xaxis": {"title": {"text": "Economy..GDP.per.Capita."}}, "yaxis": {"title": {"text": "Freedom"}}, "zaxis": {"title": {"text": "Happiness.Score"}}}, "template": {"data": {"bar": [{"error_x": {"color": "#2a3f5f"}, "error_y": {"color": "#2a3f5f"}, "marker": {"line": {"color": "#E5ECF6", "width": 0.5}}, "type": "bar"}], "barpolar": [{"marker": {"line": {"color": "#E5ECF6", "width": 0.5}}, "type": "barpolar"}], "carpet": [{"aaxis": {"endlinecolor": "#2a3f5f", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "#2a3f5f"}, "baxis": {"endlinecolor": "#2a3f5f", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "#2a3f5f"}, "type": "carpet"}], "choropleth": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "choropleth"}], "contour": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "contour"}], "contourcarpet": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "contourcarpet"}], "heatmap": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "heatmap"}], "heatmapgl": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "heatmapgl"}], "histogram": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "histogram"}], "histogram2d": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "histogram2d"}], "histogram2dcontour": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "histogram2dcontour"}], "mesh3d": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "mesh3d"}], "parcoords": [{"line": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "parcoords"}], "pie": [{"automargin": true, "type": "pie"}], "scatter": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatter"}], "scatter3d": [{"line": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatter3d"}], "scattercarpet": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattercarpet"}], "scattergeo": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattergeo"}], "scattergl": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattergl"}], "scattermapbox": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattermapbox"}], "scatterpolar": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterpolar"}], "scatterpolargl": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterpolargl"}], "scatterternary": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterternary"}], "surface": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "surface"}], "table": [{"cells": {"fill": {"color": "#EBF0F8"}, "line": {"color": "white"}}, "header": {"fill": {"color": "#C8D4E3"}, "line": {"color": "white"}}, "type": "table"}]}, "layout": {"annotationdefaults": {"arrowcolor": "#2a3f5f", "arrowhead": 0, "arrowwidth": 1}, "coloraxis": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "colorscale": {"diverging": [[0, "#8e0152"], [0.1, "#c51b7d"], [0.2, "#de77ae"], [0.3, "#f1b6da"], [0.4, "#fde0ef"], [0.5, "#f7f7f7"], [0.6, "#e6f5d0"], [0.7, "#b8e186"], [0.8, "#7fbc41"], [0.9, "#4d9221"], [1, "#276419"]], "sequential": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "sequentialminus": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]]}, "colorway": ["#636efa", "#EF553B", "#00cc96", "#ab63fa", "#FFA15A", "#19d3f3", "#FF6692", "#B6E880", "#FF97FF", "#FECB52"], "font": {"color": "#2a3f5f"}, "geo": {"bgcolor": "white", "lakecolor": "white", "landcolor": "#E5ECF6", "showlakes": true, "showland": true, "subunitcolor": "white"}, "hoverlabel": {"align": "left"}, "hovermode": "closest", "mapbox": {"style": "light"}, "paper_bgcolor": "white", "plot_bgcolor": "#E5ECF6", "polar": {"angularaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "bgcolor": "#E5ECF6", "radialaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}}, "scene": {"xaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}, "yaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}, "zaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}}, "shapedefaults": {"line": {"color": "#2a3f5f"}}, "ternary": {"aaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "baxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "bgcolor": "#E5ECF6", "caxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}}, "title": {"x": 0.05}, "xaxis": {"automargin": true, "gridcolor": "white", "linecolor": "white", "ticks": "", "title": {"standoff": 15}, "zerolinecolor": "white", "zerolinewidth": 2}, "yaxis": {"automargin": true, "gridcolor": "white", "linecolor": "white", "ticks": "", "title": {"standoff": 15}, "zerolinecolor": "white", "zerolinewidth": 2}}}, "title": {"text": "Date Sets"}},                        {"responsive": true}                    ).then(function(){
-
+                            
 var gd = document.getElementById('8b96cf0c-0dbb-4975-9b5c-948718549e5d');
 var x = new MutationObserver(function (mutations, observer) {{
         var display = window.getComputedStyle(gd).display;
@@ -1977,7 +1640,7 @@ Test error: 0.22013
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><div>                            <div id="64593fa3-cf93-43a6-9c9a-41cb14438cd5" class="plotly-graph-div" style="height:525px; width:100%;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("64593fa3-cf93-43a6-9c9a-41cb14438cd5")) {                    Plotly.newPlot(                        "64593fa3-cf93-43a6-9c9a-41cb14438cd5",                        [{"marker": {"line": {"color": "rgb(255, 255, 255)", "width": 1}, "opacity": 1, "size": 10}, "mode": "markers", "name": "Actual", "type": "scatter3d", "x": [1.6263433694839498, 0.23430564999580397, 0.479309022426605, 1.35268235206604, 1.3151752948761002, 0.233442038297653, 0.521021246910095, 1.47920441627502, 0.9910123944282528, 1.07937383651733, 0.511135876178741, 0.85769921541214, 0.11904179304838199, 0.667224824428558, 0.35022771358490007, 0.39724862575531, 1.4844149351120002, 1.05469870567322, 0.476180493831635, 1.06931757926941, 0.368745893239975, 1.12112903594971, 1.1536017656326298, 1.1614590883255, 1.00082039833069, 0.995538592338562, 0.36711055040359497, 0.989701807498932, 1.1893955469131499, 0.368610262870789, 0.305808693170547, 1.480633020401, 0.401477217674255, 0.907975316047668, 1.1982102394104, 0.951484382152557, 1.07498753070831, 0.9097844958305359, 0.833756566047668, 1.48792338371277, 1.0272358655929599, 1.54625928401947, 1.44357192516327, 0.982409417629242, 1.55167484283447, 1.4884122610092199, 1.4336265325546298, 1.2860119342803997, 0.6030489206314089, 0.0, 0.786441087722778, 1.40167844295502, 0.6364067792892459, 1.38439786434174, 0.6595166921615601, 0.89465194940567, 1.08116579055786, 1.44163393974304, 0.8089642524719242, 1.15687310695648, 1.3950666189193701, 1.10970628261566, 1.49438726902008, 0.730573117733002, 0.8584281802177429, 1.63295245170593, 1.4870972633361799, 0.783756256103516, 0.560479462146759, 0.8781145811080929, 1.29178786277771, 1.2175596952438401, 1.43092346191406, 1.69227766990662, 0.36842092871666, 0.24454993009567302, 1.12786877155304, 0.0921023488044739, 0.996192753314972, 0.6017650961875921, 1.15655755996704, 0.737299203872681, 0.524713635444641, 1.1982743740081798, 1.00985014438629, 0.872001945972443, 1.21768391132355, 1.12209415435791, 0.885416388511658, 1.3412059545516999, 0.16192533075809498, 0.7885475754737851, 1.06457793712616, 0.43108540773391707, 0.932537317276001, 1.1018030643463101, 1.36135590076447, 0.950612664222717, 0.7268835306167599, 1.3753824234008798, 1.5649795532226598, 0.777153134346008, 0.479820191860199, 1.53062355518341, 1.1027104854583702, 0.7288706302642819, 1.28177809715271, 1.00726580619812, 1.29121541976929, 1.4637807607650801, 0.5916834473609921, 0.43801298737525896, 1.3469113111496, 0.964434325695038, 0.37584653496742204, 1.1073532104492199, 0.564305365085602, 1.18529546260834, 1.23374843597412, 1.8707656860351598, 1.6164631843566901, 0.7922212481498722, 1.3208793401718102, 1.1531838178634601], "y": [0.60834527015686, 0.48079109191894503, 0.37792226672172496, 0.49094617366790794, 0.498465299606323, 0.466914653778076, 0.390661299228668, 0.611100912094116, 0.418421149253845, 0.55258983373642, 0.390017777681351, 0.585214674472809, 0.33288118243217496, 0.423026293516159, 0.32436785101890603, 0.147062435746193, 0.601607382297516, 0.479246735572815, 0.306613743305206, 0.20871552824974102, 0.5818438529968261, 0.194989055395126, 0.39815583825111406, 0.28923171758651695, 0.4551981985569, 0.443323463201523, 0.514492034912109, 0.28211015462875394, 0.491247326135635, 0.0303698573261499, 0.18919676542282102, 0.6271626353263849, 0.106179520487785, 0.5475093722343439, 0.31232857704162603, 0.260287940502167, 0.28851598501205394, 0.432452529668808, 0.5587329268455511, 0.562511384487152, 0.39414396882057207, 0.505740523338318, 0.6179508566856379, 0.204403176903725, 0.490968644618988, 0.536746919155121, 0.361466586589813, 0.17586351931095098, 0.4477061927318571, 0.270842045545578, 0.6582486629486078, 0.257921665906906, 0.461603492498398, 0.408781230449677, 0.0149958552792668, 0.12297477573156401, 0.47278770804405196, 0.508190035820007, 0.4350258708000179, 0.24932260811328896, 0.256450712680817, 0.580131649971008, 0.612924098968506, 0.348079860210419, 0.0, 0.49633759260177596, 0.567766189575195, 0.394952565431595, 0.45276376605033897, 0.408158332109451, 0.520342111587524, 0.5793922543525699, 0.470222115516663, 0.549840569496155, 0.318697690963745, 0.348587512969971, 0.580200731754303, 0.235961347818375, 0.381498634815216, 0.633375823497772, 0.295400261878967, 0.447551846504211, 0.47156670689582797, 0.300740599632263, 0.561213254928589, 0.5313106179237371, 0.457003742456436, 0.505196332931519, 0.5015376806259161, 0.572575807571411, 0.36365869641304, 0.571055591106415, 0.325905978679657, 0.42596277594566295, 0.473507791757584, 0.465733230113983, 0.518630743026733, 0.309410035610199, 0.23521526157856, 0.40598860383033797, 0.620070576667786, 0.0815394446253777, 0.44030594825744607, 0.449750572443008, 0.288555532693863, 0.24072904884815197, 0.373783111572266, 0.289680689573288, 0.40226498246192893, 0.5397707223892211, 0.24946372210979503, 0.16234202682972002, 0.47120362520217896, 0.520303547382355, 0.336384207010269, 0.437453746795654, 0.430388748645782, 0.49451920390129106, 0.550026834011078, 0.604130983352661, 0.635422587394714, 0.469987004995346, 0.479131430387497, 0.412730008363724], "z": [6.6479997634887695, 4.550000190734861, 4.53499984741211, 6.60900020599365, 5.19500017166138, 3.97000002861023, 3.80800008773804, 7.31599998474121, 5.33599996566772, 5.230000019073491, 3.34899997711182, 5.42999982833862, 3.5329999923706095, 4.11999988555908, 4.03200006484985, 3.5910000801086404, 7.28399991989136, 4.8289999961853, 4.19000005722046, 5.39499998092651, 3.47099995613098, 5.23699998855591, 5.234000205993651, 4.71400022506714, 6.00799989700317, 5.26200008392334, 4.54500007629395, 4.7350001335144, 5.62900018692017, 3.6029999256133998, 3.64400005340576, 7.50400018692017, 3.7939999103546103, 5.955999851226809, 4.46500015258789, 5.27899980545044, 5.22499990463257, 6.002999782562259, 5.82299995422363, 6.9510002136230495, 4.95499992370605, 6.993000030517581, 7.468999862670901, 5.18200016021729, 5.47200012207031, 6.08699989318848, 6.42199993133545, 5.32399988174438, 4.17999982833862, 2.69300007820129, 5.97100019454956, 5.837999820709231, 4.513999938964839, 6.40299987792969, 4.138999938964839, 4.09600019454956, 5.2729997634887695, 6.71400022506714, 4.29099988937378, 4.69199991226196, 5.96400022506714, 7.0789999961853, 7.28399991989136, 5.1810002326965305, 3.79500007629395, 6.10500001907349, 7.00600004196167, 5.07399988174438, 4.55299997329712, 5.2350001335144, 5.97300004959106, 6.4539999961853, 6.44199991226196, 6.57200002670288, 4.70900011062622, 3.50699996948242, 6.4239997863769505, 4.2800002098083505, 4.64400005340576, 4.1680002212524405, 5.5689997673034695, 6.07100009918213, 5.04099988937378, 5.5, 4.44000005722046, 6.4539999961853, 5.824999809265139, 3.7660000324249303, 5.01100015640259, 5.75799989700317, 4.02799987792969, 5.07399988174438, 5.175000190734861, 3.65700006484985, 5.493000030517581, 5.525000095367429, 6.1680002212524405, 4.28599977493286, 5.26900005340576, 7.212999820709231, 7.49399995803833, 3.46199989318848, 4.961999893188481, 6.343999862670901, 4.49700021743774, 5.837999820709231, 5.962999820709231, 4.80499982833862, 6.08400011062622, 6.89099979400635, 3.59299993515015, 3.9360001087188703, 5.80999994277954, 4.57399988174438, 3.875, 6.6350002288818395, 4.69500017166138, 6.59899997711182, 6.4520001411438, 6.375, 7.537000179290769, 4.31500005722046, 5.61100006103516, 6.57800006866455]}, {"marker": {"size": 1}, "mode": "markers", "name": "Prediction Plane", "opacity": 0.8, "surfaceaxis": 2, "type": "scatter3d", "x": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.20786285400390664, 0.20786285400390664, 0.20786285400390664, 0.20786285400390664, 0.20786285400390664, 0.20786285400390664, 0.20786285400390664, 0.20786285400390664, 0.20786285400390664, 0.20786285400390664, 0.4157257080078133, 0.4157257080078133, 0.4157257080078133, 0.4157257080078133, 0.4157257080078133, 0.4157257080078133, 0.4157257080078133, 0.4157257080078133, 0.4157257080078133, 0.4157257080078133, 0.6235885620117199, 0.6235885620117199, 0.6235885620117199, 0.6235885620117199, 0.6235885620117199, 0.6235885620117199, 0.6235885620117199, 0.6235885620117199, 0.6235885620117199, 0.6235885620117199, 0.8314514160156266, 0.8314514160156266, 0.8314514160156266, 0.8314514160156266, 0.8314514160156266, 0.8314514160156266, 0.8314514160156266, 0.8314514160156266, 0.8314514160156266, 0.8314514160156266, 1.0393142700195332, 1.0393142700195332, 1.0393142700195332, 1.0393142700195332, 1.0393142700195332, 1.0393142700195332, 1.0393142700195332, 1.0393142700195332, 1.0393142700195332, 1.0393142700195332, 1.2471771240234397, 1.2471771240234397, 1.2471771240234397, 1.2471771240234397, 1.2471771240234397, 1.2471771240234397, 1.2471771240234397, 1.2471771240234397, 1.2471771240234397, 1.2471771240234397, 1.4550399780273464, 1.4550399780273464, 1.4550399780273464, 1.4550399780273464, 1.4550399780273464, 1.4550399780273464, 1.4550399780273464, 1.4550399780273464, 1.4550399780273464, 1.4550399780273464, 1.662902832031253, 1.662902832031253, 1.662902832031253, 1.662902832031253, 1.662902832031253, 1.662902832031253, 1.662902832031253, 1.662902832031253, 1.662902832031253, 1.662902832031253, 1.8707656860351598, 1.8707656860351598, 1.8707656860351598, 1.8707656860351598, 1.8707656860351598, 1.8707656860351598, 1.8707656860351598, 1.8707656860351598, 1.8707656860351598, 1.8707656860351598], "y": [0.0, 0.07313874032762309, 0.14627748065524618, 0.21941622098286928, 0.29255496131049236, 0.36569370163811543, 0.43883244196573856, 0.5119711822933616, 0.5851099226209847, 0.6582486629486078, 0.0, 0.07313874032762309, 0.14627748065524618, 0.21941622098286928, 0.29255496131049236, 0.36569370163811543, 0.43883244196573856, 0.5119711822933616, 0.5851099226209847, 0.6582486629486078, 0.0, 0.07313874032762309, 0.14627748065524618, 0.21941622098286928, 0.29255496131049236, 0.36569370163811543, 0.43883244196573856, 0.5119711822933616, 0.5851099226209847, 0.6582486629486078, 0.0, 0.07313874032762309, 0.14627748065524618, 0.21941622098286928, 0.29255496131049236, 0.36569370163811543, 0.43883244196573856, 0.5119711822933616, 0.5851099226209847, 0.6582486629486078, 0.0, 0.07313874032762309, 0.14627748065524618, 0.21941622098286928, 0.29255496131049236, 0.36569370163811543, 0.43883244196573856, 0.5119711822933616, 0.5851099226209847, 0.6582486629486078, 0.0, 0.07313874032762309, 0.14627748065524618, 0.21941622098286928, 0.29255496131049236, 0.36569370163811543, 0.43883244196573856, 0.5119711822933616, 0.5851099226209847, 0.6582486629486078, 0.0, 0.07313874032762309, 0.14627748065524618, 0.21941622098286928, 0.29255496131049236, 0.36569370163811543, 0.43883244196573856, 0.5119711822933616, 0.5851099226209847, 0.6582486629486078, 0.0, 0.07313874032762309, 0.14627748065524618, 0.21941622098286928, 0.29255496131049236, 0.36569370163811543, 0.43883244196573856, 0.5119711822933616, 0.5851099226209847, 0.6582486629486078, 0.0, 0.07313874032762309, 0.14627748065524618, 0.21941622098286928, 0.29255496131049236, 0.36569370163811543, 0.43883244196573856, 0.5119711822933616, 0.5851099226209847, 0.6582486629486078, 0.0, 0.07313874032762309, 0.14627748065524618, 0.21941622098286928, 0.29255496131049236, 0.36569370163811543, 0.43883244196573856, 0.5119711822933616, 0.5851099226209847, 0.6582486629486078], "z": [2.530679699877842, 2.6972032302582836, 2.863726760638725, 3.0302502910191667, 3.196773821399608, 3.36329735178005, 3.5298208821604917, 3.6963444125409333, 3.862867942921375, 4.029391473301817, 2.920548657386404, 3.0870721877668457, 3.253595718147287, 3.4201192485277288, 3.5866427789081703, 3.753166309288612, 3.919689839669054, 4.086213370049496, 4.252736900429937, 4.419260430810379, 3.310417614894966, 3.4769411452754078, 3.6434646756558493, 3.809988206036291, 3.9765117364167324, 4.143035266797174, 4.3095587971776155, 4.476082327558057, 4.642605857938499, 4.80912938831894, 3.700286572403528, 3.8668101027839694, 4.0333336331644105, 4.199857163544853, 4.3663806939252945, 4.532904224305736, 4.699427754686178, 4.865951285066619, 5.032474815447061, 5.198998345827502, 4.09015552991209, 4.256679060292532, 4.4232025906729735, 4.589726121053415, 4.756249651433857, 4.922773181814298, 5.08929671219474, 5.255820242575181, 5.422343772955623, 5.588867303336064, 4.480024487420652, 4.646548017801093, 4.813071548181535, 4.979595078561977, 5.146118608942419, 5.31264213932286, 5.479165669703302, 5.645689200083743, 5.812212730464185, 5.978736260844626, 4.869893444929214, 5.036416975309655, 5.202940505690097, 5.369464036070538, 5.53598756645098, 5.702511096831422, 5.869034627211864, 6.035558157592305, 6.202081687972747, 6.3686052183531885, 5.259762402437776, 5.426285932818217, 5.592809463198659, 5.7593329935791004, 5.925856523959542, 6.0923800543399835, 6.258903584720425, 6.425427115100867, 6.591950645481308, 6.758474175861751, 5.649631359946338, 5.8161548903267795, 5.982678420707221, 6.1492019510876625, 6.315725481468104, 6.4822490118485465, 6.648772542228988, 6.81529607260943, 6.981819602989871, 7.148343133370313, 6.0395003174549, 6.2060238478353416, 6.372547378215783, 6.539070908596225, 6.705594438976666, 6.872117969357108, 7.038641499737549, 7.205165030117991, 7.371688560498432, 7.538212090878875]}],                        {"margin": {"b": 0, "l": 0, "r": 0, "t": 0}, "scene": {"xaxis": {"title": {"text": "Economy..GDP.per.Capita."}}, "yaxis": {"title": {"text": "Freedom"}}, "zaxis": {"title": {"text": "Happiness.Score"}}}, "template": {"data": {"bar": [{"error_x": {"color": "#2a3f5f"}, "error_y": {"color": "#2a3f5f"}, "marker": {"line": {"color": "#E5ECF6", "width": 0.5}}, "type": "bar"}], "barpolar": [{"marker": {"line": {"color": "#E5ECF6", "width": 0.5}}, "type": "barpolar"}], "carpet": [{"aaxis": {"endlinecolor": "#2a3f5f", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "#2a3f5f"}, "baxis": {"endlinecolor": "#2a3f5f", "gridcolor": "white", "linecolor": "white", "minorgridcolor": "white", "startlinecolor": "#2a3f5f"}, "type": "carpet"}], "choropleth": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "choropleth"}], "contour": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "contour"}], "contourcarpet": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "contourcarpet"}], "heatmap": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "heatmap"}], "heatmapgl": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "heatmapgl"}], "histogram": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "histogram"}], "histogram2d": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "histogram2d"}], "histogram2dcontour": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "histogram2dcontour"}], "mesh3d": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "type": "mesh3d"}], "parcoords": [{"line": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "parcoords"}], "pie": [{"automargin": true, "type": "pie"}], "scatter": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatter"}], "scatter3d": [{"line": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatter3d"}], "scattercarpet": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattercarpet"}], "scattergeo": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattergeo"}], "scattergl": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattergl"}], "scattermapbox": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scattermapbox"}], "scatterpolar": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterpolar"}], "scatterpolargl": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterpolargl"}], "scatterternary": [{"marker": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "type": "scatterternary"}], "surface": [{"colorbar": {"outlinewidth": 0, "ticks": ""}, "colorscale": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "type": "surface"}], "table": [{"cells": {"fill": {"color": "#EBF0F8"}, "line": {"color": "white"}}, "header": {"fill": {"color": "#C8D4E3"}, "line": {"color": "white"}}, "type": "table"}]}, "layout": {"annotationdefaults": {"arrowcolor": "#2a3f5f", "arrowhead": 0, "arrowwidth": 1}, "coloraxis": {"colorbar": {"outlinewidth": 0, "ticks": ""}}, "colorscale": {"diverging": [[0, "#8e0152"], [0.1, "#c51b7d"], [0.2, "#de77ae"], [0.3, "#f1b6da"], [0.4, "#fde0ef"], [0.5, "#f7f7f7"], [0.6, "#e6f5d0"], [0.7, "#b8e186"], [0.8, "#7fbc41"], [0.9, "#4d9221"], [1, "#276419"]], "sequential": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]], "sequentialminus": [[0.0, "#0d0887"], [0.1111111111111111, "#46039f"], [0.2222222222222222, "#7201a8"], [0.3333333333333333, "#9c179e"], [0.4444444444444444, "#bd3786"], [0.5555555555555556, "#d8576b"], [0.6666666666666666, "#ed7953"], [0.7777777777777778, "#fb9f3a"], [0.8888888888888888, "#fdca26"], [1.0, "#f0f921"]]}, "colorway": ["#636efa", "#EF553B", "#00cc96", "#ab63fa", "#FFA15A", "#19d3f3", "#FF6692", "#B6E880", "#FF97FF", "#FECB52"], "font": {"color": "#2a3f5f"}, "geo": {"bgcolor": "white", "lakecolor": "white", "landcolor": "#E5ECF6", "showlakes": true, "showland": true, "subunitcolor": "white"}, "hoverlabel": {"align": "left"}, "hovermode": "closest", "mapbox": {"style": "light"}, "paper_bgcolor": "white", "plot_bgcolor": "#E5ECF6", "polar": {"angularaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "bgcolor": "#E5ECF6", "radialaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}}, "scene": {"xaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}, "yaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}, "zaxis": {"backgroundcolor": "#E5ECF6", "gridcolor": "white", "gridwidth": 2, "linecolor": "white", "showbackground": true, "ticks": "", "zerolinecolor": "white"}}, "shapedefaults": {"line": {"color": "#2a3f5f"}}, "ternary": {"aaxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "baxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}, "bgcolor": "#E5ECF6", "caxis": {"gridcolor": "white", "linecolor": "white", "ticks": ""}}, "title": {"x": 0.05}, "xaxis": {"automargin": true, "gridcolor": "white", "linecolor": "white", "ticks": "", "title": {"standoff": 15}, "zerolinecolor": "white", "zerolinewidth": 2}, "yaxis": {"automargin": true, "gridcolor": "white", "linecolor": "white", "ticks": "", "title": {"standoff": 15}, "zerolinecolor": "white", "zerolinewidth": 2}}}, "title": {"text": "Date Sets"}},                        {"responsive": true}                    ).then(function(){
-
+                            
 var gd = document.getElementById('64593fa3-cf93-43a6-9c9a-41cb14438cd5');
 var x = new MutationObserver(function (mutations, observer) {{
         var display = window.getComputedStyle(gd).display;
@@ -2002,9 +1665,9 @@ if (outputEl) {{
 
                         })                };                });            </script>        </div></div></div>
 </div>
-</div>
-<div class="section" id="pros-cons-of-analytical-approach">
-<h3>Pros/cons of analytical approach<a class="headerlink" href="#pros-cons-of-analytical-approach" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="pros-cons-of-analytical-approach">
+<h3>Pros/cons of analytical approach<a class="headerlink" href="#pros-cons-of-analytical-approach" title="Permalink to this heading">#</a></h3>
 <p>Pros:</p>
 <ul class="simple">
 <li><p>Computed in one step.</p></li>
@@ -2015,12 +1678,12 @@ if (outputEl) {{
 <li><p>Computation of <span class="math notranslate nohighlight">\((\pmb{X}^T\pmb{X})^{-1}\)</span> is slow when the number of features is large (<span class="math notranslate nohighlight">\(n &gt; 10^4\)</span>).</p></li>
 <li><p>Doesn’t work if <span class="math notranslate nohighlight">\(\pmb{X}^T\pmb{X}\)</span> is not inversible.</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="iterative-approach-gradient-descent">
-<h2>Iterative approach: gradient descent<a class="headerlink" href="#iterative-approach-gradient-descent" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="method-description">
-<h3>Method description<a class="headerlink" href="#method-description" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="iterative-approach-gradient-descent">
+<h2>Iterative approach: gradient descent<a class="headerlink" href="#iterative-approach-gradient-descent" title="Permalink to this heading">#</a></h2>
+<section id="method-description">
+<h3>Method description<a class="headerlink" href="#method-description" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Same objective: find the <span class="math notranslate nohighlight">\(\pmb{\theta}^{*}\)</span> vector that minimizes the loss.</p></li>
 <li><p>General idea:</p>
@@ -2031,9 +1694,9 @@ if (outputEl) {{
 </li>
 <li><p>To know in which direction update <span class="math notranslate nohighlight">\(\pmb{\theta}\)</span>, we compute the <strong>gradient</strong> of the loss function w.r.t. <span class="math notranslate nohighlight">\(\pmb{\theta}\)</span> and go into the opposite direction.</p></li>
 </ul>
-</div>
-<div class="section" id="computation-of-gradients">
-<h3>Computation of gradients<a class="headerlink" href="#computation-of-gradients" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="computation-of-gradients">
+<h3>Computation of gradients<a class="headerlink" href="#computation-of-gradients" title="Permalink to this heading">#</a></h3>
 <div class="math notranslate nohighlight">
 \[\begin{split}\nabla_{\theta}\mathcal{L}(\pmb{\theta}) = \begin{pmatrix}
        \ \frac{\partial}{\partial \theta_0} \mathcal{L}(\theta) \\
@@ -2043,20 +1706,20 @@ if (outputEl) {{
      \end{pmatrix} =
 \frac{2}{m}\pmb{X}^T\left(\pmb{X}\pmb{\theta} - \pmb{y}\right)\end{split}\]</div>
 <p>(See math proof above)</p>
-</div>
-<div class="section" id="parameters-update">
-<h3>Parameters update<a class="headerlink" href="#parameters-update" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="parameters-update">
+<h3>Parameters update<a class="headerlink" href="#parameters-update" title="Permalink to this heading">#</a></h3>
 <p>The <strong><em>learning rate</em></strong> <span class="math notranslate nohighlight">\(\eta\)</span> governs the amplitude of updates.</p>
 <div class="math notranslate nohighlight">
 \[\pmb{\theta}_{next} = \pmb{\theta} - \eta\nabla_{\theta}\mathcal{L}(\pmb{\theta})\]</div>
 <p><a class="reference external" href="https://www.jeremyjordan.me/nn-learning-rate/"><img alt="Importance of learning rate" src="../_images/learning_rate.png" /></a></p>
-</div>
-<div class="section" id="interactive-example">
-<h3>Interactive example<a class="headerlink" href="#interactive-example" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="interactive-example">
+<h3>Interactive example<a class="headerlink" href="#interactive-example" title="Permalink to this heading">#</a></h3>
 <p><a class="reference external" href="https://alykhantejani.github.io/a-brief-introduction-to-gradient-descent/"><img alt="Gradient descent line graph" src="../_images/gradient_descent_line_graph.gif" /></a></p>
-</div>
-<div class="section" id="gradient-descent-types">
-<h3>Gradient descent types<a class="headerlink" href="#gradient-descent-types" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="gradient-descent-types">
+<h3>Gradient descent types<a class="headerlink" href="#gradient-descent-types" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p><em>Batch</em>: use the whole dataset to compute gradients.</p>
 <ul>
@@ -2074,9 +1737,9 @@ if (outputEl) {{
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="example-applying-stochastic-gradient-descent-to-predict-country-happiness">
-<h3>Example: applying stochastic gradient descent to predict country happiness<a class="headerlink" href="#example-applying-stochastic-gradient-descent-to-predict-country-happiness" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="example-applying-stochastic-gradient-descent-to-predict-country-happiness">
+<h3>Example: applying stochastic gradient descent to predict country happiness<a class="headerlink" href="#example-applying-stochastic-gradient-descent-to-predict-country-happiness" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a Linear Regression model (based on Stochastic Gradient Descent)</span>
@@ -2110,12 +1773,12 @@ Test error: 0.40978
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/linear_regression_60_0.png" src="../_images/linear_regression_60_0.png" />
+<img alt="../_images/75c462afb2a614161583f4a41ef325b1ee59751bb4aaffe329c7621e4727e658.png" src="../_images/75c462afb2a614161583f4a41ef325b1ee59751bb4aaffe329c7621e4727e658.png" />
 </div>
 </div>
-</div>
-<div class="section" id="pros-cons-of-iterative-approach">
-<h3>Pros/cons of iterative approach<a class="headerlink" href="#pros-cons-of-iterative-approach" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="pros-cons-of-iterative-approach">
+<h3>Pros/cons of iterative approach<a class="headerlink" href="#pros-cons-of-iterative-approach" title="Permalink to this heading">#</a></h3>
 <p>Pros:</p>
 <ul class="simple">
 <li><p>Works well with a large number of features.</p></li>
@@ -2126,21 +1789,21 @@ Test error: 0.40978
 <li><p>Convergence depends on learning rate and GD type.</p></li>
 <li><p>Dependant on feature scaling.</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="polynomial-regression">
-<h2>Polynomial Regression<a class="headerlink" href="#polynomial-regression" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="general-idea">
-<h3>General idea<a class="headerlink" href="#general-idea" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="polynomial-regression">
+<h2>Polynomial Regression<a class="headerlink" href="#polynomial-regression" title="Permalink to this heading">#</a></h2>
+<section id="general-idea">
+<h3>General idea<a class="headerlink" href="#general-idea" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>How can a linear model fit non-linear data?</p></li>
 <li><p>Solution: add powers of each feature as new features.</p></li>
 <li><p>The hypothesis function is still linear.</p></li>
 <li><p>High-degree polynomial regression can be subject to severe overfitting.</p></li>
 </ul>
-</div>
-<div class="section" id="example-fitting-a-quadratic-curve-with-polynomial-regression">
-<h3>Example: fitting a quadratic curve with polynomial regression<a class="headerlink" href="#example-fitting-a-quadratic-curve-with-polynomial-regression" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="example-fitting-a-quadratic-curve-with-polynomial-regression">
+<h3>Example: fitting a quadratic curve with polynomial regression<a class="headerlink" href="#example-fitting-a-quadratic-curve-with-polynomial-regression" title="Permalink to this heading">#</a></h3>
 <p>(Heavily inspired by Chapter 4 of <a class="reference external" href="https://github.com/ageron/handson-ml2">Hands-On Machine Learning</a> by Aurélien Géron)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2167,7 +1830,7 @@ Test error: 0.40978
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/linear_regression_66_0.png" src="../_images/linear_regression_66_0.png" />
+<img alt="../_images/0bbe139d1fe494fa28e5f07f95abe3cf130f1f894802f4cb66225e2a6e9476ed.png" src="../_images/0bbe139d1fe494fa28e5f07f95abe3cf130f1f894802f4cb66225e2a6e9476ed.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2223,15 +1886,15 @@ New features for first sample: [-1.7196066   2.95704685]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/linear_regression_69_0.png" src="../_images/linear_regression_69_0.png" />
+<img alt="../_images/dabd7294bcbac4a7de8fa50e381e3fcc7f20c72fed4b10712d442ce46221fd9b.png" src="../_images/dabd7294bcbac4a7de8fa50e381e3fcc7f20c72fed4b10712d442ce46221fd9b.png" />
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="regularization">
-<h2>Regularization<a class="headerlink" href="#regularization" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="id2">
-<h3>General idea<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="regularization">
+<h2>Regularization<a class="headerlink" href="#regularization" title="Permalink to this heading">#</a></h2>
+<section id="id2">
+<h3>General idea<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Solution against overfitting: constraining model parameters to take small values.</p></li>
 <li><p><em>Ridge regression</em> (using l2 norm):</p></li>
@@ -2246,9 +1909,9 @@ New features for first sample: [-1.7196066   2.95704685]
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\lambda\)</span> is called the <strong>regularization rate</strong>.</p></li>
 </ul>
-</div>
-<div class="section" id="example-observing-the-effects-of-regularization-rate">
-<h3>Example: observing the effects of regularization rate<a class="headerlink" href="#example-observing-the-effects-of-regularization-rate" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="example-observing-the-effects-of-regularization-rate">
+<h3>Example: observing the effects of regularization rate<a class="headerlink" href="#example-observing-the-effects-of-regularization-rate" title="Permalink to this heading">#</a></h3>
 <p>(Heavily inspired by Chapter 4 of <a class="reference external" href="https://github.com/ageron/handson-ml2">Hands-On Machine Learning</a> by Aurélien Géron)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2261,6 +1924,11 @@ New features for first sample: [-1.7196066   2.95704685]
 </div>
 </div>
 <div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_model</span><span class="p">(</span><span class="n">model_class</span><span class="p">,</span> <span class="n">polynomial</span><span class="p">,</span> <span class="n">lambdas</span><span class="p">,</span> <span class="o">**</span><span class="n">model_kargs</span><span class="p">):</span>
     <span class="c1"># Plot data and predictions for several regularization rates</span>
@@ -2283,6 +1951,7 @@ New features for first sample: [-1.7196066   2.95704685]
 </pre></div>
 </div>
 </div>
+</details>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2300,12 +1969,12 @@ New features for first sample: [-1.7196066   2.95704685]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/linear_regression_75_0.png" src="../_images/linear_regression_75_0.png" />
+<img alt="../_images/535de8e4d743252af80e39ff2aae066969cd5e8ccf84ba3594af70e494a095e3.png" src="../_images/535de8e4d743252af80e39ff2aae066969cd5e8ccf84ba3594af70e494a095e3.png" />
 </div>
 </div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -2319,7 +1988,7 @@ New features for first sample: [-1.7196066   2.95704685]
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./algorithms"
         },
         predefinedOutput: true
@@ -2327,44 +1996,154 @@ New features for first sample: [-1.7196066   2.95704685]
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="k_nearest_neighbors.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">K-Nearest Neighbors</p>
-        </div>
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="k_nearest_neighbors.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">K-Nearest Neighbors</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="logistic_regression.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="logistic_regression.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Logistic Regression</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
-</div>
-            
-        </div>
-    </div>
-    <footer class="footer">
-  <p>
-    
-      By Baptiste Pesquet<br/>
-    
-        &copy; Copyright 2021.<br/>
-  </p>
-</footer>
-</main>
-
-
       </div>
-    </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+</div>
 
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup">Environment setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression-in-a-nutshell">Linear regression in a nutshell</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-formulation">Problem formulation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-using-a-linear-model-to-predict-country-happiness">Example: using a linear model to predict country happiness</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-loading-and-analysis">Data loading and analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#univariate-regression">Univariate regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-predict-country-happiness-using-only-gdp">Example: predict country happiness using only GDP</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-splitting">Data splitting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-plotting">Data plotting</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analytical-approach-normal-equation">Analytical approach: normal equation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Problem formulation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-function">Loss function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analytical-solution">Analytical solution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#math-proof-optional">Math proof (optional)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#vectorized-notation">Vectorized notation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#vectorized-loss">Vectorized loss</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-gradient">Loss gradient</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#computation-of-loss-gradient-terms">Computation of loss gradient terms</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#final-gradient-expression">Final gradient expression</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-minimization">Loss minimization</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-applying-normal-equation-to-predict-country-happiness">Example: applying Normal Equation to predict country happiness</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multivariate-regression">Multivariate regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pros-cons-of-analytical-approach">Pros/cons of analytical approach</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iterative-approach-gradient-descent">Iterative approach: gradient descent</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-description">Method description</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computation-of-gradients">Computation of gradients</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters-update">Parameters update</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-example">Interactive example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-descent-types">Gradient descent types</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-applying-stochastic-gradient-descent-to-predict-country-happiness">Example: applying stochastic gradient descent to predict country happiness</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pros-cons-of-iterative-approach">Pros/cons of iterative approach</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polynomial-regression">Polynomial Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#general-idea">General idea</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-fitting-a-quadratic-curve-with-polynomial-regression">Example: fitting a quadratic curve with polynomial regression</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regularization">Regularization</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">General idea</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-observing-the-effects-of-regularization-rate">Example: observing the effects of regularization rate</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Baptiste Pesquet
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2021.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>
