@@ -538,7 +538,6 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">platform</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Python version: </span><span class="si">{</span><span class="n">platform</span><span class="o">.</span><span class="n">python_version</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">platform</span><span class="o">.</span><span class="n">python_version_tuple</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="s2">&quot;6&quot;</span><span class="p">)</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -550,8 +549,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Python version: 3.7.5
-NumPy version: 1.18.1
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Python version: 3.11.1
+NumPy version: 1.24.3
 </pre></div>
 </div>
 </div>
@@ -572,7 +571,6 @@ NumPy version: 1.18.1
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sklearn</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;scikit-learn version: </span><span class="si">{</span><span class="n">sklearn</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">__version__</span> <span class="o">&gt;=</span> <span class="s2">&quot;0.20&quot;</span>
 
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
 <span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
@@ -591,7 +589,7 @@ NumPy version: 1.18.1
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>scikit-learn version: 0.22.1
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>scikit-learn version: 1.2.2
 </pre></div>
 </div>
 </div>
@@ -1029,7 +1027,7 @@ memory usage: 1.6+ MB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/90573c2a8cf34ad5aece2263531842b48b228b343463f4ff8d675f4fc4a2cef1.png" src="../_images/90573c2a8cf34ad5aece2263531842b48b228b343463f4ff8d675f4fc4a2cef1.png" />
+<img alt="../_images/e149f5c586f689f11382ce8e4aba59f66759131d706c4da1c82acb57b9b0f719.png" src="../_images/e149f5c586f689f11382ce8e4aba59f66759131d706c4da1c82acb57b9b0f719.png" />
 </div>
 </div>
 </section>
@@ -1085,13 +1083,13 @@ Test dataset: (4128, 10)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/0fdf2f522a460484ef1c9e58f7e4f9f90a31647a6979277a7eb3c35b7dc11a62.png" src="../_images/0fdf2f522a460484ef1c9e58f7e4f9f90a31647a6979277a7eb3c35b7dc11a62.png" />
+<img alt="../_images/8f8121ae0378e9a2f2af547b1310e941eea93dc5200acb9e16577c089e968f38.png" src="../_images/8f8121ae0378e9a2f2af547b1310e941eea93dc5200acb9e16577c089e968f38.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute pairwise correlations of attributes</span>
-<span class="n">corr_matrix</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+<span class="n">corr_matrix</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">numeric_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="n">corr_matrix</span><span class="p">[</span><span class="s2">&quot;median_house_value&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
@@ -1099,14 +1097,14 @@ Test dataset: (4128, 10)
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>median_house_value    1.000000
-median_income         0.686469
-total_rooms           0.138808
-housing_median_age    0.110357
-households            0.069109
-total_bedrooms        0.053311
-population           -0.024133
-longitude            -0.045288
-latitude             -0.146076
+median_income         0.687742
+total_rooms           0.132244
+housing_median_age    0.103216
+households            0.065637
+total_bedrooms        0.049117
+population           -0.025206
+longitude            -0.047266
+latitude             -0.143968
 Name: median_house_value, dtype: float64
 </pre></div>
 </div>
@@ -1126,7 +1124,7 @@ Name: median_house_value, dtype: float64
 
     <span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
     <span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span>
-        <span class="n">df</span><span class="o">.</span><span class="n">corr</span><span class="p">(),</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">numeric_only</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
         <span class="n">vmax</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
         <span class="n">linewidths</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
         <span class="n">square</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
@@ -1151,7 +1149,7 @@ Name: median_house_value, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/4bc7889e76c5f6f6f3cde73edd1ff6618eff37af047bc6732e839d601f930f6b.png" src="../_images/4bc7889e76c5f6f6f3cde73edd1ff6618eff37af047bc6732e839d601f930f6b.png" />
+<img alt="../_images/2a35c6862bd7d76f8946804608d88046207f087130bb999ce7b26c5b728b205c.png" src="../_images/2a35c6862bd7d76f8946804608d88046207f087130bb999ce7b26c5b728b205c.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1169,7 +1167,7 @@ Name: median_house_value, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/acfcb06723396496e57fffdad67c111bf3f6febe6a662e52152854d55b7d331b.png" src="../_images/acfcb06723396496e57fffdad67c111bf3f6febe6a662e52152854d55b7d331b.png" />
+<img alt="../_images/0e66f48c7aa9abe705515ced3e501b1e38ec38fdc59a2439c46fbf36865f1370.png" src="../_images/0e66f48c7aa9abe705515ced3e501b1e38ec38fdc59a2439c46fbf36865f1370.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1184,7 +1182,7 @@ Name: median_house_value, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/1adc32fcd10f4b5f001d2281d8553ad009d7098224640004420523fc45c543bb.png" src="../_images/1adc32fcd10f4b5f001d2281d8553ad009d7098224640004420523fc45c543bb.png" />
+<img alt="../_images/a2b1d01e43221ab48cbe2f757f54dd04b883e8524d91062289d18a0995d35834.png" src="../_images/a2b1d01e43221ab48cbe2f757f54dd04b883e8524d91062289d18a0995d35834.png" />
 </div>
 </div>
 </section>
@@ -1208,24 +1206,24 @@ Name: median_house_value, dtype: float64
 <span class="p">)</span>
 
 <span class="c1"># Re-compute correlations</span>
-<span class="n">corr_matrix</span> <span class="o">=</span> <span class="n">df_housing_eng</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+<span class="n">corr_matrix</span> <span class="o">=</span> <span class="n">df_housing_eng</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">numeric_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">corr_matrix</span><span class="p">[</span><span class="s2">&quot;median_house_value&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>median_house_value          1.000000
-median_income               0.686469
-rooms_per_household         0.149306
-total_rooms                 0.138808
-housing_median_age          0.110357
-households                  0.069109
-total_bedrooms              0.053311
-population_per_household   -0.022527
-population                 -0.024133
-longitude                  -0.045288
-latitude                   -0.146076
-bedrooms_per_room          -0.253823
+median_income               0.687742
+rooms_per_household         0.142882
+total_rooms                 0.132244
+housing_median_age          0.103216
+households                  0.065637
+total_bedrooms              0.049117
+population_per_household   -0.021745
+population                 -0.025206
+longitude                  -0.047266
+latitude                   -0.143968
+bedrooms_per_room          -0.251022
 Name: median_house_value, dtype: float64
 </pre></div>
 </div>
@@ -1313,28 +1311,28 @@ Training labels: (16512,)
   <tbody>
     <tr>
       <th>total_bedrooms</th>
-      <td>164</td>
-      <td>0.993217</td>
+      <td>158</td>
+      <td>0.95688</td>
     </tr>
     <tr>
-      <th>ocean_proximity</th>
+      <th>longitude</th>
       <td>0</td>
-      <td>0.000000</td>
+      <td>0.00000</td>
     </tr>
     <tr>
-      <th>median_income</th>
+      <th>latitude</th>
       <td>0</td>
-      <td>0.000000</td>
+      <td>0.00000</td>
     </tr>
     <tr>
-      <th>households</th>
+      <th>housing_median_age</th>
       <td>0</td>
-      <td>0.000000</td>
+      <td>0.00000</td>
     </tr>
     <tr>
-      <th>population</th>
+      <th>total_rooms</th>
       <td>0</td>
-      <td>0.000000</td>
+      <td>0.00000</td>
     </tr>
   </tbody>
 </table>
@@ -1379,30 +1377,6 @@ Training labels: (16512,)
   </thead>
   <tbody>
     <tr>
-      <th>6421</th>
-      <td>-117.99</td>
-      <td>34.14</td>
-      <td>30.0</td>
-      <td>2346.0</td>
-      <td>NaN</td>
-      <td>1988.0</td>
-      <td>474.0</td>
-      <td>2.5625</td>
-      <td>INLAND</td>
-    </tr>
-    <tr>
-      <th>10389</th>
-      <td>-117.66</td>
-      <td>33.58</td>
-      <td>6.0</td>
-      <td>4186.0</td>
-      <td>NaN</td>
-      <td>1794.0</td>
-      <td>541.0</td>
-      <td>9.6986</td>
-      <td>&lt;1H OCEAN</td>
-    </tr>
-    <tr>
       <th>3778</th>
       <td>-118.40</td>
       <td>34.17</td>
@@ -1415,28 +1389,52 @@ Training labels: (16512,)
       <td>&lt;1H OCEAN</td>
     </tr>
     <tr>
-      <th>19391</th>
-      <td>-120.85</td>
-      <td>37.78</td>
-      <td>25.0</td>
-      <td>421.0</td>
+      <th>6052</th>
+      <td>-117.76</td>
+      <td>34.04</td>
+      <td>34.0</td>
+      <td>1914.0</td>
       <td>NaN</td>
-      <td>303.0</td>
-      <td>106.0</td>
-      <td>2.2679</td>
+      <td>1564.0</td>
+      <td>328.0</td>
+      <td>2.8347</td>
       <td>INLAND</td>
     </tr>
     <tr>
-      <th>18873</th>
-      <td>-122.22</td>
-      <td>38.08</td>
-      <td>37.0</td>
-      <td>2811.0</td>
+      <th>20268</th>
+      <td>-119.18</td>
+      <td>34.19</td>
+      <td>19.0</td>
+      <td>2393.0</td>
       <td>NaN</td>
-      <td>1574.0</td>
-      <td>516.0</td>
-      <td>3.1053</td>
-      <td>NEAR BAY</td>
+      <td>1938.0</td>
+      <td>762.0</td>
+      <td>1.6953</td>
+      <td>NEAR OCEAN</td>
+    </tr>
+    <tr>
+      <th>9622</th>
+      <td>-120.32</td>
+      <td>37.29</td>
+      <td>38.0</td>
+      <td>576.0</td>
+      <td>NaN</td>
+      <td>478.0</td>
+      <td>112.0</td>
+      <td>2.3382</td>
+      <td>INLAND</td>
+    </tr>
+    <tr>
+      <th>19959</th>
+      <td>-119.32</td>
+      <td>36.25</td>
+      <td>21.0</td>
+      <td>1231.0</td>
+      <td>NaN</td>
+      <td>609.0</td>
+      <td>206.0</td>
+      <td>2.8365</td>
+      <td>INLAND</td>
     </tr>
   </tbody>
 </table>
@@ -1473,9 +1471,9 @@ Training labels: (16512,)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[5 5 6]
- [6 6 9]
- [6 5 9]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[9 2 6]
+ [4 5 8]
+ [3 1 6]]
 </pre></div>
 </div>
 </div>
@@ -1495,11 +1493,11 @@ Training labels: (16512,)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[5.66666667 5.33333333 8.        ]
-[[-1.41421356 -0.70710678 -1.41421356]
- [ 0.70710678  1.41421356  0.70710678]
- [ 0.70710678 -0.70710678  0.70710678]]
-Mean: 0.0. Std: 0.9999999999999999
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[5.33333333 2.66666667 6.66666667]
+[[ 1.3970014  -0.39223227 -0.70710678]
+ [-0.50800051  1.37281295  1.41421356]
+ [-0.88900089 -0.98058068 -0.70710678]]
+Mean: -3.700743415417188e-17. Std: 0.9999999999999999
 </pre></div>
 </div>
 </div>
@@ -1548,7 +1546,7 @@ Mean: 0.0. Std: 0.9999999999999999
 <span class="nb">print</span><span class="p">(</span><span class="n">num_features</span><span class="p">)</span>
 
 <span class="c1"># Print categorical features</span>
-<span class="n">cat_features</span> <span class="o">=</span> <span class="n">df_x_train</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">object</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span>
+<span class="n">cat_features</span> <span class="o">=</span> <span class="n">df_x_train</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="nb">object</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">cat_features</span><span class="p">)</span>
 
 <span class="c1"># Print all values for the &quot;ocean_proximity&quot; feature</span>
@@ -1563,12 +1561,13 @@ Mean: 0.0. Std: 0.9999999999999999
 Index([&#39;ocean_proximity&#39;], dtype=&#39;object&#39;)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;1H OCEAN     7327
-INLAND        5217
-NEAR OCEAN    2138
-NEAR BAY      1826
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ocean_proximity
+&lt;1H OCEAN     7300
+INLAND        5265
+NEAR OCEAN    2105
+NEAR BAY      1838
 ISLAND           4
-Name: ocean_proximity, dtype: int64
+Name: count, dtype: int64
 </pre></div>
 </div>
 </div>
@@ -1599,9 +1598,9 @@ Name: ocean_proximity, dtype: int64
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x_train: (16512, 13)
-[ 1.24351974 -1.33959783 -0.28233878  0.59615885  0.75948981  0.14306579
-  0.7138568  -0.57842065  0.          0.          0.          0.
-  1.        ]
+[ 0.903744   -0.79334218  0.89986463 -0.70531782 -0.77310556 -0.86582553
+ -0.80977396  0.65352485  1.          0.          0.          0.
+  0.        ]
 </pre></div>
 </div>
 </div>
@@ -1661,7 +1660,7 @@ Name: ocean_proximity, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training error for linear regression: 69062.44
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training error for linear regression: 68622.30
 </pre></div>
 </div>
 </div>
@@ -1714,8 +1713,8 @@ Name: ocean_proximity, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean CV error for linear regression: 69241.05
-Mean CV error for decision tree: 68909.45
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean CV error for linear regression: 9354050557316944.00
+Mean CV error for decision tree: 68572.80
 </pre></div>
 </div>
 </div>
@@ -1735,8 +1734,8 @@ Mean CV error for decision tree: 68909.45
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training error for random forest: 19590.19
-Mean CV error for random forest: 50300.97
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training error for random forest: 19743.26
+Mean CV error for random forest: 49843.98
 </pre></div>
 </div>
 </div>
@@ -1781,7 +1780,7 @@ Mean CV error for random forest: 50300.97
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;max_features&#39;: 6, &#39;n_estimators&#39;: 30}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;max_features&#39;: 8, &#39;n_estimators&#39;: 30}
 </pre></div>
 </div>
 </div>
@@ -1812,7 +1811,7 @@ Mean CV error for random forest: 50300.97
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test data: (4128, 9)
 Test labels: (4128,)
-Test error for final model: 47968.38
+Test error for final model: 48436.38
 </pre></div>
 </div>
 </div>
@@ -1892,7 +1891,7 @@ Test error for final model: 47968.38
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted result: 290750.07
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted result: 281890.13
 </pre></div>
 </div>
 </div>
