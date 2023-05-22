@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "mlhandbook"
+version = "0.1.0"
+description = "Theorical explanations and Python-based demonstrations for various Machine Learning concepts, techniques and tools"
+authors = ["Baptiste Pesquet <bpesquet@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.7"
+jupyter-book = "^0.15.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
