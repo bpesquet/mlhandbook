@@ -1,4 +1,1 @@
-jupyter-book==0.10.*
-matplotlib
-numpy
-papermill
+jupyter-book==0.15.1
