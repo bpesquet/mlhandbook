@@ -6,7 +6,11 @@ authors = ["Baptiste Pesquet <bpesquet@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.7"
+python = "^3.8"
+numpy = "^1.24.3"
+pandas = "^2.0.1"
+matplotlib = "^3.7.1"
+seaborn = "^0.12.2"
 
 [tool.poetry.group.dev.dependencies]
 jupyter-book = "^0.15.1"
