@@ -1,60 +1,56 @@
-- file: index
+format: jb-book
+root: index
 
+parts:
 - chapters:
-    - url: https://www.bpesquet.fr/mlkatas
-      title: Machine Learning Katas
-
-- part: overview
+  - url: https://www.bpesquet.fr/mlkatas
+    title: Machine Learning Katas
+- caption: overview
   chapters:
-    - file: overview/introduction_to_machine_learning
-    - file: overview/machine_learning_in_action
-    - file: overview/introduction_to_reinforcement_learning
-
-- part: Fundamentals
+  - file: overview/introduction_to_machine_learning
+  - file: overview/machine_learning_in_action
+  - file: overview/introduction_to_reinforcement_learning
+- caption: Fundamentals
   chapters:
-    - file: fundamentals/handling_data
-    - file: fundamentals/assessing_results
-    - file: fundamentals/training_models
-
-- part: Algorithms
+  - file: fundamentals/handling_data
+  - file: fundamentals/assessing_results
+  - file: fundamentals/training_models
+- caption: Algorithms
   chapters:
-    - file: algorithms/classic_ml
-      sections:
-        - file: algorithms/k_nearest_neighbors.ipynb
-        - file: algorithms/linear_regression
-        - file: algorithms/logistic_regression
-        - file: algorithms/decision_trees_and_random_forests
-        - file: algorithms/bayesian_methods
-        - file: algorithms/support_vector_machines
-        - file: algorithms/k_means
-    - file: algorithms/nn_deep_learning
-      sections:
-        - file: algorithms/artificial_neural_networks
-        - file: algorithms/convolutional_neural_networks
-        - file: algorithms/recurrent_neural_networks
-        - file: algorithms/autoencoders
-        - file: algorithms/neural_style_transfer
-        - file: algorithms/generative_adversarial_networks
-        - file: algorithms/transformers
-
-- part: Engineering
+  - file: algorithms/classic_ml
+    sections:
+    - file: algorithms/k_nearest_neighbors.ipynb
+    - file: algorithms/linear_regression
+    - file: algorithms/logistic_regression
+    - file: algorithms/decision_trees_and_random_forests
+    - file: algorithms/bayesian_methods
+    - file: algorithms/support_vector_machines
+    - file: algorithms/k_means
+  - file: algorithms/nn_deep_learning
+    sections:
+    - file: algorithms/artificial_neural_networks
+    - file: algorithms/convolutional_neural_networks
+    - file: algorithms/recurrent_neural_networks
+    - file: algorithms/autoencoders
+    - file: algorithms/neural_style_transfer
+    - file: algorithms/generative_adversarial_networks
+    - file: algorithms/transformers
+- caption: Engineering
   chapters:
-    - file: engineering/introduction_to_mlops
-    - file: engineering/machine_learning_issues
-
-- part: Tools
+  - file: engineering/introduction_to_mlops
+  - file: engineering/machine_learning_issues
+- caption: Tools
   chapters:
-    - file: tools/python
-      sections:
-        - file: tools/python_ecosystem
-        - file: tools/python_cheatsheet
-        - file: tools/python_good_practices
-    - file: tools/numpy
-    - file: tools/keras
-    - file: tools/pytorch
-
-- part: Reference
+  - file: tools/python
+    sections:
+    - file: tools/python_ecosystem
+    - file: tools/python_cheatsheet
+    - file: tools/python_good_practices
+  - file: tools/numpy
+  - file: tools/keras
+  - file: tools/pytorch
+- caption: Reference
   chapters:
-    - file: reference/activation_functions
-    - file: reference/glossary
-    - file: reference/acknowledgments
+  - file: reference/activation_functions
+  - file: reference/glossary
+  - file: reference/acknowledgments
