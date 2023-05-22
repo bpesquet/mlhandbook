@@ -468,14 +468,29 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#demystifying-artificial-intelligence">Demystifying Artificial Intelligence</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-artificial-intelligence">About Artificial Intelligence</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-original-ambition-of-ai">The original ambition of AI</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-technical-definition-of-ai">A technical definition of AI</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#main-areas-of-ai-research">Main areas of AI research</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ai-as-a-moving-target">AI as a moving target</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-tumultuous-history-of-ai">The tumultuous history of AI</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-highly-interdisciplinary-field">A highly interdisciplinary field</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ai-as-a-social-science">AI as a social science</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ai-comes-in-different-flavours">AI comes in different flavours</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-broader-definition-of-ai">A broader definition of AI</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-machine-learning-paradigm">The Machine Learning paradigm</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-first-definition">The first definition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-first-definition-of-machine-learning">The first definition of Machine Learning</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#machine-learning-in-a-nutshell">Machine Learning in a nutshell</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-new-paradigm">A new paradigm</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-new-paradigm">A new paradigm…</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#or-merely-a-set-of-tricks">… Or merely a set of tricks?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-machine-learning-workflow">The Machine Learning workflow</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ml-is-not-a-silver-bullet">ML is not a silver bullet!</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-machine-learning-landscape">The Machine Learning landscape</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ai-machine-learning-and-deep-learning">AI, Machine Learning and Deep Learning</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#typology-of-ml-systems">Typology of ML systems</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regression">Regression</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classification">Classification</a></li>
@@ -485,7 +500,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#game-ai">Game AI</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-of-some-machine-learning-algorithms">Overview of some Machine Learning algorithms</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-machines-learn-actually">How do machines learn, actually?</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithm-1-k-nearest-neighbors">Algorithm #1: K-Nearest Neighbors</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithm-2-decision-trees">Algorithm #2: Decision Trees</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithm-3-neural-networks">Algorithm #3: Neural Networks</a></li>
@@ -510,38 +525,142 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-machine-learning">
 <h1>Introduction to Machine Learning<a class="headerlink" href="#introduction-to-machine-learning" title="Permalink to this heading">#</a></h1>
-<section id="demystifying-artificial-intelligence">
-<h2>Demystifying Artificial Intelligence<a class="headerlink" href="#demystifying-artificial-intelligence" title="Permalink to this heading">#</a></h2>
+<section id="about-artificial-intelligence">
+<h2>About Artificial Intelligence<a class="headerlink" href="#about-artificial-intelligence" title="Permalink to this heading">#</a></h2>
+<section id="the-original-ambition-of-ai">
+<h3>The original ambition of AI<a class="headerlink" href="#the-original-ambition-of-ai" title="Permalink to this heading">#</a></h3>
+<blockquote>
+<div><p>“AI is the science and engineering of making intelligent machines.” (<a class="reference external" href="https://en.wikipedia.org/wiki/John_McCarthy_(computer_scientist)">John McCarthy</a>)</p>
+</div></blockquote>
+<blockquote>
+<div><p>“Every aspect of learning or any other feature of intelligence can in principle be so precisely described that a machine can be made to simulate it.” (<a class="reference external" href="https://en.wikipedia.org/wiki/Dartmouth_workshop">Dartmouth Workshop</a>, 1956)</p>
+</div></blockquote>
+<blockquote>
+<div><p>“AI is the science of making machines do things that would require intelligence if done by men.” (<a class="reference external" href="https://en.wikipedia.org/wiki/Marvin_Minsky">Marvin Minsky</a>)</p>
+</div></blockquote>
+</section>
+<section id="a-technical-definition-of-ai">
+<h3>A technical definition of AI<a class="headerlink" href="#a-technical-definition-of-ai" title="Permalink to this heading">#</a></h3>
+<blockquote>
+<div><p>“AI refers to systems that <strong>display</strong> intelligent behavior by analysing their <strong>environment</strong> and taking <strong>actions</strong> - with some degree of <strong>autonomy</strong> - to achieve specific <strong>goals</strong>.” (<a class="reference external" href="https://ec.europa.eu/newsroom/dae/document.cfm?doc_id=51625">EC, 2018</a>)</p>
+</div></blockquote>
+<p>AI systems can be either:</p>
+<ul class="simple">
+<li><p>Purely <strong>software</strong>-based (e.g. voice assistants, search engines, face recognition systems).</p></li>
+<li><p>Embedded in <strong>hardware</strong> devices (e.g. robots, autonomous cars, drones).</p></li>
+</ul>
+</section>
+<section id="main-areas-of-ai-research">
+<h3>Main areas of AI research<a class="headerlink" href="#main-areas-of-ai-research" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Problem solving</strong> (e.g. search algorithms, constraint solving).</p></li>
+<li><p><strong>Reasoning</strong> and <strong>decision making</strong> (e.g. logic, knowledge representation).</p></li>
+<li><p><strong>Machine Learning</strong>.</p></li>
+<li><p><strong>Real-world interactions</strong> (e.g. computer vision, natural language understanding, robotics).</p></li>
+</ul>
+</section>
+<section id="ai-as-a-moving-target">
+<h3>AI as a moving target<a class="headerlink" href="#ai-as-a-moving-target" title="Permalink to this heading">#</a></h3>
+<p>As soon as AI successfully solves a problem, the problem is no longer considered a part of AI.</p>
+<blockquote>
+<div><p>“<a class="reference external" href="https://en.wikipedia.org/wiki/AI_effect">AI is whatever hasn’t been done yet</a>.”</p>
+</div></blockquote>
+</section>
+<section id="the-tumultuous-history-of-ai">
+<h3>The tumultuous history of AI<a class="headerlink" href="#the-tumultuous-history-of-ai" title="Permalink to this heading">#</a></h3>
+<p><a class="reference external" href="https://www.slideshare.net/dlavenda/ai-and-productivity"><img alt="The AI timeline" src="../_images/ai_timeline.png" /></a></p>
+</section>
+<section id="a-highly-interdisciplinary-field">
+<h3>A highly interdisciplinary field<a class="headerlink" href="#a-highly-interdisciplinary-field" title="Permalink to this heading">#</a></h3>
+<p><img alt="AI fields" src="../_images/ai_fields.png" /></p>
+</section>
+<section id="ai-as-a-social-science">
+<h3>AI as a social science<a class="headerlink" href="#ai-as-a-social-science" title="Permalink to this heading">#</a></h3>
+<p>AI has many social and societal implications:</p>
+<ul class="simple">
+<li><p>Job market transformation.</p></li>
+<li><p>Human/machine interactions.</p></li>
+<li><p>Trust and acceptability.</p></li>
+<li><p>Legal aspects and regulation.</p></li>
+<li><p>Fairness.</p></li>
+<li><p>Ethical use.</p></li>
+<li><p>Privacy and usage of personal data.</p></li>
+<li><p>…</p></li>
+</ul>
+</section>
+<section id="ai-comes-in-different-flavours">
+<h3>AI comes in different flavours<a class="headerlink" href="#ai-comes-in-different-flavours" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Substitutive intelligence</strong>: replacement of men by machines.</p></li>
+<li><p><strong>Augmented intelligence</strong>: human-centered AI for performance augmentation &amp; autonomy enhancement.</p></li>
+<li><p><strong>Hybrid intelligence</strong>: human-machine collaboration on complex tasks.</p></li>
+</ul>
+</section>
+<section id="a-broader-definition-of-ai">
+<h3>A broader definition of AI<a class="headerlink" href="#a-broader-definition-of-ai" title="Permalink to this heading">#</a></h3>
+<blockquote>
+<div><p>“AI is an <strong>interdisciplinary</strong> field aiming at <strong>understanding</strong> and <strong>imitating</strong> the mechanisms of <strong>cognition</strong> and <strong>reasoning</strong>, in order to <strong>assist</strong> or <strong>substitute</strong> humans in their activities.” (<a class="reference external" href="https://fr.wikipedia.org/wiki/Commission_d%27enrichissement_de_la_langue_fran%C3%A7aise">Commission d’enrichissement de la langue française</a>, 2018)</p>
+</div></blockquote>
+</section>
 </section>
 <section id="the-machine-learning-paradigm">
 <h2>The Machine Learning paradigm<a class="headerlink" href="#the-machine-learning-paradigm" title="Permalink to this heading">#</a></h2>
-<section id="the-first-definition">
-<h3>The first definition<a class="headerlink" href="#the-first-definition" title="Permalink to this heading">#</a></h3>
+<section id="the-first-definition-of-machine-learning">
+<h3>The first definition of Machine Learning<a class="headerlink" href="#the-first-definition-of-machine-learning" title="Permalink to this heading">#</a></h3>
 <blockquote>
-<div><p>“The field of study that gives computers the ability to learn without being explicitly programmed” (Arthur Samuel, 1959).</p>
+<div><p>“The field of study that gives computers the ability to learn without being explicitly programmed.” (Arthur Samuel, 1959).</p>
 </div></blockquote>
 </section>
 <section id="machine-learning-in-a-nutshell">
 <h3>Machine Learning in a nutshell<a class="headerlink" href="#machine-learning-in-a-nutshell" title="Permalink to this heading">#</a></h3>
 <p>Set of techniques for giving machines the ability to to find <strong>patterns</strong> and extract <strong>rules</strong> from data, in order to:</p>
 <ul class="simple">
-<li><p>Identify or classify elements</p></li>
-<li><p>Detect tendencies</p></li>
-<li><p>Make predictions</p></li>
+<li><p><strong>Identify</strong> or <strong>classify</strong> elements.</p></li>
+<li><p>Detect <strong>tendencies</strong>.</p></li>
+<li><p>Make <strong>predictions</strong>.</p></li>
 </ul>
 <p>As more data is fed into the system, results get better: performance improves with experience.</p>
 <p>a.k.a. <strong>Statistical Learning</strong>.</p>
 </section>
 <section id="a-new-paradigm">
-<h3>A new paradigm<a class="headerlink" href="#a-new-paradigm" title="Permalink to this heading">#</a></h3>
+<h3>A new paradigm…<a class="headerlink" href="#a-new-paradigm" title="Permalink to this heading">#</a></h3>
 <p><img alt="Programming paradigm" src="../_images/programming_paradigm.png" /></p>
 <p><img alt="Training paradigm" src="../_images/training_paradigm.png" /></p>
+</section>
+<section id="or-merely-a-set-of-tricks">
+<h3>… Or merely a set of tricks?<a class="headerlink" href="#or-merely-a-set-of-tricks" title="Permalink to this heading">#</a></h3>
 <p><a class="reference external" href="https://xkcd.com/1838/"><img alt="ML on XKCD" src="../_images/ml_xkcd.png" /></a></p>
+</section>
+<section id="the-machine-learning-workflow">
+<h3>The Machine Learning workflow<a class="headerlink" href="#the-machine-learning-workflow" title="Permalink to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Frame</strong> the problem.</p></li>
+<li><p>Collect, analyze and prepare <strong>data</strong>.</p></li>
+<li><p>Select and train several <strong>models</strong> on data.</p></li>
+<li><p><strong>Tune</strong> the most promising model.</p></li>
+<li><p><strong>Deploy</strong> the model to production.</p></li>
+</ol>
+</section>
+<section id="ml-is-not-a-silver-bullet">
+<h3>ML is not a silver bullet!<a class="headerlink" href="#ml-is-not-a-silver-bullet" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Some use cases are a better fit for ML than others:</p>
+<ul>
+<li><p>Difficulty to express the actions as rules.</p></li>
+<li><p>Data too complex for traditional analytical methods.</p></li>
+<li><p>Performance &gt; interpretability.</p></li>
+</ul>
+</li>
+<li><p>Data quality is paramount.</p></li>
+</ul>
 </section>
 </section>
 <section id="the-machine-learning-landscape">
 <h2>The Machine Learning landscape<a class="headerlink" href="#the-machine-learning-landscape" title="Permalink to this heading">#</a></h2>
+<section id="ai-machine-learning-and-deep-learning">
+<h3>AI, Machine Learning and Deep Learning<a class="headerlink" href="#ai-machine-learning-and-deep-learning" title="Permalink to this heading">#</a></h3>
 <p><img alt="AI/ML/DL Venn diagram" src="../_images/ai_ml_dl.png" /></p>
+</section>
 <section id="typology-of-ml-systems">
 <h3>Typology of ML systems<a class="headerlink" href="#typology-of-ml-systems" title="Permalink to this heading">#</a></h3>
 <p>ML systems are traditionally classified in three categories, according to the amount and type of human supervision during training. <a class="reference external" href="https://hackernoon.com/self-supervised-learning-gets-us-closer-to-autonomous-learning-be77e6c86b5a">Hybrid approaches</a> exist.</p>
@@ -604,13 +723,14 @@ document.write(`
             src="https://www.youtube.com/embed/TmPfTpjtdgg"
             frameborder="0"
             allowfullscreen
+            
         ></iframe>
         </div></div>
 </div>
 </section>
 </section>
-<section id="overview-of-some-machine-learning-algorithms">
-<h2>Overview of some Machine Learning algorithms<a class="headerlink" href="#overview-of-some-machine-learning-algorithms" title="Permalink to this heading">#</a></h2>
+<section id="how-do-machines-learn-actually">
+<h2>How do machines learn, actually?<a class="headerlink" href="#how-do-machines-learn-actually" title="Permalink to this heading">#</a></h2>
 <section id="algorithm-1-k-nearest-neighbors">
 <h3>Algorithm #1: K-Nearest Neighbors<a class="headerlink" href="#algorithm-1-k-nearest-neighbors" title="Permalink to this heading">#</a></h3>
 <p>Prediction is based on the <code class="docutils literal notranslate"><span class="pre">k</span></code> nearest neighbors of a data sample.</p>
@@ -632,7 +752,7 @@ document.write(`
 <h2>The advent of Deep Learning<a class="headerlink" href="#the-advent-of-deep-learning" title="Permalink to this heading">#</a></h2>
 <section id="the-deep-learning-tsunami">
 <h3>The Deep Learning tsunami<a class="headerlink" href="#the-deep-learning-tsunami" title="Permalink to this heading">#</a></h3>
-<p>DL is a subfield of Machine Learning consisting of multilayered neural networks trained on (generally) vast amounts of data.</p>
+<p>DL is a subfield of Machine Learning consisting of multilayered neural networks trained on vast amounts of data.</p>
 <p><a class="reference external" href="https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf"><img alt="AlexNet'12 (simplified)" src="../_images/alexnet.png" /></a></p>
 <p>Since 2010, DL-based approaches outperformed previous state-of-the-art techniques in many fields (language translation, image and scene recognition…).</p>
 </section>
@@ -723,14 +843,29 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#demystifying-artificial-intelligence">Demystifying Artificial Intelligence</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-artificial-intelligence">About Artificial Intelligence</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-original-ambition-of-ai">The original ambition of AI</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-technical-definition-of-ai">A technical definition of AI</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#main-areas-of-ai-research">Main areas of AI research</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ai-as-a-moving-target">AI as a moving target</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-tumultuous-history-of-ai">The tumultuous history of AI</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-highly-interdisciplinary-field">A highly interdisciplinary field</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ai-as-a-social-science">AI as a social science</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ai-comes-in-different-flavours">AI comes in different flavours</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-broader-definition-of-ai">A broader definition of AI</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-machine-learning-paradigm">The Machine Learning paradigm</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-first-definition">The first definition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-first-definition-of-machine-learning">The first definition of Machine Learning</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#machine-learning-in-a-nutshell">Machine Learning in a nutshell</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-new-paradigm">A new paradigm</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-new-paradigm">A new paradigm…</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#or-merely-a-set-of-tricks">… Or merely a set of tricks?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-machine-learning-workflow">The Machine Learning workflow</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ml-is-not-a-silver-bullet">ML is not a silver bullet!</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-machine-learning-landscape">The Machine Learning landscape</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ai-machine-learning-and-deep-learning">AI, Machine Learning and Deep Learning</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#typology-of-ml-systems">Typology of ML systems</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regression">Regression</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#classification">Classification</a></li>
@@ -740,7 +875,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#game-ai">Game AI</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-of-some-machine-learning-algorithms">Overview of some Machine Learning algorithms</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-machines-learn-actually">How do machines learn, actually?</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithm-1-k-nearest-neighbors">Algorithm #1: K-Nearest Neighbors</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithm-2-decision-trees">Algorithm #2: Decision Trees</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithm-3-neural-networks">Algorithm #3: Neural Networks</a></li>
