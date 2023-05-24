@@ -549,12 +549,11 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">platform</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Python version: </span><span class="si">{</span><span class="n">platform</span><span class="o">.</span><span class="n">python_version</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">platform</span><span class="o">.</span><span class="n">python_version_tuple</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="s2">&quot;6&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Python version: 3.7.5
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Python version: 3.11.1
 </pre></div>
 </div>
 </div>
@@ -568,7 +567,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PyTorch version: 1.3.1
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PyTorch version: 2.0.1
 </pre></div>
 </div>
 </div>
@@ -870,9 +869,9 @@ symbolic expressions.</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>v1: tensor([0.6931], grad_fn=&lt;LogBackward&gt;)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>v1: tensor([0.6931], grad_fn=&lt;LogBackward0&gt;)
 v2: tensor([10.], grad_fn=&lt;MulBackward0&gt;)
-v3: tensor([-0.9589], grad_fn=&lt;SinBackward&gt;)
+v3: tensor([-0.9589], grad_fn=&lt;SinBackward0&gt;)
 v4: tensor([10.6931], grad_fn=&lt;AddBackward0&gt;)
 y: tensor([11.6521], grad_fn=&lt;SubBackward0&gt;)
 </pre></div>

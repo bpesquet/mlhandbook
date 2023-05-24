@@ -546,7 +546,6 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">platform</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Python version: </span><span class="si">{</span><span class="n">platform</span><span class="o">.</span><span class="n">python_version</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">platform</span><span class="o">.</span><span class="n">python_version_tuple</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="s2">&quot;6&quot;</span><span class="p">)</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -557,8 +556,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Python version: 3.7.5
-NumPy version: 1.18.1
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Python version: 3.11.1
+NumPy version: 1.23.5
 </pre></div>
 </div>
 </div>
@@ -579,7 +578,6 @@ NumPy version: 1.18.1
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sklearn</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;scikit-learn version: </span><span class="si">{</span><span class="n">sklearn</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">__version__</span> <span class="o">&gt;=</span> <span class="s2">&quot;0.22&quot;</span>  <span class="c1"># For plotting API</span>
 
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_absolute_error</span><span class="p">,</span> <span class="n">mean_squared_error</span>
 <span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">SGDClassifier</span>
@@ -588,16 +586,16 @@ NumPy version: 1.18.1
     <span class="n">accuracy_score</span><span class="p">,</span>
     <span class="n">precision_score</span><span class="p">,</span>
     <span class="n">recall_score</span><span class="p">,</span>
-    <span class="n">plot_confusion_matrix</span><span class="p">,</span>
+    <span class="n">ConfusionMatrixDisplay</span><span class="p">,</span>
     <span class="n">classification_report</span><span class="p">,</span>
-    <span class="n">plot_roc_curve</span><span class="p">,</span>
+    <span class="n">RocCurveDisplay</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">cross_val_score</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>scikit-learn version: 0.22.1
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>scikit-learn version: 1.2.2
 </pre></div>
 </div>
 </div>
@@ -609,6 +607,12 @@ NumPy version: 1.18.1
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;TensorFlow version: </span><span class="si">{</span><span class="n">tf</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Keras version: </span><span class="si">{</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
+<span class="c1"># Device configuration</span>
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">list_physical_devices</span><span class="p">(</span><span class="s2">&quot;GPU&quot;</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;GPU found :)&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No available GPU :/&quot;</span><span class="p">)</span>
+
 <span class="kn">from</span> <span class="nn">tensorflow.keras.datasets</span> <span class="kn">import</span> <span class="n">mnist</span>
 <span class="kn">from</span> <span class="nn">tensorflow.keras.losses</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">BinaryCrossentropy</span><span class="p">,</span>
@@ -619,8 +623,9 @@ NumPy version: 1.18.1
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>TensorFlow version: 2.3.1
-Keras version: 2.4.0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>TensorFlow version: 2.12.0
+Keras version: 2.12.0
+GPU found :)
 </pre></div>
 </div>
 </div>
@@ -728,7 +733,7 @@ Keras version: 2.4.0
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/15c49fcc5cc9ce41d3cbd8bde8ebbcefe8f220f4a3cf4ea11655f2569959e84b.png" src="../_images/15c49fcc5cc9ce41d3cbd8bde8ebbcefe8f220f4a3cf4ea11655f2569959e84b.png" />
+<img alt="../_images/55152458051e99829ba29fd2fa919323dc2a69960c102cf3b8b785790ff29d9d.png" src="../_images/55152458051e99829ba29fd2fa919323dc2a69960c102cf3b8b785790ff29d9d.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -741,7 +746,7 @@ Keras version: 2.4.0
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;BCE (good prediction): </span><span class="si">{</span><span class="n">bce</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="c1"># Compare expected and computed values</span>
 <span class="n">np</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">assert_almost_equal</span><span class="p">(</span>
-    <span class="o">-</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">0.9</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">0.8</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">0.7</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">0.99</span><span class="p">))</span> <span class="o">/</span> <span class="mi">4</span><span class="p">,</span> <span class="n">bce</span>
+    <span class="o">-</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">0.9</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">0.8</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">0.7</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">0.99</span><span class="p">))</span> <span class="o">/</span> <span class="mi">4</span><span class="p">,</span> <span class="n">bce</span><span class="p">,</span> <span class="n">decimal</span><span class="o">=</span><span class="mi">5</span>
 <span class="p">)</span>
 
 <span class="c1"># Perfect prediction</span>
@@ -755,7 +760,8 @@ Keras version: 2.4.0
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCE (good prediction): 0.17380718886852264
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Metal device set to: Apple M1 Pro
+BCE (good prediction): 0.17380717396736145
 BCE (perfect prediction): 0.0
 BCE (awful prediction): 2.241847515106201
 </pre></div>
@@ -842,7 +848,7 @@ BCE (awful prediction): 2.241847515106201
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.1769392
-0.6979594
+0.69795936
 </pre></div>
 </div>
 </div>
@@ -876,7 +882,7 @@ BCE (awful prediction): 2.241847515106201
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.1769392
-0.6979594
+0.69795936
 </pre></div>
 </div>
 </div>
@@ -942,7 +948,7 @@ Test images: (10000, 28, 28). Test labels: (10000,)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/d12ba3e36db1939146588065a50af8f6eeaad95b4f3be21d55e5d5ec06f11472.png" src="../_images/d12ba3e36db1939146588065a50af8f6eeaad95b4f3be21d55e5d5ec06f11472.png" />
+<img alt="../_images/4662a220faa1b3911c0e54d0b554f550c8c908b72ebda86692fb0208ba5b77b2.png" src="../_images/4662a220faa1b3911c0e54d0b554f550c8c908b72ebda86692fb0208ba5b77b2.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1018,15 +1024,11 @@ x_test: (10000, 784)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SGDClassifier(alpha=0.0001, average=False, class_weight=None,
-              early_stopping=False, epsilon=0.1, eta0=0.0, fit_intercept=True,
-              l1_ratio=0.15, learning_rate=&#39;optimal&#39;, loss=&#39;log&#39;, max_iter=1000,
-              n_iter_no_change=5, n_jobs=None, penalty=&#39;l2&#39;, power_t=0.5,
-              random_state=None, shuffle=True, tol=0.001,
-              validation_fraction=0.1, verbose=0, warm_start=False)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/baptiste/Documents/Projets/GitHub/bpesquet/mlhandbook/.venv/lib/python3.11/site-packages/sklearn/linear_model/_stochastic_gradient.py:163: FutureWarning: The loss &#39;log&#39; was deprecated in v1.1 and will be removed in version 1.3. Use `loss=&#39;log_loss&#39;` which is equivalent.
+  warnings.warn(
 </pre></div>
 </div>
-</div>
+<div class="output text_html"><style>#sk-container-id-1 {color: black;background-color: white;}#sk-container-id-1 pre{padding: 0;}#sk-container-id-1 div.sk-toggleable {background-color: white;}#sk-container-id-1 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-1 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-1 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-1 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-1 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-1 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-1 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-1 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-1 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-1 div.sk-item {position: relative;z-index: 1;}#sk-container-id-1 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-1 div.sk-item::before, #sk-container-id-1 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-1 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-1 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-1 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-1 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-1 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-1 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-1 div.sk-label-container {text-align: center;}#sk-container-id-1 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-1 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>SGDClassifier(loss=&#x27;log&#x27;)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" checked><label for="sk-estimator-id-1" class="sk-toggleable__label sk-toggleable__label-arrow">SGDClassifier</label><div class="sk-toggleable__content"><pre>SGDClassifier(loss=&#x27;log&#x27;)</pre></div></div></div></div></div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1045,7 +1047,7 @@ x_test: (10000, 784)
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ True False False]
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.163, 0.837],
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.178, 0.822],
        [0.999, 0.001],
        [1.   , 0.   ]])
 </pre></div>
@@ -1099,8 +1101,18 @@ x_test: (10000, 784)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training accuracy: 0.97487
-CV accuracy: [0.97085 0.9709  0.97165]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training accuracy: 0.97503
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/baptiste/Documents/Projets/GitHub/bpesquet/mlhandbook/.venv/lib/python3.11/site-packages/sklearn/linear_model/_stochastic_gradient.py:163: FutureWarning: The loss &#39;log&#39; was deprecated in v1.1 and will be removed in version 1.3. Use `loss=&#39;log_loss&#39;` which is equivalent.
+  warnings.warn(
+/Users/baptiste/Documents/Projets/GitHub/bpesquet/mlhandbook/.venv/lib/python3.11/site-packages/sklearn/linear_model/_stochastic_gradient.py:163: FutureWarning: The loss &#39;log&#39; was deprecated in v1.1 and will be removed in version 1.3. Use `loss=&#39;log_loss&#39;` which is equivalent.
+  warnings.warn(
+/Users/baptiste/Documents/Projets/GitHub/bpesquet/mlhandbook/.venv/lib/python3.11/site-packages/sklearn/linear_model/_stochastic_gradient.py:163: FutureWarning: The loss &#39;log&#39; was deprecated in v1.1 and will be removed in version 1.3. Use `loss=&#39;log_loss&#39;` which is equivalent.
+  warnings.warn(
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CV accuracy: [0.9738  0.97205 0.9716 ]
 </pre></div>
 </div>
 </div>
@@ -1148,7 +1160,7 @@ Dumb classifier accuracy: 0.90965
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the confusion matrix for a model and a dataset</span>
 <span class="k">def</span> <span class="nf">plot_conf_mat</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
     <span class="k">with</span> <span class="n">sns</span><span class="o">.</span><span class="n">axes_style</span><span class="p">(</span><span class="s2">&quot;white&quot;</span><span class="p">):</span>  <span class="c1"># Temporary hide Seaborn grid lines</span>
-        <span class="n">display</span> <span class="o">=</span> <span class="n">plot_confusion_matrix</span><span class="p">(</span>
+        <span class="n">display</span> <span class="o">=</span> <span class="n">ConfusionMatrixDisplay</span><span class="o">.</span><span class="n">from_estimator</span><span class="p">(</span>
             <span class="n">model</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">values_format</span><span class="o">=</span><span class="s2">&quot;d&quot;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">Blues</span>
         <span class="p">)</span>
 
@@ -1159,7 +1171,7 @@ Dumb classifier accuracy: 0.90965
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/1bb0657fe1741d03a92191a82588bd70c29ef5f1f469e141191fcca6b9569514.png" src="../_images/1bb0657fe1741d03a92191a82588bd70c29ef5f1f469e141191fcca6b9569514.png" />
+<img alt="../_images/bf1288bfe7271ab3d045aa7a7400b02580b472926e1ba2f437de510eded48432.png" src="../_images/bf1288bfe7271ab3d045aa7a7400b02580b472926e1ba2f437de510eded48432.png" />
 </div>
 </div>
 </section>
@@ -1253,11 +1265,11 @@ Recall = \frac{1}{1 + 8} = 11\%\]</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              precision    recall  f1-score   support
 
        False       0.98      0.99      0.99     54579
-        True       0.89      0.83      0.86      5421
+        True       0.91      0.80      0.85      5421
 
-    accuracy                           0.97     60000
-   macro avg       0.94      0.91      0.92     60000
-weighted avg       0.97      0.97      0.97     60000
+    accuracy                           0.98     60000
+   macro avg       0.95      0.90      0.92     60000
+weighted avg       0.97      0.98      0.97     60000
 </pre></div>
 </div>
 </div>
@@ -1278,13 +1290,13 @@ weighted avg       0.97      0.97      0.97     60000
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot ROC curve for the SGD classifier</span>
-<span class="n">sgd_disp</span> <span class="o">=</span> <span class="n">plot_roc_curve</span><span class="p">(</span><span class="n">sgd_model</span><span class="p">,</span> <span class="n">x_train</span><span class="p">,</span> <span class="n">y_train_5</span><span class="p">)</span>
+<span class="n">sgd_disp</span> <span class="o">=</span> <span class="n">RocCurveDisplay</span><span class="o">.</span><span class="n">from_estimator</span><span class="p">(</span><span class="n">sgd_model</span><span class="p">,</span> <span class="n">x_train</span><span class="p">,</span> <span class="n">y_train_5</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/adcc0c2cf209be51e3a66531a9553a8183c5348889fed991f0f48f7fad8cd7c4.png" src="../_images/adcc0c2cf209be51e3a66531a9553a8183c5348889fed991f0f48f7fad8cd7c4.png" />
+<img alt="../_images/5a64225863dcbe3a97401f73fcae389f102f7566a7df58dd3b4265b5c2bd0699.png" src="../_images/5a64225863dcbe3a97401f73fcae389f102f7566a7df58dd3b4265b5c2bd0699.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1295,14 +1307,14 @@ weighted avg       0.97      0.97      0.97     60000
 
 <span class="c1"># Plot ROC curves for both classifiers</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
-<span class="n">rf_disp</span> <span class="o">=</span> <span class="n">plot_roc_curve</span><span class="p">(</span><span class="n">rf_model</span><span class="p">,</span> <span class="n">x_train</span><span class="p">,</span> <span class="n">y_train_5</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+<span class="n">rf_disp</span> <span class="o">=</span> <span class="n">RocCurveDisplay</span><span class="o">.</span><span class="n">from_estimator</span><span class="p">(</span><span class="n">rf_model</span><span class="p">,</span> <span class="n">x_train</span><span class="p">,</span> <span class="n">y_train_5</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
 <span class="n">sgd_disp</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/bae59c5194e24fc80eda2f67ea639b64c76ce173ce576de5ed691f5ac8c05df7.png" src="../_images/bae59c5194e24fc80eda2f67ea639b64c76ce173ce576de5ed691f5ac8c05df7.png" />
+<img alt="../_images/a2a019af9b2b85c21e35326c194271ceb86823f268b82b3c27d37dcec5923d2b.png" src="../_images/a2a019af9b2b85c21e35326c194271ceb86823f268b82b3c27d37dcec5923d2b.png" />
 </div>
 </div>
 </section>
@@ -1315,7 +1327,7 @@ weighted avg       0.97      0.97      0.97     60000
 <span class="n">y_test</span> <span class="o">=</span> <span class="n">test_labels</span>
 
 <span class="c1"># Training a SGD classifier to recognize all digits, not just 5s</span>
-<span class="n">multi_sgd_model</span> <span class="o">=</span> <span class="n">SGDClassifier</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+<span class="n">multi_sgd_model</span> <span class="o">=</span> <span class="n">SGDClassifier</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s2">&quot;log_loss&quot;</span><span class="p">)</span>
 <span class="n">multi_sgd_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 
 <span class="c1"># Since dataset is not class imbalanced anymore, accuracy is a reliable metric</span>
@@ -1325,8 +1337,8 @@ weighted avg       0.97      0.97      0.97     60000
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training accuracy: 0.91933
-Test accuracy: 0.91540
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training accuracy: 0.92032
+Test accuracy: 0.91610
 </pre></div>
 </div>
 </div>
@@ -1339,7 +1351,7 @@ Test accuracy: 0.91540
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/7e4f131fb8ef8b3bcd8d4226a647dc3fd392680b9acfee3a4cdb9633f7cc520c.png" src="../_images/7e4f131fb8ef8b3bcd8d4226a647dc3fd392680b9acfee3a4cdb9633f7cc520c.png" />
+<img alt="../_images/e4d1bcc84dda2c196d3b3ce921d2f76577eb5ac9431eb36b7f5928b72f27eca5.png" src="../_images/e4d1bcc84dda2c196d3b3ce921d2f76577eb5ac9431eb36b7f5928b72f27eca5.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1355,17 +1367,17 @@ Test accuracy: 0.91540
            0       0.92      0.98      0.95       980
            1       0.96      0.98      0.97      1135
            2       0.94      0.88      0.91      1032
-           3       0.91      0.90      0.91      1010
-           4       0.89      0.95      0.92       982
-           5       0.89      0.86      0.88       892
-           6       0.94      0.94      0.94       958
-           7       0.89      0.94      0.92      1028
-           8       0.88      0.85      0.86       974
-           9       0.92      0.85      0.88      1009
+           3       0.89      0.92      0.90      1010
+           4       0.92      0.93      0.92       982
+           5       0.91      0.85      0.88       892
+           6       0.94      0.95      0.94       958
+           7       0.91      0.93      0.92      1028
+           8       0.86      0.87      0.86       974
+           9       0.92      0.86      0.89      1009
 
     accuracy                           0.92     10000
-   macro avg       0.91      0.91      0.91     10000
-weighted avg       0.92      0.92      0.91     10000
+   macro avg       0.92      0.91      0.91     10000
+weighted avg       0.92      0.92      0.92     10000
 </pre></div>
 </div>
 </div>

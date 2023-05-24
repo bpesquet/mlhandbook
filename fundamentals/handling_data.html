@@ -528,7 +528,6 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">platform</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Python version: </span><span class="si">{</span><span class="n">platform</span><span class="o">.</span><span class="n">python_version</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">platform</span><span class="o">.</span><span class="n">python_version_tuple</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="s2">&quot;6&quot;</span><span class="p">)</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -538,8 +537,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Python version: 3.7.5
-NumPy version: 1.18.1
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Python version: 3.11.1
+NumPy version: 1.23.5
 </pre></div>
 </div>
 </div>
@@ -559,7 +558,6 @@ NumPy version: 1.18.1
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sklearn</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;scikit-learn version: </span><span class="si">{</span><span class="n">sklearn</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">__version__</span> <span class="o">&gt;=</span> <span class="s2">&quot;0.20&quot;</span>
 
 <span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_sample_images</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
@@ -569,7 +567,7 @@ NumPy version: 1.18.1
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>scikit-learn version: 0.22.1
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>scikit-learn version: 1.2.2
 </pre></div>
 </div>
 </div>
@@ -828,7 +826,7 @@ Shape: (6,)
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sample image: (427, 640, 3)
 </pre></div>
 </div>
-<img alt="../_images/387044dd392282af53a5761bb0286267b7a5e1bbedff6daa5fec7765f99a4299.png" src="../_images/387044dd392282af53a5761bb0286267b7a5e1bbedff6daa5fec7765f99a4299.png" />
+<img alt="../_images/c0400820c216f4fc97eaafb24a1ee4d7b11d7a0b7353bf85cb0cdee56d381608.png" src="../_images/c0400820c216f4fc97eaafb24a1ee4d7b11d7a0b7353bf85cb0cdee56d381608.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1000,16 +998,16 @@ x_test: (8, 4). y_test: (8,)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[5 8 6 2]
- [2 7 9 5]
- [9 5 7 2]]
-[[0.42857143 1.         0.         0.        ]
- [0.         0.66666667 1.         1.        ]
- [1.         0.         0.33333333 0.        ]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[3 9 8 1]
+ [8 5 6 9]
+ [5 3 4 5]]
+[[0.         1.         1.         0.        ]
+ [1.         0.33333333 0.5        1.        ]
+ [0.4        0.         0.         0.5       ]]
 Minimum: [0. 0. 0. 0.]. Maximum: [1. 1. 1. 1.]
-[[0.42857143 1.         0.         0.        ]
- [0.         0.66666667 1.         1.        ]
- [1.         0.         0.33333333 0.        ]]
+[[0.         1.         1.         0.        ]
+ [1.         0.33333333 0.5        1.        ]
+ [0.4        0.         0.         0.5       ]]
 Minimum: [0. 0. 0. 0.]. Maximum: [1. 1. 1. 1.]
 </pre></div>
 </div>
@@ -1031,13 +1029,13 @@ Minimum: [0. 0. 0. 0.]. Maximum: [1. 1. 1. 1.]
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[8 6 1 4]
- [5 2 7 7]
- [3 1 2 8]]
-[[ 1.29777137  1.38873015 -0.88900089 -1.37281295]
- [-0.16222142 -0.46291005  1.3970014   0.39223227]
- [-1.13554995 -0.9258201  -0.50800051  0.98058068]]
-Mean: [ 1.48029737e-16  0.00000000e+00 -3.70074342e-17  2.22044605e-16]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[9 1 5 5]
+ [7 8 3 5]
+ [9 7 1 1]]
+[[ 0.70710678 -1.40182605  1.22474487  0.70710678]
+ [-1.41421356  0.86266219  0.          0.70710678]
+ [ 0.70710678  0.53916387 -1.22474487 -1.41421356]]
+Mean: [-5.92118946e-16  7.40148683e-17  0.00000000e+00  7.40148683e-17]
 Std: [1. 1. 1. 1.]
 </pre></div>
 </div>
@@ -1060,10 +1058,10 @@ Std: [1. 1. 1. 1.]
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Train mean: [-1.21115239e-16 -1.71579922e-16  3.78485122e-16  2.82602224e-16]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Train mean: [ 3.22973971e-16 -9.08364293e-17 -3.53252781e-17  5.24832703e-16]
 Train std: [1. 1. 1. 1.]
-Test mean: [ 0.8257346   0.19514623 -0.4815369  -0.81434219]
-Test std: [1.04356636 0.80795965 0.86251091 0.62746467]
+Test mean: [ 0.22795318 -0.49120847 -0.34399297  0.11494666]
+Test std: [0.85152578 1.10953828 0.92824746 0.81104679]
 </pre></div>
 </div>
 </div>
@@ -1131,16 +1129,16 @@ Test std: [1.04356636 0.80795965 0.86251091 0.62746467]
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[6]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0]
+ [3]
  [7]
- [8]
- [2]
- [2]]
-[[0. 1. 0. 0.]
- [0. 0. 1. 0.]
+ [5]
+ [3]]
+[[1. 0. 0. 0.]
+ [0. 1. 0. 0.]
  [0. 0. 0. 1.]
- [1. 0. 0. 0.]
- [1. 0. 0. 0.]]
+ [0. 0. 1. 0.]
+ [0. 1. 0. 0.]]
 </pre></div>
 </div>
 </div>
