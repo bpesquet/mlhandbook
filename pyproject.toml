@@ -14,6 +14,7 @@ seaborn = "^0.12.2"
 scikit-learn = "^1.2.2"
 tensorflow-macos = "^2.12.0"
 tensorflow-metal = "^0.8.0"
+torch = "^2.0.1"
 
 [tool.poetry.group.dev.dependencies]
 jupyter-book = "^0.15.1"
