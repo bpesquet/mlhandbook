@@ -554,7 +554,6 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">platform</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Python version: </span><span class="si">{</span><span class="n">platform</span><span class="o">.</span><span class="n">python_version</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">platform</span><span class="o">.</span><span class="n">python_version_tuple</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="s2">&quot;6&quot;</span><span class="p">)</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib</span>
@@ -568,8 +567,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Python version: 3.7.5
-NumPy version: 1.18.1
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Python version: 3.11.1
+NumPy version: 1.23.5
 </pre></div>
 </div>
 </div>
@@ -598,6 +597,9 @@ NumPy version: 1.18.1
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;TensorFlow version: </span><span class="si">{</span><span class="n">tf</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Keras version: </span><span class="si">{</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
+<span class="c1"># Device configuration</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;GPU found :)&quot;</span> <span class="k">if</span> <span class="n">tf</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">list_physical_devices</span><span class="p">(</span><span class="s2">&quot;GPU&quot;</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;No available GPU :/&quot;</span><span class="p">)</span>
+
 <span class="kn">from</span> <span class="nn">tensorflow.keras.models</span> <span class="kn">import</span> <span class="n">Sequential</span>
 <span class="kn">from</span> <span class="nn">tensorflow.keras.layers</span> <span class="kn">import</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">Dropout</span><span class="p">,</span> <span class="n">Flatten</span>
 <span class="kn">from</span> <span class="nn">tensorflow.keras.optimizers</span> <span class="kn">import</span> <span class="n">SGD</span>
@@ -608,9 +610,10 @@ NumPy version: 1.18.1
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>scikit-learn version: 0.22.1
-TensorFlow version: 2.3.1
-Keras version: 2.4.0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>scikit-learn version: 1.2.2
+TensorFlow version: 2.12.0
+Keras version: 2.12.0
+GPU found :)
 </pre></div>
 </div>
 </div>
@@ -898,7 +901,7 @@ Test images: (10000, 28, 28). Test labels: (10000,)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/d12ba3e36db1939146588065a50af8f6eeaad95b4f3be21d55e5d5ec06f11472.png" src="../_images/d12ba3e36db1939146588065a50af8f6eeaad95b4f3be21d55e5d5ec06f11472.png" />
+<img alt="../_images/4662a220faa1b3911c0e54d0b554f550c8c908b72ebda86692fb0208ba5b77b2.png" src="../_images/4662a220faa1b3911c0e54d0b554f550c8c908b72ebda86692fb0208ba5b77b2.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -934,36 +937,36 @@ Test images: (10000, 28, 28). Test labels: (10000,)
   </thead>
   <tbody>
     <tr>
-      <th>25076</th>
-      <td>6</td>
-    </tr>
-    <tr>
-      <th>12840</th>
-      <td>9</td>
-    </tr>
-    <tr>
-      <th>26661</th>
-      <td>8</td>
-    </tr>
-    <tr>
-      <th>39673</th>
+      <th>22922</th>
       <td>2</td>
     </tr>
     <tr>
-      <th>22703</th>
-      <td>8</td>
-    </tr>
-    <tr>
-      <th>10276</th>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>44623</th>
+      <th>52071</th>
       <td>7</td>
     </tr>
     <tr>
-      <th>37723</th>
-      <td>0</td>
+      <th>56722</th>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>59578</th>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>3130</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>13430</th>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>57796</th>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>10892</th>
+      <td>1</td>
     </tr>
   </tbody>
 </table>
@@ -1032,7 +1035,7 @@ y_test: (10000, 10)
   </thead>
   <tbody>
     <tr>
-      <th>59042</th>
+      <th>37645</th>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -1045,7 +1048,72 @@ y_test: (10000, 10)
       <td>0.0</td>
     </tr>
     <tr>
-      <th>37149</th>
+      <th>57708</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>17103</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>53787</th>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>51129</th>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>10122</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>6214</th>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -1058,33 +1126,7 @@ y_test: (10000, 10)
       <td>0.0</td>
     </tr>
     <tr>
-      <th>55771</th>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>2391</th>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>44946</th>
+      <th>38880</th>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -1095,45 +1137,6 @@ y_test: (10000, 10)
       <td>0.0</td>
       <td>0.0</td>
       <td>1.0</td>
-    </tr>
-    <tr>
-      <th>27908</th>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>31972</th>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>26174</th>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
     </tr>
   </tbody>
 </table>
@@ -1159,15 +1162,17 @@ y_test: (10000, 10)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;sequential&quot;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Metal device set to: Apple M1 Pro
+Model: &quot;sequential&quot;
 _________________________________________________________________
-Layer (type)                 Output Shape              Param #   
+ Layer (type)                Output Shape              Param #   
 =================================================================
-flatten (Flatten)            (None, 784)               0         
-_________________________________________________________________
-dense (Dense)                (None, 15)                11775     
-_________________________________________________________________
-dense_1 (Dense)              (None, 10)                160       
+ flatten (Flatten)           (None, 784)               0         
+                                                                 
+ dense (Dense)               (None, 15)                11775     
+                                                                 
+ dense_1 (Dense)             (None, 10)                160       
+                                                                 
 =================================================================
 Total params: 11,935
 Trainable params: 11,935
@@ -1190,7 +1195,10 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/df2fd6a334d566b79b17e2d243012904b57b865be114edafe064a73812f41819.png" src="../_images/df2fd6a334d566b79b17e2d243012904b57b865be114edafe064a73812f41819.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2023-05-25 18:59:24.489324: W tensorflow/tsl/platform/profile_utils/cpu_utils.cc:128] Failed to get CPU frequency: 0 Hz
+</pre></div>
+</div>
+<img alt="../_images/01695779f353763bc9ce5379c8cf4b2344e5d4b68704483b75063e0510b1dd5c.png" src="../_images/01695779f353763bc9ce5379c8cf4b2344e5d4b68704483b75063e0510b1dd5c.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1203,7 +1211,7 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test accuracy: 0.94700
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test accuracy: 0.92060
 </pre></div>
 </div>
 </div>
@@ -1225,7 +1233,19 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/c349fadf5917c16389eae8a1cdf957299364c132b9f7752701e26d4eafcbd16a.png" src="../_images/c349fadf5917c16389eae8a1cdf957299364c132b9f7752701e26d4eafcbd16a.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1/1 [==============================] - 0s 345ms/step
+1/1 [==============================] - 0s 11ms/step
+1/1 [==============================] - 0s 11ms/step
+1/1 [==============================] - 0s 11ms/step
+1/1 [==============================] - 0s 11ms/step
+1/1 [==============================] - 0s 11ms/step
+1/1 [==============================] - 0s 11ms/step
+1/1 [==============================] - 0s 11ms/step
+1/1 [==============================] - 0s 11ms/step
+1/1 [==============================] - 0s 11ms/step
+</pre></div>
+</div>
+<img alt="../_images/d36f95f48a2e8b9632ebabab7928542e5fe509c5a3ed6ef2ddd608649ba1d58f.png" src="../_images/d36f95f48a2e8b9632ebabab7928542e5fe509c5a3ed6ef2ddd608649ba1d58f.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1289,7 +1309,7 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/1372134acca8a762636fb52f0b89dc9b926cd74ceb87e7e305c0894a32539855.png" src="../_images/1372134acca8a762636fb52f0b89dc9b926cd74ceb87e7e305c0894a32539855.png" />
+<img alt="../_images/9ccd5628639e12b5179465517aefb863605c1978ee175185dfeed325c6cc433a.png" src="../_images/9ccd5628639e12b5179465517aefb863605c1978ee175185dfeed325c6cc433a.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1319,7 +1339,47 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/0b585c0d40756b8c921979cae580157f811a77d7e6b856cb7f6af5697bd4e1bc.png" src="../_images/0b585c0d40756b8c921979cae580157f811a77d7e6b856cb7f6af5697bd4e1bc.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:absl:At this time, the v2.11+ optimizer `tf.keras.optimizers.SGD` runs slowly on M1/M2 Macs, please use the legacy Keras optimizer instead, located at `tf.keras.optimizers.legacy.SGD`.
+WARNING:absl:`lr` is deprecated in Keras optimizer, please use `learning_rate` or use the legacy optimizer, e.g.,tf.keras.optimizers.legacy.SGD.
+WARNING:absl:There is a known slowdown when using v2.11+ Keras optimizers on M1/M2 Macs. Falling back to the legacy Keras optimizer, i.e., `tf.keras.optimizers.legacy.SGD`.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7180/7180 [==============================] - 9s 1ms/step
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:absl:At this time, the v2.11+ optimizer `tf.keras.optimizers.SGD` runs slowly on M1/M2 Macs, please use the legacy Keras optimizer instead, located at `tf.keras.optimizers.legacy.SGD`.
+WARNING:absl:`lr` is deprecated in Keras optimizer, please use `learning_rate` or use the legacy optimizer, e.g.,tf.keras.optimizers.legacy.SGD.
+WARNING:absl:There is a known slowdown when using v2.11+ Keras optimizers on M1/M2 Macs. Falling back to the legacy Keras optimizer, i.e., `tf.keras.optimizers.legacy.SGD`.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7180/7180 [==============================] - 9s 1ms/step
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:absl:At this time, the v2.11+ optimizer `tf.keras.optimizers.SGD` runs slowly on M1/M2 Macs, please use the legacy Keras optimizer instead, located at `tf.keras.optimizers.legacy.SGD`.
+WARNING:absl:`lr` is deprecated in Keras optimizer, please use `learning_rate` or use the legacy optimizer, e.g.,tf.keras.optimizers.legacy.SGD.
+WARNING:absl:There is a known slowdown when using v2.11+ Keras optimizers on M1/M2 Macs. Falling back to the legacy Keras optimizer, i.e., `tf.keras.optimizers.legacy.SGD`.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7180/7180 [==============================] - 10s 1ms/step
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:absl:At this time, the v2.11+ optimizer `tf.keras.optimizers.SGD` runs slowly on M1/M2 Macs, please use the legacy Keras optimizer instead, located at `tf.keras.optimizers.legacy.SGD`.
+WARNING:absl:`lr` is deprecated in Keras optimizer, please use `learning_rate` or use the legacy optimizer, e.g.,tf.keras.optimizers.legacy.SGD.
+WARNING:absl:There is a known slowdown when using v2.11+ Keras optimizers on M1/M2 Macs. Falling back to the legacy Keras optimizer, i.e., `tf.keras.optimizers.legacy.SGD`.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7180/7180 [==============================] - 10s 1ms/step
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:absl:At this time, the v2.11+ optimizer `tf.keras.optimizers.SGD` runs slowly on M1/M2 Macs, please use the legacy Keras optimizer instead, located at `tf.keras.optimizers.legacy.SGD`.
+WARNING:absl:`lr` is deprecated in Keras optimizer, please use `learning_rate` or use the legacy optimizer, e.g.,tf.keras.optimizers.legacy.SGD.
+WARNING:absl:There is a known slowdown when using v2.11+ Keras optimizers on M1/M2 Macs. Falling back to the legacy Keras optimizer, i.e., `tf.keras.optimizers.legacy.SGD`.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7180/7180 [==============================] - 10s 1ms/step
+</pre></div>
+</div>
+<img alt="../_images/26892040efebf85557c2199769471c5758ed5f7c1705b817b75573ab75df6d43.png" src="../_images/26892040efebf85557c2199769471c5758ed5f7c1705b817b75573ab75df6d43.png" />
 </div>
 </div>
 </section>
@@ -1358,7 +1418,15 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/35cb638e48935a0d32445a9782826d3a7ae605738abd4f4fb4bcab642e2a8ae9.png" src="../_images/35cb638e48935a0d32445a9782826d3a7ae605738abd4f4fb4bcab642e2a8ae9.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:absl:At this time, the v2.11+ optimizer `tf.keras.optimizers.SGD` runs slowly on M1/M2 Macs, please use the legacy Keras optimizer instead, located at `tf.keras.optimizers.legacy.SGD`.
+WARNING:absl:`lr` is deprecated in Keras optimizer, please use `learning_rate` or use the legacy optimizer, e.g.,tf.keras.optimizers.legacy.SGD.
+WARNING:absl:There is a known slowdown when using v2.11+ Keras optimizers on M1/M2 Macs. Falling back to the legacy Keras optimizer, i.e., `tf.keras.optimizers.legacy.SGD`.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7180/7180 [==============================] - 10s 1ms/step
+</pre></div>
+</div>
+<img alt="../_images/b717783c4348a7e418b76aadb6023fdd2cb022e5c7978f27ae856db794508a35.png" src="../_images/b717783c4348a7e418b76aadb6023fdd2cb022e5c7978f27ae856db794508a35.png" />
 </div>
 </div>
 </section>
@@ -1386,7 +1454,15 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/5377d2107e3c0025341fa8f9c1e2c561e091e456a9fe54801b9ec6a061e7d931.png" src="../_images/5377d2107e3c0025341fa8f9c1e2c561e091e456a9fe54801b9ec6a061e7d931.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:absl:At this time, the v2.11+ optimizer `tf.keras.optimizers.SGD` runs slowly on M1/M2 Macs, please use the legacy Keras optimizer instead, located at `tf.keras.optimizers.legacy.SGD`.
+WARNING:absl:`lr` is deprecated in Keras optimizer, please use `learning_rate` or use the legacy optimizer, e.g.,tf.keras.optimizers.legacy.SGD.
+WARNING:absl:There is a known slowdown when using v2.11+ Keras optimizers on M1/M2 Macs. Falling back to the legacy Keras optimizer, i.e., `tf.keras.optimizers.legacy.SGD`.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7180/7180 [==============================] - 11s 1ms/step
+</pre></div>
+</div>
+<img alt="../_images/114cf73c094088b179273f3f5836f487e343ce632fa3dff7b8225dbbcd9eb39f.png" src="../_images/114cf73c094088b179273f3f5836f487e343ce632fa3dff7b8225dbbcd9eb39f.png" />
 </div>
 </div>
 </section>
@@ -1416,7 +1492,9 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training data: (25000,). Training labels: (25000,)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://storage.googleapis.com/tensorflow/tf-keras-datasets/imdb.npz
+17464789/17464789 [==============================] - 1s 0us/step
+Training data: (25000,). Training labels: (25000,)
 First review: [1, 14, 22, 16, 43, 530, 973, 1622, 1385, 65, 458, 4468, 66, 3941, 4, 173, 36, 256, 5, 25, 100, 43, 838, 112, 50, 670, 2, 9, 35, 480, 284, 5, 150, 4, 172, 112, 167, 2, 336, 385, 39, 4, 172, 4536, 1111, 17, 546, 38, 13, 447, 4, 192, 50, 16, 6, 147, 2025, 19, 14, 22, 4, 1920, 4613, 469, 4, 22, 71, 87, 12, 16, 43, 530, 38, 76, 15, 13, 1247, 4, 22, 17, 515, 17, 12, 16, 626, 18, 2, 5, 62, 386, 12, 8, 316, 8, 106, 5, 4, 2223, 5244, 16, 480, 66, 3785, 33, 4, 130, 12, 16, 38, 619, 5, 25, 124, 51, 36, 135, 48, 25, 1415, 33, 6, 22, 12, 215, 28, 77, 52, 5, 14, 407, 16, 82, 2, 8, 4, 107, 117, 5952, 15, 256, 4, 2, 7, 3766, 5, 723, 36, 71, 43, 530, 476, 26, 400, 317, 46, 7, 4, 2, 1029, 13, 104, 88, 4, 381, 15, 297, 98, 32, 2071, 56, 26, 141, 6, 194, 7486, 18, 4, 226, 22, 21, 134, 476, 26, 480, 5, 144, 30, 5535, 18, 51, 36, 28, 224, 92, 25, 104, 4, 226, 65, 16, 38, 1334, 88, 12, 16, 283, 5, 16, 4472, 113, 103, 32, 15, 16, 5345, 19, 178, 32]
 First label: 1
 </pre></div>
@@ -1439,7 +1517,9 @@ First label: 1
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>? this film was just brilliant casting location scenery story direction everyone&#39;s really suited the part they played and you could just imagine being there robert ? is an amazing actor and now the same being director ? father came from the same scottish island as myself so i loved the fact there was a real connection with this film the witty remarks throughout the film were great it was just brilliant so much that i bought the film as soon as it was released for ? and would recommend it to everyone to watch and the fly fishing was amazing really cried at the end it was so sad and you know what they say if you cry at a film it must have been good and this definitely was also ? to the two little boy&#39;s that played the ? of norman and paul they were just brilliant children are often left out of the ? list i think because the stars that play them all grown up are such a big profile for the whole film but these children are amazing and should be praised for what they have done don&#39;t you think the whole story was so lovely because it was true and was someone&#39;s life after all that was shared with us all
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://storage.googleapis.com/tensorflow/tf-keras-datasets/imdb_word_index.json
+1641221/1641221 [==============================] - 0s 0us/step
+? this film was just brilliant casting location scenery story direction everyone&#39;s really suited the part they played and you could just imagine being there robert ? is an amazing actor and now the same being director ? father came from the same scottish island as myself so i loved the fact there was a real connection with this film the witty remarks throughout the film were great it was just brilliant so much that i bought the film as soon as it was released for ? and would recommend it to everyone to watch and the fly fishing was amazing really cried at the end it was so sad and you know what they say if you cry at a film it must have been good and this definitely was also ? to the two little boy&#39;s that played the ? of norman and paul they were just brilliant children are often left out of the ? list i think because the stars that play them all grown up are such a big profile for the whole film but these children are amazing and should be praised for what they have done don&#39;t you think the whole story was so lovely because it was true and was someone&#39;s life after all that was shared with us all
 </pre></div>
 </div>
 </div>
@@ -1533,7 +1613,7 @@ First label: 1
   </thead>
   <tbody>
     <tr>
-      <th>13577</th>
+      <th>5738</th>
       <td>0.0</td>
       <td>1.0</td>
       <td>1.0</td>
@@ -1557,7 +1637,7 @@ First label: 1
       <td>0.0</td>
     </tr>
     <tr>
-      <th>3395</th>
+      <th>2392</th>
       <td>0.0</td>
       <td>1.0</td>
       <td>1.0</td>
@@ -1581,7 +1661,7 @@ First label: 1
       <td>0.0</td>
     </tr>
     <tr>
-      <th>11038</th>
+      <th>3824</th>
       <td>0.0</td>
       <td>1.0</td>
       <td>1.0</td>
@@ -1605,7 +1685,7 @@ First label: 1
       <td>0.0</td>
     </tr>
     <tr>
-      <th>10368</th>
+      <th>4586</th>
       <td>0.0</td>
       <td>1.0</td>
       <td>1.0</td>
@@ -1629,7 +1709,7 @@ First label: 1
       <td>0.0</td>
     </tr>
     <tr>
-      <th>4615</th>
+      <th>12950</th>
       <td>0.0</td>
       <td>1.0</td>
       <td>1.0</td>
@@ -1653,7 +1733,7 @@ First label: 1
       <td>0.0</td>
     </tr>
     <tr>
-      <th>13839</th>
+      <th>11154</th>
       <td>0.0</td>
       <td>1.0</td>
       <td>1.0</td>
@@ -1677,7 +1757,7 @@ First label: 1
       <td>0.0</td>
     </tr>
     <tr>
-      <th>4032</th>
+      <th>186</th>
       <td>0.0</td>
       <td>1.0</td>
       <td>1.0</td>
@@ -1701,7 +1781,7 @@ First label: 1
       <td>0.0</td>
     </tr>
     <tr>
-      <th>1950</th>
+      <th>11459</th>
       <td>0.0</td>
       <td>1.0</td>
       <td>1.0</td>
@@ -1725,17 +1805,17 @@ First label: 1
       <td>0.0</td>
     </tr>
     <tr>
-      <th>3774</th>
+      <th>3254</th>
       <td>0.0</td>
       <td>1.0</td>
       <td>1.0</td>
       <td>0.0</td>
-      <td>0.0</td>
       <td>1.0</td>
       <td>1.0</td>
       <td>1.0</td>
       <td>1.0</td>
-      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
       <td>...</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -1749,7 +1829,7 @@ First label: 1
       <td>0.0</td>
     </tr>
     <tr>
-      <th>6116</th>
+      <th>6775</th>
       <td>0.0</td>
       <td>1.0</td>
       <td>1.0</td>
@@ -1759,7 +1839,7 @@ First label: 1
       <td>1.0</td>
       <td>1.0</td>
       <td>1.0</td>
-      <td>1.0</td>
+      <td>0.0</td>
       <td>...</td>
       <td>0.0</td>
       <td>0.0</td>
@@ -1793,13 +1873,14 @@ First label: 1
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;sequential_8&quot;
 _________________________________________________________________
-Layer (type)                 Output Shape              Param #   
+ Layer (type)                Output Shape              Param #   
 =================================================================
-dense_16 (Dense)             (None, 16)                160016    
-_________________________________________________________________
-dense_17 (Dense)             (None, 16)                272       
-_________________________________________________________________
-dense_18 (Dense)             (None, 1)                 17        
+ dense_16 (Dense)            (None, 16)                160016    
+                                                                 
+ dense_17 (Dense)            (None, 16)                272       
+                                                                 
+ dense_18 (Dense)            (None, 1)                 17        
+                                                                 
 =================================================================
 Total params: 160,305
 Trainable params: 160,305
@@ -1822,7 +1903,7 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/b968a8c6d12ea86deca6f2483de9f32d6cedaae5f94b6c53e48815eadaa2bd5a.png" src="../_images/b968a8c6d12ea86deca6f2483de9f32d6cedaae5f94b6c53e48815eadaa2bd5a.png" />
+<img alt="../_images/079b9f23e54e877ad2a07b09df6a4e947af6566d6394b6c6d7a1bca679f622b1.png" src="../_images/079b9f23e54e877ad2a07b09df6a4e947af6566d6394b6c6d7a1bca679f622b1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1835,7 +1916,7 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test accuracy: 0.84844
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test accuracy: 0.85048
 </pre></div>
 </div>
 </div>
@@ -1865,13 +1946,14 @@ _________________________________________________________________
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;sequential_9&quot;
 _________________________________________________________________
-Layer (type)                 Output Shape              Param #   
+ Layer (type)                Output Shape              Param #   
 =================================================================
-dense_19 (Dense)             (None, 8)                 80008     
-_________________________________________________________________
-dense_20 (Dense)             (None, 8)                 72        
-_________________________________________________________________
-dense_21 (Dense)             (None, 1)                 9         
+ dense_19 (Dense)            (None, 8)                 80008     
+                                                                 
+ dense_20 (Dense)            (None, 8)                 72        
+                                                                 
+ dense_21 (Dense)            (None, 1)                 9         
+                                                                 
 =================================================================
 Total params: 80,089
 Trainable params: 80,089
@@ -1879,7 +1961,7 @@ Non-trainable params: 0
 _________________________________________________________________
 </pre></div>
 </div>
-<img alt="../_images/ec99faa93d20735a750015c0aa5e5e2a020def7f179d00b2f66ee0cdedadb9c3.png" src="../_images/ec99faa93d20735a750015c0aa5e5e2a020def7f179d00b2f66ee0cdedadb9c3.png" />
+<img alt="../_images/147cb70f33112dee5af96b4875c2a0845d5e157d7c92d5f75012fabf43fcd102.png" src="../_images/147cb70f33112dee5af96b4875c2a0845d5e157d7c92d5f75012fabf43fcd102.png" />
 </div>
 </div>
 </section>
@@ -1915,13 +1997,14 @@ _________________________________________________________________
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;sequential_10&quot;
 _________________________________________________________________
-Layer (type)                 Output Shape              Param #   
+ Layer (type)                Output Shape              Param #   
 =================================================================
-dense_22 (Dense)             (None, 8)                 80008     
-_________________________________________________________________
-dense_23 (Dense)             (None, 8)                 72        
-_________________________________________________________________
-dense_24 (Dense)             (None, 1)                 9         
+ dense_22 (Dense)            (None, 8)                 80008     
+                                                                 
+ dense_23 (Dense)            (None, 8)                 72        
+                                                                 
+ dense_24 (Dense)            (None, 1)                 9         
+                                                                 
 =================================================================
 Total params: 80,089
 Trainable params: 80,089
@@ -1929,7 +2012,7 @@ Non-trainable params: 0
 _________________________________________________________________
 </pre></div>
 </div>
-<img alt="../_images/d6fcfea1fa5feb4f4e711a92ce55c8557f15deda53635a587a13d57ad1aa34d2.png" src="../_images/d6fcfea1fa5feb4f4e711a92ce55c8557f15deda53635a587a13d57ad1aa34d2.png" />
+<img alt="../_images/806328d96e76f8eb9e128ba18e526faf2c5d198d05a415f54fb6c1bc4e470163.png" src="../_images/806328d96e76f8eb9e128ba18e526faf2c5d198d05a415f54fb6c1bc4e470163.png" />
 </div>
 </div>
 </section>
@@ -1967,17 +2050,18 @@ _________________________________________________________________
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;sequential_11&quot;
 _________________________________________________________________
-Layer (type)                 Output Shape              Param #   
+ Layer (type)                Output Shape              Param #   
 =================================================================
-dense_25 (Dense)             (None, 8)                 80008     
-_________________________________________________________________
-dropout_1 (Dropout)          (None, 8)                 0         
-_________________________________________________________________
-dense_26 (Dense)             (None, 8)                 72        
-_________________________________________________________________
-dropout_2 (Dropout)          (None, 8)                 0         
-_________________________________________________________________
-dense_27 (Dense)             (None, 1)                 9         
+ dense_25 (Dense)            (None, 8)                 80008     
+                                                                 
+ dropout_1 (Dropout)         (None, 8)                 0         
+                                                                 
+ dense_26 (Dense)            (None, 8)                 72        
+                                                                 
+ dropout_2 (Dropout)         (None, 8)                 0         
+                                                                 
+ dense_27 (Dense)            (None, 1)                 9         
+                                                                 
 =================================================================
 Total params: 80,089
 Trainable params: 80,089
@@ -1985,7 +2069,7 @@ Non-trainable params: 0
 _________________________________________________________________
 </pre></div>
 </div>
-<img alt="../_images/0ba52c669bb469656a92074345567cccfb1f3963a1abfeb7e032e3fe60b61ade.png" src="../_images/0ba52c669bb469656a92074345567cccfb1f3963a1abfeb7e032e3fe60b61ade.png" />
+<img alt="../_images/bdc848b37b1737b0a3f17ce2148320797c11b4f404c1cd1e145ffd02af6d899b.png" src="../_images/bdc848b37b1737b0a3f17ce2148320797c11b4f404c1cd1e145ffd02af6d899b.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1998,7 +2082,7 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test accuracy: 0.87184
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test accuracy: 0.87024
 </pre></div>
 </div>
 </div>

@@ -542,7 +542,6 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">platform</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Python version: </span><span class="si">{</span><span class="n">platform</span><span class="o">.</span><span class="n">python_version</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">platform</span><span class="o">.</span><span class="n">python_version_tuple</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="s2">&quot;6&quot;</span><span class="p">)</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -552,7 +551,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Python version: 3.7.5
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Python version: 3.11.1
 </pre></div>
 </div>
 </div>
@@ -574,7 +573,9 @@ document.write(`
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;TensorFlow version: </span><span class="si">{</span><span class="n">tf</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Keras version: </span><span class="si">{</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;GPU found :)&#39;</span> <span class="k">if</span> <span class="n">tf</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">list_physical_devices</span><span class="p">(</span><span class="s2">&quot;GPU&quot;</span><span class="p">)</span> <span class="k">else</span> <span class="s1">&#39;No GPU :(&#39;</span><span class="p">)</span>
+
+<span class="c1"># Device configuration</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;GPU found :)&quot;</span> <span class="k">if</span> <span class="n">tf</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">list_physical_devices</span><span class="p">(</span><span class="s2">&quot;GPU&quot;</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;No available GPU :/&quot;</span><span class="p">)</span>
 
 <span class="kn">from</span> <span class="nn">tensorflow.keras.models</span> <span class="kn">import</span> <span class="n">Sequential</span>
 <span class="kn">from</span> <span class="nn">tensorflow.keras.layers</span> <span class="kn">import</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">Flatten</span><span class="p">,</span> <span class="n">Conv2D</span><span class="p">,</span> <span class="n">MaxPooling2D</span><span class="p">,</span> <span class="n">Dropout</span>
@@ -585,9 +586,9 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>TensorFlow version: 2.3.1
-Keras version: 2.4.0
-No GPU :(
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>TensorFlow version: 2.12.0
+Keras version: 2.12.0
+GPU found :)
 </pre></div>
 </div>
 </div>
@@ -777,6 +778,7 @@ No GPU :(
             src="https://www.youtube.com/embed/FwFduRA_L6Q"
             frameborder="0"
             allowfullscreen
+            
         ></iframe>
         </div></div>
 </div>
@@ -863,7 +865,15 @@ No GPU :(
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training images: (60000, 28, 28). Training labels: (60000,)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://storage.googleapis.com/tensorflow/tf-keras-datasets/train-labels-idx1-ubyte.gz
+29515/29515 [==============================] - 0s 1us/step
+Downloading data from https://storage.googleapis.com/tensorflow/tf-keras-datasets/train-images-idx3-ubyte.gz
+26421880/26421880 [==============================] - 1s 0us/step
+Downloading data from https://storage.googleapis.com/tensorflow/tf-keras-datasets/t10k-labels-idx1-ubyte.gz
+5148/5148 [==============================] - 0s 0us/step
+Downloading data from https://storage.googleapis.com/tensorflow/tf-keras-datasets/t10k-images-idx3-ubyte.gz
+4422102/4422102 [==============================] - 0s 0us/step
+Training images: (60000, 28, 28). Training labels: (60000,)
 Test images: (10000, 28, 28). Test labels: (10000,)
 </pre></div>
 </div>
@@ -882,7 +892,7 @@ Test images: (10000, 28, 28). Test labels: (10000,)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/410082353330327e495417279e2ae5260bec15e749ec8ff15613026e0ab06c52.png" src="../_images/410082353330327e495417279e2ae5260bec15e749ec8ff15613026e0ab06c52.png" />
+<img alt="../_images/e520ffda4ab1992ba35ef262f36d382f36a26d4fbb03bb38c0b3ac6ae0e6c234.png" src="../_images/e520ffda4ab1992ba35ef262f36d382f36a26d4fbb03bb38c0b3ac6ae0e6c234.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -918,36 +928,36 @@ Test images: (10000, 28, 28). Test labels: (10000,)
   </thead>
   <tbody>
     <tr>
-      <th>48873</th>
-      <td>3</td>
+      <th>18079</th>
+      <td>0</td>
     </tr>
     <tr>
-      <th>50246</th>
-      <td>8</td>
+      <th>17918</th>
+      <td>0</td>
     </tr>
     <tr>
-      <th>52153</th>
-      <td>3</td>
+      <th>23857</th>
+      <td>2</td>
     </tr>
     <tr>
-      <th>29803</th>
+      <th>10316</th>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>38185</th>
       <td>1</td>
     </tr>
     <tr>
-      <th>23481</th>
-      <td>8</td>
+      <th>867</th>
+      <td>9</td>
     </tr>
     <tr>
-      <th>23519</th>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>18528</th>
-      <td>8</td>
-    </tr>
-    <tr>
-      <th>12866</th>
+      <th>40864</th>
       <td>1</td>
+    </tr>
+    <tr>
+      <th>59097</th>
+      <td>8</td>
     </tr>
   </tbody>
 </table>
@@ -1015,6 +1025,11 @@ x_test: (10000, 28, 28, 1). y_test: (10000, 10)
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Metal device set to: Apple M1 Pro
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1026,23 +1041,26 @@ x_test: (10000, 28, 28, 1). y_test: (10000, 10)
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;sequential&quot;
 _________________________________________________________________
-Layer (type)                 Output Shape              Param #   
+ Layer (type)                Output Shape              Param #   
 =================================================================
-conv2d (Conv2D)              (None, 26, 26, 32)        320       
-_________________________________________________________________
-max_pooling2d (MaxPooling2D) (None, 13, 13, 32)        0         
-_________________________________________________________________
-conv2d_1 (Conv2D)            (None, 11, 11, 64)        18496     
-_________________________________________________________________
-max_pooling2d_1 (MaxPooling2 (None, 5, 5, 64)          0         
-_________________________________________________________________
-flatten (Flatten)            (None, 1600)              0         
-_________________________________________________________________
-dense (Dense)                (None, 128)               204928    
-_________________________________________________________________
-dropout (Dropout)            (None, 128)               0         
-_________________________________________________________________
-dense_1 (Dense)              (None, 10)                1290      
+ conv2d (Conv2D)             (None, 26, 26, 32)        320       
+                                                                 
+ max_pooling2d (MaxPooling2D  (None, 13, 13, 32)       0         
+ )                                                               
+                                                                 
+ conv2d_1 (Conv2D)           (None, 11, 11, 64)        18496     
+                                                                 
+ max_pooling2d_1 (MaxPooling  (None, 5, 5, 64)         0         
+ 2D)                                                             
+                                                                 
+ flatten (Flatten)           (None, 1600)              0         
+                                                                 
+ dense (Dense)               (None, 128)               204928    
+                                                                 
+ dropout (Dropout)           (None, 128)               0         
+                                                                 
+ dense_1 (Dense)             (None, 10)                1290      
+                                                                 
 =================================================================
 Total params: 225,034
 Trainable params: 225,034
@@ -1072,25 +1090,30 @@ _________________________________________________________________
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/10
-422/422 - 26s - loss: 0.5861 - accuracy: 0.7897 - val_loss: 0.3855 - val_accuracy: 0.8582
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2023-05-25 19:39:05.028127: W tensorflow/tsl/platform/profile_utils/cpu_utils.cc:128] Failed to get CPU frequency: 0 Hz
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>422/422 - 10s - loss: 0.5622 - accuracy: 0.8018 - val_loss: 0.3639 - val_accuracy: 0.8688 - 10s/epoch - 23ms/step
 Epoch 2/10
-422/422 - 25s - loss: 0.3822 - accuracy: 0.8639 - val_loss: 0.3370 - val_accuracy: 0.8768
+422/422 - 19s - loss: 0.3623 - accuracy: 0.8709 - val_loss: 0.3151 - val_accuracy: 0.8863 - 19s/epoch - 46ms/step
 Epoch 3/10
-422/422 - 26s - loss: 0.3342 - accuracy: 0.8799 - val_loss: 0.3098 - val_accuracy: 0.8857
+422/422 - 6s - loss: 0.3202 - accuracy: 0.8854 - val_loss: 0.3032 - val_accuracy: 0.8895 - 6s/epoch - 14ms/step
 Epoch 4/10
-422/422 - 26s - loss: 0.3036 - accuracy: 0.8916 - val_loss: 0.2872 - val_accuracy: 0.8978
+422/422 - 6s - loss: 0.2878 - accuracy: 0.8970 - val_loss: 0.2797 - val_accuracy: 0.8970 - 6s/epoch - 14ms/step
 Epoch 5/10
-422/422 - 26s - loss: 0.2855 - accuracy: 0.8980 - val_loss: 0.2693 - val_accuracy: 0.9047
+422/422 - 6s - loss: 0.2686 - accuracy: 0.9036 - val_loss: 0.2714 - val_accuracy: 0.8997 - 6s/epoch - 14ms/step
 Epoch 6/10
-422/422 - 25s - loss: 0.2677 - accuracy: 0.9037 - val_loss: 0.2637 - val_accuracy: 0.9013
+422/422 - 6s - loss: 0.2508 - accuracy: 0.9098 - val_loss: 0.2668 - val_accuracy: 0.9022 - 6s/epoch - 13ms/step
 Epoch 7/10
-422/422 - 25s - loss: 0.2524 - accuracy: 0.9097 - val_loss: 0.2612 - val_accuracy: 0.9085
+422/422 - 6s - loss: 0.2346 - accuracy: 0.9155 - val_loss: 0.2638 - val_accuracy: 0.9062 - 6s/epoch - 14ms/step
 Epoch 8/10
-422/422 - 25s - loss: 0.2379 - accuracy: 0.9156 - val_loss: 0.2675 - val_accuracy: 0.9027
+422/422 - 6s - loss: 0.2255 - accuracy: 0.9186 - val_loss: 0.2536 - val_accuracy: 0.9088 - 6s/epoch - 13ms/step
 Epoch 9/10
-422/422 - 25s - loss: 0.2261 - accuracy: 0.9188 - val_loss: 0.2547 - val_accuracy: 0.9080
+422/422 - 6s - loss: 0.2130 - accuracy: 0.9228 - val_loss: 0.2568 - val_accuracy: 0.9048 - 6s/epoch - 14ms/step
 Epoch 10/10
-422/422 - 25s - loss: 0.2157 - accuracy: 0.9228 - val_loss: 0.2542 - val_accuracy: 0.9082
+422/422 - 6s - loss: 0.2012 - accuracy: 0.9268 - val_loss: 0.2493 - val_accuracy: 0.9113 - 6s/epoch - 14ms/step
 </pre></div>
 </div>
 </div>
@@ -1103,7 +1126,7 @@ Epoch 10/10
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/54494e77054377f5fdc5bd528d6aa2c86b671700df691ff744a8cfd2039d82f1.png" src="../_images/54494e77054377f5fdc5bd528d6aa2c86b671700df691ff744a8cfd2039d82f1.png" />
+<img alt="../_images/6409e2e66ef623b27d1848fa0128b05cf5deaadb3aa9c4cc12362a5465edb6bb.png" src="../_images/6409e2e66ef623b27d1848fa0128b05cf5deaadb3aa9c4cc12362a5465edb6bb.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1116,7 +1139,7 @@ Epoch 10/10
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test accuracy: 0.90320
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test accuracy: 0.90300
 </pre></div>
 </div>
 </div>
@@ -1158,7 +1181,9 @@ Epoch 10/10
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training images: (50000, 32, 32, 3). Training labels: (50000, 1)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz
+170498071/170498071 [==============================] - 17s 0us/step
+Training images: (50000, 32, 32, 3). Training labels: (50000, 1)
 Test images: (10000, 32, 32, 3). Test labels: (10000, 1)
 </pre></div>
 </div>
@@ -1177,7 +1202,7 @@ Test images: (10000, 32, 32, 3). Test labels: (10000, 1)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/4bbd72818b151c2a6e2ce3fef73f8598d2e9157f65fdf313c15c1da0f0b2a2e7.png" src="../_images/4bbd72818b151c2a6e2ce3fef73f8598d2e9157f65fdf313c15c1da0f0b2a2e7.png" />
+<img alt="../_images/30817680320e6ea102b6efe62adc0b2e6202d3fd3f0fdc7407734e3d4148245d.png" src="../_images/30817680320e6ea102b6efe62adc0b2e6202d3fd3f0fdc7407734e3d4148245d.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1216,47 +1241,50 @@ x_test: (10000, 32, 32, 3). y_test: (10000, 10)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;vgg16&quot;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://storage.googleapis.com/tensorflow/keras-applications/vgg16/vgg16_weights_tf_dim_ordering_tf_kernels_notop.h5
+58889256/58889256 [==============================] - 3s 0us/step
+Model: &quot;vgg16&quot;
 _________________________________________________________________
-Layer (type)                 Output Shape              Param #   
+ Layer (type)                Output Shape              Param #   
 =================================================================
-input_1 (InputLayer)         [(None, 32, 32, 3)]       0         
-_________________________________________________________________
-block1_conv1 (Conv2D)        (None, 32, 32, 64)        1792      
-_________________________________________________________________
-block1_conv2 (Conv2D)        (None, 32, 32, 64)        36928     
-_________________________________________________________________
-block1_pool (MaxPooling2D)   (None, 16, 16, 64)        0         
-_________________________________________________________________
-block2_conv1 (Conv2D)        (None, 16, 16, 128)       73856     
-_________________________________________________________________
-block2_conv2 (Conv2D)        (None, 16, 16, 128)       147584    
-_________________________________________________________________
-block2_pool (MaxPooling2D)   (None, 8, 8, 128)         0         
-_________________________________________________________________
-block3_conv1 (Conv2D)        (None, 8, 8, 256)         295168    
-_________________________________________________________________
-block3_conv2 (Conv2D)        (None, 8, 8, 256)         590080    
-_________________________________________________________________
-block3_conv3 (Conv2D)        (None, 8, 8, 256)         590080    
-_________________________________________________________________
-block3_pool (MaxPooling2D)   (None, 4, 4, 256)         0         
-_________________________________________________________________
-block4_conv1 (Conv2D)        (None, 4, 4, 512)         1180160   
-_________________________________________________________________
-block4_conv2 (Conv2D)        (None, 4, 4, 512)         2359808   
-_________________________________________________________________
-block4_conv3 (Conv2D)        (None, 4, 4, 512)         2359808   
-_________________________________________________________________
-block4_pool (MaxPooling2D)   (None, 2, 2, 512)         0         
-_________________________________________________________________
-block5_conv1 (Conv2D)        (None, 2, 2, 512)         2359808   
-_________________________________________________________________
-block5_conv2 (Conv2D)        (None, 2, 2, 512)         2359808   
-_________________________________________________________________
-block5_conv3 (Conv2D)        (None, 2, 2, 512)         2359808   
-_________________________________________________________________
-block5_pool (MaxPooling2D)   (None, 1, 1, 512)         0         
+ input_1 (InputLayer)        [(None, 32, 32, 3)]       0         
+                                                                 
+ block1_conv1 (Conv2D)       (None, 32, 32, 64)        1792      
+                                                                 
+ block1_conv2 (Conv2D)       (None, 32, 32, 64)        36928     
+                                                                 
+ block1_pool (MaxPooling2D)  (None, 16, 16, 64)        0         
+                                                                 
+ block2_conv1 (Conv2D)       (None, 16, 16, 128)       73856     
+                                                                 
+ block2_conv2 (Conv2D)       (None, 16, 16, 128)       147584    
+                                                                 
+ block2_pool (MaxPooling2D)  (None, 8, 8, 128)         0         
+                                                                 
+ block3_conv1 (Conv2D)       (None, 8, 8, 256)         295168    
+                                                                 
+ block3_conv2 (Conv2D)       (None, 8, 8, 256)         590080    
+                                                                 
+ block3_conv3 (Conv2D)       (None, 8, 8, 256)         590080    
+                                                                 
+ block3_pool (MaxPooling2D)  (None, 4, 4, 256)         0         
+                                                                 
+ block4_conv1 (Conv2D)       (None, 4, 4, 512)         1180160   
+                                                                 
+ block4_conv2 (Conv2D)       (None, 4, 4, 512)         2359808   
+                                                                 
+ block4_conv3 (Conv2D)       (None, 4, 4, 512)         2359808   
+                                                                 
+ block4_pool (MaxPooling2D)  (None, 2, 2, 512)         0         
+                                                                 
+ block5_conv1 (Conv2D)       (None, 2, 2, 512)         2359808   
+                                                                 
+ block5_conv2 (Conv2D)       (None, 2, 2, 512)         2359808   
+                                                                 
+ block5_conv3 (Conv2D)       (None, 2, 2, 512)         2359808   
+                                                                 
+ block5_pool (MaxPooling2D)  (None, 1, 1, 512)         0         
+                                                                 
 =================================================================
 Total params: 14,714,688
 Trainable params: 0
@@ -1285,17 +1313,18 @@ _________________________________________________________________
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;sequential_1&quot;
 _________________________________________________________________
-Layer (type)                 Output Shape              Param #   
+ Layer (type)                Output Shape              Param #   
 =================================================================
-vgg16 (Functional)           (None, 1, 1, 512)         14714688  
-_________________________________________________________________
-flatten_1 (Flatten)          (None, 512)               0         
-_________________________________________________________________
-dense_2 (Dense)              (None, 512)               262656    
-_________________________________________________________________
-dropout_1 (Dropout)          (None, 512)               0         
-_________________________________________________________________
-dense_3 (Dense)              (None, 10)                5130      
+ vgg16 (Functional)          (None, 1, 1, 512)         14714688  
+                                                                 
+ flatten_1 (Flatten)         (None, 512)               0         
+                                                                 
+ dense_2 (Dense)             (None, 512)               262656    
+                                                                 
+ dropout_1 (Dropout)         (None, 512)               0         
+                                                                 
+ dense_3 (Dense)             (None, 10)                5130      
+                                                                 
 =================================================================
 Total params: 14,982,474
 Trainable params: 267,786
@@ -1322,45 +1351,45 @@ _________________________________________________________________
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/20
-1407/1407 [==============================] - 318s 226ms/step - loss: 1.4528 - accuracy: 0.4889 - val_loss: 1.2485 - val_accuracy: 0.5622
+1407/1407 [==============================] - 19s 13ms/step - loss: 1.4967 - accuracy: 0.4814 - val_loss: 1.2548 - val_accuracy: 0.5634
 Epoch 2/20
-1407/1407 [==============================] - 307s 218ms/step - loss: 1.2735 - accuracy: 0.5536 - val_loss: 1.1642 - val_accuracy: 0.5968
+1407/1407 [==============================] - 19s 13ms/step - loss: 1.3561 - accuracy: 0.5318 - val_loss: 1.2202 - val_accuracy: 0.5736
 Epoch 3/20
-1407/1407 [==============================] - 9552s 7s/step - loss: 1.2200 - accuracy: 0.5700 - val_loss: 1.1345 - val_accuracy: 0.6000
+1407/1407 [==============================] - 18s 13ms/step - loss: 1.3405 - accuracy: 0.5387 - val_loss: 1.2391 - val_accuracy: 0.5684
 Epoch 4/20
-1407/1407 [==============================] - 17599s 13s/step - loss: 1.1845 - accuracy: 0.5829 - val_loss: 1.1143 - val_accuracy: 0.6118
+1407/1407 [==============================] - 17s 12ms/step - loss: 1.3481 - accuracy: 0.5392 - val_loss: 1.2275 - val_accuracy: 0.5690
 Epoch 5/20
-1407/1407 [==============================] - 307s 219ms/step - loss: 1.1577 - accuracy: 0.5936 - val_loss: 1.1115 - val_accuracy: 0.6158
+1407/1407 [==============================] - 17s 12ms/step - loss: 1.3426 - accuracy: 0.5392 - val_loss: 1.2746 - val_accuracy: 0.5538
 Epoch 6/20
-1407/1407 [==============================] - 309s 220ms/step - loss: 1.1330 - accuracy: 0.6043 - val_loss: 1.0977 - val_accuracy: 0.6144
+1407/1407 [==============================] - 17s 12ms/step - loss: 1.3436 - accuracy: 0.5402 - val_loss: 1.2272 - val_accuracy: 0.5734
 Epoch 7/20
-1407/1407 [==============================] - 283s 201ms/step - loss: 1.1148 - accuracy: 0.6071 - val_loss: 1.0855 - val_accuracy: 0.6190
+1407/1407 [==============================] - 18s 13ms/step - loss: 1.3579 - accuracy: 0.5374 - val_loss: 1.2734 - val_accuracy: 0.5550
 Epoch 8/20
-1407/1407 [==============================] - 275s 195ms/step - loss: 1.0938 - accuracy: 0.6144 - val_loss: 1.0883 - val_accuracy: 0.6140
+1407/1407 [==============================] - 18s 13ms/step - loss: 1.3506 - accuracy: 0.5417 - val_loss: 1.2168 - val_accuracy: 0.5750
 Epoch 9/20
-1407/1407 [==============================] - 951s 676ms/step - loss: 1.0749 - accuracy: 0.6228 - val_loss: 1.0831 - val_accuracy: 0.6242
+1407/1407 [==============================] - 17s 12ms/step - loss: 1.3558 - accuracy: 0.5417 - val_loss: 1.2757 - val_accuracy: 0.5486
 Epoch 10/20
-1407/1407 [==============================] - 284s 202ms/step - loss: 1.0620 - accuracy: 0.6257 - val_loss: 1.0767 - val_accuracy: 0.6202
+1407/1407 [==============================] - 18s 13ms/step - loss: 1.3611 - accuracy: 0.5412 - val_loss: 1.2390 - val_accuracy: 0.5664
 Epoch 11/20
-1407/1407 [==============================] - 286s 203ms/step - loss: 1.0435 - accuracy: 0.6302 - val_loss: 1.0717 - val_accuracy: 0.6266
+1407/1407 [==============================] - 17s 12ms/step - loss: 1.3693 - accuracy: 0.5412 - val_loss: 1.2821 - val_accuracy: 0.5622
 Epoch 12/20
-1407/1407 [==============================] - 286s 204ms/step - loss: 1.0284 - accuracy: 0.6363 - val_loss: 1.0729 - val_accuracy: 0.6258
+1407/1407 [==============================] - 18s 13ms/step - loss: 1.3772 - accuracy: 0.5366 - val_loss: 1.2726 - val_accuracy: 0.5660
 Epoch 13/20
-1407/1407 [==============================] - 277s 197ms/step - loss: 1.0119 - accuracy: 0.6420 - val_loss: 1.0881 - val_accuracy: 0.6168
+1407/1407 [==============================] - 18s 13ms/step - loss: 1.3785 - accuracy: 0.5385 - val_loss: 1.3005 - val_accuracy: 0.5568
 Epoch 14/20
-1407/1407 [==============================] - 273s 194ms/step - loss: 1.0008 - accuracy: 0.6466 - val_loss: 1.0772 - val_accuracy: 0.6286
+1407/1407 [==============================] - 18s 13ms/step - loss: 1.3975 - accuracy: 0.5342 - val_loss: 1.2803 - val_accuracy: 0.5722
 Epoch 15/20
-1407/1407 [==============================] - 273s 194ms/step - loss: 0.9804 - accuracy: 0.6498 - val_loss: 1.0703 - val_accuracy: 0.6246
+1407/1407 [==============================] - 18s 13ms/step - loss: 1.3994 - accuracy: 0.5356 - val_loss: 1.2798 - val_accuracy: 0.5658
 Epoch 16/20
-1407/1407 [==============================] - 273s 194ms/step - loss: 0.9735 - accuracy: 0.6566 - val_loss: 1.0654 - val_accuracy: 0.6278
+1407/1407 [==============================] - 17s 12ms/step - loss: 1.4084 - accuracy: 0.5348 - val_loss: 1.2851 - val_accuracy: 0.5544
 Epoch 17/20
-1407/1407 [==============================] - 299s 212ms/step - loss: 0.9625 - accuracy: 0.6599 - val_loss: 1.0730 - val_accuracy: 0.6262
+1407/1407 [==============================] - 17s 12ms/step - loss: 1.4200 - accuracy: 0.5312 - val_loss: 1.2668 - val_accuracy: 0.5604
 Epoch 18/20
-1407/1407 [==============================] - 287s 204ms/step - loss: 0.9469 - accuracy: 0.6618 - val_loss: 1.0576 - val_accuracy: 0.6330
+1407/1407 [==============================] - 17s 12ms/step - loss: 1.4212 - accuracy: 0.5348 - val_loss: 1.3595 - val_accuracy: 0.5426
 Epoch 19/20
-1407/1407 [==============================] - 281s 200ms/step - loss: 0.9359 - accuracy: 0.6667 - val_loss: 1.0725 - val_accuracy: 0.6388
+1407/1407 [==============================] - 18s 13ms/step - loss: 1.4391 - accuracy: 0.5298 - val_loss: 1.2996 - val_accuracy: 0.5550
 Epoch 20/20
-1407/1407 [==============================] - 280s 199ms/step - loss: 0.9224 - accuracy: 0.6719 - val_loss: 1.0847 - val_accuracy: 0.6340
+1407/1407 [==============================] - 18s 13ms/step - loss: 1.4372 - accuracy: 0.5292 - val_loss: 1.3527 - val_accuracy: 0.5308
 </pre></div>
 </div>
 </div>
@@ -1373,7 +1402,7 @@ Epoch 20/20
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/883b5765808128f095a658b5f3eb935a852ea73419d7321be044422d4b343c12.png" src="../_images/883b5765808128f095a658b5f3eb935a852ea73419d7321be044422d4b343c12.png" />
+<img alt="../_images/9076c5e228fb7c8e2315b3aa94f972b59eec9cd3f2b8dd3ba3a1ba69487ef70b.png" src="../_images/9076c5e228fb7c8e2315b3aa94f972b59eec9cd3f2b8dd3ba3a1ba69487ef70b.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1386,7 +1415,7 @@ Epoch 20/20
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test accuracy: 0.62750
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test accuracy: 0.51820
 </pre></div>
 </div>
 </div>
