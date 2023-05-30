@@ -1013,7 +1013,7 @@ x_test: (10000, 784)
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a classifier using stochastic gradient descent and log loss</span>
-<span class="n">sgd_model</span> <span class="o">=</span> <span class="n">SGDClassifier</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+<span class="n">sgd_model</span> <span class="o">=</span> <span class="n">SGDClassifier</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s2">&quot;log_loss&quot;</span><span class="p">)</span>
 
 <span class="c1"># Trains the model on data</span>
 <span class="n">sgd_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train_5</span><span class="p">)</span>
@@ -1021,11 +1021,7 @@ x_test: (10000, 784)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/baptiste/Documents/Projets/GitHub/bpesquet/mlhandbook/.venv/lib/python3.11/site-packages/sklearn/linear_model/_stochastic_gradient.py:163: FutureWarning: The loss &#39;log&#39; was deprecated in v1.1 and will be removed in version 1.3. Use `loss=&#39;log_loss&#39;` which is equivalent.
-  warnings.warn(
-</pre></div>
-</div>
-<div class="output text_html"><style>#sk-container-id-1 {color: black;background-color: white;}#sk-container-id-1 pre{padding: 0;}#sk-container-id-1 div.sk-toggleable {background-color: white;}#sk-container-id-1 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-1 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-1 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-1 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-1 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-1 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-1 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-1 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-1 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-1 div.sk-item {position: relative;z-index: 1;}#sk-container-id-1 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-1 div.sk-item::before, #sk-container-id-1 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-1 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-1 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-1 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-1 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-1 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-1 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-1 div.sk-label-container {text-align: center;}#sk-container-id-1 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-1 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>SGDClassifier(loss=&#x27;log&#x27;)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" checked><label for="sk-estimator-id-1" class="sk-toggleable__label sk-toggleable__label-arrow">SGDClassifier</label><div class="sk-toggleable__content"><pre>SGDClassifier(loss=&#x27;log&#x27;)</pre></div></div></div></div></div></div></div>
+<div class="output text_html"><style>#sk-container-id-1 {color: black;background-color: white;}#sk-container-id-1 pre{padding: 0;}#sk-container-id-1 div.sk-toggleable {background-color: white;}#sk-container-id-1 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-1 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-1 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-1 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-1 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-1 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-1 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-1 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-1 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-1 div.sk-item {position: relative;z-index: 1;}#sk-container-id-1 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-1 div.sk-item::before, #sk-container-id-1 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-1 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-1 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-1 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-1 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-1 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-1 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-1 div.sk-label-container {text-align: center;}#sk-container-id-1 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-1 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>SGDClassifier(loss=&#x27;log_loss&#x27;)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" checked><label for="sk-estimator-id-1" class="sk-toggleable__label sk-toggleable__label-arrow">SGDClassifier</label><div class="sk-toggleable__content"><pre>SGDClassifier(loss=&#x27;log_loss&#x27;)</pre></div></div></div></div></div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1044,8 +1040,8 @@ x_test: (10000, 784)
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ True False False]
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.178, 0.822],
-       [0.999, 0.001],
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.124, 0.876],
+       [1.   , 0.   ],
        [1.   , 0.   ]])
 </pre></div>
 </div>
@@ -1098,18 +1094,8 @@ x_test: (10000, 784)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training accuracy: 0.97503
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/baptiste/Documents/Projets/GitHub/bpesquet/mlhandbook/.venv/lib/python3.11/site-packages/sklearn/linear_model/_stochastic_gradient.py:163: FutureWarning: The loss &#39;log&#39; was deprecated in v1.1 and will be removed in version 1.3. Use `loss=&#39;log_loss&#39;` which is equivalent.
-  warnings.warn(
-/Users/baptiste/Documents/Projets/GitHub/bpesquet/mlhandbook/.venv/lib/python3.11/site-packages/sklearn/linear_model/_stochastic_gradient.py:163: FutureWarning: The loss &#39;log&#39; was deprecated in v1.1 and will be removed in version 1.3. Use `loss=&#39;log_loss&#39;` which is equivalent.
-  warnings.warn(
-/Users/baptiste/Documents/Projets/GitHub/bpesquet/mlhandbook/.venv/lib/python3.11/site-packages/sklearn/linear_model/_stochastic_gradient.py:163: FutureWarning: The loss &#39;log&#39; was deprecated in v1.1 and will be removed in version 1.3. Use `loss=&#39;log_loss&#39;` which is equivalent.
-  warnings.warn(
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CV accuracy: [0.9738  0.97205 0.9716 ]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training accuracy: 0.97437
+CV accuracy: [0.9733  0.9716  0.96875]
 </pre></div>
 </div>
 </div>
@@ -1168,7 +1154,7 @@ Dumb classifier accuracy: 0.90965
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/bf1288bfe7271ab3d045aa7a7400b02580b472926e1ba2f437de510eded48432.png" src="../_images/bf1288bfe7271ab3d045aa7a7400b02580b472926e1ba2f437de510eded48432.png" />
+<img alt="../_images/b09e9fddd7722e8ef24bb16962dc8ab6b778b4c544fed1954efc479d9cf504d6.png" src="../_images/b09e9fddd7722e8ef24bb16962dc8ab6b778b4c544fed1954efc479d9cf504d6.png" />
 </div>
 </div>
 </section>
@@ -1262,11 +1248,11 @@ Recall = \frac{1}{1 + 8} = 11\%\]</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              precision    recall  f1-score   support
 
        False       0.98      0.99      0.99     54579
-        True       0.91      0.80      0.85      5421
+        True       0.90      0.81      0.85      5421
 
-    accuracy                           0.98     60000
-   macro avg       0.95      0.90      0.92     60000
-weighted avg       0.97      0.98      0.97     60000
+    accuracy                           0.97     60000
+   macro avg       0.94      0.90      0.92     60000
+weighted avg       0.97      0.97      0.97     60000
 </pre></div>
 </div>
 </div>
@@ -1293,7 +1279,7 @@ weighted avg       0.97      0.98      0.97     60000
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/5a64225863dcbe3a97401f73fcae389f102f7566a7df58dd3b4265b5c2bd0699.png" src="../_images/5a64225863dcbe3a97401f73fcae389f102f7566a7df58dd3b4265b5c2bd0699.png" />
+<img alt="../_images/6caa33dd2b9cb8acfc185186135410572999cd40f32189048c076a4a6e9e5c36.png" src="../_images/6caa33dd2b9cb8acfc185186135410572999cd40f32189048c076a4a6e9e5c36.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1311,7 +1297,7 @@ weighted avg       0.97      0.98      0.97     60000
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/a2a019af9b2b85c21e35326c194271ceb86823f268b82b3c27d37dcec5923d2b.png" src="../_images/a2a019af9b2b85c21e35326c194271ceb86823f268b82b3c27d37dcec5923d2b.png" />
+<img alt="../_images/df8bf540441bf267c1277f0a4600c5aa5a31b6601e6245a4a96f2d5eaa5f3bbf.png" src="../_images/df8bf540441bf267c1277f0a4600c5aa5a31b6601e6245a4a96f2d5eaa5f3bbf.png" />
 </div>
 </div>
 </section>
@@ -1334,8 +1320,8 @@ weighted avg       0.97      0.98      0.97     60000
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training accuracy: 0.92032
-Test accuracy: 0.91610
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training accuracy: 0.92023
+Test accuracy: 0.91770
 </pre></div>
 </div>
 </div>
@@ -1348,7 +1334,7 @@ Test accuracy: 0.91610
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/e4d1bcc84dda2c196d3b3ce921d2f76577eb5ac9431eb36b7f5928b72f27eca5.png" src="../_images/e4d1bcc84dda2c196d3b3ce921d2f76577eb5ac9431eb36b7f5928b72f27eca5.png" />
+<img alt="../_images/31d63d8194dd41b751ba77379fa3ce9c578399483b47454aaec8b808736b3f1f.png" src="../_images/31d63d8194dd41b751ba77379fa3ce9c578399483b47454aaec8b808736b3f1f.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1361,19 +1347,19 @@ Test accuracy: 0.91610
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              precision    recall  f1-score   support
 
-           0       0.92      0.98      0.95       980
-           1       0.96      0.98      0.97      1135
-           2       0.94      0.88      0.91      1032
-           3       0.89      0.92      0.90      1010
-           4       0.92      0.93      0.92       982
-           5       0.91      0.85      0.88       892
-           6       0.94      0.95      0.94       958
-           7       0.91      0.93      0.92      1028
-           8       0.86      0.87      0.86       974
-           9       0.92      0.86      0.89      1009
+           0       0.94      0.98      0.96       980
+           1       0.95      0.98      0.97      1135
+           2       0.95      0.88      0.91      1032
+           3       0.92      0.90      0.91      1010
+           4       0.91      0.92      0.92       982
+           5       0.90      0.86      0.88       892
+           6       0.92      0.96      0.94       958
+           7       0.92      0.93      0.92      1028
+           8       0.88      0.86      0.87       974
+           9       0.88      0.90      0.89      1009
 
     accuracy                           0.92     10000
-   macro avg       0.92      0.91      0.91     10000
+   macro avg       0.92      0.92      0.92     10000
 weighted avg       0.92      0.92      0.92     10000
 </pre></div>
 </div>
