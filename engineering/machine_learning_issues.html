@@ -476,9 +476,9 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#white-boxes-models">White boxes models</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#black-boxes-models">Black boxes models</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explainability-vs-interpretability">Explainability Vs interpretability</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-possible-taxonomy">A possible taxonomy</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explanation-methods">Explanation methods</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explanation-examples">Explanation examples</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-possible-taxonomy">A possible taxonomy</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-attribution-method-lime">An attribution method: LIME</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#how-lime-works">How LIME works</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#lime-for-images-1-2">LIME for images (1/2)</a></li>
@@ -572,25 +572,32 @@ document.write(`
 <span class="expanded">Hide code cell output</span>
 </summary>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: lime in /Users/baptiste/miniconda3/envs/tf2/lib/python3.7/site-packages (0.2.0.1)
-Requirement already satisfied: tqdm in /Users/baptiste/miniconda3/envs/tf2/lib/python3.7/site-packages (from lime) (4.63.0)
-Requirement already satisfied: scikit-learn&gt;=0.18 in /Users/baptiste/miniconda3/envs/tf2/lib/python3.7/site-packages (from lime) (0.22.1)
-Requirement already satisfied: matplotlib in /Users/baptiste/miniconda3/envs/tf2/lib/python3.7/site-packages (from lime) (3.1.3)
-Requirement already satisfied: scipy in /Users/baptiste/miniconda3/envs/tf2/lib/python3.7/site-packages (from lime) (1.4.1)
-Requirement already satisfied: scikit-image&gt;=0.12 in /Users/baptiste/miniconda3/envs/tf2/lib/python3.7/site-packages (from lime) (0.18.1)
-Requirement already satisfied: numpy in /Users/baptiste/miniconda3/envs/tf2/lib/python3.7/site-packages (from lime) (1.18.1)
-Requirement already satisfied: joblib&gt;=0.11 in /Users/baptiste/miniconda3/envs/tf2/lib/python3.7/site-packages (from scikit-learn&gt;=0.18-&gt;lime) (0.14.1)
-Requirement already satisfied: cycler&gt;=0.10 in /Users/baptiste/miniconda3/envs/tf2/lib/python3.7/site-packages (from matplotlib-&gt;lime) (0.10.0)
-Requirement already satisfied: kiwisolver&gt;=1.0.1 in /Users/baptiste/miniconda3/envs/tf2/lib/python3.7/site-packages (from matplotlib-&gt;lime) (1.2.0)
-Requirement already satisfied: pyparsing!=2.0.4,!=2.1.2,!=2.1.6,&gt;=2.0.1 in /Users/baptiste/miniconda3/envs/tf2/lib/python3.7/site-packages (from matplotlib-&gt;lime) (2.4.7)
-Requirement already satisfied: python-dateutil&gt;=2.1 in /Users/baptiste/miniconda3/envs/tf2/lib/python3.7/site-packages (from matplotlib-&gt;lime) (2.8.1)
-Requirement already satisfied: networkx&gt;=2.0 in /Users/baptiste/miniconda3/envs/tf2/lib/python3.7/site-packages (from scikit-image&gt;=0.12-&gt;lime) (2.5.1)
-Requirement already satisfied: pillow!=7.1.0,!=7.1.1,&gt;=4.3.0 in /Users/baptiste/miniconda3/envs/tf2/lib/python3.7/site-packages (from scikit-image&gt;=0.12-&gt;lime) (7.1.2)
-Requirement already satisfied: imageio&gt;=2.3.0 in /Users/baptiste/miniconda3/envs/tf2/lib/python3.7/site-packages (from scikit-image&gt;=0.12-&gt;lime) (2.9.0)
-Requirement already satisfied: tifffile&gt;=2019.7.26 in /Users/baptiste/miniconda3/envs/tf2/lib/python3.7/site-packages (from scikit-image&gt;=0.12-&gt;lime) (2021.4.8)
-Requirement already satisfied: PyWavelets&gt;=1.1.1 in /Users/baptiste/miniconda3/envs/tf2/lib/python3.7/site-packages (from scikit-image&gt;=0.12-&gt;lime) (1.1.1)
-Requirement already satisfied: six in /Users/baptiste/miniconda3/envs/tf2/lib/python3.7/site-packages (from cycler&gt;=0.10-&gt;matplotlib-&gt;lime) (1.14.0)
-Requirement already satisfied: decorator&lt;5,&gt;=4.3 in /Users/baptiste/miniconda3/envs/tf2/lib/python3.7/site-packages (from networkx&gt;=2.0-&gt;scikit-image&gt;=0.12-&gt;lime) (4.4.2)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: lime in /Users/baptiste/Documents/Projets/GitHub/bpesquet/mlhandbook/.venv/lib/python3.11/site-packages (0.2.0.1)
+Requirement already satisfied: matplotlib in /Users/baptiste/Documents/Projets/GitHub/bpesquet/mlhandbook/.venv/lib/python3.11/site-packages (from lime) (3.7.1)
+Requirement already satisfied: numpy in /Users/baptiste/Documents/Projets/GitHub/bpesquet/mlhandbook/.venv/lib/python3.11/site-packages (from lime) (1.23.5)
+Requirement already satisfied: scipy in /Users/baptiste/Documents/Projets/GitHub/bpesquet/mlhandbook/.venv/lib/python3.11/site-packages (from lime) (1.9.3)
+Requirement already satisfied: tqdm in /Users/baptiste/Documents/Projets/GitHub/bpesquet/mlhandbook/.venv/lib/python3.11/site-packages (from lime) (4.65.0)
+Requirement already satisfied: scikit-learn&gt;=0.18 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/mlhandbook/.venv/lib/python3.11/site-packages (from lime) (1.2.2)
+Requirement already satisfied: scikit-image&gt;=0.12 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/mlhandbook/.venv/lib/python3.11/site-packages (from lime) (0.21.0)
+Requirement already satisfied: networkx&gt;=2.8 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/mlhandbook/.venv/lib/python3.11/site-packages (from scikit-image&gt;=0.12-&gt;lime) (3.1)
+Requirement already satisfied: pillow&gt;=9.0.1 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/mlhandbook/.venv/lib/python3.11/site-packages (from scikit-image&gt;=0.12-&gt;lime) (9.5.0)
+Requirement already satisfied: imageio&gt;=2.27 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/mlhandbook/.venv/lib/python3.11/site-packages (from scikit-image&gt;=0.12-&gt;lime) (2.31.0)
+Requirement already satisfied: tifffile&gt;=2022.8.12 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/mlhandbook/.venv/lib/python3.11/site-packages (from scikit-image&gt;=0.12-&gt;lime) (2023.4.12)
+Requirement already satisfied: PyWavelets&gt;=1.1.1 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/mlhandbook/.venv/lib/python3.11/site-packages (from scikit-image&gt;=0.12-&gt;lime) (1.4.1)
+Requirement already satisfied: packaging&gt;=21 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/mlhandbook/.venv/lib/python3.11/site-packages (from scikit-image&gt;=0.12-&gt;lime) (23.1)
+Requirement already satisfied: lazy_loader&gt;=0.2 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/mlhandbook/.venv/lib/python3.11/site-packages (from scikit-image&gt;=0.12-&gt;lime) (0.2)
+Requirement already satisfied: joblib&gt;=1.1.1 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/mlhandbook/.venv/lib/python3.11/site-packages (from scikit-learn&gt;=0.18-&gt;lime) (1.2.0)
+Requirement already satisfied: threadpoolctl&gt;=2.0.0 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/mlhandbook/.venv/lib/python3.11/site-packages (from scikit-learn&gt;=0.18-&gt;lime) (3.1.0)
+Requirement already satisfied: contourpy&gt;=1.0.1 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/mlhandbook/.venv/lib/python3.11/site-packages (from matplotlib-&gt;lime) (1.0.7)
+Requirement already satisfied: cycler&gt;=0.10 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/mlhandbook/.venv/lib/python3.11/site-packages (from matplotlib-&gt;lime) (0.11.0)
+Requirement already satisfied: fonttools&gt;=4.22.0 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/mlhandbook/.venv/lib/python3.11/site-packages (from matplotlib-&gt;lime) (4.39.4)
+Requirement already satisfied: kiwisolver&gt;=1.0.1 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/mlhandbook/.venv/lib/python3.11/site-packages (from matplotlib-&gt;lime) (1.4.4)
+Requirement already satisfied: pyparsing&gt;=2.3.1 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/mlhandbook/.venv/lib/python3.11/site-packages (from matplotlib-&gt;lime) (3.0.9)
+Requirement already satisfied: python-dateutil&gt;=2.7 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/mlhandbook/.venv/lib/python3.11/site-packages (from matplotlib-&gt;lime) (2.8.2)
+Requirement already satisfied: six&gt;=1.5 in /Users/baptiste/Documents/Projets/GitHub/bpesquet/mlhandbook/.venv/lib/python3.11/site-packages (from python-dateutil&gt;=2.7-&gt;matplotlib-&gt;lime) (1.16.0)
+
+<span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> A new release of pip available: <span class=" -Color -Color-Red">22.3.1</span> -&gt; <span class=" -Color -Color-Green">23.1.2</span>
+<span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> To update, run: <span class=" -Color -Color-Green">pip install --upgrade pip</span>
 </pre></div>
 </div>
 </div>
@@ -601,7 +608,6 @@ Requirement already satisfied: decorator&lt;5,&gt;=4.3 in /Users/baptiste/minico
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">platform</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Python version: </span><span class="si">{</span><span class="n">platform</span><span class="o">.</span><span class="n">python_version</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">platform</span><span class="o">.</span><span class="n">python_version_tuple</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="s2">&quot;6&quot;</span><span class="p">)</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -613,8 +619,8 @@ Requirement already satisfied: decorator&lt;5,&gt;=4.3 in /Users/baptiste/minico
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Python version: 3.7.5
-NumPy version: 1.18.1
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Python version: 3.11.1
+NumPy version: 1.23.5
 </pre></div>
 </div>
 </div>
@@ -624,7 +630,6 @@ NumPy version: 1.18.1
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sklearn</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;scikit-learn version: </span><span class="si">{</span><span class="n">sklearn</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">__version__</span> <span class="o">&gt;=</span> <span class="s2">&quot;0.20&quot;</span>
 
 <span class="kn">import</span> <span class="nn">sklearn.datasets</span>
 <span class="kn">import</span> <span class="nn">sklearn.ensemble</span>
@@ -635,7 +640,7 @@ NumPy version: 1.18.1
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>scikit-learn version: 0.22.1
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>scikit-learn version: 1.2.2
 </pre></div>
 </div>
 </div>
@@ -674,10 +679,6 @@ NumPy version: 1.18.1
 <li><p><strong>Explainability</strong> is about justifying the model’s decision, e.g. understanding <em>why</em>.</p></li>
 </ul>
 </section>
-<section id="a-possible-taxonomy">
-<h3>A possible taxonomy<a class="headerlink" href="#a-possible-taxonomy" title="Permalink to this heading">#</a></h3>
-<p><a class="reference external" href="https://arxiv.org/abs/2012.01805v1"><img alt="XAI taxomony" src="../_images/xai_taxomony.png" /></a></p>
-</section>
 <section id="explanation-methods">
 <h3>Explanation methods<a class="headerlink" href="#explanation-methods" title="Permalink to this heading">#</a></h3>
 <p>Explanations can:</p>
@@ -691,6 +692,10 @@ NumPy version: 1.18.1
 <h3>Explanation examples<a class="headerlink" href="#explanation-examples" title="Permalink to this heading">#</a></h3>
 <p>“This person hasn’t be approved for a loan because her financial behavior has been questionable for 10 years”.</p>
 <p><img alt="Visual explainability example" src="../_images/woman_frisbee.png" /></p>
+</section>
+<section id="a-possible-taxonomy">
+<h3>A possible taxonomy<a class="headerlink" href="#a-possible-taxonomy" title="Permalink to this heading">#</a></h3>
+<p><a class="reference external" href="https://arxiv.org/abs/2012.01805v1"><img alt="XAI taxomony" src="../_images/xai_taxomony.png" /></a></p>
 </section>
 <section id="an-attribution-method-lime">
 <h3>An attribution method: LIME<a class="headerlink" href="#an-attribution-method-lime" title="Permalink to this heading">#</a></h3>
@@ -779,72 +784,72 @@ x_test: (30, 4). y_test: (30,)
   </thead>
   <tbody>
     <tr>
-      <th>70</th>
-      <td>5.9</td>
-      <td>3.2</td>
-      <td>4.8</td>
-      <td>1.8</td>
-      <td>1</td>
-      <td>versicolor</td>
+      <th>37</th>
+      <td>4.9</td>
+      <td>3.6</td>
+      <td>1.4</td>
+      <td>0.1</td>
+      <td>0</td>
+      <td>setosa</td>
     </tr>
     <tr>
-      <th>129</th>
-      <td>7.2</td>
-      <td>3.0</td>
-      <td>5.8</td>
-      <td>1.6</td>
-      <td>2</td>
-      <td>virginica</td>
-    </tr>
-    <tr>
-      <th>120</th>
-      <td>6.9</td>
-      <td>3.2</td>
-      <td>5.7</td>
-      <td>2.3</td>
-      <td>2</td>
-      <td>virginica</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>5.7</td>
-      <td>3.8</td>
-      <td>1.7</td>
+      <th>40</th>
+      <td>5.0</td>
+      <td>3.5</td>
+      <td>1.3</td>
       <td>0.3</td>
       <td>0</td>
       <td>setosa</td>
     </tr>
     <tr>
-      <th>66</th>
-      <td>5.6</td>
-      <td>3.0</td>
-      <td>4.5</td>
-      <td>1.5</td>
-      <td>1</td>
-      <td>versicolor</td>
-    </tr>
-    <tr>
-      <th>58</th>
-      <td>6.6</td>
-      <td>2.9</td>
-      <td>4.6</td>
+      <th>42</th>
+      <td>4.4</td>
+      <td>3.2</td>
       <td>1.3</td>
-      <td>1</td>
-      <td>versicolor</td>
-    </tr>
-    <tr>
-      <th>46</th>
-      <td>5.1</td>
-      <td>3.8</td>
-      <td>1.6</td>
       <td>0.2</td>
       <td>0</td>
       <td>setosa</td>
     </tr>
     <tr>
-      <th>29</th>
-      <td>4.7</td>
-      <td>3.2</td>
+      <th>99</th>
+      <td>5.7</td>
+      <td>2.8</td>
+      <td>4.1</td>
+      <td>1.3</td>
+      <td>1</td>
+      <td>versicolor</td>
+    </tr>
+    <tr>
+      <th>100</th>
+      <td>6.3</td>
+      <td>3.3</td>
+      <td>6.0</td>
+      <td>2.5</td>
+      <td>2</td>
+      <td>virginica</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5.0</td>
+      <td>3.6</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>0</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>132</th>
+      <td>6.4</td>
+      <td>2.8</td>
+      <td>5.6</td>
+      <td>2.2</td>
+      <td>2</td>
+      <td>virginica</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>5.0</td>
+      <td>3.0</td>
       <td>1.6</td>
       <td>0.2</td>
       <td>0</td>
@@ -867,7 +872,7 @@ x_test: (30, 4). y_test: (30,)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test accuracy: 0.93333
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test accuracy: 1.00000
 </pre></div>
 </div>
 </div>
@@ -37990,25 +37995,25 @@ x_test: (30, 4). y_test: (30,)
 /***/ })
 /******/ ]);
 //# sourceMappingURL=bundle.js.map </script></head><body>
-        <div class="lime top_div" id="top_divJHO43ZNYBF58QDL"></div>
+        <div class="lime top_div" id="top_divOUASOTNMH7J5OP5"></div>
         
         <script>
-        var top_div = d3.select('#top_divJHO43ZNYBF58QDL').classed('lime top_div', true);
+        var top_div = d3.select('#top_divOUASOTNMH7J5OP5').classed('lime top_div', true);
         
             var pp_div = top_div.append('div')
                                 .classed('lime predict_proba', true);
             var pp_svg = pp_div.append('svg').style('width', '100%');
-            var pp = new lime.PredictProba(pp_svg, ["setosa", "versicolor", "virginica"], [1.0, 0.0, 0.0]);
+            var pp = new lime.PredictProba(pp_svg, ["setosa", "versicolor", "virginica"], [0.0, 1.0, 0.0]);
             
         
         var exp_div;
             var exp = new lime.Explanation(["setosa", "versicolor", "virginica"]);
         
                 exp_div = top_div.append('div').classed('lime explanation', true);
-                exp.show([["petal length (cm) <= 1.60", 0.4570943275478726], ["0.30 < petal width (cm) <= 1.30", -0.03706530791987005]], 0, exp_div);
+                exp.show([["4.15 < petal length (cm) <= 5.10", 0.25533060841472033], ["1.30 < petal width (cm) <= 1.80", 0.23365638368850616]], 1, exp_div);
                 
         var raw_div = top_div.append('div');
-            exp.show_raw_tabular([["petal length (cm)", "1.30", 0.4570943275478726], ["petal width (cm)", "0.40", -0.03706530791987005]], 0, raw_div);
+            exp.show_raw_tabular([["petal length (cm)", "4.20", 0.25533060841472033], ["petal width (cm)", "1.50", 0.23365638368850616]], 1, raw_div);
         
         </script>
         </body></html></div></div>
@@ -38020,8 +38025,8 @@ x_test: (30, 4). y_test: (30,)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;petal width (cm) &gt; 1.80&#39;, 0.5422203956617914),
- (&#39;petal length (cm) &gt; 5.10&#39;, 0.36372880423287635)]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;4.15 &lt; petal length (cm) &lt;= 5.10&#39;, 0.25533060841472033),
+ (&#39;1.30 &lt; petal width (cm) &lt;= 1.80&#39;, 0.23365638368850616)]
 </pre></div>
 </div>
 </div>
@@ -38180,6 +38185,7 @@ x_test: (30, 4). y_test: (30,)
             src="https://www.youtube.com/embed/zQ_uMenoBCk"
             frameborder="0"
             allowfullscreen
+            
         ></iframe>
         </div></div>
 </div>
@@ -38189,7 +38195,7 @@ x_test: (30, 4). y_test: (30,)
 <p>Since the loss function and parameters (weights) of the network are known, we can engineer a impercertible perturbation that, added to the input, causes the loss value to go up.</p>
 <p>Formally, let <span class="math notranslate nohighlight">\(\theta\)</span> be the parameters of a model, <span class="math notranslate nohighlight">\(x\)</span> its inputs, <span class="math notranslate nohighlight">\(y\)</span> the targets associated with <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(\mathcal{J}(\theta, x, y)\)</span> the loss function used to train the neural network.</p>
 <p><span class="math notranslate nohighlight">\(\nabla_{x}\mathcal{J}(\theta, x, y)\)</span> is the gradient of the loss function w.r.t. the inputs <span class="math notranslate nohighlight">\(x\)</span>. It represents how much the error changes when a small modification to <span class="math notranslate nohighlight">\(x\)</span> is made.</p>
-<p><span class="math notranslate nohighlight">\(\eta = \epsilon \mathcal{sign}(\nabla_{x}\mathcal{J}(\theta, x, y))\)</span> is the perturbation that causes an increase in the loss value while being small enough to be hard to detect.</p>
+<p><span class="math notranslate nohighlight">\(\eta = \epsilon \cdot \mathcal{sign}(\nabla_{x}\mathcal{J}(\theta, x, y))\)</span> is the perturbation that causes an increase in the loss value while being small enough to be hard to detect.</p>
 </section>
 <section id="adversarial-black-box-attacks">
 <h4>Adversarial black-box attacks<a class="headerlink" href="#adversarial-black-box-attacks" title="Permalink to this heading">#</a></h4>
@@ -38386,9 +38392,9 @@ x_test: (30, 4). y_test: (30,)
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#white-boxes-models">White boxes models</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#black-boxes-models">Black boxes models</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explainability-vs-interpretability">Explainability Vs interpretability</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-possible-taxonomy">A possible taxonomy</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explanation-methods">Explanation methods</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explanation-examples">Explanation examples</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-possible-taxonomy">A possible taxonomy</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-attribution-method-lime">An attribution method: LIME</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#how-lime-works">How LIME works</a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#lime-for-images-1-2">LIME for images (1/2)</a></li>
