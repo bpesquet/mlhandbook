@@ -2,6 +2,10 @@
 
 This site provides theorical explanations and Python-based demonstrations for various Machine Learning concepts, techniques and tools. Associated practical challenges (_katas_) can be found [here](https://www.bpesquet.fr/mlkatas).
 
+```{warning}
+This project is being phased out and replaced by [ainotes](https://bpesquet.fr/ainotes).
+```
+
 ## About
 
 This is my main textbook for teaching Machine Learning at French engineering schools [ENSC](https://ensc.bordeaux-inp.fr). [ENSEIRB-MATMECA](https://enseirb-matmeca.bordeaux-inp.fr) and [IOGS](https://www.institutoptique.fr).

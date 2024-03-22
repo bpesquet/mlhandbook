@@ -3,6 +3,8 @@
 
 # Machine Learning Handbook
 
+> This project is being phased out and replaced by [ainotes](https://github.com/bpesquet/ainotes).
+
 This repository contains the source files for the [Machine Learning Handbook](https://www.bpesquet.fr/mlhandbook), my textbook for teaching Machine Learning. More info [here](index.md).
 
 ## Development notes
